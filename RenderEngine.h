@@ -11,16 +11,18 @@
 class RenderEngine : protected QOpenGLFunctions
 {
 public:
-    RenderEngine();
+
+    RenderEngine(QOpenGLShaderProgram *program);
+
     virtual ~RenderEngine();
 
-    void render(QOpenGLShaderProgram *program);
+    void render();
 
 private:
     void initCubeGeometry();
-
+QOpenGLShaderProgram *program;
     QOpenGLBuffer arrayBuf;
-    QOpenGLBuffer indexBuf;
+    QOpenGLBuffer vao;
 };
 
 #endif // GEOMETRYENGINE_H

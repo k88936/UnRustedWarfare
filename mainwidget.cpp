@@ -34,7 +34,7 @@ void MainWidget::initializeGL()
     initShaders();
     initTextures();
 
-    engine = new RenderEngine;
+    engine = new RenderEngine(&program);
 
     // Use QBasicTimer because its faster than QTimer
     timer.start(12, this);
@@ -128,5 +128,5 @@ void MainWidget::paintGL()
     // Use texture unit 0 which contains cube.png
     program.setUniformValue("texture", 0);
     // Draw cube geometry
-    engine->render(&program);
+    engine->render();
 }
