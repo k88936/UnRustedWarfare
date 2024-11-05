@@ -7,86 +7,126 @@
 
 #include <cmath>
 
-// MainWidget::MainWidget(QWidget *parent) {
-// }
-
 MainWidget::~MainWidget()
-= default;
-
-
-//! [1]
-void MainWidget::timerEvent(QTimerEvent *) {
-    update();
+{
+    // Make sure the context is current when deleting the texture
+    // and the buffers.
+    makeCurrent();
+    delete texture;
+    delete engine;
+    doneCurrent();
 }
 
+
+//! [1]
+void MainWidget::timerEvent(QTimerEvent *)
+{
+        update();
+}
 //! [1]
 
-void MainWidget::initializeGL() {
+void MainWidget::initializeGL()
+{
     initializeOpenGLFunctions();
+
     glClearColor(0, 0, 0, 1);
+
+    initShaders();
     initTextures();
-    engine = new RenderEngine(texture);
+
+    engine = new RenderEngine;
+
     // Use QBasicTimer because its faster than QTimer
     timer.start(12, this);
 }
 
 //! [3]
+void MainWidget::initShaders()
+{
+    // Compile vertex shader
+    if (!program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../vshader.glsl"))
+        close();
 
+    // Compile fragment shader
+    if (!program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../fshader.glsl"))
+        close();
+
+    // Link shader pipeline
+    if (!program.link())
+        close();
+
+    // Bind shader pipeline for use
+    if (!program.bind())
+        close();
+}
 //! [3]
 
 //! [4]
-void MainWidget::initTextures() {
-    // Load cube.png image
-    QOpenGLTexture *tex = new QOpenGLTexture(QImage("../DJ.png").mirrored());
+void MainWidget::initTextures()
+{
+
+
+
+      // Load cube.png image
+    texture = new QOpenGLTexture(QImage("../DJ.png").mirrored());
 
     // Set nearest filtering mode for texture minification
-    tex->setMinificationFilter(QOpenGLTexture::Nearest);
+    texture->setMinificationFilter(QOpenGLTexture::Nearest);
 
     // Set bilinear filtering mode for texture magnification
-    tex->setMagnificationFilter(QOpenGLTexture::Linear);
-    texture.push_back(tex);
+    texture->setMagnificationFilter(QOpenGLTexture::Linear);
     // Wrap texture coordinates by repeating
     // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
     // texture->setWrapMode(QOpenGLTexture::);
-}
 
+}
 //! [4]
 
 //! [5]
-void MainWidget::resizeGL(int w, int h) {
+void MainWidget::resizeGL(int w, int h)
+{
     // Calculate aspect ratio
 
     // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
-    qreal zoom = 0.01;
+    qreal  zoom=0.01;
     const qreal zNear = 3.0, zFar = 7.0;
 
     // Reset projection
     projection.setToIdentity();
-    projection.ortho(-w * zoom, w * zoom, -h * zoom, h * zoom, zNear, zFar);
+    projection.ortho(-w*zoom,w*zoom,-h*zoom,h*zoom,zNear,zFar);
 
     // Set perspective projection
     // projection.perspective(fov, aspect, zNear, zFar);
 }
-
 //! [5]
 
-void MainWidget::paintGL() {
+void MainWidget::paintGL()
+{
     // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //! [2]
+//! [2]
     // Enable depth buffer
     glEnable(GL_DEPTH_TEST);
 
     // Enable back face culling
     glEnable(GL_CULL_FACE);
-    //! [2]
+//! [2]
 
+    texture->bind();
+    program.bind();
 
+//! [6]
+    // Calculate model view transformation
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -5.0);
-    engine->setView(projection * matrix);
 
+    // Set modelview-projection matrix
+    program.setUniformValue("mvp_matrix", projection * matrix);
+//! [6]
+
+    // Use texture unit 0 which contains cube.png
+    program.setUniformValue("texture", 0);
     // Draw cube geometry
-    engine->render();
+    engine->render(&program);
 }

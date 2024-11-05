@@ -405,10 +405,6 @@ CMakeFiles/untitled1.dir/main.cpp.o.ddi: \
  /usr/include/qt6/QtGui/qgenericmatrix.h \
  /usr/include/qt6/QtOpenGL/QOpenGLBuffer \
  /usr/include/qt6/QtOpenGL/qopenglbuffer.h \
- /usr/include/qt6/QtOpenGL/QOpenGLTexture \
- /usr/include/qt6/QtOpenGL/qopengltexture.h \
- /usr/include/qt6/QtCore/QScopedPointer \
- /usr/include/qt6/QtCore/qscopedpointer.h \
  /usr/include/qt6/QtOpenGLWidgets/QOpenGLWidget \
  /usr/include/qt6/QtOpenGLWidgets/qopenglwidget.h \
  /usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsglobal.h \
@@ -418,4 +414,8 @@ CMakeFiles/untitled1.dir/main.cpp.o.ddi: \
  /usr/include/qt6/QtGui/QQuaternion /usr/include/qt6/QtGui/qquaternion.h \
  /usr/include/qt6/QtGui/QVector2D /usr/include/qt6/QtGui/qvectornd.h \
  /usr/include/qt6/QtCore/QBasicTimer \
- /usr/include/qt6/QtCore/qbasictimer.h
+ /usr/include/qt6/QtCore/qbasictimer.h \
+ /usr/include/qt6/QtOpenGL/QOpenGLTexture \
+ /usr/include/qt6/QtOpenGL/qopengltexture.h \
+ /usr/include/qt6/QtCore/QScopedPointer \
+ /usr/include/qt6/QtCore/qscopedpointer.h

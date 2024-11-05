@@ -7,30 +7,20 @@
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
-#include <QOpenGLTexture>
 
-
-class RenderEngine : protected QOpenGLFunctions {
+class RenderEngine : protected QOpenGLFunctions
+{
 public:
-
-    RenderEngine(std::vector<QOpenGLTexture *> textures);
-    void initShaders();
-
+    RenderEngine();
     virtual ~RenderEngine();
 
-    void render();
-
-    void setView(QMatrix4x4);
-
-    void getShaderProgram();
-
-    QOpenGLShaderProgram program;
+    void render(QOpenGLShaderProgram *program);
 
 private:
-    QMatrix4x4 view;
-    std::vector<QOpenGLTexture *> textures;
+    void initCubeGeometry();
 
-    void initVOA();
+    QOpenGLBuffer arrayBuf;
+    QOpenGLBuffer indexBuf;
 };
 
 #endif // GEOMETRYENGINE_H

@@ -17,28 +17,36 @@
 
 class GeometryEngine;
 
-class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions {
+class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
+{
+
 public:
     using QOpenGLWidget::QOpenGLWidget;
-
     ~MainWidget() override;
 
 protected:
     void timerEvent(QTimerEvent *e) override;
 
     void initializeGL() override;
-
     void resizeGL(int w, int h) override;
-
     void paintGL() override;
 
+    void initShaders();
     void initTextures();
 
 private:
     QBasicTimer timer;
-    RenderEngine *engine=nullptr;
-    std::vector<QOpenGLTexture *> texture;
+    QOpenGLShaderProgram program;
+    RenderEngine *engine = nullptr;
+
+    QOpenGLTexture *texture = nullptr;
+
     QMatrix4x4 projection;
+
+    QVector2D mousePressPosition;
+    QVector3D rotationAxis;
+    qreal angularSpeed = 0;
+    QQuaternion rotation;
 };
 
 #endif // MAINWIDGET_H

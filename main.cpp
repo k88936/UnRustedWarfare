@@ -5,7 +5,9 @@
 #include <QLabel>
 #include <QSurfaceFormat>
 
+#ifndef QT_NO_OPENGL
 #include "mainwidget.h"
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -14,11 +16,15 @@ int main(int argc, char *argv[])
     QSurfaceFormat format;
     format.setDepthBufferSize(24);
     QSurfaceFormat::setDefaultFormat(format);
-MainWidget widget;
-    widget.show()
-    ;
-    app.setApplicationName("MainWidget");
-    app.setApplicationVersion("0.1");
 
+    app.setApplicationName("cube");
+    app.setApplicationVersion("0.1");
+#ifndef QT_NO_OPENGL
+    MainWidget widget;
+    widget.show();
+#else
+    QLabel note("OpenGL Support required");
+    note.show();
+#endif
     return app.exec();
 }

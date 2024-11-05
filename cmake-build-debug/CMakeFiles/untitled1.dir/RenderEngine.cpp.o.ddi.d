@@ -370,16 +370,5 @@ CMakeFiles/untitled1.dir/RenderEngine.cpp.o.ddi: \
  /usr/include/qt6/QtGui/qgenericmatrix.h \
  /usr/include/qt6/QtOpenGL/QOpenGLBuffer \
  /usr/include/qt6/QtOpenGL/qopenglbuffer.h \
- /usr/include/qt6/QtOpenGL/QOpenGLTexture \
- /usr/include/qt6/QtOpenGL/qopengltexture.h \
- /usr/include/qt6/QtGui/qimage.h /usr/include/qt6/QtGui/qcolor.h \
- /usr/include/qt6/QtGui/qrgb.h /usr/include/qt6/QtGui/qrgba64.h \
- /usr/include/qt6/QtGui/qpaintdevice.h \
- /usr/include/qt6/QtGui/qpixelformat.h \
- /usr/include/qt6/QtGui/qtransform.h /usr/include/qt6/QtGui/qpolygon.h \
- /usr/include/qt6/QtGui/qregion.h /usr/include/qt6/QtCore/qspan.h \
- /usr/include/c++/14.2.1/cassert /usr/include/qt6/QtCore/q20iterator.h \
- /usr/include/qt6/QtCore/qline.h /usr/include/qt6/QtCore/QScopedPointer \
- /usr/include/qt6/QtCore/qscopedpointer.h \
  /usr/include/qt6/QtGui/QVector2D /usr/include/qt6/QtGui/qvectornd.h \
  /usr/include/qt6/QtGui/QVector3D
