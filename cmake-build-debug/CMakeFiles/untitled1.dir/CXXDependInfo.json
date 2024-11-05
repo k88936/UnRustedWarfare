@@ -1,0 +1,28 @@
+{
+	"bmi-installation" : null,
+	"compiler-frontend-variant" : "GNU",
+	"compiler-id" : "GNU",
+	"compiler-simulate-id" : "",
+	"config" : "Debug",
+	"cxx-modules" : {},
+	"dir-cur-bld" : "/root/CLionProjects/untitled1/cmake-build-debug",
+	"dir-cur-src" : "/root/CLionProjects/untitled1",
+	"dir-top-bld" : "/root/CLionProjects/untitled1/cmake-build-debug",
+	"dir-top-src" : "/root/CLionProjects/untitled1",
+	"exports" : [],
+	"forward-modules-from-target-dirs" : [],
+	"include-dirs" : 
+	[
+		"untitled1_autogen/include",
+		"/usr/include/qt6/QtCore",
+		"/usr/include/qt6",
+		"/usr/lib/qt6/mkspecs/linux-g++",
+		"/usr/include/qt6/QtGui",
+		"/usr/include/qt6/QtWidgets",
+		"/usr/include/qt6/QtOpenGL",
+		"/usr/include/qt6/QtOpenGLWidgets"
+	],
+	"language" : "CXX",
+	"linked-target-dirs" : [],
+	"module-dir" : "/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/untitled1.dir"
+}

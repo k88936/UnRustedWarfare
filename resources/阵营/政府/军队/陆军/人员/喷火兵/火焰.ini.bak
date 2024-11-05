@@ -1,0 +1,199 @@
+
+[core]
+name: 大火
+displayText: 火灾
+displayDescription: 大火
+class: CustomUnitMetadata
+price: 0
+maxHp: 50000
+mass: 100
+techLevel: 1
+buildSpeed: 2s
+#availableInDemo: true
+radius:15
+#isBuilding: true
+fogOfWarSightRange:0
+showOnMinimap:false
+hideScorchMark: true
+isBio: false
+softCollisionOnAll: 15
+#isBuilding:true
+#transportSlotsNeeded: 0.5
+explodeOnDeath: false
+hideScorchMark: true
+disableAllUnitCollisions: true
+#isUnselectable: true
+#canNotBeDirectlyAttacked:true
+#createNeutral:true
+canOnlyBeAttackedByUnitsWithTags:灭火
+tags:火,灾害
+createOnAggressiveTeam:true
+#fireTurretXAtSelfOnDeath:2
+#unitsSpawnedOnDeath:自爆
+autoTriggerCooldownTime:0.5s
+
+[hiddenAction_生成火]
+autoTriggerOnEvent:killedAnyUnit
+fireTurretXAtGround:2
+fireTurretXAtGround_withOffset:0,0
+fireTurretXAtGround_count:1
+
+[graphics]
+total_frames: 8
+image:        无.png
+image_wreak:  NONE
+image_turret: NONE
+image_shadow: AUTO
+shadowOffsetX:0.1
+shadowOffsetY:0.2
+dustEffect: false
+showHealthBar:false
+
+[attack]
+canAttack: false
+canAttackFlyingUnits: false
+canAttackLandUnits:   false
+canAttackUnderwaterUnits: false
+#dieOnAttack:true
+turretSize: 0
+turretTurnSpeed: 6
+maxAttackRange: 0
+shootDelay: 8
+aimOffsetSpread: 0
+
+[action_死亡]
+autoTrigger:if self.isOverLiquid
+addResources:hp=-10000
+isVisible:false
+#接触水扣血
+[action_d]
+displayType: action
+text: 释放火焰，造成伤害
+pos: 1
+buildSpeed: 0s
+fireTurretXAtGround: bz
+fireTurretXAtGround_withOffset: 0,-0
+
+autoTrigger:true
+#if self.timeAlive(laterThanSeconds=0) and not self.timeAlive(laterThanSeconds=30)
+
+[turret_bz]
+#
+x: 0
+y: -0
+#canShoot: false
+#warmup: 18
+projectile: bz
+turnSpeedAcceleration: 1.0
+canShoot: true
+recoilOffset: -2
+limitingRange:0
+
+[turret_2]
+x: 0
+y: 0
+projectile:扩散
+invisible:true
+limitingRange:50
+showRangeUIGuide:false
+
+[projectile_bz]
+directDamage: 1
+life: 10
+speed: 0
+#areaHitUnderwaterAlways:true
+frame: 1
+drawSize: 0.1
+areaHitAirAndLandAtSameTime: true
+deflectionPower:-1
+explodeOnEndOfLife: true
+areaDamage: 30
+areaRadius: 50
+explodeEffect:none
+friendlyFire:true
+mutator1_directDamageMultiplier:0.001
+mutator1_areaDamageMultiplier:0.001
+mutator1_ifUnitWithTags:丧尸,丧尸建筑
+
+[projectile_扩散]
+life:50
+directDamage:0
+targetGround:true
+targetGroundSpread:95
+speed:10
+spawnUnit: 大火
+explodeEffect:NONE
+image:无.png
+instant: true
+
+[action_烟]
+isVisible: false
+isLocked:true
+autoTrigger:true
+spawnEffects:CUSTOM:火光,CUSTOM:火,CUSTOM:黑烟
+
+
+[movement]
+movementType: air
+moveSpeed: 0
+moveAccelerationSpeed: 0
+moveDecelerationSpeed: 0
+maxTurnSpeed: 0
+turnAcceleration: 0
+targetHeight: 0
+targetHeightDrift: 0
+moveSlidingMode :true
+moveIgnoringBody:true
+joinsGroupFormations:false
+
+[effect_火]
+image:火.png
+total_frames:8
+animateFrameSpeed:0.09
+animateFrameStart:0
+animateFrameEnd:8
+animateFramePingPong:false
+scaleFrom:2
+scaleTo:2
+attachedToUnit:true
+drawUnderUnits:false
+xOffsetRelative:0
+yOffsetRelative:0
+priority: verylow
+alwayStartDirAtZero:true
+
+[effect_火光]
+image:SHARED:light_50.png
+scaleFrom:2.5
+scaleTo:4
+drawUnderUnits:false
+attachedToUnit:false
+xOffsetRelative:0
+yOffsetRelative:0
+color:#f29a80
+life:61.1
+alpha:0.5
+fadeOut:false
+
+[effect_黑烟]
+priority:high
+#spawnChance:0.4
+stripIndex: effects
+frameIndex: 0
+life: 270
+fadeOut: true
+attachedToUnit: false
+color: #222222
+fadeInTime:30
+scaleFrom: 2.5
+scaleTo: 6.5
+alpha: 1.5
+drawUnderUnits:false
+hSpeed: 0.9
+hOffsetRandom:0.3
+atmospheric:true
+dirOffsetRandom:180
+#shadow:true
+xOffsetRelative:0
+yOffsetRelative:0.5
+xSpeedAbsolute:0.2

@@ -1,0 +1,11 @@
+[mod]
+title:5.2未优化版本(内部专属,请勿外传)
+description:先有防空后有天，石勒喀河日神仙,宝藏哥用爱制作
+
+taps:Units
+thumbnail:mod.jpg
+
+
+[music]
+sourceFolder:music/
+whenUsingUnitsFromThisMod_playExclusively:true

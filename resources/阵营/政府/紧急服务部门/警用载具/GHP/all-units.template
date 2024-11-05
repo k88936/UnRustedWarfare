@@ -1,0 +1,63 @@
+[core]
+
+[global_resource_zj]
+displayName: 政府资金
+displayColor:#ADFF2F
+displayTextPrefix:【政府资金
+displayTextPostfix:$】
+
+[global_resource_wz]
+displayName: 物资
+displayColor:#FF8C00
+displayTextPrefix:【物资
+displayTextPostfix:▣】
+[global_resource_gr]
+displayName: 感染值
+displayColor:#696969
+displayTextPrefix:【感染值
+displayTextPostfix:☣】
+
+[global_resource_dna]
+displayName: DNA
+displayColor:#B22222
+
+[global_resource_zcl]
+displayName: 支持率
+displayColor:#87CEFA
+
+
+[global_resource_kw]
+displayName: 空位
+displayColor:#66FF99
+
+
+[resource_燃油]
+displayName: 燃油
+#displayColor:
+hidden:false
+
+[resource_弹药]
+displayName: 弹药
+#displayColor:
+hidden:false
+
+[resource_火箭弹]
+displayName: 火箭弹
+#displayColor:
+hidden:false
+
+[resource_燃油]
+displayName: 燃油
+#displayColor:
+hidden:false
+
+[resource_霰弹枪]
+displayName: 霰弹枪
+#displayColor:
+hidden:false
+
+[resource_重视度]
+displayName: 重视度
+#displayColor:
+hidden:false
+
