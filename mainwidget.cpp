@@ -57,9 +57,10 @@ void MainWidget::initializeGL()
 void MainWidget::initTextures()
 {
     engine->resisterTexture("DJ",QImage("../DJ.png"));
+    engine->resisterTexture("side1",QImage("../side1.png"));
 
 }
-//! [4]
+//! [4en]
 
 //! [5]
 void MainWidget::resizeGL(int w, int h)
@@ -83,11 +84,12 @@ void MainWidget::paintGL()
 {
     glClearColor(0, 1, 0, 1);
     engine->bindShaderProgram();
-    engine->bindTexture("DJ");
 
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -5.0);
     engine->setView(projection * matrix);
+
+    engine->bindTexture("DJ");
 
     QMatrix4x4 transform;
     transform.setToIdentity();
@@ -98,10 +100,12 @@ void MainWidget::paintGL()
 
     engine->render();
 
+    engine->bindTexture("side1");
+
     transform.setToIdentity();
     transform.translate(3, 2, 0);
     transform.rotate(-45, 0, 0, 1);
-    transform.scale(5);
+    transform.scale(0.8);
     engine->transform(transform);
 
     engine->render();
