@@ -4,18 +4,12 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include "RenderEngine.h"
-
 #include <QOpenGLWidget>
-#include <QOpenGLFunctions>
-#include <QMatrix4x4>
-#include <QQuaternion>
-#include <QVector2D>
 #include <QBasicTimer>
-#include <QOpenGLShaderProgram>
 #include <QOpenGLTexture>
 
-class GeometryEngine;
+#include "RenderEngine.h"
+
 
 class MainWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {

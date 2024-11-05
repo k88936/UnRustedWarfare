@@ -27,57 +27,37 @@ void MainWidget::timerEvent(QTimerEvent *)
 
 void MainWidget::initializeGL()
 {
-    initializeOpenGLFunctions();
+    initializeOpenGLFunctions(); // Clear color and depth buffer
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glClearColor(0, 0, 0, 1);
+//! [2]
+    // Enable depth buffer
+    glEnable(GL_DEPTH_TEST);
 
-    initShaders();
+    // Enable back face culling
+    glEnable(GL_CULL_FACE);
+
+    glEnable(GL_ALPHA_TEST);
+    glAlphaFunc(GL_GREATER, 0.1);
+
+    glClearColor(0, 1, 0, 1);
+
+    engine = new RenderEngine();
     initTextures();
 
-    engine = new RenderEngine(&program);
 
     // Use QBasicTimer because its faster than QTimer
     timer.start(12, this);
 }
 
 //! [3]
-void MainWidget::initShaders()
-{
-    // Compile vertex shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../vshader.glsl"))
-        close();
 
-    // Compile fragment shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../fshader.glsl"))
-        close();
-
-    // Link shader pipeline
-    if (!program.link())
-        close();
-
-    // Bind shader pipeline for use
-    if (!program.bind())
-        close();
-}
 //! [3]
 
 //! [4]
 void MainWidget::initTextures()
 {
-
-
-
-      // Load cube.png image
-    texture = new QOpenGLTexture(QImage("../DJ.png").mirrored());
-
-    // Set nearest filtering mode for texture minification
-    texture->setMinificationFilter(QOpenGLTexture::Nearest);
-
-    // Set bilinear filtering mode for texture magnification
-    texture->setMagnificationFilter(QOpenGLTexture::Linear);
-    // Wrap texture coordinates by repeating
-    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    // texture->setWrapMode(QOpenGLTexture::);
+    engine->resisterTexture("DJ",QImage("../DJ.png"));
 
 }
 //! [4]
@@ -102,31 +82,15 @@ void MainWidget::resizeGL(int w, int h)
 
 void MainWidget::paintGL()
 {
-    // Clear color and depth buffer
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
 //! [2]
-    // Enable depth buffer
-    glEnable(GL_DEPTH_TEST);
+    engine->bindTexture("DJ");
 
-    // Enable back face culling
-    glEnable(GL_CULL_FACE);
-//! [2]
-
-    texture->bind();
-    program.bind();
-
-//! [6]
-    // Calculate model view transformation
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -5.0);
+    engine->setView(projection * matrix);
 
-    // Set modelview-projection matrix
-    program.setUniformValue("mvp_matrix", projection * matrix);
-//! [6]
-
-    // Use texture unit 0 which contains cube.png
-    program.setUniformValue("texture", 0);
     // Draw cube geometry
     engine->render();
 }

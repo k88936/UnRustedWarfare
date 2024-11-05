@@ -4,25 +4,33 @@
 #ifndef GEOMETRYENGINE_H
 #define GEOMETRYENGINE_H
 
+#include <qimage.h>
 #include <QOpenGLFunctions>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLBuffer>
+#include <QOpenGLVertexArrayObject>
+#include <QOpenGLTexture>
 
-class RenderEngine : protected QOpenGLFunctions
-{
+class RenderEngine : protected QOpenGLFunctions {
 public:
-
-    RenderEngine(QOpenGLShaderProgram *program);
+    RenderEngine();
 
     virtual ~RenderEngine();
 
+    void initShaders();
+
     void render();
 
+    void setView(const QMatrix4x4 &matrix4_x4);
+
+    void resisterTexture(std::string,QImage);
+    void bindTexture(std::string);
 private:
-    void initCubeGeometry();
-QOpenGLShaderProgram *program;
-    QOpenGLBuffer arrayBuf;
-    QOpenGLBuffer vao;
+    std::unordered_map<std::string,std::pair<QOpenGLTexture*,QOpenGLVertexArrayObject*> > textures;
+
+
+    QOpenGLShaderProgram program;
+    QMatrix4x4 view;
 };
 
 #endif // GEOMETRYENGINE_H

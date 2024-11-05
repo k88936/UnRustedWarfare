@@ -17,14 +17,9 @@ int main(int argc, char *argv[])
     format.setDepthBufferSize(24);
     QSurfaceFormat::setDefaultFormat(format);
 
-    app.setApplicationName("cube");
+    app.setApplicationName("test");
     app.setApplicationVersion("0.1");
-#ifndef QT_NO_OPENGL
     MainWidget widget;
     widget.show();
-#else
-    QLabel note("OpenGL Support required");
-    note.show();
-#endif
     return app.exec();
 }
