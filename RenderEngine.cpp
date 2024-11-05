@@ -18,10 +18,6 @@ RenderEngine::RenderEngine()
 {
     initializeOpenGLFunctions();
     initShaders();
-
-    // Generate 2 VBOs
-
-    // Initializes cube geometrrey and transfers it to VBOs
 }
 
 RenderEngine::~RenderEngine()
@@ -48,37 +44,21 @@ void RenderEngine::initShaders()
 }
 
 
+void RenderEngine::transform(const QMatrix4x4 &matrix) {
+    program.setUniformValue("transform", matrix);
+}
+
 //! [2]
 void RenderEngine::render()
 {
-    program.bind();
-
-//! [6]
-    // Calculate model view transformation
-
-    // Set modelview-projection matrix
-    program.setUniformValue("mvp_matrix", view );
-//! [6]
-
-    // Use texture unit 0 which contains cube.png
-    program.setUniformValue("texture", 0);
-
-    QMatrix4x4 matrix;
-    matrix.translate(0, 10, 0);
-    matrix.rotate(45, 0, 0, 1);
-    program.setUniformValue("transform", matrix);
-    // Draw cube geometry using indices from VBO 1
-    // glDrawElements(GL_TRIANGLE_STRIP, 5, GL_UNSIGNED_SHORT, nullptr);
     glDrawArrays(GL_QUADS, 0, 4);
 }
 
-void RenderEngine::setView(const QMatrix4x4 &matrix4_x4) {
-    view = matrix4_x4;
+void RenderEngine::setView(const QMatrix4x4 &view) {
+    program.setUniformValue("mvp_matrix", view );
 }
 
-void RenderEngine::resisterTexture(std::string id, QImage image ) {  // For cube we would need only 8 vertices but we have to
-    // duplicate vertex for each face because texture coordinate
-    // is different.
+void RenderEngine::resisterTexture(const std::string& id, const QImage& image ) {  // For cube we would need only 8 vertices but we have to
     QOpenGLBuffer *arrayBuf=new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);;
     QOpenGLVertexArrayObject *vao = new QOpenGLVertexArrayObject();
     vao->create();
@@ -122,15 +102,16 @@ void RenderEngine::resisterTexture(std::string id, QImage image ) {  // For cube
     // Set bilinear filtering mode for texture magnification
     texture->setMagnificationFilter(QOpenGLTexture::Linear);
     textures[id] = std::make_pair(texture, vao);
-    // Wrap texture coordinates by repeating
-    // f.ex. texture coordinate (1.1, 1.2) is same as (0.1, 0.2)
-    // texture->setWrapMode(QOpenGLTexture::);
+
 }
 
-void RenderEngine::bindTexture(std::string id) {
-
+void RenderEngine::bindTexture(const std::string& id) {
     textures[id].first->bind();
     textures[id].second->bind();
+}
+
+void RenderEngine::bindShaderProgram() {
+    this->program.bind();
 }
 
 //! [2]

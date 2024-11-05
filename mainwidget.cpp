@@ -40,7 +40,6 @@ void MainWidget::initializeGL()
     glEnable(GL_ALPHA_TEST);
     glAlphaFunc(GL_GREATER, 0.1);
 
-    glClearColor(0, 1, 0, 1);
 
     engine = new RenderEngine();
     initTextures();
@@ -82,15 +81,29 @@ void MainWidget::resizeGL(int w, int h)
 
 void MainWidget::paintGL()
 {
-
-
-//! [2]
+    glClearColor(0, 1, 0, 1);
+    engine->bindShaderProgram();
     engine->bindTexture("DJ");
 
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -5.0);
     engine->setView(projection * matrix);
 
-    // Draw cube geometry
+    QMatrix4x4 transform;
+    transform.setToIdentity();
+    transform.translate(0, 5, 0);
+    transform.rotate(45, 0, 0, 1);
+    transform.scale(2);
+    engine->transform(transform);
+
     engine->render();
+
+    transform.setToIdentity();
+    transform.translate(3, 2, 0);
+    transform.rotate(-45, 0, 0, 1);
+    transform.scale(5);
+    engine->transform(transform);
+
+    engine->render();
+
 }

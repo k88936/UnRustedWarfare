@@ -19,12 +19,15 @@ public:
 
     void initShaders();
 
+    void transform(const QMatrix4x4 &matrix);
+
     void render();
 
     void setView(const QMatrix4x4 &matrix4_x4);
 
-    void resisterTexture(std::string,QImage);
-    void bindTexture(std::string);
+    void resisterTexture(const std::string&,const QImage&);
+    void bindTexture(const std::string&);
+    void bindShaderProgram();
 private:
     std::unordered_map<std::string,std::pair<QOpenGLTexture*,QOpenGLVertexArrayObject*> > textures;
 
