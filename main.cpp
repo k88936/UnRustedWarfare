@@ -3,8 +3,7 @@
 
 #include <QApplication>
 #include <QLabel>
-#include <QSurfaceFormat>
-
+#include "game/Configs.h"
 #ifndef QT_NO_OPENGL
 #include "mainwidget.h"
 #endif
@@ -21,5 +20,7 @@ int main(int argc, char *argv[])
     // app.setApplicationVersion("0.1");
     // MainWidget widget;
     // widget.show();
+    Configs::init();
+    exit(0);
     return app.exec();
 }

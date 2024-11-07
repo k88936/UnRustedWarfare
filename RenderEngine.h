@@ -21,6 +21,8 @@ public:
 
     void transform(const QMatrix4x4 &matrix);
 
+    void setColor(const QVector4D &color);
+
     void render();
 
     void setView(const QMatrix4x4 &matrix4_x4);

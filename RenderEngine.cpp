@@ -48,9 +48,14 @@ void RenderEngine::transform(const QMatrix4x4 &matrix) {
     program.setUniformValue("transform", matrix);
 }
 
+void RenderEngine::setColor(const QVector4D &color) {
+    program.setUniformValue("color",color);
+}
+
 //! [2]
 void RenderEngine::render()
 {
+    ;
     glDrawArrays(GL_QUADS, 0, 4);
 }
 
@@ -63,13 +68,12 @@ void RenderEngine::resisterTexture(const std::string& id, const QImage& image ) 
     QOpenGLVertexArrayObject *vao = new QOpenGLVertexArrayObject();
     vao->create();
     arrayBuf->create();
-    const float factor=0.01;
     VertexData vertices[] = {
         // Vertex data for face 0
-        {QVector3D(-factor*image.width(), -factor*image.height(),  0), QVector2D(0, 0)},  // v0
-        {QVector3D( factor*image.width(), -factor*image.height(),  0), QVector2D(1, 0)}, // v1
-        {QVector3D( factor*image.width(),  factor*image.height(),  0), QVector2D(1, 1)}, // v3
-        {QVector3D(-factor*image.width(),  factor*image.height(),  0), QVector2D(0, 1)},  // v2
+        {QVector3D(-static_cast<float>(image.width())/static_cast<float>(image.height()), -1,  0), QVector2D(0, 0)},  // v0
+        {QVector3D( static_cast<float>(image.width())/static_cast<float>(image.height()), -1,  0), QVector2D(1, 0)}, // v1
+        {QVector3D( static_cast<float>(image.width())/static_cast<float>(image.height()),  1,  0), QVector2D(1, 1)}, // v3
+        {QVector3D(-static_cast<float>(image.width())/static_cast<float>(image.height()),  1,  0), QVector2D(0, 1)},  // v2
     };
     vao->bind();
     arrayBuf->bind();

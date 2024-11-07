@@ -179,6 +179,246 @@ RenderEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/RenderEngine.cpp.s
 .PHONY : RenderEngine.cpp.s
 
+game/Configs.o: game/Configs.cpp.o
+.PHONY : game/Configs.o
+
+# target to build an object file
+game/Configs.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Configs.cpp.o
+.PHONY : game/Configs.cpp.o
+
+game/Configs.i: game/Configs.cpp.i
+.PHONY : game/Configs.i
+
+# target to preprocess a source file
+game/Configs.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Configs.cpp.i
+.PHONY : game/Configs.cpp.i
+
+game/Configs.s: game/Configs.cpp.s
+.PHONY : game/Configs.s
+
+# target to generate assembly for a file
+game/Configs.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Configs.cpp.s
+.PHONY : game/Configs.cpp.s
+
+game/Drawable.o: game/Drawable.cpp.o
+.PHONY : game/Drawable.o
+
+# target to build an object file
+game/Drawable.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Drawable.cpp.o
+.PHONY : game/Drawable.cpp.o
+
+game/Drawable.i: game/Drawable.cpp.i
+.PHONY : game/Drawable.i
+
+# target to preprocess a source file
+game/Drawable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Drawable.cpp.i
+.PHONY : game/Drawable.cpp.i
+
+game/Drawable.s: game/Drawable.cpp.s
+.PHONY : game/Drawable.s
+
+# target to generate assembly for a file
+game/Drawable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Drawable.cpp.s
+.PHONY : game/Drawable.cpp.s
+
+game/MetaAttachable.o: game/MetaAttachable.cpp.o
+.PHONY : game/MetaAttachable.o
+
+# target to build an object file
+game/MetaAttachable.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaAttachable.cpp.o
+.PHONY : game/MetaAttachable.cpp.o
+
+game/MetaAttachable.i: game/MetaAttachable.cpp.i
+.PHONY : game/MetaAttachable.i
+
+# target to preprocess a source file
+game/MetaAttachable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaAttachable.cpp.i
+.PHONY : game/MetaAttachable.cpp.i
+
+game/MetaAttachable.s: game/MetaAttachable.cpp.s
+.PHONY : game/MetaAttachable.s
+
+# target to generate assembly for a file
+game/MetaAttachable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaAttachable.cpp.s
+.PHONY : game/MetaAttachable.cpp.s
+
+game/MetaEffect.o: game/MetaEffect.cpp.o
+.PHONY : game/MetaEffect.o
+
+# target to build an object file
+game/MetaEffect.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaEffect.cpp.o
+.PHONY : game/MetaEffect.cpp.o
+
+game/MetaEffect.i: game/MetaEffect.cpp.i
+.PHONY : game/MetaEffect.i
+
+# target to preprocess a source file
+game/MetaEffect.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaEffect.cpp.i
+.PHONY : game/MetaEffect.cpp.i
+
+game/MetaEffect.s: game/MetaEffect.cpp.s
+.PHONY : game/MetaEffect.s
+
+# target to generate assembly for a file
+game/MetaEffect.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaEffect.cpp.s
+.PHONY : game/MetaEffect.cpp.s
+
+game/MetaObject.o: game/MetaObject.cpp.o
+.PHONY : game/MetaObject.o
+
+# target to build an object file
+game/MetaObject.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaObject.cpp.o
+.PHONY : game/MetaObject.cpp.o
+
+game/MetaObject.i: game/MetaObject.cpp.i
+.PHONY : game/MetaObject.i
+
+# target to preprocess a source file
+game/MetaObject.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaObject.cpp.i
+.PHONY : game/MetaObject.cpp.i
+
+game/MetaObject.s: game/MetaObject.cpp.s
+.PHONY : game/MetaObject.s
+
+# target to generate assembly for a file
+game/MetaObject.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaObject.cpp.s
+.PHONY : game/MetaObject.cpp.s
+
+game/MetaProjectiles.o: game/MetaProjectiles.cpp.o
+.PHONY : game/MetaProjectiles.o
+
+# target to build an object file
+game/MetaProjectiles.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaProjectiles.cpp.o
+.PHONY : game/MetaProjectiles.cpp.o
+
+game/MetaProjectiles.i: game/MetaProjectiles.cpp.i
+.PHONY : game/MetaProjectiles.i
+
+# target to preprocess a source file
+game/MetaProjectiles.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaProjectiles.cpp.i
+.PHONY : game/MetaProjectiles.cpp.i
+
+game/MetaProjectiles.s: game/MetaProjectiles.cpp.s
+.PHONY : game/MetaProjectiles.s
+
+# target to generate assembly for a file
+game/MetaProjectiles.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaProjectiles.cpp.s
+.PHONY : game/MetaProjectiles.cpp.s
+
+game/MetaTurret.o: game/MetaTurret.cpp.o
+.PHONY : game/MetaTurret.o
+
+# target to build an object file
+game/MetaTurret.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaTurret.cpp.o
+.PHONY : game/MetaTurret.cpp.o
+
+game/MetaTurret.i: game/MetaTurret.cpp.i
+.PHONY : game/MetaTurret.i
+
+# target to preprocess a source file
+game/MetaTurret.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaTurret.cpp.i
+.PHONY : game/MetaTurret.cpp.i
+
+game/MetaTurret.s: game/MetaTurret.cpp.s
+.PHONY : game/MetaTurret.s
+
+# target to generate assembly for a file
+game/MetaTurret.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaTurret.cpp.s
+.PHONY : game/MetaTurret.cpp.s
+
+game/MetaUnit.o: game/MetaUnit.cpp.o
+.PHONY : game/MetaUnit.o
+
+# target to build an object file
+game/MetaUnit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaUnit.cpp.o
+.PHONY : game/MetaUnit.cpp.o
+
+game/MetaUnit.i: game/MetaUnit.cpp.i
+.PHONY : game/MetaUnit.i
+
+# target to preprocess a source file
+game/MetaUnit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaUnit.cpp.i
+.PHONY : game/MetaUnit.cpp.i
+
+game/MetaUnit.s: game/MetaUnit.cpp.s
+.PHONY : game/MetaUnit.s
+
+# target to generate assembly for a file
+game/MetaUnit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaUnit.cpp.s
+.PHONY : game/MetaUnit.cpp.s
+
+game/Object.o: game/Object.cpp.o
+.PHONY : game/Object.o
+
+# target to build an object file
+game/Object.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Object.cpp.o
+.PHONY : game/Object.cpp.o
+
+game/Object.i: game/Object.cpp.i
+.PHONY : game/Object.i
+
+# target to preprocess a source file
+game/Object.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Object.cpp.i
+.PHONY : game/Object.cpp.i
+
+game/Object.s: game/Object.cpp.s
+.PHONY : game/Object.s
+
+# target to generate assembly for a file
+game/Object.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Object.cpp.s
+.PHONY : game/Object.cpp.s
+
+game/Unit.o: game/Unit.cpp.o
+.PHONY : game/Unit.o
+
+# target to build an object file
+game/Unit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Unit.cpp.o
+.PHONY : game/Unit.cpp.o
+
+game/Unit.i: game/Unit.cpp.i
+.PHONY : game/Unit.i
+
+# target to preprocess a source file
+game/Unit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Unit.cpp.i
+.PHONY : game/Unit.cpp.i
+
+game/Unit.s: game/Unit.cpp.s
+.PHONY : game/Unit.s
+
+# target to generate assembly for a file
+game/Unit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Unit.cpp.s
+.PHONY : game/Unit.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -265,6 +505,36 @@ help:
 	@echo "... RenderEngine.o"
 	@echo "... RenderEngine.i"
 	@echo "... RenderEngine.s"
+	@echo "... game/Configs.o"
+	@echo "... game/Configs.i"
+	@echo "... game/Configs.s"
+	@echo "... game/Drawable.o"
+	@echo "... game/Drawable.i"
+	@echo "... game/Drawable.s"
+	@echo "... game/MetaAttachable.o"
+	@echo "... game/MetaAttachable.i"
+	@echo "... game/MetaAttachable.s"
+	@echo "... game/MetaEffect.o"
+	@echo "... game/MetaEffect.i"
+	@echo "... game/MetaEffect.s"
+	@echo "... game/MetaObject.o"
+	@echo "... game/MetaObject.i"
+	@echo "... game/MetaObject.s"
+	@echo "... game/MetaProjectiles.o"
+	@echo "... game/MetaProjectiles.i"
+	@echo "... game/MetaProjectiles.s"
+	@echo "... game/MetaTurret.o"
+	@echo "... game/MetaTurret.i"
+	@echo "... game/MetaTurret.s"
+	@echo "... game/MetaUnit.o"
+	@echo "... game/MetaUnit.i"
+	@echo "... game/MetaUnit.s"
+	@echo "... game/Object.o"
+	@echo "... game/Object.i"
+	@echo "... game/Object.s"
+	@echo "... game/Unit.o"
+	@echo "... game/Unit.i"
+	@echo "... game/Unit.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

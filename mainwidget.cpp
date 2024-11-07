@@ -30,6 +30,7 @@ void MainWidget::initializeGL()
     initializeOpenGLFunctions(); // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
 //! [2]
     // Enable depth buffer
     glEnable(GL_DEPTH_TEST);
@@ -39,6 +40,7 @@ void MainWidget::initializeGL()
 
     glEnable(GL_ALPHA_TEST);
     glAlphaFunc(GL_GREATER, 0.1);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
 
     engine = new RenderEngine();
@@ -90,6 +92,8 @@ void MainWidget::paintGL()
     engine->setView(projection * matrix);
 
     engine->bindTexture("DJ");
+    QVector4D color(1,1,1,1);
+    engine->setColor(color);
 
     QMatrix4x4 transform;
     transform.setToIdentity();
@@ -103,7 +107,7 @@ void MainWidget::paintGL()
     engine->bindTexture("side1");
 
     transform.setToIdentity();
-    transform.translate(3, 2, 0);
+    transform.translate(0.2, 5, -0.1);
     transform.rotate(-45, 0, 0, 1);
     transform.scale(0.8);
     engine->transform(transform);

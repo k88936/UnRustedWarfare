@@ -549,6 +549,66 @@
 			null
 		],
 		[
+			"/root/CLionProjects/untitled1/game/Configs.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_Configs.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/Drawable.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_Drawable.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaAttachable.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaAttachable.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaEffect.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaEffect.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaObject.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaObject.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaProjectiles.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaProjectiles.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaTurret.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaTurret.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/MetaUnit.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_MetaUnit.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/Object.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_Object.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/game/Unit.h",
+			"MU",
+			"ZL6H5ELRUJ/moc_Unit.cpp",
+			null
+		],
+		[
 			"/root/CLionProjects/untitled1/mainwidget.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwidget.cpp",
@@ -623,6 +683,16 @@
 	"SOURCES" : 
 	[
 		[ "/root/CLionProjects/untitled1/RenderEngine.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/Configs.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/Drawable.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaAttachable.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaEffect.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaObject.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaProjectiles.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaTurret.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/MetaUnit.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/Object.cpp", "MU", null ],
+		[ "/root/CLionProjects/untitled1/game/Unit.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/main.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/mainwidget.cpp", "MU", null ]
 	],

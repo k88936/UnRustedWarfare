@@ -19,6 +19,26 @@ add_executable(untitled1
         main.cpp
         mainwidget.cpp
         RenderEngine.cpp
+        game/Drawable.cpp
+        game/Drawable.h
+        game/Object.cpp
+        game/Object.h
+        game/Unit.cpp
+        game/Unit.h
+        game/MetaAttachable.cpp
+        game/MetaAttachable.h
+        game/MetaUnit.cpp
+        game/MetaUnit.h
+        game/MetaEffect.cpp
+        game/MetaEffect.h
+        game/MetaTurret.cpp
+        game/MetaTurret.h
+        game/MetaObject.cpp
+        game/MetaObject.h
+        game/Configs.cpp
+        game/Configs.h
+        game/MetaProjectiles.cpp
+        game/MetaProjectiles.h
 )
 target_link_libraries(untitled1
         Qt::Core

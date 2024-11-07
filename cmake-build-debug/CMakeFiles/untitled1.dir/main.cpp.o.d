@@ -438,15 +438,29 @@ CMakeFiles/untitled1.dir/main.cpp.o: \
   /usr/include/qt6/QtWidgets/qsizepolicy.h \
   /usr/include/qt6/QtGui/qpicture.h /usr/include/qt6/QtCore/qiodevice.h \
   /usr/include/qt6/QtGui/qtextdocument.h /usr/include/qt6/QtCore/qurl.h \
-  /usr/include/qt6/QtGui/QSurfaceFormat \
-  /usr/include/qt6/QtGui/qsurfaceformat.h \
+  /root/CLionProjects/untitled1/game/Configs.h \
+  /root/CLionProjects/untitled1/game/MetaEffect.h \
+  /root/CLionProjects/untitled1/game/MetaObject.h \
+  /root/CLionProjects/untitled1/game/Object.h \
+  /usr/include/qt6/QtGui/QVector3D /usr/include/qt6/QtGui/qvectornd.h \
+  /root/CLionProjects/untitled1/game/MetaTurret.h \
+  /root/CLionProjects/untitled1/game/MetaAttachable.h \
+  /usr/include/qt6/QtGui/QMatrix4x4 /usr/include/qt6/QtGui/qmatrix4x4.h \
+  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvector4d.h \
+  /usr/include/qt6/QtGui/qquaternion.h \
+  /usr/include/qt6/QtGui/qgenericmatrix.h \
+  /root/CLionProjects/untitled1/game/MetaProjectiles.h \
+  /root/CLionProjects/untitled1/game/MetaUnit.h \
   /root/CLionProjects/untitled1/mainwidget.h \
   /usr/include/qt6/QtOpenGLWidgets/QOpenGLWidget \
   /usr/include/qt6/QtOpenGLWidgets/qopenglwidget.h \
   /usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsglobal.h \
   /usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsexports.h \
-  /usr/include/qt6/QtWidgets/QWidget /usr/include/qt6/QtGui/qopengl.h \
-  /usr/include/GL/gl.h /usr/include/qt6/QtGui/qopenglext.h \
+  /usr/include/qt6/QtWidgets/QWidget \
+  /usr/include/qt6/QtGui/QSurfaceFormat \
+  /usr/include/qt6/QtGui/qsurfaceformat.h \
+  /usr/include/qt6/QtGui/qopengl.h /usr/include/GL/gl.h \
+  /usr/include/qt6/QtGui/qopenglext.h \
   /usr/lib/clang/18/include/inttypes.h /usr/include/inttypes.h \
   /usr/include/qt6/QtCore/QBasicTimer \
   /usr/include/qt6/QtCore/qbasictimer.h \
@@ -462,11 +476,7 @@ CMakeFiles/untitled1.dir/main.cpp.o: \
   /usr/include/qt6/QtGui/qopenglcontext_platform.h \
   /usr/include/qt6/QtOpenGL/QOpenGLShaderProgram \
   /usr/include/qt6/QtOpenGL/qopenglshaderprogram.h \
-  /usr/include/qt6/QtGui/qvector2d.h /usr/include/qt6/QtGui/qvectornd.h \
-  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvector4d.h \
-  /usr/include/qt6/QtGui/qmatrix4x4.h \
-  /usr/include/qt6/QtGui/qquaternion.h \
-  /usr/include/qt6/QtGui/qgenericmatrix.h \
+  /usr/include/qt6/QtGui/qvector2d.h \
   /usr/include/qt6/QtOpenGL/QOpenGLBuffer \
   /usr/include/qt6/QtOpenGL/qopenglbuffer.h \
   /usr/include/qt6/QtOpenGL/QOpenGLVertexArrayObject \
