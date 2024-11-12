@@ -4,6 +4,8 @@
 
 #ifndef METAEFFECT_H
 #define METAEFFECT_H
+#include <string>
+
 #include "MetaObject.h"
 
 enum priority {

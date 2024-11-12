@@ -3,3 +3,12 @@
 //
 
 #include "Object.h"
+
+// Object::Object(QVector3D position, float rotation) {
+//     this->position=position;
+//     this->rotation=rotation;
+// }
+
+Object::Object() {
+
+}

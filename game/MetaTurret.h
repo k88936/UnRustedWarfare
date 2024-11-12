@@ -8,9 +8,12 @@
 #include "MetaObject.h"
 
 
-class MetaTurret: MetaAttachable {
+class MetaTurret :MetaAttachable{
     // QVector4D barrelTransform;
 public:
+    MetaTurret();
+    float x;
+    float y;
     float barrelX;
     float barrelY;
     std::string image;
@@ -26,18 +29,16 @@ public:
     float range;
     float rangeMin;
     float delay;
-    bool invisible;
+    bool invisible=false;
     float turnSpeedAcceleration;
     std::string attachedTo;
+    std::vector<attachSlot<MetaTurret>> attached_turrets=std::vector<attachSlot<MetaTurret>>();
+
     bool canShoot;
     float limitingMinRange;
     std::string projectile;
     bool slave;
     std::string shoot_effect;
-
-
-    void attackAt();
-
 };
 
 

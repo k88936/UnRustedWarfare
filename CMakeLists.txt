@@ -39,6 +39,14 @@ add_executable(untitled1
         game/Configs.h
         game/MetaProjectiles.cpp
         game/MetaProjectiles.h
+        game/Turret.cpp
+        game/Turret.h
+        game/Game.cpp
+        game/Game.h
+        game/Attachable.cpp
+        game/Attachable.h
+        game/PhysicsEngine.cpp
+        game/PhysicsEngine.h
 )
 target_link_libraries(untitled1
         Qt::Core

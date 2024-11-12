@@ -441,12 +441,11 @@ CMakeFiles/untitled1.dir/main.cpp.o: \
   /root/CLionProjects/untitled1/game/Configs.h \
   /root/CLionProjects/untitled1/game/MetaEffect.h \
   /root/CLionProjects/untitled1/game/MetaObject.h \
-  /root/CLionProjects/untitled1/game/Object.h \
-  /usr/include/qt6/QtGui/QVector3D /usr/include/qt6/QtGui/qvectornd.h \
   /root/CLionProjects/untitled1/game/MetaTurret.h \
   /root/CLionProjects/untitled1/game/MetaAttachable.h \
   /usr/include/qt6/QtGui/QMatrix4x4 /usr/include/qt6/QtGui/qmatrix4x4.h \
-  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvector4d.h \
+  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvectornd.h \
+  /usr/include/qt6/QtGui/qvector4d.h \
   /usr/include/qt6/QtGui/qquaternion.h \
   /usr/include/qt6/QtGui/qgenericmatrix.h \
   /root/CLionProjects/untitled1/game/MetaProjectiles.h \

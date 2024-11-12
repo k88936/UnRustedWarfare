@@ -478,4 +478,19 @@ CMakeFiles/untitled1.dir/mainwidget.cpp.o: \
   /usr/include/qt6/QtCore/qcoreapplication_platform.h \
   /usr/include/qt6/QtGui/qinputmethod.h \
   /usr/include/qt6/QtCore/qlocale.h \
-  /usr/include/qt6/QtGui/qguiapplication_platform.h
+  /usr/include/qt6/QtGui/qguiapplication_platform.h \
+  /root/CLionProjects/untitled1/game/Configs.h \
+  /root/CLionProjects/untitled1/game/MetaEffect.h \
+  /root/CLionProjects/untitled1/game/MetaObject.h \
+  /root/CLionProjects/untitled1/game/MetaTurret.h \
+  /root/CLionProjects/untitled1/game/MetaAttachable.h \
+  /usr/include/qt6/QtGui/QMatrix4x4 \
+  /root/CLionProjects/untitled1/game/MetaProjectiles.h \
+  /root/CLionProjects/untitled1/game/MetaUnit.h \
+  /root/CLionProjects/untitled1/game/Game.h \
+  /root/CLionProjects/untitled1/game/Drawable.h \
+  /root/CLionProjects/untitled1/game/Object.h \
+  /usr/include/qt6/QtGui/QVector3D \
+  /root/CLionProjects/untitled1/game/Unit.h \
+  /root/CLionProjects/untitled1/game/Turret.h \
+  /root/CLionProjects/untitled1/game/Attachable.h

@@ -7,8 +7,18 @@
 
 #include <cmath>
 
-MainWidget::~MainWidget()
-{
+#include "game/Configs.h"
+#include "game/Game.h"
+#include "game/Unit.h"
+
+Unit* unit;
+
+MainWidget::MainWidget(QWidget *parent) {
+    unit= new Unit(Configs::meta_units["m2a3"], QVector3D(3, 3, 0), 0);
+
+}
+
+MainWidget::~MainWidget() {
     // Make sure the context is current when deleting the texture
     // and the buffers.
     makeCurrent();
@@ -19,19 +29,22 @@ MainWidget::~MainWidget()
 
 
 //! [1]
-void MainWidget::timerEvent(QTimerEvent *)
-{
-        update();
+void MainWidget::timerEvent(QTimerEvent *) {
+    Game::image_draw_config_map.clear();
+    unit->relative_rotation+=1;
+    unit->turrets[0].attached->relative_rotation+=2;
+    unit->position=QVector4D(5.0*sin(unit->relative_rotation*0.01),3,0,1);
+    unit->updatePosition(QMatrix4x4(), 0);
+    unit->draw();
+    update();
 }
+
 //! [1]
 
-void MainWidget::initializeGL()
-{
+void MainWidget::initializeGL() {
     initializeOpenGLFunctions(); // Clear color and depth buffer
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-//! [2]
+    //! [2]
     // Enable depth buffer
     glEnable(GL_DEPTH_TEST);
 
@@ -56,17 +69,17 @@ void MainWidget::initializeGL()
 //! [3]
 
 //! [4]
-void MainWidget::initTextures()
-{
-    engine->resisterTexture("DJ",QImage("../DJ.png"));
-    engine->resisterTexture("side1",QImage("../side1.png"));
-
+void MainWidget::initTextures() {
+    // engine->resisterTexture("DJ", QImage("../DJ.png"));
+    for (const auto &[id, image] : Configs::images) {
+        engine->resisterTexture(id,image);
+    }
 }
+
 //! [4en]
 
 //! [5]
-void MainWidget::resizeGL(int w, int h)
-{
+void MainWidget::resizeGL(int w, int h) {
     // Calculate aspect ratio
 
     // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
@@ -80,38 +93,36 @@ void MainWidget::resizeGL(int w, int h)
     // Set perspective projection
     // projection.perspective(fov, aspect, zNear, zFar);
 }
+
 //! [5]
 
-void MainWidget::paintGL()
-{
+void MainWidget::paintGL() {
     glClearColor(0, 1, 0, 1);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     engine->bindShaderProgram();
 
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -5.0);
     engine->setView(projection * matrix);
 
-    engine->bindTexture("DJ");
-    QVector4D color(1,1,1,1);
-    engine->setColor(color);
-
     QMatrix4x4 transform;
-    transform.setToIdentity();
-    transform.translate(0, 5, 0);
-    transform.rotate(45, 0, 0, 1);
-    transform.scale(2);
-    engine->transform(transform);
 
-    engine->render();
+    for (const auto &[texture_id, drawables]: Game::image_draw_config_map) {
+        engine->bindTexture(texture_id);
+        // qDebug()<<texture_id;
+        for (const auto &drawable: drawables) {
+            transform.setToIdentity();
+            transform.translate(drawable->position.toVector3D());
+            transform.rotate(drawable->rotation, 0, 0, 1);
+            transform.scale(drawable->scale);
+            engine->transform(transform);
+            engine->setColor(drawable->color);
+            engine->render();
+        }
+    }
 
-    engine->bindTexture("side1");
 
-    transform.setToIdentity();
-    transform.translate(0.2, 5, -0.1);
-    transform.rotate(-45, 0, 0, 1);
-    transform.scale(0.8);
-    engine->transform(transform);
 
-    engine->render();
+
 
 }

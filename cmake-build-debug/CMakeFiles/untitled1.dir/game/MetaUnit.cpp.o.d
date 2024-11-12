@@ -408,6 +408,4 @@ CMakeFiles/untitled1.dir/game/MetaUnit.cpp.o: \
   /usr/include/qt6/QtCore/qset.h /usr/include/qt6/QtCore/qhash.h \
   /usr/include/qt6/QtCore/qvarlengtharray.h \
   /root/CLionProjects/untitled1/game/MetaObject.h \
-  /root/CLionProjects/untitled1/game/Object.h \
-  /usr/include/qt6/QtGui/QVector3D \
   /root/CLionProjects/untitled1/game/MetaTurret.h

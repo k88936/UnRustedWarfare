@@ -345,4 +345,71 @@ CMakeFiles/untitled1.dir/game/Unit.cpp.o: \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_numeric.h \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/pstl/glue_numeric_defs.h \
   /usr/include/qt6/QtCore/qmargins.h /usr/include/qt6/QtCore/qsize.h \
-  /usr/include/qt6/QtCore/qmath.h /usr/include/qt6/QtCore/qalgorithms.h
+  /usr/include/qt6/QtCore/qmath.h /usr/include/qt6/QtCore/qalgorithms.h \
+  /root/CLionProjects/untitled1/game/MetaUnit.h \
+  /root/CLionProjects/untitled1/game/MetaAttachable.h \
+  /usr/include/qt6/QtGui/QMatrix4x4 /usr/include/qt6/QtGui/qmatrix4x4.h \
+  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvector4d.h \
+  /usr/include/qt6/QtGui/qquaternion.h \
+  /usr/include/qt6/QtGui/qgenericmatrix.h \
+  /usr/include/qt6/QtCore/qmetatype.h \
+  /usr/include/qt6/QtCore/qdatastream.h \
+  /usr/include/qt6/QtCore/qscopedpointer.h \
+  /usr/include/qt6/QtCore/qiodevicebase.h \
+  /usr/include/qt6/QtCore/qfloat16.h /usr/include/qt6/QtCore/qiterable.h \
+  /usr/include/qt6/QtCore/qmetacontainer.h \
+  /usr/include/qt6/QtCore/qcontainerinfo.h \
+  /usr/include/qt6/QtCore/qtaggedpointer.h \
+  /usr/include/qt6/QtCore/qobjectdefs.h \
+  /usr/include/qt6/QtCore/qobjectdefs_impl.h \
+  /usr/include/qt6/QtCore/qfunctionaltools_impl.h \
+  /usr/include/qt6/QtCore/qscopeguard.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/list \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_list.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/list.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/map \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_tree.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_map.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_multimap.h \
+  /usr/include/qt6/QtCore/qdebug.h /usr/include/qt6/QtCore/qtextstream.h \
+  /usr/include/qt6/QtCore/qcontiguouscache.h \
+  /usr/include/qt6/QtCore/qsharedpointer.h \
+  /usr/include/qt6/QtCore/qshareddata.h \
+  /usr/include/qt6/QtCore/qsharedpointer_impl.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/chrono \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/chrono.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/ratio \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/ctime \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/sstream \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/istream \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/istream.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/sstream.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/chrono_io.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/iomanip \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/locale \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_facets_nonio.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu/bits/time_members.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/codecvt.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_facets_nonio.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_conv.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/quoted_string.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/format \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/charconv \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/span \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/unicode.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/unicode-data.h \
+  /usr/include/qt6/QtCore/qlist.h /usr/include/qt6/QtCore/qiterator.h \
+  /usr/include/qt6/QtCore/qbytearraylist.h \
+  /usr/include/qt6/QtCore/qstringlist.h \
+  /usr/include/qt6/QtCore/qstringmatcher.h \
+  /usr/include/qt6/QtCore/qmap.h \
+  /usr/include/qt6/QtCore/qshareddata_impl.h \
+  /usr/include/qt6/QtCore/qset.h /usr/include/qt6/QtCore/qhash.h \
+  /usr/include/qt6/QtCore/qvarlengtharray.h \
+  /root/CLionProjects/untitled1/game/MetaObject.h \
+  /root/CLionProjects/untitled1/game/MetaTurret.h \
+  /root/CLionProjects/untitled1/game/Turret.h \
+  /root/CLionProjects/untitled1/game/Attachable.h \
+  /root/CLionProjects/untitled1/game/Game.h

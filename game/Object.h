@@ -8,9 +8,12 @@
 
 
 class Object {
-    QVector3D translation=QVector3D(0,0,0);
-    float rotation=0;//north is zero
+public:
+    // Object(QVector3D position, float rotation);
 
+    Object();
+    QVector4D position=QVector4D(0,0,0,1);
+    float rotation=0;//north is zero
 };
 
 

@@ -10,21 +10,25 @@
 
 class MetaAttachable;
 
-struct attachSlot {
+template <typename T>
+struct  attachSlot {
     // QMatrix4x4 transform;
-    float x;
-    float y;
-    bool isFixed{};
-    bool visible{};
-    MetaAttachable *attached;
+    QVector4D translation;
+    bool isFixed;
+    bool inVisible;
+    T *attached;
+    attachSlot(float x,float y,bool isFixed,bool visible,T *attached):translation(x,y,0,1),isFixed(isFixed),inVisible(visible),attached(attached){};
+    attachSlot(QVector4D translation,bool isFixed,bool visible,T *attached):translation(translation),isFixed(isFixed),inVisible(visible),attached(attached){};
+    attachSlot(float x,float y,float z,bool isFixed,bool visible,T *attached):translation(x,y,z,1),isFixed(isFixed),inVisible(visible),attached(attached){};
 };
 
 class MetaAttachable:MetaObject{
 public:
-    MetaObject *host;
-    std::vector<attachSlot> attachSlots;
-    void operate();
-    void transformTo(QMatrix4x4);
+    MetaAttachable();
+    // MetaObject *host;
+    // std::vector<attachSlot> attachSlots;
+    // void operate();
+    // void transformTo(QMatrix4x4);
     // void spin(float);
 
 };

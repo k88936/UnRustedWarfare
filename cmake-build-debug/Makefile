@@ -179,6 +179,30 @@ RenderEngine.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/RenderEngine.cpp.s
 .PHONY : RenderEngine.cpp.s
 
+game/Attachable.o: game/Attachable.cpp.o
+.PHONY : game/Attachable.o
+
+# target to build an object file
+game/Attachable.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Attachable.cpp.o
+.PHONY : game/Attachable.cpp.o
+
+game/Attachable.i: game/Attachable.cpp.i
+.PHONY : game/Attachable.i
+
+# target to preprocess a source file
+game/Attachable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Attachable.cpp.i
+.PHONY : game/Attachable.cpp.i
+
+game/Attachable.s: game/Attachable.cpp.s
+.PHONY : game/Attachable.s
+
+# target to generate assembly for a file
+game/Attachable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Attachable.cpp.s
+.PHONY : game/Attachable.cpp.s
+
 game/Configs.o: game/Configs.cpp.o
 .PHONY : game/Configs.o
 
@@ -226,6 +250,30 @@ game/Drawable.s: game/Drawable.cpp.s
 game/Drawable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Drawable.cpp.s
 .PHONY : game/Drawable.cpp.s
+
+game/Game.o: game/Game.cpp.o
+.PHONY : game/Game.o
+
+# target to build an object file
+game/Game.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Game.cpp.o
+.PHONY : game/Game.cpp.o
+
+game/Game.i: game/Game.cpp.i
+.PHONY : game/Game.i
+
+# target to preprocess a source file
+game/Game.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Game.cpp.i
+.PHONY : game/Game.cpp.i
+
+game/Game.s: game/Game.cpp.s
+.PHONY : game/Game.s
+
+# target to generate assembly for a file
+game/Game.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Game.cpp.s
+.PHONY : game/Game.cpp.s
 
 game/MetaAttachable.o: game/MetaAttachable.cpp.o
 .PHONY : game/MetaAttachable.o
@@ -395,6 +443,54 @@ game/Object.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Object.cpp.s
 .PHONY : game/Object.cpp.s
 
+game/PhysicsEngine.o: game/PhysicsEngine.cpp.o
+.PHONY : game/PhysicsEngine.o
+
+# target to build an object file
+game/PhysicsEngine.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o
+.PHONY : game/PhysicsEngine.cpp.o
+
+game/PhysicsEngine.i: game/PhysicsEngine.cpp.i
+.PHONY : game/PhysicsEngine.i
+
+# target to preprocess a source file
+game/PhysicsEngine.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.i
+.PHONY : game/PhysicsEngine.cpp.i
+
+game/PhysicsEngine.s: game/PhysicsEngine.cpp.s
+.PHONY : game/PhysicsEngine.s
+
+# target to generate assembly for a file
+game/PhysicsEngine.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.s
+.PHONY : game/PhysicsEngine.cpp.s
+
+game/Turret.o: game/Turret.cpp.o
+.PHONY : game/Turret.o
+
+# target to build an object file
+game/Turret.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Turret.cpp.o
+.PHONY : game/Turret.cpp.o
+
+game/Turret.i: game/Turret.cpp.i
+.PHONY : game/Turret.i
+
+# target to preprocess a source file
+game/Turret.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Turret.cpp.i
+.PHONY : game/Turret.cpp.i
+
+game/Turret.s: game/Turret.cpp.s
+.PHONY : game/Turret.s
+
+# target to generate assembly for a file
+game/Turret.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Turret.cpp.s
+.PHONY : game/Turret.cpp.s
+
 game/Unit.o: game/Unit.cpp.o
 .PHONY : game/Unit.o
 
@@ -505,12 +601,18 @@ help:
 	@echo "... RenderEngine.o"
 	@echo "... RenderEngine.i"
 	@echo "... RenderEngine.s"
+	@echo "... game/Attachable.o"
+	@echo "... game/Attachable.i"
+	@echo "... game/Attachable.s"
 	@echo "... game/Configs.o"
 	@echo "... game/Configs.i"
 	@echo "... game/Configs.s"
 	@echo "... game/Drawable.o"
 	@echo "... game/Drawable.i"
 	@echo "... game/Drawable.s"
+	@echo "... game/Game.o"
+	@echo "... game/Game.i"
+	@echo "... game/Game.s"
 	@echo "... game/MetaAttachable.o"
 	@echo "... game/MetaAttachable.i"
 	@echo "... game/MetaAttachable.s"
@@ -532,6 +634,12 @@ help:
 	@echo "... game/Object.o"
 	@echo "... game/Object.i"
 	@echo "... game/Object.s"
+	@echo "... game/PhysicsEngine.o"
+	@echo "... game/PhysicsEngine.i"
+	@echo "... game/PhysicsEngine.s"
+	@echo "... game/Turret.o"
+	@echo "... game/Turret.i"
+	@echo "... game/Turret.s"
 	@echo "... game/Unit.o"
 	@echo "... game/Unit.i"
 	@echo "... game/Unit.s"

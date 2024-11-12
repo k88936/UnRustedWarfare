@@ -10,12 +10,15 @@
     //
     // };
 
-class Drawable :Object{
+class Drawable :public  Object{
+public:
 
-    std::string textureId="blank";
+    Drawable();
+
+    std::string textureId;
     QVector4D color=QVector4D(1,1,1,1);
     float scale=1;
-    void draw();
+    virtual void draw();
 };
 
 

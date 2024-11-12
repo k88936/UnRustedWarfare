@@ -27,7 +27,7 @@ public:
 
     void setView(const QMatrix4x4 &matrix4_x4);
 
-    void resisterTexture(const std::string&,const QImage&);
+    void resisterTexture(const std::string &, const QImage &image);
     void bindTexture(const std::string&);
     void bindShaderProgram();
 private:

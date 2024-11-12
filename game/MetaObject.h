@@ -4,13 +4,9 @@
 
 #ifndef METAOBJECT_H
 #define METAOBJECT_H
-#include "Object.h"
 
 
-class MetaObject:Object {
-
-
-
+class MetaObject {
 
 };
 
