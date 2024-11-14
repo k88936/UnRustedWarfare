@@ -9,13 +9,13 @@
 #include "MetaTurret.h"
 
 
-class Turret :public Attachable{
+class Turret :public Attachable,public Drawable,public Object{
 public:
     Turret(MetaTurret* meta);
     MetaTurret *meta;
     float rotationSpeed;
-    void updatePosition(QMatrix4x4 transform, float rotation_base) override;
-    std::vector<attachSlot<Turret>> turrets_attached;
+    void updateSlots(QMatrix4x4 transform, float rotation_base) override;
+    std::vector<Turret*> turrets_attached;
     float aim(QVector3D target);
     bool shoot();
     void draw() override;

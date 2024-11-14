@@ -70,10 +70,10 @@ void RenderEngine::resisterTexture(const std::string& id, const QImage& image ) 
     arrayBuf->create();
     VertexData vertices[] = {
         // Vertex data for face 0
-        {QVector3D(-static_cast<float>(image.width())/static_cast<float>(image.height()), -1,  0), QVector2D(0, 0)},  // v0
-        {QVector3D( static_cast<float>(image.width())/static_cast<float>(image.height()), -1,  0), QVector2D(1, 0)}, // v1
-        {QVector3D( static_cast<float>(image.width())/static_cast<float>(image.height()),  1,  0), QVector2D(1, 1)}, // v3
-        {QVector3D(-static_cast<float>(image.width())/static_cast<float>(image.height()),  1,  0), QVector2D(0, 1)},  // v2
+        {QVector3D(-static_cast<float>(image.height())/static_cast<float>(image.width())*0.5, -0.5,  0), QVector2D(0, 0)},  // v0
+        {QVector3D( static_cast<float>(image.height())/static_cast<float>(image.width())*0.5, -0.5,  0), QVector2D(0, 1)}, // v1
+        {QVector3D( static_cast<float>(image.height())/static_cast<float>(image.width())*0.5,  0.5,  0), QVector2D(1, 1)}, // v3
+        {QVector3D(-static_cast<float>(image.height())/static_cast<float>(image.width())*0.5,  0.5,  0), QVector2D(1, 0)},  // v2
     };
     vao->bind();
     arrayBuf->bind();

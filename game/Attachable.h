@@ -8,10 +8,13 @@
 #include "Object.h"
 
 
-class Attachable: public Drawable {
+class Attachable {
 public:
+  QVector3D slot_translation;
+  bool slot_isFixed;
+  bool slot_inVisible;
   explicit Attachable();
-  virtual  void updatePosition(QMatrix4x4 transform, float rotation_base);
+  virtual  void updateSlots(QMatrix4x4 transform, float rotation_base);
   float relative_rotation=0;
 };
 

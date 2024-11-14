@@ -343,4 +343,5 @@ CMakeFiles/untitled1.dir/game/Object.cpp.o: \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_numeric.h \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/pstl/glue_numeric_defs.h \
   /usr/include/qt6/QtCore/qmargins.h /usr/include/qt6/QtCore/qsize.h \
-  /usr/include/qt6/QtCore/qmath.h /usr/include/qt6/QtCore/qalgorithms.h
+  /usr/include/qt6/QtCore/qmath.h /usr/include/qt6/QtCore/qalgorithms.h \
+  /root/CLionProjects/untitled1/game/Grid.h

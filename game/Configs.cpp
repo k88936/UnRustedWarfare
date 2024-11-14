@@ -127,8 +127,8 @@ void Configs::loadIni(const QString &path) {
                     //
                 else if (fst == "maxTransportingUnits")unit->maxTransportingUnits = std::stoi(snd);
                 else if (fst == "transportUnitsRequireTag")unit->transportUnitsRequireTag = split(snd, ',');
-                else if (fst == "exit_x")unit->exit_x = std::stof(snd) * rw2sw;
-                else if (fst == "exit_y")unit->exit_y = std::stof(snd) * rw2sw;
+                else if (fst == "exit_x")unit->exit_y = std::stof(snd) * rw2sw;
+                else if (fst == "exit_y")unit->exit_x = std::stof(snd) * rw2sw;
                 else {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
                 }
@@ -187,8 +187,8 @@ void Configs::loadIni(const QString &path) {
                 for (const auto &[fst, snd]: content) {
                     if (fst == "barrelX")turret->barrelX = std::stof(snd);
                     else if (fst == "barrelY")turret->barrelY = std::stof(snd);
-                    else if (fst == "x")turret->x = std::stof(snd) * rw2sw;
-                    else if (fst == "y")turret->y = std::stof(snd) * rw2sw;
+                    else if (fst == "x")turret->y = std::stof(snd) * rw2sw;
+                    else if (fst == "y")turret->x = std::stof(snd) * rw2sw;
                     else if (fst == "image")turret->image = snd;
                     else if (fst == "turnSpeed")turret->turnSpeed = std::stof(snd);
                     else if (fst == "turnAcc")turret->turnAcc = std::stof(snd);
@@ -216,13 +216,16 @@ void Configs::loadIni(const QString &path) {
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
                     }
                 }
+                    turret->slot_translation=QVector3D(turret->x,turret->y,0);
+                    turret->slot_isFixed=false;
+                    turret->slot_inVisible=turret->invisible;
                 if (attachToUnit) {
-                    unit->attached_turret.push_back(
-                        attachSlot(turret->x, turret->y, 0, false, turret->invisible, turret));
+                    unit->attached_turret.push_back(turret);
                 } else {
-                    turretData[turret->attachedTo]->attached_turrets.push_back(
-                        attachSlot(turret->x, turret->y, 0,
-                                   false, turret->invisible, turret));
+                    turretData[turret->attachedTo]->attached_turrets.push_back(turret);
+                }
+                if(turret->turnSpeed==-1){
+                    turret->turnSpeed=unit->turretTurnSpeed;
                 }
             } else if (section_id.starts_with("projectile")) {
                 auto *projectile = meta_projectiles[section_id.substr(10)];

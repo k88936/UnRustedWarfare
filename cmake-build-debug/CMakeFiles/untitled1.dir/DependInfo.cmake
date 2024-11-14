@@ -10,6 +10,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/root/CLionProjects/untitled1/RenderEngine.cpp" "CMakeFiles/untitled1.dir/RenderEngine.cpp.o" "gcc" "CMakeFiles/untitled1.dir/RenderEngine.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Attachable.cpp" "CMakeFiles/untitled1.dir/game/Attachable.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Attachable.cpp.o.d"
+  "/root/CLionProjects/untitled1/game/Body.cpp" "CMakeFiles/untitled1.dir/game/Body.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Body.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Configs.cpp" "CMakeFiles/untitled1.dir/game/Configs.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Configs.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Drawable.cpp" "CMakeFiles/untitled1.dir/game/Drawable.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Drawable.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Game.cpp" "CMakeFiles/untitled1.dir/game/Game.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Game.cpp.o.d"
@@ -21,6 +22,8 @@ set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/root/CLionProjects/untitled1/game/MetaUnit.cpp" "CMakeFiles/untitled1.dir/game/MetaUnit.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/MetaUnit.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Object.cpp" "CMakeFiles/untitled1.dir/game/Object.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Object.cpp.o.d"
   "/root/CLionProjects/untitled1/game/PhysicsEngine.cpp" "CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o.d"
+  "/root/CLionProjects/untitled1/game/Projectile.cpp" "CMakeFiles/untitled1.dir/game/Projectile.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Projectile.cpp.o.d"
+  "/root/CLionProjects/untitled1/game/SpaceEngine.cpp" "CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Turret.cpp" "CMakeFiles/untitled1.dir/game/Turret.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Turret.cpp.o.d"
   "/root/CLionProjects/untitled1/game/Unit.cpp" "CMakeFiles/untitled1.dir/game/Unit.cpp.o" "gcc" "CMakeFiles/untitled1.dir/game/Unit.cpp.o.d"
   "/root/CLionProjects/untitled1/main.cpp" "CMakeFiles/untitled1.dir/main.cpp.o" "gcc" "CMakeFiles/untitled1.dir/main.cpp.o.d"

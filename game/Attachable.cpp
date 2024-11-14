@@ -6,10 +6,10 @@
 
 #include <QMatrix4x4>
 
-Attachable::Attachable(): Drawable() {
+Attachable::Attachable(){
 }
 
-void Attachable::updatePosition(QMatrix4x4 transform, float rotation_base) {
+void Attachable::updateSlots(QMatrix4x4 transform, float rotation_base) {
 }
 
 

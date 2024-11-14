@@ -9,13 +9,20 @@
 
 #include "game/Configs.h"
 #include "game/Game.h"
+#include "game/SpaceEngine.h"
 #include "game/Unit.h"
 
 Unit* unit;
+Unit* unit2;
+Unit* unit3;
 
+SpaceEngine* spaceEngine;
 MainWidget::MainWidget(QWidget *parent) {
-    unit= new Unit(Configs::meta_units["m2a3"], QVector3D(3, 3, 0), 0);
+    unit= new Unit(Configs::meta_units["m2a3"], QVector3D(0, 0, 0), 0);
+    unit2= new Unit(Configs::meta_units["m2a3"], QVector3D(0, -3, 0), 0);
+    unit3= new Unit(Configs::meta_units["m2a3"], QVector3D(7, -3, 0), 30);
 
+    spaceEngine = new SpaceEngine();
 }
 
 MainWidget::~MainWidget() {
@@ -28,14 +35,34 @@ MainWidget::~MainWidget() {
 }
 
 
+float ths=0;
 //! [1]
 void MainWidget::timerEvent(QTimerEvent *) {
     Game::image_draw_config_map.clear();
-    unit->relative_rotation+=1;
-    unit->turrets[0].attached->relative_rotation+=2;
-    unit->position=QVector4D(5.0*sin(unit->relative_rotation*0.01),3,0,1);
-    unit->updatePosition(QMatrix4x4(), 0);
+  ths+=0.3;
+    if(ths>=180) {
+        ths-=360;
+    }else if(ths<-180) {
+        ths+=360;
+    }
+    // qDebug()<<ths;
+    unit->relative_rotation=ths;
+    unit->position=QVector3D(5.0/180*ths,3,0);
+    unit->turrets[0]->aim({0,-3,0});
+    unit->updateSlots(QMatrix4x4(), 0);
     unit->draw();
+
+
+    unit2->relative_rotation=41*ths;
+    unit2->updateSlots(QMatrix4x4(),0);
+    unit2->draw();
+
+    unit3->turrets[0]->aim(unit->position);
+    unit3->updateSlots(QMatrix4x4(),0);
+    unit3->draw();
+
+    spaceEngine->updateObject(unit);
+
     update();
 }
 
@@ -47,27 +74,16 @@ void MainWidget::initializeGL() {
     //! [2]
     // Enable depth buffer
     glEnable(GL_DEPTH_TEST);
-
     // Enable back face culling
     glEnable(GL_CULL_FACE);
-
     glEnable(GL_ALPHA_TEST);
-    glAlphaFunc(GL_GREATER, 0.1);
+    glAlphaFunc(GL_GREATER, 0.3);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
     engine = new RenderEngine();
     initTextures();
-
-
     // Use QBasicTimer because its faster than QTimer
     timer.start(12, this);
 }
-
-//! [3]
-
-//! [3]
-
 //! [4]
 void MainWidget::initTextures() {
     // engine->resisterTexture("DJ", QImage("../DJ.png"));
@@ -105,17 +121,12 @@ void MainWidget::paintGL() {
     matrix.translate(0.0, 0.0, -5.0);
     engine->setView(projection * matrix);
 
-    QMatrix4x4 transform;
 
     for (const auto &[texture_id, drawables]: Game::image_draw_config_map) {
         engine->bindTexture(texture_id);
         // qDebug()<<texture_id;
         for (const auto &drawable: drawables) {
-            transform.setToIdentity();
-            transform.translate(drawable->position.toVector3D());
-            transform.rotate(drawable->rotation, 0, 0, 1);
-            transform.scale(drawable->scale);
-            engine->transform(transform);
+            engine->transform(drawable->render_transform);
             engine->setColor(drawable->color);
             engine->render();
         }

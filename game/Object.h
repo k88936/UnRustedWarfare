@@ -6,16 +6,14 @@
 #define OBJECT_H
 #include <QVector3D>
 
+#include "Grid.h"
 
 class Object {
 public:
-    // Object(QVector3D position, float rotation);
-
     Object();
-    QVector4D position=QVector4D(0,0,0,1);
-    float rotation=0;//north is zero
+    QVector3D position=QVector3D(0,0,0);
+    float radius;
+    float rotation=0;//east is zero
+    std::vector<Grid *> gridsAcross;
 };
-
-
-
 #endif //OBJECT_H

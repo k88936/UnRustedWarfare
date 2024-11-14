@@ -4,5 +4,5 @@
 
 #include "MetaAttachable.h"
 
-MetaAttachable::MetaAttachable() : MetaObject() {
+MetaAttachable::MetaAttachable() {
 }

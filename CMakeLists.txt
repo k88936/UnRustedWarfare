@@ -47,6 +47,13 @@ add_executable(untitled1
         game/Attachable.h
         game/PhysicsEngine.cpp
         game/PhysicsEngine.h
+        game/Projectile.cpp
+        game/Projectile.h
+        game/SpaceEngine.cpp
+        game/SpaceEngine.h
+        game/Body.cpp
+        game/Body.h
+        game/Grid.h
 )
 target_link_libraries(untitled1
         Qt::Core

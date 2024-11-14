@@ -8,7 +8,7 @@
 #include "MetaObject.h"
 
 
-class MetaTurret :MetaAttachable{
+class MetaTurret :public MetaAttachable ,public  MetaObject{
     // QVector4D barrelTransform;
 public:
     MetaTurret();
@@ -17,7 +17,7 @@ public:
     float barrelX;
     float barrelY;
     std::string image;
-    float turnSpeed;
+    float turnSpeed=-1;
     float turnAcc;
     std::string shootSound;
     float shootSoundVolume;
@@ -32,7 +32,7 @@ public:
     bool invisible=false;
     float turnSpeedAcceleration;
     std::string attachedTo;
-    std::vector<attachSlot<MetaTurret>> attached_turrets=std::vector<attachSlot<MetaTurret>>();
+    std::vector<MetaTurret*> attached_turrets=std::vector<MetaTurret*>();
 
     bool canShoot;
     float limitingMinRange;

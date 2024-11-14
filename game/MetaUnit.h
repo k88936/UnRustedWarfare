@@ -84,7 +84,7 @@ public:
     float targetHeight;
     bool joinGroup;
 
-    std::vector<attachSlot<MetaTurret>> attached_turret=std::vector<attachSlot<MetaTurret>>();
+    std::vector<MetaTurret*> attached_turret=std::vector<MetaTurret*>();
     void attack();
 };
 

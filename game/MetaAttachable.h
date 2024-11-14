@@ -10,21 +10,24 @@
 
 class MetaAttachable;
 
-template <typename T>
-struct  attachSlot {
-    // QMatrix4x4 transform;
-    QVector4D translation;
-    bool isFixed;
-    bool inVisible;
-    T *attached;
-    attachSlot(float x,float y,bool isFixed,bool visible,T *attached):translation(x,y,0,1),isFixed(isFixed),inVisible(visible),attached(attached){};
-    attachSlot(QVector4D translation,bool isFixed,bool visible,T *attached):translation(translation),isFixed(isFixed),inVisible(visible),attached(attached){};
-    attachSlot(float x,float y,float z,bool isFixed,bool visible,T *attached):translation(x,y,z,1),isFixed(isFixed),inVisible(visible),attached(attached){};
-};
+// template <typename T>
+// struct  attachSlot {
+//     // QMatrix4x4 transform;
+//     QVector4D translation;
+//     bool isFixed;
+//     bool inVisible;
+//     T *attached;
+//     attachSlot(float x,float y,bool isFixed,bool visible,T *attached):translation(x,y,0,1),isFixed(isFixed),inVisible(visible),attached(attached){};
+//     attachSlot(QVector4D translation,bool isFixed,bool visible,T *attached):translation(translation),isFixed(isFixed),inVisible(visible),attached(attached){};
+//     attachSlot(float x,float y,float z,bool isFixed,bool visible,T *attached):translation(x,y,z,1),isFixed(isFixed),inVisible(visible),attached(attached){};
+// };
 
-class MetaAttachable:MetaObject{
+class MetaAttachable{
 public:
     MetaAttachable();
+    QVector3D slot_translation;
+    bool slot_isFixed;
+    bool slot_inVisible;
     // MetaObject *host;
     // std::vector<attachSlot> attachSlots;
     // void operate();

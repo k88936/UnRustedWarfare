@@ -4,7 +4,7 @@
 
 #include "Drawable.h"
 
-Drawable::Drawable(): Object() {
+Drawable::Drawable() {
 }
 
 void Drawable::draw() {
