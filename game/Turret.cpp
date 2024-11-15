@@ -9,39 +9,27 @@
 #include "Game.h"
 
 
-Turret::Turret(MetaTurret *meta) : Attachable(), Drawable() {
-    this->meta=meta;
-    this->textureId=meta->image;
-    for (const auto & slot : meta->attached_turrets) {
-        auto turret=new Turret(slot);
-        turret->slot_translation=slot->slot_translation;
-        turret->slot_isFixed=slot->slot_isFixed;
-        turret->slot_inVisible=slot->slot_inVisible;
+Turret::Turret(MetaTurret *meta) : Attachable(), Drawable(), Sensor(meta->range) {
+    this->meta = meta;
+    this->textureId = meta->image;
+    for (const auto &slot: meta->attached_turrets) {
+        auto turret = new Turret(slot);
+        turret->slot_translation = slot->slot_translation;
+        turret->slot_isFixed = slot->slot_isFixed;
+        turret->slot_inVisible = slot->slot_inVisible;
         turrets_attached.push_back(turret);
     }
-    rotationSpeed=0;
+    rotationSpeed = 0;
 }
 
-void Turret::updateSlots(QMatrix4x4 transform, float rotation_base) {
-
-    if(relative_rotation>=180) {
-        relative_rotation-=360;
-    }else if(relative_rotation<-180) {
-        relative_rotation+=360;
-    }
-    this->rotation=relative_rotation+rotation_base;
- if(rotation>=180) {
-     rotation-=360;
- }
-    else if (rotation<-180) {
-        rotation+=360;
-    }
+void Turret::updateSlots(QMatrix4x4 transform) {
         transform.rotate(this->relative_rotation,0,0,1);
     for (auto slot: this->turrets_attached) {
         QMatrix4x4 push_this=transform;
         push_this.translate(slot->slot_translation);
         slot->position=transform.map(slot->slot_translation);
-        slot->updateSlots(push_this, this->rotation);
+        slot->setRotation(slot->relative_rotation+rotation);
+        slot->updateSlots(push_this);
     }
 
 }
@@ -73,6 +61,7 @@ float Turret::aim(const QVector3D target) {
 }
 
 bool Turret::shoot() {
+
     //TODO gen projectile and effect
     return true;
 }

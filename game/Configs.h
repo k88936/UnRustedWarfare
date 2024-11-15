@@ -17,9 +17,7 @@ public:
     static std::unordered_map<std::string, MetaProjectiles *> meta_projectiles;
     static std::unordered_map<std::string, MetaEffect *> meta_effects;
     static std::unordered_map<std::string,QImage> images;
-
     static void loadIni(const QString &path);
-
     static void init();
 };
 

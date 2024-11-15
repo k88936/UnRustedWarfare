@@ -492,8 +492,10 @@ CMakeFiles/untitled1.dir/mainwidget.cpp.o: \
   /root/CLionProjects/untitled1/game/Object.h \
   /usr/include/qt6/QtGui/QVector3D \
   /root/CLionProjects/untitled1/game/Grid.h \
-  /root/CLionProjects/untitled1/game/SpaceEngine.h \
+  /root/CLionProjects/untitled1/game/GridsManager.h \
+  /root/CLionProjects/untitled1/game/Projectile.h \
+  /root/CLionProjects/untitled1/game/../mainwidget.h \
   /root/CLionProjects/untitled1/game/Unit.h \
-  /root/CLionProjects/untitled1/game/Body.h \
   /root/CLionProjects/untitled1/game/Turret.h \
-  /root/CLionProjects/untitled1/game/Attachable.h
+  /root/CLionProjects/untitled1/game/Attachable.h \
+  /root/CLionProjects/untitled1/game/Sensor.h

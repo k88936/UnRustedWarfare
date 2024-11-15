@@ -203,30 +203,6 @@ game/Attachable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Attachable.cpp.s
 .PHONY : game/Attachable.cpp.s
 
-game/Body.o: game/Body.cpp.o
-.PHONY : game/Body.o
-
-# target to build an object file
-game/Body.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Body.cpp.o
-.PHONY : game/Body.cpp.o
-
-game/Body.i: game/Body.cpp.i
-.PHONY : game/Body.i
-
-# target to preprocess a source file
-game/Body.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Body.cpp.i
-.PHONY : game/Body.cpp.i
-
-game/Body.s: game/Body.cpp.s
-.PHONY : game/Body.s
-
-# target to generate assembly for a file
-game/Body.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Body.cpp.s
-.PHONY : game/Body.cpp.s
-
 game/Configs.o: game/Configs.cpp.o
 .PHONY : game/Configs.o
 
@@ -298,6 +274,30 @@ game/Game.s: game/Game.cpp.s
 game/Game.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Game.cpp.s
 .PHONY : game/Game.cpp.s
+
+game/GridsManager.o: game/GridsManager.cpp.o
+.PHONY : game/GridsManager.o
+
+# target to build an object file
+game/GridsManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/GridsManager.cpp.o
+.PHONY : game/GridsManager.cpp.o
+
+game/GridsManager.i: game/GridsManager.cpp.i
+.PHONY : game/GridsManager.i
+
+# target to preprocess a source file
+game/GridsManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/GridsManager.cpp.i
+.PHONY : game/GridsManager.cpp.i
+
+game/GridsManager.s: game/GridsManager.cpp.s
+.PHONY : game/GridsManager.s
+
+# target to generate assembly for a file
+game/GridsManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/GridsManager.cpp.s
+.PHONY : game/GridsManager.cpp.s
 
 game/MetaAttachable.o: game/MetaAttachable.cpp.o
 .PHONY : game/MetaAttachable.o
@@ -467,30 +467,6 @@ game/Object.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Object.cpp.s
 .PHONY : game/Object.cpp.s
 
-game/PhysicsEngine.o: game/PhysicsEngine.cpp.o
-.PHONY : game/PhysicsEngine.o
-
-# target to build an object file
-game/PhysicsEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o
-.PHONY : game/PhysicsEngine.cpp.o
-
-game/PhysicsEngine.i: game/PhysicsEngine.cpp.i
-.PHONY : game/PhysicsEngine.i
-
-# target to preprocess a source file
-game/PhysicsEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.i
-.PHONY : game/PhysicsEngine.cpp.i
-
-game/PhysicsEngine.s: game/PhysicsEngine.cpp.s
-.PHONY : game/PhysicsEngine.s
-
-# target to generate assembly for a file
-game/PhysicsEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.s
-.PHONY : game/PhysicsEngine.cpp.s
-
 game/Projectile.o: game/Projectile.cpp.o
 .PHONY : game/Projectile.o
 
@@ -515,29 +491,29 @@ game/Projectile.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Projectile.cpp.s
 .PHONY : game/Projectile.cpp.s
 
-game/SpaceEngine.o: game/SpaceEngine.cpp.o
-.PHONY : game/SpaceEngine.o
+game/Sensor.o: game/Sensor.cpp.o
+.PHONY : game/Sensor.o
 
 # target to build an object file
-game/SpaceEngine.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o
-.PHONY : game/SpaceEngine.cpp.o
+game/Sensor.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Sensor.cpp.o
+.PHONY : game/Sensor.cpp.o
 
-game/SpaceEngine.i: game/SpaceEngine.cpp.i
-.PHONY : game/SpaceEngine.i
+game/Sensor.i: game/Sensor.cpp.i
+.PHONY : game/Sensor.i
 
 # target to preprocess a source file
-game/SpaceEngine.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.i
-.PHONY : game/SpaceEngine.cpp.i
+game/Sensor.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Sensor.cpp.i
+.PHONY : game/Sensor.cpp.i
 
-game/SpaceEngine.s: game/SpaceEngine.cpp.s
-.PHONY : game/SpaceEngine.s
+game/Sensor.s: game/Sensor.cpp.s
+.PHONY : game/Sensor.s
 
 # target to generate assembly for a file
-game/SpaceEngine.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.s
-.PHONY : game/SpaceEngine.cpp.s
+game/Sensor.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Sensor.cpp.s
+.PHONY : game/Sensor.cpp.s
 
 game/Turret.o: game/Turret.cpp.o
 .PHONY : game/Turret.o
@@ -676,9 +652,6 @@ help:
 	@echo "... game/Attachable.o"
 	@echo "... game/Attachable.i"
 	@echo "... game/Attachable.s"
-	@echo "... game/Body.o"
-	@echo "... game/Body.i"
-	@echo "... game/Body.s"
 	@echo "... game/Configs.o"
 	@echo "... game/Configs.i"
 	@echo "... game/Configs.s"
@@ -688,6 +661,9 @@ help:
 	@echo "... game/Game.o"
 	@echo "... game/Game.i"
 	@echo "... game/Game.s"
+	@echo "... game/GridsManager.o"
+	@echo "... game/GridsManager.i"
+	@echo "... game/GridsManager.s"
 	@echo "... game/MetaAttachable.o"
 	@echo "... game/MetaAttachable.i"
 	@echo "... game/MetaAttachable.s"
@@ -709,15 +685,12 @@ help:
 	@echo "... game/Object.o"
 	@echo "... game/Object.i"
 	@echo "... game/Object.s"
-	@echo "... game/PhysicsEngine.o"
-	@echo "... game/PhysicsEngine.i"
-	@echo "... game/PhysicsEngine.s"
 	@echo "... game/Projectile.o"
 	@echo "... game/Projectile.i"
 	@echo "... game/Projectile.s"
-	@echo "... game/SpaceEngine.o"
-	@echo "... game/SpaceEngine.i"
-	@echo "... game/SpaceEngine.s"
+	@echo "... game/Sensor.o"
+	@echo "... game/Sensor.i"
+	@echo "... game/Sensor.s"
 	@echo "... game/Turret.o"
 	@echo "... game/Turret.i"
 	@echo "... game/Turret.s"

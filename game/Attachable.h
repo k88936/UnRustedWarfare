@@ -10,12 +10,14 @@
 
 class Attachable {
 public:
+  explicit Attachable();
   QVector3D slot_translation;
   bool slot_isFixed;
   bool slot_inVisible;
-  explicit Attachable();
-  virtual  void updateSlots(QMatrix4x4 transform, float rotation_base);
+  virtual  void updateSlots(QMatrix4x4 transform);
   float relative_rotation=0;
+  void setRelativeRotation(float rotation);
+  void addRelativeRotation(float rotation);
 };
 
 

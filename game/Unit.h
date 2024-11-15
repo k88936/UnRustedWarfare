@@ -4,16 +4,15 @@
 
 #ifndef UNIT_H
 #define UNIT_H
-#include "Body.h"
 #include "Drawable.h"
 #include "MetaUnit.h"
 #include "Turret.h"
 
 
-class Unit :public Attachable,public Drawable,public Body{
+class Unit :public Attachable,public Drawable,public Object{
 public:
     explicit Unit(MetaUnit * meta,QVector3D position,float rotation);
-    void updateSlots(QMatrix4x4 transform, float rotation_base) override;
+    void updateSlots(QMatrix4x4 transform) override;
     MetaUnit *meta = nullptr;
     bool isAttached=false;
     void attack(QVector3D target);
@@ -21,6 +20,7 @@ public:
     std::vector<Turret*> turrets;
     std::vector<Object*> watchers;
 
+    void after() override;
 };
 
 

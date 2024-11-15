@@ -7,14 +7,15 @@
 #include "Attachable.h"
 #include "Drawable.h"
 #include "MetaTurret.h"
+#include "Sensor.h"
 
 
-class Turret :public Attachable,public Drawable,public Object{
+class Turret :public Attachable,public Drawable,public Sensor{
 public:
     Turret(MetaTurret* meta);
     MetaTurret *meta;
     float rotationSpeed;
-    void updateSlots(QMatrix4x4 transform, float rotation_base) override;
+    void updateSlots(QMatrix4x4 transform) override;
     std::vector<Turret*> turrets_attached;
     float aim(QVector3D target);
     bool shoot();

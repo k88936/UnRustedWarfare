@@ -47,8 +47,6 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/3.29.6/CMakeSystem.cmake \
 	/root/CLionProjects/untitled1/game/Attachable.cpp \
 	/root/CLionProjects/untitled1/game/Attachable.h \
-	/root/CLionProjects/untitled1/game/Body.cpp \
-	/root/CLionProjects/untitled1/game/Body.h \
 	/root/CLionProjects/untitled1/game/Configs.cpp \
 	/root/CLionProjects/untitled1/game/Configs.h \
 	/root/CLionProjects/untitled1/game/Drawable.cpp \
@@ -56,6 +54,8 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/game/Game.cpp \
 	/root/CLionProjects/untitled1/game/Game.h \
 	/root/CLionProjects/untitled1/game/Grid.h \
+	/root/CLionProjects/untitled1/game/GridsManager.cpp \
+	/root/CLionProjects/untitled1/game/GridsManager.h \
 	/root/CLionProjects/untitled1/game/MetaAttachable.cpp \
 	/root/CLionProjects/untitled1/game/MetaAttachable.h \
 	/root/CLionProjects/untitled1/game/MetaEffect.cpp \
@@ -70,12 +70,10 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/game/MetaUnit.h \
 	/root/CLionProjects/untitled1/game/Object.cpp \
 	/root/CLionProjects/untitled1/game/Object.h \
-	/root/CLionProjects/untitled1/game/PhysicsEngine.cpp \
-	/root/CLionProjects/untitled1/game/PhysicsEngine.h \
 	/root/CLionProjects/untitled1/game/Projectile.cpp \
 	/root/CLionProjects/untitled1/game/Projectile.h \
-	/root/CLionProjects/untitled1/game/SpaceEngine.cpp \
-	/root/CLionProjects/untitled1/game/SpaceEngine.h \
+	/root/CLionProjects/untitled1/game/Sensor.cpp \
+	/root/CLionProjects/untitled1/game/Sensor.h \
 	/root/CLionProjects/untitled1/game/Turret.cpp \
 	/root/CLionProjects/untitled1/game/Turret.h \
 	/root/CLionProjects/untitled1/game/Unit.cpp \

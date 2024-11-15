@@ -106,12 +106,12 @@ void Configs::loadIni(const QString &path) {
                 else if (fst == "displayText")unit->displayText = snd;
                 else if (fst == "displayDescription")unit->displayDescription = snd;
                 else if (fst == "price")unit->price = std::stoi(snd);
-                else if (fst == "maxHp")unit->maxHp = std::stoi(snd);
+                else if (fst == "maxHp")unit->maxHp = std::stof(snd);
                 else if (fst == "techLevel")unit->techLevel = std::stoi(snd);
                 else if (fst == "buildSpeed")unit->buildSpeed = std::stof(snd);
                 else if (fst == "energyMax")unit->energyMax = std::stof(snd);
                 else if (fst == "energyRegen")unit->energyRegen = std::stof(snd);
-                else if (fst == "mass")unit->mass = std::stoi(snd);
+                else if (fst == "mass")unit->mass = std::stof(snd);
                 else if (fst == "radius")unit->radius = std::stof(snd) * rw2sw;
                 else if (fst == "displayRadius")unit->displayRadius = std::stof(snd) * rw2sw;
                 else if (fst == "fogOfWarSightRange")unit->fogOfWarSightRange = std::stof(snd) * rw2sw;

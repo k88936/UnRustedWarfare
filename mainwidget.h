@@ -20,8 +20,6 @@ public:
     ~MainWidget() override;
 
 protected:
-    void timerEvent(QTimerEvent *e) override;
-
     void initializeGL() override;
     void resizeGL(int w, int h) override;
     void paintGL() override;
@@ -30,7 +28,6 @@ protected:
     void initTextures();
 
 private:
-    QBasicTimer timer;
     QOpenGLShaderProgram program;
     RenderEngine *engine = nullptr;
 

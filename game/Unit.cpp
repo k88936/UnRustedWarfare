@@ -5,12 +5,13 @@
 #include "Unit.h"
 
 #include "Game.h"
+#include "Sensor.h"
 
 
-Unit::Unit(MetaUnit *meta, const QVector3D position, const float rotation): Attachable(),Drawable() {
+Unit::Unit(MetaUnit *meta, const QVector3D position, const float rotation): Attachable(),Drawable(),Object(meta->radius,meta->mass,meta->mass) {
     this->meta = meta;
     this->position = position;
-    this->relative_rotation = rotation;
+    this->rotation = rotation;
     this->textureId = meta->image;
     for (const auto &slot: meta->attached_turret) {
         auto turret =new Turret(slot);
@@ -19,36 +20,21 @@ Unit::Unit(MetaUnit *meta, const QVector3D position, const float rotation): Atta
         turret->slot_inVisible = slot->slot_inVisible;
         turrets.push_back(turret);
     }
-    this->radius=meta->radius;
-    auto* mar=new Object();
-    mar->radius=meta->maxAttackRange;
+    auto* mar=new Sensor(meta->maxAttackRange);
     watchers.push_back(mar);
 }
 
-void Unit::updateSlots(QMatrix4x4 transform, const float rotation_base) {
-    if(relative_rotation>=180) {
-        relative_rotation-=360;
-    }else if(relative_rotation<-180) {
-        relative_rotation+=360;
-    }
-    this->rotation=relative_rotation+rotation_base;
-    if(rotation>=180) {
-        rotation-=360;
-    }else if(rotation<-180) {
-        rotation+=360;
-    }
+void Unit::updateSlots(QMatrix4x4 transform) {
 
-    if (!this->isAttached) {
-        transform.translate(this->position);
-    }
     transform.rotate(this->relative_rotation, 0, 0, 1);
     for (auto slot: this->turrets) {
         QMatrix4x4 push_this = transform;
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
-        slot->updateSlots(push_this, this->rotation);
+        slot->setRotation(slot->relative_rotation+rotation);
+        slot->updateSlots(push_this);
     }
-    for (auto watcher : watchers) {
+    for (const auto watcher : watchers) {
         watcher->position = this->position;
     }
 }
@@ -74,6 +60,17 @@ void Unit::draw() {
         }
         slot->draw();
     }
+}
+
+void Unit::after() {
+    Object::after();
+    if (!this->isAttached) {
+        QMatrix4x4 transform;
+        transform.translate(this->position);
+        transform.rotate(this->rotation, 0, 0, 1);
+        updateSlots(transform);
+    }
+    this->draw();
 }
 
 

@@ -344,4 +344,123 @@ CMakeFiles/untitled1.dir/game/Object.cpp.o: \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/pstl/glue_numeric_defs.h \
   /usr/include/qt6/QtCore/qmargins.h /usr/include/qt6/QtCore/qsize.h \
   /usr/include/qt6/QtCore/qmath.h /usr/include/qt6/QtCore/qalgorithms.h \
-  /root/CLionProjects/untitled1/game/Grid.h
+  /root/CLionProjects/untitled1/game/Grid.h \
+  /root/CLionProjects/untitled1/game/Game.h \
+  /usr/include/qt6/QtCore/QBasicTimer \
+  /usr/include/qt6/QtCore/qbasictimer.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/chrono \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/chrono.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/ratio \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/ctime \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/sstream \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/istream \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/istream.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/sstream.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/chrono_io.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/iomanip \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/locale \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_facets_nonio.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu/bits/time_members.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/x86_64-pc-linux-gnu/bits/messages_members.h \
+  /usr/include/libintl.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/codecvt.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_facets_nonio.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/locale_conv.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/quoted_string.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/format \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/charconv \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/span \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/unicode.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/unicode-data.h \
+  /usr/include/qt6/QtCore/QObject /usr/include/qt6/QtCore/qobject.h \
+  /usr/include/qt6/QtCore/qobjectdefs.h \
+  /usr/include/qt6/QtCore/qobjectdefs_impl.h \
+  /usr/include/qt6/QtCore/qfunctionaltools_impl.h \
+  /usr/include/qt6/QtCore/qlist.h /usr/include/qt6/QtCore/qiterator.h \
+  /usr/include/qt6/QtCore/qbytearraylist.h \
+  /usr/include/qt6/QtCore/qstringlist.h \
+  /usr/include/qt6/QtCore/qstringmatcher.h \
+  /usr/include/qt6/QtCore/qscopedpointer.h \
+  /usr/include/qt6/QtCore/qmetatype.h \
+  /usr/include/qt6/QtCore/qdatastream.h \
+  /usr/include/qt6/QtCore/qiodevicebase.h \
+  /usr/include/qt6/QtCore/qfloat16.h /usr/include/qt6/QtCore/qiterable.h \
+  /usr/include/qt6/QtCore/qmetacontainer.h \
+  /usr/include/qt6/QtCore/qcontainerinfo.h \
+  /usr/include/qt6/QtCore/qtaggedpointer.h \
+  /usr/include/qt6/QtCore/qscopeguard.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/list \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_list.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/list.tcc \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/map \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_tree.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_map.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/bits/stl_multimap.h \
+  /usr/include/qt6/QtCore/qobject_impl.h \
+  /usr/include/qt6/QtCore/qbindingstorage.h \
+  /root/CLionProjects/untitled1/game/Drawable.h \
+  /usr/include/qt6/QtGui/QMatrix4x4 /usr/include/qt6/QtGui/qmatrix4x4.h \
+  /usr/include/qt6/QtGui/qvector3d.h /usr/include/qt6/QtGui/qvector4d.h \
+  /usr/include/qt6/QtGui/qquaternion.h \
+  /usr/include/qt6/QtGui/qgenericmatrix.h \
+  /usr/include/qt6/QtCore/qdebug.h /usr/include/qt6/QtCore/qtextstream.h \
+  /usr/include/qt6/QtCore/qcontiguouscache.h \
+  /usr/include/qt6/QtCore/qsharedpointer.h \
+  /usr/include/qt6/QtCore/qshareddata.h \
+  /usr/include/qt6/QtCore/qsharedpointer_impl.h \
+  /usr/include/qt6/QtCore/qmap.h \
+  /usr/include/qt6/QtCore/qshareddata_impl.h \
+  /usr/include/qt6/QtCore/qset.h /usr/include/qt6/QtCore/qhash.h \
+  /usr/include/qt6/QtCore/qvarlengtharray.h \
+  /root/CLionProjects/untitled1/game/GridsManager.h \
+  /root/CLionProjects/untitled1/game/Projectile.h \
+  /root/CLionProjects/untitled1/game/../mainwidget.h \
+  /usr/include/qt6/QtOpenGLWidgets/QOpenGLWidget \
+  /usr/include/qt6/QtOpenGLWidgets/qopenglwidget.h \
+  /usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsglobal.h \
+  /usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsexports.h \
+  /usr/include/qt6/QtWidgets/QWidget \
+  /usr/include/qt6/QtWidgets/qwidget.h \
+  /usr/include/qt6/QtWidgets/qtwidgetsglobal.h \
+  /usr/include/qt6/QtWidgets/qtwidgets-config.h \
+  /usr/include/qt6/QtWidgets/qtwidgetsexports.h \
+  /usr/include/qt6/QtGui/qwindowdefs.h /usr/include/qt6/QtGui/qaction.h \
+  /usr/include/qt6/QtGui/qkeysequence.h /usr/include/qt6/QtGui/qicon.h \
+  /usr/include/qt6/QtGui/qpixmap.h /usr/include/qt6/QtGui/qpaintdevice.h \
+  /usr/include/qt6/QtGui/qcolor.h /usr/include/qt6/QtGui/qrgb.h \
+  /usr/include/qt6/QtGui/qrgba64.h /usr/include/qt6/QtGui/qimage.h \
+  /usr/include/qt6/QtGui/qpixelformat.h \
+  /usr/include/qt6/QtGui/qtransform.h /usr/include/qt6/QtGui/qpolygon.h \
+  /usr/include/qt6/QtGui/qregion.h /usr/include/qt6/QtCore/qspan.h \
+  /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/cassert \
+  /usr/include/qt6/QtCore/q20iterator.h /usr/include/qt6/QtCore/qline.h \
+  /usr/include/qt6/QtCore/qvariant.h /usr/include/qt6/QtGui/qpalette.h \
+  /usr/include/qt6/QtGui/qbrush.h /usr/include/qt6/QtGui/qfont.h \
+  /usr/include/qt6/QtCore/qendian.h \
+  /usr/include/qt6/QtGui/qfontmetrics.h \
+  /usr/include/qt6/QtGui/qfontinfo.h \
+  /usr/include/qt6/QtWidgets/qsizepolicy.h \
+  /usr/include/qt6/QtGui/qcursor.h /usr/include/qt6/QtGui/qbitmap.h \
+  /usr/include/qt6/QtGui/QSurfaceFormat \
+  /usr/include/qt6/QtGui/qsurfaceformat.h \
+  /usr/include/qt6/QtGui/qopengl.h /usr/include/GL/gl.h \
+  /usr/include/qt6/QtGui/qopenglext.h \
+  /usr/lib/clang/18/include/inttypes.h /usr/include/inttypes.h \
+  /usr/include/qt6/QtOpenGL/QOpenGLTexture \
+  /usr/include/qt6/QtOpenGL/qopengltexture.h \
+  /usr/include/qt6/QtOpenGL/qtopenglglobal.h \
+  /usr/include/qt6/QtOpenGL/qtopenglexports.h \
+  /usr/include/qt6/QtCore/QScopedPointer \
+  /root/CLionProjects/untitled1/game/../RenderEngine.h \
+  /usr/include/qt6/QtGui/QOpenGLFunctions \
+  /usr/include/qt6/QtGui/qopenglfunctions.h \
+  /usr/include/qt6/QtGui/qopenglcontext.h \
+  /usr/include/qt6/QtCore/qnativeinterface.h \
+  /usr/include/qt6/QtGui/qopenglcontext_platform.h \
+  /usr/include/qt6/QtOpenGL/QOpenGLShaderProgram \
+  /usr/include/qt6/QtOpenGL/qopenglshaderprogram.h \
+  /usr/include/qt6/QtGui/qvector2d.h \
+  /usr/include/qt6/QtOpenGL/QOpenGLBuffer \
+  /usr/include/qt6/QtOpenGL/qopenglbuffer.h \
+  /usr/include/qt6/QtOpenGL/QOpenGLVertexArrayObject \
+  /usr/include/qt6/QtOpenGL/qopenglvertexarrayobject.h

@@ -307,24 +307,10 @@ CMakeFiles/untitled1.dir/game/Attachable.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/Attachable.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/Attachable.cpp -o CMakeFiles/untitled1.dir/game/Attachable.cpp.s
 
-CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o: /root/CLionProjects/untitled1/game/PhysicsEngine.cpp
-CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o -MF CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o.d -o CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o -c /root/CLionProjects/untitled1/game/PhysicsEngine.cpp
-
-CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/untitled1/game/PhysicsEngine.cpp > CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.i
-
-CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/PhysicsEngine.cpp -o CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.s
-
 CMakeFiles/untitled1.dir/game/Projectile.cpp.o: CMakeFiles/untitled1.dir/flags.make
 CMakeFiles/untitled1.dir/game/Projectile.cpp.o: /root/CLionProjects/untitled1/game/Projectile.cpp
 CMakeFiles/untitled1.dir/game/Projectile.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/untitled1.dir/game/Projectile.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object CMakeFiles/untitled1.dir/game/Projectile.cpp.o"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/Projectile.cpp.o -MF CMakeFiles/untitled1.dir/game/Projectile.cpp.o.d -o CMakeFiles/untitled1.dir/game/Projectile.cpp.o -c /root/CLionProjects/untitled1/game/Projectile.cpp
 
 CMakeFiles/untitled1.dir/game/Projectile.cpp.i: cmake_force
@@ -335,33 +321,33 @@ CMakeFiles/untitled1.dir/game/Projectile.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/Projectile.cpp.s"
 	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/Projectile.cpp -o CMakeFiles/untitled1.dir/game/Projectile.cpp.s
 
-CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o: /root/CLionProjects/untitled1/game/SpaceEngine.cpp
-CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o -MF CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o.d -o CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o -c /root/CLionProjects/untitled1/game/SpaceEngine.cpp
+CMakeFiles/untitled1.dir/game/GridsManager.cpp.o: CMakeFiles/untitled1.dir/flags.make
+CMakeFiles/untitled1.dir/game/GridsManager.cpp.o: /root/CLionProjects/untitled1/game/GridsManager.cpp
+CMakeFiles/untitled1.dir/game/GridsManager.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Building CXX object CMakeFiles/untitled1.dir/game/GridsManager.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/GridsManager.cpp.o -MF CMakeFiles/untitled1.dir/game/GridsManager.cpp.o.d -o CMakeFiles/untitled1.dir/game/GridsManager.cpp.o -c /root/CLionProjects/untitled1/game/GridsManager.cpp
 
-CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/untitled1/game/SpaceEngine.cpp > CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.i
+CMakeFiles/untitled1.dir/game/GridsManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/game/GridsManager.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/untitled1/game/GridsManager.cpp > CMakeFiles/untitled1.dir/game/GridsManager.cpp.i
 
-CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/SpaceEngine.cpp -o CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.s
+CMakeFiles/untitled1.dir/game/GridsManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/GridsManager.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/GridsManager.cpp -o CMakeFiles/untitled1.dir/game/GridsManager.cpp.s
 
-CMakeFiles/untitled1.dir/game/Body.cpp.o: CMakeFiles/untitled1.dir/flags.make
-CMakeFiles/untitled1.dir/game/Body.cpp.o: /root/CLionProjects/untitled1/game/Body.cpp
-CMakeFiles/untitled1.dir/game/Body.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Building CXX object CMakeFiles/untitled1.dir/game/Body.cpp.o"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/Body.cpp.o -MF CMakeFiles/untitled1.dir/game/Body.cpp.o.d -o CMakeFiles/untitled1.dir/game/Body.cpp.o -c /root/CLionProjects/untitled1/game/Body.cpp
+CMakeFiles/untitled1.dir/game/Sensor.cpp.o: CMakeFiles/untitled1.dir/flags.make
+CMakeFiles/untitled1.dir/game/Sensor.cpp.o: /root/CLionProjects/untitled1/game/Sensor.cpp
+CMakeFiles/untitled1.dir/game/Sensor.cpp.o: CMakeFiles/untitled1.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_20) "Building CXX object CMakeFiles/untitled1.dir/game/Sensor.cpp.o"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/untitled1.dir/game/Sensor.cpp.o -MF CMakeFiles/untitled1.dir/game/Sensor.cpp.o.d -o CMakeFiles/untitled1.dir/game/Sensor.cpp.o -c /root/CLionProjects/untitled1/game/Sensor.cpp
 
-CMakeFiles/untitled1.dir/game/Body.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/game/Body.cpp.i"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/untitled1/game/Body.cpp > CMakeFiles/untitled1.dir/game/Body.cpp.i
+CMakeFiles/untitled1.dir/game/Sensor.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/untitled1.dir/game/Sensor.cpp.i"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/untitled1/game/Sensor.cpp > CMakeFiles/untitled1.dir/game/Sensor.cpp.i
 
-CMakeFiles/untitled1.dir/game/Body.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/Body.cpp.s"
-	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/Body.cpp -o CMakeFiles/untitled1.dir/game/Body.cpp.s
+CMakeFiles/untitled1.dir/game/Sensor.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/untitled1.dir/game/Sensor.cpp.s"
+	/usr/bin/clang++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/untitled1/game/Sensor.cpp -o CMakeFiles/untitled1.dir/game/Sensor.cpp.s
 
 # Object files for target untitled1
 untitled1_OBJECTS = \
@@ -382,10 +368,9 @@ untitled1_OBJECTS = \
 "CMakeFiles/untitled1.dir/game/Turret.cpp.o" \
 "CMakeFiles/untitled1.dir/game/Game.cpp.o" \
 "CMakeFiles/untitled1.dir/game/Attachable.cpp.o" \
-"CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o" \
 "CMakeFiles/untitled1.dir/game/Projectile.cpp.o" \
-"CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o" \
-"CMakeFiles/untitled1.dir/game/Body.cpp.o"
+"CMakeFiles/untitled1.dir/game/GridsManager.cpp.o" \
+"CMakeFiles/untitled1.dir/game/Sensor.cpp.o"
 
 # External object files for target untitled1
 untitled1_EXTERNAL_OBJECTS =
@@ -407,10 +392,9 @@ untitled1: CMakeFiles/untitled1.dir/game/MetaProjectiles.cpp.o
 untitled1: CMakeFiles/untitled1.dir/game/Turret.cpp.o
 untitled1: CMakeFiles/untitled1.dir/game/Game.cpp.o
 untitled1: CMakeFiles/untitled1.dir/game/Attachable.cpp.o
-untitled1: CMakeFiles/untitled1.dir/game/PhysicsEngine.cpp.o
 untitled1: CMakeFiles/untitled1.dir/game/Projectile.cpp.o
-untitled1: CMakeFiles/untitled1.dir/game/SpaceEngine.cpp.o
-untitled1: CMakeFiles/untitled1.dir/game/Body.cpp.o
+untitled1: CMakeFiles/untitled1.dir/game/GridsManager.cpp.o
+untitled1: CMakeFiles/untitled1.dir/game/Sensor.cpp.o
 untitled1: CMakeFiles/untitled1.dir/build.make
 untitled1: /usr/lib/libQt6OpenGLWidgets.so.6.8.0
 untitled1: /usr/lib/libQt6Widgets.so.6.8.0
@@ -420,7 +404,7 @@ untitled1: /usr/lib/libGLX.so
 untitled1: /usr/lib/libOpenGL.so
 untitled1: /usr/lib/libQt6Core.so.6.8.0
 untitled1: CMakeFiles/untitled1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_22) "Linking CXX executable untitled1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_21) "Linking CXX executable untitled1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

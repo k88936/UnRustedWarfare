@@ -5,19 +5,17 @@
 #include <QLabel>
 #include "game/Configs.h"
 #include "mainwidget.h"
+#include "game/Game.h"
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
     QSurfaceFormat format;
     format.setDepthBufferSize(24);
     QSurfaceFormat::setDefaultFormat(format);
-
-    Configs::init();
     app.setApplicationName("test");
     app.setApplicationVersion("0.1");
-    MainWidget widget;
-    widget.show();
+
+    Game::init();
     return app.exec();
 }

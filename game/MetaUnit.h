@@ -25,8 +25,8 @@ public:
     std::string displayText; //display name
     std::string displayDescription;
     int price;
-    int maxHp;
-    int mass;
+    float maxHp;
+    float mass;
     int techLevel;
     float radius; //contact radius
     float displayRadius;

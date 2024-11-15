@@ -445,13 +445,13 @@ CMakeFiles/untitled1.dir/game/Configs.cpp.o: \
   /usr/bin/../lib64/gcc/x86_64-pc-linux-gnu/14.2.1/../../../../include/c++/14.2.1/cassert \
   /usr/include/qt6/QtCore/q20iterator.h /usr/include/qt6/QtCore/qline.h \
   /root/CLionProjects/untitled1/game/Unit.h \
-  /root/CLionProjects/untitled1/game/Body.h \
-  /usr/include/qt6/QtGui/QVector3D \
-  /root/CLionProjects/untitled1/game/Object.h \
-  /root/CLionProjects/untitled1/game/Grid.h \
   /root/CLionProjects/untitled1/game/Drawable.h \
+  /root/CLionProjects/untitled1/game/Object.h \
+  /usr/include/qt6/QtGui/QVector3D \
+  /root/CLionProjects/untitled1/game/Grid.h \
   /root/CLionProjects/untitled1/game/Turret.h \
   /root/CLionProjects/untitled1/game/Attachable.h \
+  /root/CLionProjects/untitled1/game/Sensor.h \
   /root/CLionProjects/untitled1/game/../RenderEngine.h \
   /usr/include/qt6/QtGui/QOpenGLFunctions \
   /usr/include/qt6/QtGui/qopenglfunctions.h \
