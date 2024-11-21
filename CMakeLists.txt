@@ -6,7 +6,6 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
-
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -16,44 +15,42 @@ find_package(Qt6 COMPONENTS
         REQUIRED)
 
 add_executable(untitled1
-        main.cpp
-        mainwidget.cpp
-        RenderEngine.cpp
-        game/Drawable.cpp
-        game/Drawable.h
-        game/Object.cpp
-        game/Object.h
-        game/Unit.cpp
-        game/Unit.h
-        game/MetaAttachable.cpp
-        game/MetaAttachable.h
-        game/MetaUnit.cpp
-        game/MetaUnit.h
-        game/MetaEffect.cpp
-        game/MetaEffect.h
-        game/MetaTurret.cpp
-        game/MetaTurret.h
-        game/MetaObject.cpp
-        game/MetaObject.h
-        game/Configs.cpp
-        game/Configs.h
-        game/MetaProjectiles.cpp
-        game/MetaProjectiles.h
-        game/Turret.cpp
-        game/Turret.h
-        game/Game.cpp
-        game/Game.h
-        game/Attachable.cpp
-        game/Attachable.h
-        game/Projectile.cpp
-        game/Projectile.h
-        game/GridsManager.cpp
-        game/GridsManager.h
-        game/Grid.h
-        game/Sensor.cpp
-        game/Sensor.h
+        src/main.cpp
+        src/ui/BattlefieldWidget.cpp
+        src/game/Drawable.cpp
+        src/game/Object.cpp
+        src/game/Unit.cpp
+        src/game/MetaAttachable.cpp
+        src/game/MetaUnit.cpp
+        src/game/MetaEffect.cpp
+        src/game/MetaTurret.cpp
+        src/game/MetaObject.cpp
+        src/game/Configs.cpp
+        src/game/MetaProjectiles.cpp
+        src/game/Turret.cpp
+        src/game/Game.cpp
+        src/game/Attachable.cpp
+        src/game/Projectile.cpp
+        src/game/GridsManager.cpp
+        src/game/Sensor.cpp
+        src/game/MetaDrawable.cpp
+        src/game/Effect.cpp
+        include/battle_widget.h
+        src/ui/welcome_widget.cpp
+        include/welcome_widget.h
+        src/ui/splash_widget.cpp
+        include/splash_widget.h
+        src/ui/battle_widget.cpp
+        include/battle_widget.h
+        src/ui/RenderEngine.cpp
 )
+add_subdirectory(src/tmxlite)
+#link_libraries(tmxlite)
+include_directories(src/tmxlite/include)
+include_directories(include)
+
 target_link_libraries(untitled1
+        tmxlite
         Qt::Core
         Qt::Gui
         Qt::Widgets

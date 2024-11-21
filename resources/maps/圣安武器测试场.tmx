@@ -751,7 +751,7 @@
       <properties>
         <property name="water" value="" />
       </properties>
-    </tile>
+    </tileest>
     <tile id="16">
       <properties>
         <property name="water" value="" />

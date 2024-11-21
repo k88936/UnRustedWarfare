@@ -85,6 +85,51 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Available install components are: \"Unspecified\" \"libraries\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+.PHONY : list_install_components/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Install the project..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -P cmake_install.cmake
+.PHONY : install/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing only the local directory..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Installing the project stripped..."
+	/opt/clion/bin/cmake/linux/x64/bin/cmake -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles /root/CLionProjects/untitled1/cmake-build-debug//CMakeFiles/progress.marks
@@ -154,6 +199,69 @@ untitled1_autogen: cmake_check_build_system
 untitled1_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1_autogen.dir/build.make CMakeFiles/untitled1_autogen.dir/build
 .PHONY : untitled1_autogen/fast
+
+#=============================================================================
+# Target rules for targets named tmxlite
+
+# Build rule for target.
+tmxlite: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tmxlite
+.PHONY : tmxlite
+
+# fast build rule for target.
+tmxlite/fast:
+	$(MAKE) $(MAKESILENT) -f src/tmxlite/CMakeFiles/tmxlite.dir/build.make src/tmxlite/CMakeFiles/tmxlite.dir/build
+.PHONY : tmxlite/fast
+
+#=============================================================================
+# Target rules for targets named tmxlite_autogen_timestamp_deps
+
+# Build rule for target.
+tmxlite_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tmxlite_autogen_timestamp_deps
+.PHONY : tmxlite_autogen_timestamp_deps
+
+# fast build rule for target.
+tmxlite_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f src/tmxlite/CMakeFiles/tmxlite_autogen_timestamp_deps.dir/build.make src/tmxlite/CMakeFiles/tmxlite_autogen_timestamp_deps.dir/build
+.PHONY : tmxlite_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named tmxlite_autogen
+
+# Build rule for target.
+tmxlite_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 tmxlite_autogen
+.PHONY : tmxlite_autogen
+
+# fast build rule for target.
+tmxlite_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f src/tmxlite/CMakeFiles/tmxlite_autogen.dir/build.make src/tmxlite/CMakeFiles/tmxlite_autogen.dir/build
+.PHONY : tmxlite_autogen/fast
+
+BattlefieldWidget.o: BattlefieldWidget.cpp.o
+.PHONY : BattlefieldWidget.o
+
+# target to build an object file
+BattlefieldWidget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/BattlefieldWidget.cpp.o
+.PHONY : BattlefieldWidget.cpp.o
+
+BattlefieldWidget.i: BattlefieldWidget.cpp.i
+.PHONY : BattlefieldWidget.i
+
+# target to preprocess a source file
+BattlefieldWidget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/BattlefieldWidget.cpp.i
+.PHONY : BattlefieldWidget.cpp.i
+
+BattlefieldWidget.s: BattlefieldWidget.cpp.s
+.PHONY : BattlefieldWidget.s
+
+# target to generate assembly for a file
+BattlefieldWidget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/BattlefieldWidget.cpp.s
+.PHONY : BattlefieldWidget.cpp.s
 
 RenderEngine.o: RenderEngine.cpp.o
 .PHONY : RenderEngine.o
@@ -251,6 +359,30 @@ game/Drawable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Drawable.cpp.s
 .PHONY : game/Drawable.cpp.s
 
+game/Effect.o: game/Effect.cpp.o
+.PHONY : game/Effect.o
+
+# target to build an object file
+game/Effect.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Effect.cpp.o
+.PHONY : game/Effect.cpp.o
+
+game/Effect.i: game/Effect.cpp.i
+.PHONY : game/Effect.i
+
+# target to preprocess a source file
+game/Effect.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Effect.cpp.i
+.PHONY : game/Effect.cpp.i
+
+game/Effect.s: game/Effect.cpp.s
+.PHONY : game/Effect.s
+
+# target to generate assembly for a file
+game/Effect.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/Effect.cpp.s
+.PHONY : game/Effect.cpp.s
+
 game/Game.o: game/Game.cpp.o
 .PHONY : game/Game.o
 
@@ -322,6 +454,30 @@ game/MetaAttachable.s: game/MetaAttachable.cpp.s
 game/MetaAttachable.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaAttachable.cpp.s
 .PHONY : game/MetaAttachable.cpp.s
+
+game/MetaDrawable.o: game/MetaDrawable.cpp.o
+.PHONY : game/MetaDrawable.o
+
+# target to build an object file
+game/MetaDrawable.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaDrawable.cpp.o
+.PHONY : game/MetaDrawable.cpp.o
+
+game/MetaDrawable.i: game/MetaDrawable.cpp.i
+.PHONY : game/MetaDrawable.i
+
+# target to preprocess a source file
+game/MetaDrawable.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaDrawable.cpp.i
+.PHONY : game/MetaDrawable.cpp.i
+
+game/MetaDrawable.s: game/MetaDrawable.cpp.s
+.PHONY : game/MetaDrawable.s
+
+# target to generate assembly for a file
+game/MetaDrawable.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/game/MetaDrawable.cpp.s
+.PHONY : game/MetaDrawable.cpp.s
 
 game/MetaEffect.o: game/MetaEffect.cpp.o
 .PHONY : game/MetaEffect.o
@@ -587,29 +743,77 @@ main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-mainwidget.o: mainwidget.cpp.o
-.PHONY : mainwidget.o
+src/ui/battle_widget.o: src/ui/battle_widget.cpp.o
+.PHONY : src/ui/battle_widget.o
 
 # target to build an object file
-mainwidget.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainwidget.cpp.o
-.PHONY : mainwidget.cpp.o
+src/ui/battle_widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/battle_widget.cpp.o
+.PHONY : src/ui/battle_widget.cpp.o
 
-mainwidget.i: mainwidget.cpp.i
-.PHONY : mainwidget.i
+src/ui/battle_widget.i: src/ui/battle_widget.cpp.i
+.PHONY : src/ui/battle_widget.i
 
 # target to preprocess a source file
-mainwidget.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainwidget.cpp.i
-.PHONY : mainwidget.cpp.i
+src/ui/battle_widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/battle_widget.cpp.i
+.PHONY : src/ui/battle_widget.cpp.i
 
-mainwidget.s: mainwidget.cpp.s
-.PHONY : mainwidget.s
+src/ui/battle_widget.s: src/ui/battle_widget.cpp.s
+.PHONY : src/ui/battle_widget.s
 
 # target to generate assembly for a file
-mainwidget.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/mainwidget.cpp.s
-.PHONY : mainwidget.cpp.s
+src/ui/battle_widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/battle_widget.cpp.s
+.PHONY : src/ui/battle_widget.cpp.s
+
+src/ui/splash_widget.o: src/ui/splash_widget.cpp.o
+.PHONY : src/ui/splash_widget.o
+
+# target to build an object file
+src/ui/splash_widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/splash_widget.cpp.o
+.PHONY : src/ui/splash_widget.cpp.o
+
+src/ui/splash_widget.i: src/ui/splash_widget.cpp.i
+.PHONY : src/ui/splash_widget.i
+
+# target to preprocess a source file
+src/ui/splash_widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/splash_widget.cpp.i
+.PHONY : src/ui/splash_widget.cpp.i
+
+src/ui/splash_widget.s: src/ui/splash_widget.cpp.s
+.PHONY : src/ui/splash_widget.s
+
+# target to generate assembly for a file
+src/ui/splash_widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/splash_widget.cpp.s
+.PHONY : src/ui/splash_widget.cpp.s
+
+src/ui/welcome_widget.o: src/ui/welcome_widget.cpp.o
+.PHONY : src/ui/welcome_widget.o
+
+# target to build an object file
+src/ui/welcome_widget.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/welcome_widget.cpp.o
+.PHONY : src/ui/welcome_widget.cpp.o
+
+src/ui/welcome_widget.i: src/ui/welcome_widget.cpp.i
+.PHONY : src/ui/welcome_widget.i
+
+# target to preprocess a source file
+src/ui/welcome_widget.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/welcome_widget.cpp.i
+.PHONY : src/ui/welcome_widget.cpp.i
+
+src/ui/welcome_widget.s: src/ui/welcome_widget.cpp.s
+.PHONY : src/ui/welcome_widget.s
+
+# target to generate assembly for a file
+src/ui/welcome_widget.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled1.dir/build.make CMakeFiles/untitled1.dir/src/ui/welcome_widget.cpp.s
+.PHONY : src/ui/welcome_widget.cpp.s
 
 untitled1_autogen/mocs_compilation.o: untitled1_autogen/mocs_compilation.cpp.o
 .PHONY : untitled1_autogen/mocs_compilation.o
@@ -642,10 +846,20 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
+	@echo "... install"
+	@echo "... install/local"
+	@echo "... install/strip"
+	@echo "... list_install_components"
 	@echo "... rebuild_cache"
+	@echo "... tmxlite_autogen"
+	@echo "... tmxlite_autogen_timestamp_deps"
 	@echo "... untitled1_autogen"
 	@echo "... untitled1_autogen_timestamp_deps"
+	@echo "... tmxlite"
 	@echo "... untitled1"
+	@echo "... BattlefieldWidget.o"
+	@echo "... BattlefieldWidget.i"
+	@echo "... BattlefieldWidget.s"
 	@echo "... RenderEngine.o"
 	@echo "... RenderEngine.i"
 	@echo "... RenderEngine.s"
@@ -658,6 +872,9 @@ help:
 	@echo "... game/Drawable.o"
 	@echo "... game/Drawable.i"
 	@echo "... game/Drawable.s"
+	@echo "... game/Effect.o"
+	@echo "... game/Effect.i"
+	@echo "... game/Effect.s"
 	@echo "... game/Game.o"
 	@echo "... game/Game.i"
 	@echo "... game/Game.s"
@@ -667,6 +884,9 @@ help:
 	@echo "... game/MetaAttachable.o"
 	@echo "... game/MetaAttachable.i"
 	@echo "... game/MetaAttachable.s"
+	@echo "... game/MetaDrawable.o"
+	@echo "... game/MetaDrawable.i"
+	@echo "... game/MetaDrawable.s"
 	@echo "... game/MetaEffect.o"
 	@echo "... game/MetaEffect.i"
 	@echo "... game/MetaEffect.s"
@@ -700,9 +920,15 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... mainwidget.o"
-	@echo "... mainwidget.i"
-	@echo "... mainwidget.s"
+	@echo "... src/ui/battle_widget.o"
+	@echo "... src/ui/battle_widget.i"
+	@echo "... src/ui/battle_widget.s"
+	@echo "... src/ui/splash_widget.o"
+	@echo "... src/ui/splash_widget.i"
+	@echo "... src/ui/splash_widget.s"
+	@echo "... src/ui/welcome_widget.o"
+	@echo "... src/ui/welcome_widget.i"
+	@echo "... src/ui/welcome_widget.s"
 	@echo "... untitled1_autogen/mocs_compilation.o"
 	@echo "... untitled1_autogen/mocs_compilation.i"
 	@echo "... untitled1_autogen/mocs_compilation.s"
