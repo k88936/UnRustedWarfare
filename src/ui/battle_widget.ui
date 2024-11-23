@@ -6,12 +6,373 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>775</width>
-    <height>672</height>
+    <width>941</width>
+    <height>685</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>battle_widget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/*
+Material Dark Style Sheet for QT Applications
+Author: Jaime A. Quiroga P.
+Inspired on https://github.com/jxfwinter/qt-material-stylesheet
+Company: GTRONICK
+Last updated: 04/12/2018, 15:00.
+Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
+*/
+QMainWindow {
+	background-color:#000000;
+}
+.QWidget{
+ 	background-color: #000000;
+}
+ QDialog {
+	background-color:#000000;
+}
+QColorDialog {
+	background-color:#000000;
+}
+QTextEdit {
+	background-color:#000000;
+	color: #a9b7c6;
+} 
+QPlainTextEdit {
+	selection-background-color:#007b50;
+	background-color:#000000;
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-width: 1px;
+	color: #a9b7c6;
+} 
+QPushButton{
+	border-style: solid;
+	border-radius:0px;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #30F6D9;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+padding:5px;
+	background-color: #151515;
+	
+}
+QPushButton::default{
+	border-bottom-width: 2px;
+	border-bottom-color: #32FFE0;
+	color: #32FFE0;
+}
+
+QPushButton:hover{
+	color: #000000;
+	background-color: #30F6D9;
+	
+}
+QPushButton:pressed{
+	color: #000000;
+	background-color: #2BDABD;
+}
+QPushButton:disabled{
+	border-bottom-color: #505050;
+	color: #505050;
+	background-color: #151515;
+}
+/* QToolButton {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #04b97f;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+	padding: 2px;
+	background-color: #000000;
+}
+QToolButton:hover{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #37efba;
+	border-bottom-width: 2px;
+	border-style: solid;
+	color: #FFFFFF;
+	padding-bottom: 1px;
+	background-color: #000000;
+} */ 
+QLineEdit {
+	border-width: 1px; 
+	border-radius: 0px;
+	border-color: #505050;
+	border-style: inset;
+	padding: 0px;
+	color: #a9b7c6;
+	background:#151515;
+	selection-background-color:#505050;
+	selection-color: #2BDABD;
+}
+QLabel {
+	color: #a9b7c6;
+}
+/* QLCDNumber {
+	color: #37e6b4;
+} */ 
+QProgressBar {
+	color: transparent;
+	border-style:inset;
+	border-width: 1px; 
+	border-radius: 0px;
+	border-color: #30F6D9;
+	background-color:#151515;
+}
+QProgressBar::chunk {
+	background-color: #30F6D9;
+	width:5px;
+	margin:0px;
+	border-radius: 0px;
+}
+/* QMenuBar {
+	background-color: #000000;
+}
+QMenuBar::item {
+	color: #a9b7c6;
+  	spacing: 3px;
+  	padding: 1px 4px;
+  	background: #000000;
+}
+
+QMenuBar::item:selected {
+  	background:#000000;
+	color: #FFFFFF;
+}
+QMenu::item:selected {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: #04b97f;
+	border-bottom-color: transparent;
+	border-left-width: 2px;
+	color: #FFFFFF;
+	padding-left:15px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:7px;
+	background-color: #000000;
+}
+QMenu::item {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+	padding-left:17px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:7px;
+	background-color: #000000;
+}
+QMenu{
+	background-color:#000000;
+} */ 
+QTabWidget {
+	color:#a9b7c6;
+	background-color:#000000;
+	
+}
+QTabWidget::pane {
+	border:1px solid #151515;
+	border-radius: 0px;
+}
+QTabBar::tab{
+	border:1px solid #000000;
+	border-radius: 0px;
+	color: #a9b7c6;
+	padding:8px;
+	background-color: #000000;
+}
+QTabBar::tab:top,QTabBar::tab:bottom{
+min-width:80px;
+}
+QTabBar::tab:left,QTabBar::tab:right{
+min-height:80px;
+}
+ QTabBar::tab:hover {
+	color: #30F6D9;
+}
+QTabBar::tab:top:hover{
+	border-bottom-color:#30F6D9;
+}
+QTabBar::tab:bottom:hover{
+	border-top-color:#30F6D9;
+}
+QTabBar::tab:left:hover{
+	border-right-color:#30F6D9;
+}
+QTabBar::tab:right:hover{
+	border-left-color:#30F6D9;
+}
+QTabBar::tab:selected, QTabBar::tab:last:selected {
+	color: #000000;
+	border-color: #32FFE0;
+	background-color: #30F6D9;
+}
+
+QCheckBox {
+	color: #a9b7c6;
+	border:1px solid #151515;
+	border-radius:0px;
+	background-color:#151515;
+	padding-left: 4px;
+}
+
+
+QCheckBox:hover {
+	border-color: #30F6D9;
+	color:#30F6D9;
+}
+QCheckBox::indicator{
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-width: 1px;
+	border-color: #a9b7c6;
+}
+QCheckBox::indicator:checked {
+	background-color: #30F6D9;
+	border-color:#30F6D9
+}
+QCheckBox::indicator:unchecked {
+	background-color: transparent;
+}
+QCheckBox:disabled {
+	color: #505050;
+}
+/* QRadioButton {
+	color: #a9b7c6;
+	background-color: #000000;
+	padding: 1px;
+}
+QRadioButton::indicator:checked {
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-radius:5px;
+	border-width: 1px;
+	border-color: #04b97f;
+	color: #a9b7c6;
+	background-color: #04b97f;
+}
+QRadioButton::indicator:unchecked {
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-radius:5px;
+	border-width: 1px;
+	border-color: #04b97f;
+	color: #a9b7c6;
+	background-color: transparent;
+} */ 
+QStatusBar {
+	color:#ffffff;
+}
+QSpinBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDoubleSpinBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QTimeEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDateTimeEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDateEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QComboBox {
+	color: #a9b7c6;	
+	background: #000000;
+}
+QComboBox:editable {
+	background: #000000;
+	color: #a9b7c6;
+	selection-background-color: #000000;
+}
+QComboBox QAbstractItemView {
+	color: #a9b7c6;	
+	background: #000000;
+	selection-color: #FFFFFF;
+	selection-background-color: #000000;
+}
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+	color: #a9b7c6;	
+	background: #000000;
+}
+QFontComboBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QToolBox {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QToolBox::tab {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QToolBox::tab:selected {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+QScrollArea {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QSlider{
+background-color: #000000
+}
+QSlider::groove:horizontal {
+	height: 1px;
+}
+QSlider::groove:vertical {
+	width: 1px;
+}
+QSlider::handle{
+	background-color: #32FFE0;
+	border: 1px solid #151515;
+	border-radius: 0px;
+}
+QSlider::handle:horizontal {
+	width: 6px;
+	margin: -4px 0;
+}
+QSlider::handle:vertical {
+	height: 6px;
+	margin: 0 -4px;
+}
+QSlider::add-page{
+    background: #a9b7c6;
+}
+QSlider::sub-page {
+    background: #2BDABD;
+}
+</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
@@ -31,7 +392,7 @@
    </property>
    <item row="0" column="0">
     <widget class="QWidget" name="widget" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout_3">
+     <layout class="QVBoxLayout" name="verticalLayout_5">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -50,12 +411,12 @@
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-         <widget class="QLabel" name="tasks_label">
+         <widget class="QLabel" name="label_tasks">
           <property name="text">
-           <string>TextLabel</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Goals:&lt;/p&gt;&lt;p&gt;[ ] survive&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="alignment">
-           <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
+           <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
           </property>
          </widget>
         </item>
@@ -73,9 +434,9 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="time_label">
+         <widget class="QLabel" name="label_info">
           <property name="text">
-           <string>TextLabel</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;10:27&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -111,19 +472,6 @@
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>130</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -134,15 +482,18 @@
            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
           </property>
           <item>
-           <widget class="QPushButton" name="pause_button">
+           <widget class="QPushButton" name="button_pause">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
             <property name="text">
-             <string/>
+             <string>p?c</string>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -150,18 +501,13 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="pushButton_6">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+           <widget class="QPushButton" name="button_speed">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 24px;max-width:32px;max-height:24px;image: url(:/ui/speed_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/speed_dark.png);}
+</string>
             </property>
             <property name="text">
              <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -194,12 +540,15 @@
          </spacer>
         </item>
         <item>
-         <widget class="QTabWidget" name="tool_tabs">
+         <widget class="QTabWidget" name="tabs_actions">
           <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="acceptDrops">
+           <bool>false</bool>
           </property>
           <property name="tabPosition">
            <enum>QTabWidget::TabPosition::East</enum>
@@ -208,10 +557,13 @@
            <enum>QTabWidget::TabShape::Rounded</enum>
           </property>
           <property name="currentIndex">
-           <number>0</number>
+           <number>2</number>
           </property>
           <property name="elideMode">
            <enum>Qt::TextElideMode::ElideLeft</enum>
+          </property>
+          <property name="usesScrollButtons">
+           <bool>false</bool>
           </property>
           <property name="documentMode">
            <bool>false</bool>
@@ -226,34 +578,281 @@
            <bool>false</bool>
           </property>
           <widget class="QWidget" name="tab">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <attribute name="title">
-            <string>Tab 1</string>
+            <string>action</string>
            </attribute>
+           <layout class="QGridLayout" name="gridLayout_3">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <property name="spacing">
+             <number>1</number>
+            </property>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="button_upgrade">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/upgrade_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/upgrade_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QPushButton" name="button_fix">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/repair_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/repair_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="button_march">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/march_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/march_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="button_delete">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/delete_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/delete_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="QPushButton" name="button_explore">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/explore_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/explore_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QPushButton" name="button_patrol">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/patrol_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/patrol_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="button_attack">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/attack_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/attack_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="2">
+             <widget class="QPushButton" name="button_stay">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/stay_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/stay_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="2">
+             <widget class="QPushButton" name="button_defence">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/defence_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/defence_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <spacer name="verticalSpacer_7">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
           <widget class="QWidget" name="tab_2">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
            <attribute name="title">
-            <string>Tab 2</string>
+            <string>build</string>
            </attribute>
+           <layout class="QGridLayout" name="gridLayout_2">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <property name="spacing">
+             <number>1</number>
+            </property>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_8">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>40</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </widget>
+          <widget class="QWidget" name="tab_3">
+           <attribute name="title">
+            <string>develop</string>
+           </attribute>
+           <layout class="QGridLayout" name="gridLayout_4">
+            <property name="leftMargin">
+             <number>0</number>
+            </property>
+            <property name="topMargin">
+             <number>0</number>
+            </property>
+            <property name="rightMargin">
+             <number>0</number>
+            </property>
+            <property name="bottomMargin">
+             <number>0</number>
+            </property>
+            <property name="spacing">
+             <number>1</number>
+            </property>
+            <item row="0" column="0">
+             <spacer name="verticalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Orientation::Vertical</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>20</width>
+                <height>293</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </widget>
          </widget>
         </item>
        </layout>
       </item>
       <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <layout class="QHBoxLayout" name="horizontalLayout_4">
         <item>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -270,12 +869,16 @@
            </spacer>
           </item>
           <item>
-           <widget class="QPushButton" name="queue0">
+           <widget class="QPushButton" name="button_queue_new">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/add-group_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/add-group_dark.png);}
+</string>
             </property>
             <property name="text">
              <string/>
@@ -286,60 +889,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="queue1">
+           <widget class="QPushButton" name="button_queue">
             <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_5">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButton">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/group_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/group_dark.png);}
+</string>
             </property>
             <property name="text">
              <string/>
@@ -365,106 +924,110 @@
          </spacer>
         </item>
         <item>
-         <layout class="QGridLayout" name="gridLayout_2">
-          <property name="sizeConstraint">
-           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <spacer name="verticalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QPushButton" name="button_type">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>type1</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_9">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>type1</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="pushButton_10">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="text">
+               <string>type1</string>
+              </property>
+              <property name="flat">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Orientation::Horizontal</enum>
           </property>
-          <property name="spacing">
-           <number>6</number>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-          <item row="1" column="2">
-           <widget class="QPushButton" name="pushButton_13">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+         </spacer>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <spacer name="verticalSpacer_6">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
             </property>
-            <property name="text">
-             <string/>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
             </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
+           </spacer>
           </item>
-          <item row="0" column="2">
-           <widget class="QPushButton" name="pushButton_12">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item>
+           <widget class="QPushButton" name="button_select_all">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/all_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/all_dark.png);}
+</string>
             </property>
             <property name="text">
              <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QPushButton" name="pushButton_10">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QPushButton" name="pushButton_9">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QPushButton" name="pushButton_8">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_11">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string/>
-            </property>
-            <property name="flat">
-             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -477,6 +1040,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

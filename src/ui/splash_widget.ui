@@ -2,16 +2,8 @@
 <ui version="4.0">
  <class>splash_widget</class>
  <widget class="QWidget" name="splash_widget">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>1200</width>
-    <height>600</height>
-   </rect>
-  </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -37,6 +29,9 @@
   <property name="windowTitle">
    <string>splash</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: rgb(0, 0, 0);</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>0</number>
@@ -61,14 +56,16 @@
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="styleSheet">
+      <string notr="true">min-width:1200px;
+min-height:600px;
+image: url(:/ui/splash.png);</string>
+     </property>
      <property name="lineWidth">
       <number>0</number>
      </property>
      <property name="text">
       <string/>
-     </property>
-     <property name="pixmap">
-      <pixmap>../resources/ui/splash.png</pixmap>
      </property>
      <property name="scaledContents">
       <bool>true</bool>
@@ -77,6 +74,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

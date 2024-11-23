@@ -30,11 +30,11 @@ RenderEngine::~RenderEngine()
 void RenderEngine::initShaders()
 {
     // Compile vertex shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Vertex, "../vshader.glsl"))
+    if (!program.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vshader.glsl"))
         exit(1);
 
     // Compile fragment shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Fragment, "../fshader.glsl"))
+    if (!program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fshader.glsl"))
         exit(1);
 
     // Link shader pipeline

@@ -43,6 +43,7 @@ add_executable(untitled1
         src/ui/battle_widget.cpp
         include/battle_widget.h
         src/ui/RenderEngine.cpp
+        resources.qrc
 )
 add_subdirectory(src/tmxlite)
 #link_libraries(tmxlite)

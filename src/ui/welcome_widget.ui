@@ -6,14 +6,378 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1114</width>
-    <height>784</height>
+    <width>1096</width>
+    <height>672</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>welcome_widget</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <property name="styleSheet">
+   <string notr="true">/*
+Material Dark Style Sheet for QT Applications
+Author: Jaime A. Quiroga P.
+Inspired on https://github.com/jxfwinter/qt-material-stylesheet
+Company: GTRONICK
+Last updated: 04/12/2018, 15:00.
+Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
+*/
+QMainWindow {
+	background-color:#000000;
+}
+QWidget{
+ 	background-color: #000000;
+}
+QDialog {
+	background-color:#000000;
+}
+QColorDialog {
+	background-color:#000000;
+}
+QTextEdit {
+	background-color:#000000;
+	color: #a9b7c6;
+} 
+QPlainTextEdit {
+	selection-background-color:#007b50;
+	background-color:#000000;
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-width: 1px;
+	color: #a9b7c6;
+} 
+QPushButton{
+	border-style: solid;
+	border-radius:0px;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #30F6D9;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+	padding:5px;
+	background-color: #151515;
+	
+}
+
+QPushButton::default{
+	border-bottom-width: 2px;
+	border-bottom-color: #32FFE0;
+	color: #32FFE0;
+}
+QPushButton:flat{
+	color:#000000;
+	background-color:#30F6D9;
+}
+QPushButton:hover{
+	color: #000000;
+	background-color: #30F6D9;
+	
+}
+QPushButton:pressed{
+	color: #000000;
+	border-bottom-color: #2BDABD;
+	background-color: #2BDABD;
+}
+QPushButton:disabled{
+	border-bottom-color: #505050;
+	color: #505050;
+	background-color: #151515;
+}
+/* QToolButton {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #04b97f;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+	padding: 2px;
+	background-color: #000000;
+}
+QToolButton:hover{
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: #37efba;
+	border-bottom-width: 2px;
+	border-style: solid;
+	color: #FFFFFF;
+	padding-bottom: 1px;
+	background-color: #000000;
+} */ 
+QLineEdit {
+	border-width: 1px; 
+	border-radius: 0px;
+	border-color: #505050;
+	border-style: inset;
+	padding: 0px;
+	color: #a9b7c6;
+	background:#151515;
+	selection-background-color:#505050;
+	selection-color: #2BDABD;
+}
+QLabel {
+	color: #a9b7c6;
+	background-color: transparent;
+}
+/* QLCDNumber {
+	color: #37e6b4;
+} */ 
+QProgressBar {
+	color: transparent;
+	border-style:inset;
+	border-width: 1px; 
+	border-radius: 0px;
+	border-color: #30F6D9;
+	background-color:#151515;
+}
+QProgressBar::chunk {
+	background-color: #30F6D9;
+	width:5px;
+	margin:0px;
+	border-radius: 0px;
+}
+/* QMenuBar {
+	background-color: #000000;
+}
+QMenuBar::item {
+	color: #a9b7c6;
+  	spacing: 3px;
+  	padding: 1px 4px;
+  	background: #000000;
+}
+
+QMenuBar::item:selected {
+  	background:#000000;
+	color: #FFFFFF;
+}
+QMenu::item:selected {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: #04b97f;
+	border-bottom-color: transparent;
+	border-left-width: 2px;
+	color: #FFFFFF;
+	padding-left:15px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:7px;
+	background-color: #000000;
+}
+QMenu::item {
+	border-style: solid;
+	border-top-color: transparent;
+	border-right-color: transparent;
+	border-left-color: transparent;
+	border-bottom-color: transparent;
+	border-bottom-width: 1px;
+	border-style: solid;
+	color: #a9b7c6;
+	padding-left:17px;
+	padding-top:4px;
+	padding-bottom:4px;
+	padding-right:7px;
+	background-color: #000000;
+}
+QMenu{
+	background-color:#000000;
+} */ 
+QTabWidget {
+	color:#a9b7c6;
+	background-color:#000000;
+	
+}
+QTabWidget::pane {
+	border:1px solid #151515;
+	border-radius: 0px;
+}
+QTabBar::tab{
+	border:1px solid #000000;
+	border-radius: 0px;
+	color: #a9b7c6;
+	padding:8px;
+	background-color: #000000;
+}
+ QTabBar::tab:hover {
+	color: #30F6D9;
+}
+QTabBar::tab:top:hover{
+	border-bottom-color:#30F6D9;
+}
+QTabBar::tab:bottom:hover{
+	border-top-color:#30F6D9;
+}
+QTabBar::tab:left:hover{
+	border-right-color:#30F6D9;
+}
+QTabBar::tab:right:hover{
+	border-left-color:#30F6D9;
+}
+QTabBar::tab:selected, QTabBar::tab:last:selected {
+	color: #000000;
+	border-color: #32FFE0;
+	background-color: #30F6D9;
+}
+
+QCheckBox {
+	color: #a9b7c6;
+	border:1px solid #151515;
+	border-radius:0px;
+	background-color:#151515;
+	padding-left: 4px;
+}
+
+
+QCheckBox:hover {
+	border-color: #30F6D9;
+	color:#30F6D9;
+}
+QCheckBox::indicator{
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-width: 1px;
+	border-color: #a9b7c6;
+}
+QCheckBox::indicator:checked {
+	background-color: #30F6D9;
+	border-color:#30F6D9
+}
+QCheckBox::indicator:unchecked {
+	background-color: transparent;
+}
+QCheckBox:disabled {
+	color: #505050;
+}
+/* QRadioButton {
+	color: #a9b7c6;
+	background-color: #000000;
+	padding: 1px;
+}
+QRadioButton::indicator:checked {
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-radius:5px;
+	border-width: 1px;
+	border-color: #04b97f;
+	color: #a9b7c6;
+	background-color: #04b97f;
+}
+QRadioButton::indicator:unchecked {
+	height: 10px;
+	width: 10px;
+	border-style:solid;
+	border-radius:5px;
+	border-width: 1px;
+	border-color: #04b97f;
+	color: #a9b7c6;
+	background-color: transparent;
+} */ 
+QStatusBar {
+	color:#ffffff;
+}
+QSpinBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDoubleSpinBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QTimeEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDateTimeEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QDateEdit {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QComboBox {
+	color: #a9b7c6;	
+	background: #000000;
+}
+QComboBox:editable {
+	background: #000000;
+	color: #a9b7c6;
+	selection-background-color: #000000;
+}
+QComboBox QAbstractItemView {
+	color: #a9b7c6;	
+	background: #000000;
+	selection-color: #FFFFFF;
+	selection-background-color: #000000;
+}
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+	color: #a9b7c6;	
+	background: #000000;
+}
+QFontComboBox {
+	color: #a9b7c6;	
+	background-color: #000000;
+}
+QToolBox {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QToolBox::tab {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QToolBox::tab:selected {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+QScrollArea {
+	color: #a9b7c6;
+	background-color: #000000;
+}
+QSlider{
+background-color: #000000
+}
+QSlider::groove:horizontal {
+	height: 1px;
+}
+QSlider::groove:vertical {
+	width: 1px;
+}
+QSlider::handle{
+	background-color: #32FFE0;
+	border: 1px solid #151515;
+	border-radius: 0px;
+}
+QSlider::handle:horizontal {
+	width: 6px;
+	margin: -4px 0;
+}
+QSlider::handle:vertical {
+	height: 6px;
+	margin: 0 -4px;
+}
+QSlider::add-page{
+    background: #a9b7c6;
+}
+QSlider::sub-page {
+    background: #2BDABD;
+}
+</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -26,237 +390,431 @@
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <item row="2" column="0">
-    <widget class="BattlefieldWidget" name="widget" native="true">
+   <item>
+    <widget class="QLabel" name="label">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
-     <property name="layoutDirection">
-      <enum>Qt::LayoutDirection::LeftToRight</enum>
+     <property name="minimumSize">
+      <size>
+       <width>1096</width>
+       <height>128</height>
+      </size>
      </property>
-     <property name="autoFillBackground">
+     <property name="baseSize">
+      <size>
+       <width>1096</width>
+       <height>128</height>
+      </size>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">image: url(:/ui/title.png);</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="scaledContents">
       <bool>false</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <property name="spacing">
-       <number>0</number>
-      </property>
-      <property name="leftMargin">
-       <number>0</number>
-      </property>
-      <property name="topMargin">
-       <number>0</number>
-      </property>
-      <property name="rightMargin">
-       <number>0</number>
-      </property>
-      <property name="bottomMargin">
-       <number>0</number>
-      </property>
-      <item>
-       <widget class="QLabel" name="label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="pixmap">
-         <pixmap>../resources/ui/title.png</pixmap>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout">
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="play">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../resources/ui/play.png</normaloff>../resources/ui/play.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>128</width>
-            <height>128</height>
-           </size>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>237</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
-        <item>
-         <widget class="QPushButton" name="github">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../resources/ui/github.png</normaloff>../resources/ui/github.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="info">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-            <horstretch>0</horstretch>
-            <verstretch>0</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../resources/ui/info.png</normaloff>../resources/ui/info.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_3">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item>
-         <widget class="QPushButton" name="setting">
-          <property name="text">
-           <string/>
-          </property>
-          <property name="icon">
-           <iconset>
-            <normaloff>../resources/ui/settings.png</normaloff>../resources/ui/settings.png</iconset>
-          </property>
-          <property name="iconSize">
-           <size>
-            <width>32</width>
-            <height>32</height>
-           </size>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-          <property name="flat">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
     </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>1</number>
+       </property>
+       <item>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_play">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>250</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+          </font>
+         </property>
+         <property name="layoutDirection">
+          <enum>Qt::LayoutDirection::LeftToRight</enum>
+         </property>
+         <property name="text">
+          <string>PLAY</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../../resources.qrc">
+           <normaloff>:/ui/play_dark.png</normaloff>:/ui/play_dark.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>32</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_2">
+         <property name="spacing">
+          <number>1</number>
+         </property>
+         <item>
+          <widget class="QPushButton" name="button_settings">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/settings_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/settings_dark.png);}
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button_github">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/github_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/github_dark.png);}
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="button_info">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="palette">
+            <palette>
+             <active>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Highlight">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>50</red>
+                 <green>255</green>
+                 <blue>224</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </active>
+             <inactive>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Highlight">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>50</red>
+                 <green>255</green>
+                 <blue>224</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>169</red>
+                 <green>183</green>
+                 <blue>198</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </inactive>
+             <disabled>
+              <colorrole role="WindowText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>128</red>
+                 <green>128</green>
+                 <blue>134</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Button">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Text">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>128</red>
+                 <green>128</green>
+                 <blue>134</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="ButtonText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>128</red>
+                 <green>128</green>
+                 <blue>134</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Base">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="Window">
+               <brush brushstyle="SolidPattern">
+                <color alpha="255">
+                 <red>21</red>
+                 <green>21</green>
+                 <blue>21</blue>
+                </color>
+               </brush>
+              </colorrole>
+              <colorrole role="PlaceholderText">
+               <brush brushstyle="SolidPattern">
+                <color alpha="128">
+                 <red>128</red>
+                 <green>128</green>
+                 <blue>134</blue>
+                </color>
+               </brush>
+              </colorrole>
+             </disabled>
+            </palette>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/info_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/info_dark.png);}
+</string>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="default">
+            <bool>false</bool>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="BattlefieldWidget" name="widget" native="true">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LayoutDirection::LeftToRight</enum>
+       </property>
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
@@ -268,6 +826,9 @@
    <container>1</container>
   </customwidget>
  </customwidgets>
- <resources/>
+ <resources>
+  <include location="../../resources.qrc"/>
+  <include location="../../resources.qrc"/>
+ </resources>
  <connections/>
 </ui>
