@@ -25,7 +25,7 @@ add_executable(untitled1
         src/game/MetaEffect.cpp
         src/game/MetaTurret.cpp
         src/game/MetaObject.cpp
-        src/game/Configs.cpp
+        src/game/UnitConfigs.cpp
         src/game/MetaProjectiles.cpp
         src/game/Turret.cpp
         src/game/Game.cpp
@@ -35,6 +35,7 @@ add_executable(untitled1
         src/game/Sensor.cpp
         src/game/MetaDrawable.cpp
         src/game/Effect.cpp
+
         include/battle_widget.h
         src/ui/welcome_widget.cpp
         include/welcome_widget.h
@@ -43,19 +44,36 @@ add_executable(untitled1
         src/ui/battle_widget.cpp
         include/battle_widget.h
         src/ui/RenderEngine.cpp
+
+        src/tmxlite/FreeFuncs.cpp
+        src/tmxlite/ImageLayer.cpp
+        src/tmxlite/Map.cpp
+        src/tmxlite/Object.cpp
+        src/tmxlite/ObjectGroup.cpp
+        src/tmxlite/Property.cpp
+        src/tmxlite/TileLayer.cpp
+        src/tmxlite/LayerGroup.cpp
+        src/tmxlite/Tileset.cpp
+        src/tmxlite/ObjectTypes.cpp
+        src/tmxlite/miniz.c
+        src/tmxlite/pugixml.cpp
+        src/tmxlite/FreeFuncs.cpp
+
         resources.qrc
+        src/game/MapConfig.cpp
+        src/game/Tile.cpp
 )
-add_subdirectory(src/tmxlite)
-#link_libraries(tmxlite)
-include_directories(src/tmxlite/include)
 include_directories(include)
 
+find_package(ZLIB REQUIRED)
+find_package(zstd REQUIRED)
 target_link_libraries(untitled1
-        tmxlite
         Qt::Core
         Qt::Gui
         Qt::Widgets
         Qt::OpenGL
         Qt::OpenGLWidgets
+        ZLIB::ZLIB
+        zstd
 )
 

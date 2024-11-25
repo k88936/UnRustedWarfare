@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-#include "Configs.h"
+#include "UnitConfigs.h"
 #include "Effect.h"
 #include "Game.h"
 
@@ -71,11 +71,11 @@ bool Turret::shoot() {
         QMatrix4x4 transform;
         transform.translate(position);
         transform.rotate(rotation,0,0,1);
-        const auto metaProjectiles=Configs::meta_projectiles.at(this->meta->projectile);
+        const auto metaProjectiles=UnitConfigs::meta_projectiles.at(this->meta->projectile);
         Game::addProjectile(new Projectile(metaProjectiles, transform.map(meta->barrelPosition), rotation, QVector3D(0, 0, 0)));
         for (const auto & shoot_flame : meta->shoot_flame)
         {
-            Game::addEffect(new Effect(Configs::meta_effects.at(shoot_flame), transform.map(meta->barrelPosition), rotation,this->linearVelocity));
+            Game::addEffect(new Effect(UnitConfigs::meta_effects.at(shoot_flame), transform.map(meta->barrelPosition), rotation,this->linearVelocity));
         }
         coolDown=meta->delay;
     return true;
@@ -106,7 +106,7 @@ void Turret::draw() {
     render_transform.translate(position);
     render_transform.rotate(rotation,0,0,1);
     render_transform.scale(this->scale);
-    Game::image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     for (const auto &slot: turrets_attached) {
         if(slot->slot_inVisible) {
             continue;

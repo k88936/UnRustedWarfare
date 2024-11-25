@@ -22,10 +22,9 @@ Unit::Unit(MetaUnit *meta, const QVector3D position, const float rotation): Atta
     }
     auto* mar=new Sensor(meta->maxAttackRange);
     watchers.push_back(mar);
-    this->restitution=0.1;
-    linearDampingDir = 0.4;
-     linearDampingVer = 0.8;
-     angularDamping = 0.6;
+    linearDampingDir = 1.6;
+     linearDampingVer = 3.2;
+     angularDamping = 24.0;
 }
 
 void Unit::updateSlots(QMatrix4x4 transform) {
@@ -63,7 +62,7 @@ void Unit::draw() {
     render_transform.translate(position);
     render_transform.rotate(rotation,0,0,1);
     render_transform.scale(this->scale);
-    Game::image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     for (const auto &slot: turrets) {
         if (slot->slot_inVisible) {
             continue;

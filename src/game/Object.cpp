@@ -106,7 +106,9 @@ void Object::after() {
     }
 
     position += linearVelocity * Game::deltaTime;
+
     addRotation(angularVelocity * Game::deltaTime);
+
     // qDebug()<<"object::after";
     // qDebug()<<linearForces;
     // qDebug()<<angularForces;
@@ -133,9 +135,13 @@ void Object::solveCollision(Object *obj1, Object *obj2, QVector3D positionDiff) 
     const float force = (2 - obj1->restitution - obj2->restitution) *(speedProjected + 5.0f) * obj1->mass * obj2->mass*(obj1->radius+obj2->radius)*(obj1->radius+obj2->radius) / (
                             (obj1->mass + obj2->mass) * (positionDiff.lengthSquared() +5.0f) * Game::deltaTime);;
     const QVector3D force3D =  normDiff * force;
-
+   // if (force!=force) {
+   //      qDebug()<<"nan";
+   //      throw std::runtime_error("nan");
+   //  }
     const float torqueBefore = 256 * force * obj1->friction * obj2->friction;
     // qDebug()<<torqueBefore;
     obj1->applyForce(-force3D, torqueBefore * obj1->radius);
     obj2->applyForce(force3D, -torqueBefore * obj2->radius);
+    qDebug()<<"hit";
 }

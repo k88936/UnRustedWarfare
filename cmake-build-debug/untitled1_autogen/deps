@@ -26,6 +26,7 @@ untitled1_autogen/timestamp: \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindPkgConfig.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindThreads.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindVulkan.cmake \
+	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/FindZLIB.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/GNUInstallDirs.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckCompilerFlag.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Internal/CheckFlagCommonConfig.cmake \
@@ -39,6 +40,7 @@ untitled1_autogen/timestamp: \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux-Initialize.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/Linux.cmake \
 	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/Platform/UnixPaths.cmake \
+	/opt/clion/bin/cmake/linux/x64/share/cmake-3.30/Modules/SelectLibraryConfigurations.cmake \
 	/root/CLionProjects/untitled1/CMakeLists.txt \
 	/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/3.30.5/CMakeCCompiler.cmake \
 	/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake \
@@ -49,11 +51,11 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/include/welcome_widget.h \
 	/root/CLionProjects/untitled1/resources.qrc \
 	/root/CLionProjects/untitled1/src/game/Attachable.cpp \
-	/root/CLionProjects/untitled1/src/game/Configs.cpp \
 	/root/CLionProjects/untitled1/src/game/Drawable.cpp \
 	/root/CLionProjects/untitled1/src/game/Effect.cpp \
 	/root/CLionProjects/untitled1/src/game/Game.cpp \
 	/root/CLionProjects/untitled1/src/game/GridsManager.cpp \
+	/root/CLionProjects/untitled1/src/game/MapConfig.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaAttachable.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaDrawable.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaEffect.cpp \
@@ -64,9 +66,24 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/src/game/Object.cpp \
 	/root/CLionProjects/untitled1/src/game/Projectile.cpp \
 	/root/CLionProjects/untitled1/src/game/Sensor.cpp \
+	/root/CLionProjects/untitled1/src/game/Tile.cpp \
 	/root/CLionProjects/untitled1/src/game/Turret.cpp \
 	/root/CLionProjects/untitled1/src/game/Unit.cpp \
+	/root/CLionProjects/untitled1/src/game/UnitConfigs.cpp \
 	/root/CLionProjects/untitled1/src/main.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/FreeFuncs.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/ImageLayer.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/LayerGroup.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/Map.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/Object.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/ObjectGroup.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/ObjectTypes.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/Property.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/TileLayer.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/Tileset.cpp \
+	/root/CLionProjects/untitled1/src/tmxlite/miniz.c \
+	/root/CLionProjects/untitled1/src/tmxlite/miniz.h \
+	/root/CLionProjects/untitled1/src/tmxlite/pugixml.cpp \
 	/root/CLionProjects/untitled1/src/ui/BattlefieldWidget.cpp \
 	/root/CLionProjects/untitled1/src/ui/RenderEngine.cpp \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.cpp \
@@ -831,6 +848,10 @@ untitled1_autogen/timestamp: \
 	/usr/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets-relwithdebinfo.cmake \
 	/usr/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsTargets.cmake \
 	/usr/lib/cmake/Qt6WidgetsTools/Qt6WidgetsToolsVersionlessTargets.cmake \
+	/usr/lib/cmake/zstd/zstdConfig.cmake \
+	/usr/lib/cmake/zstd/zstdConfigVersion.cmake \
+	/usr/lib/cmake/zstd/zstdTargets-none.cmake \
+	/usr/lib/cmake/zstd/zstdTargets.cmake \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/splash_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/welcome_widget.ui \

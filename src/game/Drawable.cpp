@@ -8,5 +8,4 @@
 // }
 
 void Drawable::draw() {
-
 }

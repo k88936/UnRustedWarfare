@@ -36,7 +36,7 @@ void Effect::draw()
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Effect::after()

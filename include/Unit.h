@@ -9,20 +9,20 @@
 #include "Turret.h"
 
 
-class Unit :public Attachable,public Drawable,public Object{
+class Unit : public Attachable, public Drawable, public Object
+{
 public:
-    explicit Unit(MetaUnit * meta,QVector3D position,float rotation);
+    explicit Unit(MetaUnit* meta, QVector3D position, float rotation);
     void updateSlots(QMatrix4x4 transform) override;
-    MetaUnit *meta = nullptr;
-    bool isAttached=false;
-    void attack(const QVector3D &target);
+    MetaUnit* meta = nullptr;
+    bool isAttached = false;
+    void attack(const QVector3D& target);
     void draw() override;
     std::vector<Turret*> turrets;
     std::vector<Object*> watchers;
 
     void after() override;
 };
-
 
 
 #endif //UNIT_H

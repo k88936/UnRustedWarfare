@@ -7,6 +7,7 @@
 
 #include <QVector3D>
 #include <QOpenGLBuffer>
+#include <Structures.h>
 
 struct VertexData
 {
@@ -71,32 +72,53 @@ void RenderEngine::setView(const QMatrix4x4& view)
 
 void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaImage)
 {
+    if (textures.find(id) != textures.end())
+    {
+        return;
+    }
+    QOpenGLVertexArrayObject* vao;
+    QOpenGLTexture* texture;
     for (int i = 0; i < metaImage.frames; ++i)
     {
         QRect rect = QRect(i * metaImage.image.width() / metaImage.frames, 0,
                            metaImage.image.width() / metaImage.frames, metaImage.image.height());
-        QOpenGLBuffer* arrayBuf = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
-        auto* vao = new QOpenGLVertexArrayObject();
+        auto* arrayBuf = new QOpenGLBuffer(QOpenGLBuffer::VertexBuffer);
+        vao = new QOpenGLVertexArrayObject();
         vao->create();
         arrayBuf->create();
         VertexData vertices[4];
+        QVector2D texCoords[4];
+        if (metaImage.rawRot)
+        {
+            texCoords[0] = QVector2D(0, 0);
+            texCoords[1] = QVector2D(1, 0);
+            texCoords[2] = QVector2D(1, 1);
+            texCoords[3] = QVector2D(0, 1);
+        }
+        else
+        {
+            texCoords[0] = QVector2D(0, 0);
+            texCoords[1] = QVector2D(0, 1);
+            texCoords[2] = QVector2D(1, 1);
+            texCoords[3] = QVector2D(1, 0);
+        }
         if (metaImage.rawSize)
         {
             vertices[0] = {
-                QVector3D(-static_cast<float>(rect.height()) /80, -static_cast<float>(rect.width()) / 80, 0),
-                QVector2D(0, 0)
+                QVector3D(-static_cast<float>(rect.height()) / 80, -static_cast<float>(rect.width()) / 80, 0),
+                texCoords[0]
             }; // v0
             vertices[1] = {
-                QVector3D(static_cast<float>(rect.height()) /80, -static_cast<float>(rect.width()) / 80, 0),
-                QVector2D(0, 1)
+                QVector3D(static_cast<float>(rect.height()) / 80, -static_cast<float>(rect.width()) / 80, 0),
+                texCoords[1]
             }; // v1
             vertices[2] = {
-                QVector3D(static_cast<float>(rect.height()) /80, static_cast<float>(rect.width()) / 80, 0),
-                QVector2D(1, 1)
+                QVector3D(static_cast<float>(rect.height()) / 80, static_cast<float>(rect.width()) / 80, 0),
+                texCoords[2]
             }; // v3
             vertices[3] = {
-                QVector3D(-static_cast<float>(rect.height()) /80, static_cast<float>(rect.width()) / 80, 0),
-                QVector2D(1, 0)
+                QVector3D(-static_cast<float>(rect.height()) / 80, static_cast<float>(rect.width()) / 80, 0),
+                texCoords[3]
             }; // v2
         }
         else
@@ -106,25 +128,25 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
                 QVector3D(
                     -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
                     -0.5, 0),
-                QVector2D(0, 0)
+                texCoords[0]
             }; // v0
             vertices[1] = {
                 QVector3D(
                     static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
                     -0.5, 0),
-                QVector2D(0, 1)
+                texCoords[1]
             }; // v1
             vertices[2] = {
                 QVector3D(
                     static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
                     0.5, 0),
-                QVector2D(1, 1)
+                texCoords[2]
             }; // v3
             vertices[3] = {
                 QVector3D(
                     -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
                     0.5, 0),
-                QVector2D(1, 0)
+                texCoords[3]
             }; // v2
         }
         vao->bind();
@@ -149,12 +171,16 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
         arrayBuf->release();
         vao->release();
 
-        QOpenGLTexture* texture = new QOpenGLTexture(metaImage.image.copy(rect).mirrored());
+        texture = new QOpenGLTexture(metaImage.image.copy(rect).mirrored());
         // Set nearest filtering mode for texture minification
         texture->setMinificationFilter(QOpenGLTexture::Linear);
         // Set bilinear filtering mode for texture magnification
         texture->setMagnificationFilter(QOpenGLTexture::Linear);
-        textures[(id + "_"+std::to_string(i))] = std::make_pair(texture, vao);
+        textures[(id + "_" + std::to_string(i))] = std::make_pair(texture, vao);
+    }
+    if (metaImage.frames == 1)
+    {
+        textures[id] = std::make_pair(texture, vao);
     }
 }
 

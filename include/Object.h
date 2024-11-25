@@ -47,7 +47,7 @@ public:
     ObjectType type = dynamic_body;
     bool sleep = false;
     float friction = 0.1;
-    float restitution ;
+    float restitution=0.1 ;
 
     bool marked_for_delete = false;
 

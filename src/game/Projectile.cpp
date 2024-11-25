@@ -4,7 +4,7 @@
 
 #include "Projectile.h"
 
-#include "Configs.h"
+#include "UnitConfigs.h"
 #include "Game.h"
 
 Projectile::Projectile(MetaProjectiles *meta, const QVector3D position, const float rotation, const QVector3D& linear_velocity_base
@@ -23,7 +23,7 @@ void Projectile::draw() {
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Projectile::after() {
@@ -52,7 +52,7 @@ void Projectile::hit(Unit* unit) const
 {
     for (const auto& explode_effect : meta->explode_effect)
     {
-            auto meta_effect = Configs::meta_effects.at(explode_effect);
+            auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
         Game::addEffect(new Effect(meta_effect, position, rotation,unit->linearVelocity));
     }
     // Game::addEffect()

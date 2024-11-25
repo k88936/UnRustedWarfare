@@ -3,7 +3,7 @@
 
 #include <QApplication>
 #include <QLabel>
-#include "Configs.h"
+#include "UnitConfigs.h"
 #include "Game.h"
 
 int main(int argc, char *argv[])

@@ -9,8 +9,7 @@
 #include <QOpenGLShaderProgram>
 #include <QOpenGLVertexArrayObject>
 #include <QOpenGLTexture>
-
-#include "Resources.h"
+#include <Structures.h>
 
 
 class RenderEngine : protected QOpenGLFunctions {
