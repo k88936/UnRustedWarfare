@@ -143,5 +143,5 @@ void Object::solveCollision(Object *obj1, Object *obj2, QVector3D positionDiff) 
     // qDebug()<<torqueBefore;
     obj1->applyForce(-force3D, torqueBefore * obj1->radius);
     obj2->applyForce(force3D, -torqueBefore * obj2->radius);
-    qDebug()<<"hit";
+    // qDebug()<<"hit";
 }

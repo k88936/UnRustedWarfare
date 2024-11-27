@@ -7,6 +7,7 @@
 #include <string>
 #include <Structures.h>
 #include <vector>
+#include <tmxlite/Layer.hpp>
 
 #include "Tile.h"
 
@@ -14,8 +15,9 @@ class MapConfig {
 
 public:
     static void init();
-    static void loadMap(const ::std::string& path, std::vector<Tile*>& tiles);
-    static std::vector<MetaImage> tile_images;
+    static void config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer);
+    static void loadMap(const std::string& path, std::vector<std::unique_ptr<Tile>>& tiles);
+    static std::map<std::string,MetaImage> tile_images;
     static std::vector<std::string> index_to_name;
 };
 

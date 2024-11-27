@@ -20,13 +20,15 @@
 class Game{
 public:
    static  std::unordered_map<std::string,std::vector<Drawable *>> var_image_draw_config_map;
+   static std::vector<QVector3D> line_draw_config;
    static std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
    static float FPS;
    static float deltaTime;
    static GridsManager grids_manager;
    static std::vector<Unit*> units;
-   static std::vector<Tile*> tiles;
+   static std::vector<std::unique_ptr<Tile>> tiles;
    static QBasicTimer timer;
+   static std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
    static  void addProjectile(Projectile *projectile);
    static void addEffect(Effect* effect);
    static std::vector<Projectile*> projectiles;

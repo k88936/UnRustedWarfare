@@ -14,6 +14,7 @@ public:
     float scale=1;
     float alpha=1   ;
     virtual void draw();
+   static QVector3D generateRandomSmallVector(float maxOffset);
 };
 
 

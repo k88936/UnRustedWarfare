@@ -59,4 +59,6 @@ convert_non_transparent("ui/speed.png")
 convert_non_transparent("ui/group.png")
 convert_non_transparent("ui/add-group.png")
 
+convert_non_transparent("ui/select.png")
+
 icons_config.close()

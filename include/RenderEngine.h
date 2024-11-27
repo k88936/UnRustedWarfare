@@ -31,10 +31,12 @@ public:
     void resisterTexture(const std::string &, const MetaImage &metaImage);
     void bindTexture(const std::string& id, int index);
     void bindTexture(const std::string&);
-    void bindShaderProgram();
+    void bind_texture_shader();
+    void bind_simple_shader();
 private:
-    std::unordered_map<std::string,std::pair<QOpenGLTexture*,QOpenGLVertexArrayObject*> > textures;
-    QOpenGLShaderProgram program;
+    static std::unordered_map<std::string,std::pair<QOpenGLTexture*,QOpenGLVertexArrayObject*> > textures;
+    QOpenGLShaderProgram texture_shader;
+    QOpenGLShaderProgram simple_shader;
     QMatrix4x4 view;
 };
 

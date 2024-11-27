@@ -50,25 +50,24 @@ GridsManager::GridsManager() {
 
 void GridsManager::updateObject(Object *object) const {
     object->gridsAcross.clear();
-
-
     int x1 =static_cast<int> ((object->position.x() - object->radius) / grid_size);
     int x2=static_cast<int>((object->position.x()+object->radius)/grid_size);
     int y1 =static_cast<int> ((object->position.y() - object->radius) / grid_size);
     int y2=static_cast<int>((object->position.y()+object->radius)/grid_size);
     // std::cout<<object<<std::endl;
-    while (x1 <= x2) {
-        while (y1 <= y2) {
-            if(x1<0||y1<0||x1>=width||y1>=height){
-                y1++;
+    int i=x1;
+    while (i <= x2) {
+        int j=y1;
+        while (j <= y2) {
+            if(i<0||j<0||i>=width||j>=height){
+                j++;
                 continue;
             }
-            grids[x1][y1]->objects.push_back(object);
-            // std::cout<<x1<<","<<y1<<std::endl;
-            object->gridsAcross.push_back(grids[x1][y1]);
-            y1++;
+            grids[i][j]->objects.push_back(object);
+            object->gridsAcross.push_back(grids[i][j]);
+            j++;
         }
-        x1++;
+        i++;
     }
     // std::cout.flush();
 }

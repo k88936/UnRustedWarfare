@@ -5,6 +5,7 @@
 #ifndef WELCOME_WIDGET_H
 #define WELCOME_WIDGET_H
 
+#include <battlefieldwidget.h>
 #include <QWidget>
 #include <QtOpenGLWidgets/QOpenGLWidget>
 
@@ -22,6 +23,7 @@ public:
 
 void    setWidget(QOpenGLWidget* widget);
 void update();
+BattlefieldWidget* get_battleFieldWidget();
 
 private:
     Ui::welcome_widget *ui;

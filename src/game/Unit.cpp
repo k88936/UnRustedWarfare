@@ -8,36 +8,42 @@
 #include "Sensor.h"
 
 
-Unit::Unit(MetaUnit *meta, const QVector3D position, const float rotation): Attachable(),Drawable(),Object(meta->radius,meta->mass,meta->mass) {
+Unit::Unit(MetaUnit* meta, const QVector3D position, const float rotation): Attachable(), Drawable(),
+                                                                            Object(meta->radius, meta->mass, meta->mass)
+{
     this->meta = meta;
     this->position = position;
     this->rotation = rotation;
-    this->scale=meta->scale;
-    for (const auto &slot: meta->attached_turret) {
-        auto turret =new Turret(slot);
+    this->scale = meta->scale;
+    for (const auto& slot : meta->attached_turret)
+    {
+        auto turret = new Turret(slot);
         turret->slot_translation = slot->slot_translation;
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
         turrets.push_back(turret);
     }
-    auto* mar=new Sensor(meta->maxAttackRange);
+    auto* mar = new Sensor(meta->maxAttackRange);
     watchers.push_back(mar);
+    restitution = 0.8;
     linearDampingDir = 1.6;
-     linearDampingVer = 3.2;
-     angularDamping = 24.0;
+    linearDampingVer = 3.2;
+    angularDamping = 24.0;
 }
 
-void Unit::updateSlots(QMatrix4x4 transform) {
-
+void Unit::updateSlots(QMatrix4x4 transform)
+{
     transform.rotate(this->relative_rotation, 0, 0, 1);
-    for (auto slot: this->turrets) {
+    for (auto slot : this->turrets)
+    {
         QMatrix4x4 push_this = transform;
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
-        slot->setRotation(slot->relative_rotation+rotation);
+        slot->setRotation(slot->relative_rotation + rotation);
         slot->updateSlots(push_this);
     }
-    for (const auto watcher : watchers) {
+    for (const auto watcher : watchers)
+    {
         watcher->position = this->position;
     }
 }
@@ -51,29 +57,44 @@ void Unit::updateSlots(QMatrix4x4 transform) {
 //     }
 // }
 
-void Unit::attack(const QVector3D & target) {
-    for (const auto turret : turrets) {
-         turret->attack(target);
+void Unit::attack(const QVector3D& target)
+{
+    for (const auto turret : turrets)
+    {
+        turret->attack(target);
     }
 }
 
-void Unit::draw() {
+void Unit::draw()
+{
     render_transform.setToIdentity();
-    render_transform.translate(position);
-    render_transform.rotate(rotation,0,0,1);
+    // if (this->linearVelocity.lengthSquared() == 0 && this->angularVelocity == 0)
+    // {
+    //     render_transform.translate(this->position);
+    // }
+    // else
+    // {
+    //     render_transform.translate(position + generateRandomSmallVector(0.025));
+    // }
+    render_transform.translate(this->position);
+    render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    for (const auto &slot: turrets) {
-        if (slot->slot_inVisible) {
+    for (const auto& slot : turrets)
+    {
+        if (slot->slot_inVisible)
+        {
             continue;
         }
         slot->draw();
     }
 }
 
-void Unit::after() {
+void Unit::after()
+{
     Object::after();
-    if (!this->isAttached) {
+    if (!this->isAttached)
+    {
         QMatrix4x4 transform;
         transform.translate(this->position);
         transform.rotate(this->rotation, 0, 0, 1);
@@ -81,5 +102,3 @@ void Unit::after() {
     }
     this->draw();
 }
-
-

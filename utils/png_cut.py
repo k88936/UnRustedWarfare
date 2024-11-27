@@ -19,4 +19,4 @@ def cut_image(image_path, new_width, new_height):
     new_img.save(image_path, "PNG")
 
 # Example usage
-cut_image("resources/ui/loading_background.png",1920,1080)
+# cut_image("resources/ui/loading_background.png",1920,1080)

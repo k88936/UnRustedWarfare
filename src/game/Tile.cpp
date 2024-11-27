@@ -7,7 +7,7 @@
 #include <Game.h>
 #include <MapConfig.h>
 
-Tile::Tile(int index, int x, int y)
+Tile::Tile(const int index, const int x, const int y)
 {
     this->index = index;
     this->x = x;

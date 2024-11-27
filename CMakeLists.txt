@@ -60,8 +60,10 @@ add_executable(untitled1
         src/tmxlite/FreeFuncs.cpp
 
         resources.qrc
+
         src/game/MapConfig.cpp
         src/game/Tile.cpp
+
 )
 include_directories(include)
 

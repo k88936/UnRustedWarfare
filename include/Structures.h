@@ -10,8 +10,8 @@
 struct MetaImage
 {
     QImage image;
-    float size = 1;
-    bool rawSize = false;
+    float scale=1;
+    bool is_raw_size = false;
     bool rawRot=false;
     int frames = 1;
 };

@@ -348,7 +348,7 @@ void UnitConfigs::loadIni(const QString& path)
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
                     }
                 }
-                images[projectile->image].rawSize = true;
+                images[projectile->image].is_raw_size = true;
                 projectile->init_frames();
             }
             else if (section_id.starts_with("effect"))
@@ -402,7 +402,7 @@ void UnitConfigs::loadIni(const QString& path)
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
                     }
                 }
-                images[effect->image].rawSize = true;
+                images[effect->image].is_raw_size = true;
                 images[effect->image].frames = effect->total_frames;
                 effect->init_frames();
             }

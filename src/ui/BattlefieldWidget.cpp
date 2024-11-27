@@ -6,6 +6,8 @@
 #include <QMouseEvent>
 
 #include <cmath>
+#include <QOpenGLBuffer>
+#include <qpainter.h>
 
 #include "UnitConfigs.h"
 #include "Game.h"
@@ -27,10 +29,7 @@ BattlefieldWidget::~BattlefieldWidget()
     doneCurrent();
 }
 
-
 float ths = 0;
-//! [1]
-//! [1]
 
 void BattlefieldWidget::initializeGL()
 {
@@ -42,80 +41,92 @@ void BattlefieldWidget::initializeGL()
     // Enable back face culling
     glEnable(GL_CULL_FACE);
     glEnable(GL_ALPHA_TEST);
-    glAlphaFunc(GL_GREATER, 0.1);
+    glAlphaFunc(GL_GREATER, 0.3);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     engine = new RenderEngine();
-    initTextures();
+    update_textures();
     // Use QBasicTimer because its faster than QTimer
 }
 
 //! [4]
-void BattlefieldWidget::initTextures()
+void BattlefieldWidget::update_textures()
 {
-    // engine->resisterTexture("DJ", QImage("../DJ.png"));
+    //for ui
+    engine->resisterTexture("_select", MetaImage(QImage(":ui/select_highlight.png"), 2, false, false));
+
     for (const auto& [id, image] : UnitConfigs::images)
     {
         if (id.empty())continue;
         engine->resisterTexture(id, image);
     }
-    for (int i=0;i<MapConfig::index_to_name.size();i++)
+    for (const auto& [id, meta_image] : MapConfig::tile_images)
     {
-        if (MapConfig::index_to_name[i].empty())continue;
-        engine->resisterTexture(MapConfig::index_to_name[i], MapConfig::tile_images[i]);
+        if (id.empty())continue;
+        engine->resisterTexture(id, meta_image);
     }
 }
 
-//! [4en]
-
-//! [5]
 void BattlefieldWidget::resizeGL(int w, int h)
 {
-    // Calculate aspect ratio
-
-    // Set near plane to 3.0, far plane to 7.0, field of view 45 degrees
-    qreal zoom = 0.05;
     const qreal zNear = 3.0, zFar = 7.0;
-    qreal x_center = 20;
-    qreal y_center = 20;
-
-    // Reset projection
     projection.setToIdentity();
-    projection.ortho(-w * zoom+x_center, w * zoom+x_center, -h * zoom+y_center, h * zoom+y_center, zNear, zFar);
-    // Set perspective projection
-    // projection.perspective(fov, aspect, zNear, zFar);
+    projection.ortho(-w * zoom / 2 + x_center, w * zoom / 2 + x_center, -h * zoom / 2 + y_center,
+                     h * zoom / 2 + y_center, zNear, zFar);
+    QMatrix4x4 matrix;
+    matrix.translate(0.0, 0.0, -5.0);
+    projection *= matrix;
+}
+
+void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches) const
+{
+    for (const auto& [texture_id, drawables] : batches)
+    {
+        if (texture_id.empty())continue;
+        engine->bindTexture(texture_id);
+        // qDebug()<<texture_id;
+        for (const auto& drawable : drawables)
+        {
+            engine->transform(drawable->render_transform);
+            engine->setColor(drawable->color);
+            engine->render();
+        }
+    }
 }
 
 //! [5]
 void BattlefieldWidget::paintGL()
 {
-    glClearColor(0.3, 0.3, 0.3, 1);
+    glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    engine->bindShaderProgram();
-    QMatrix4x4 matrix;
-    matrix.translate(0.0, 0.0, -5.0);
-    engine->setView(projection * matrix);
-    for (const auto& [texture_id, drawables] : Game::var_image_draw_config_map)
+    //
+
+    engine->bind_simple_shader();
+    engine->setView(projection);
+
+    glColor3f(48.0 / 256, 246.0 / 256, 217.0 / 256);
+    glBegin(GL_LINES);
+    for (const auto& line : Game::line_draw_config)
     {
-        if (texture_id.empty())continue;
-        engine->bindTexture(texture_id);
-        // qDebug()<<texture_id;
-        for (const auto& drawable : drawables)
-        {
-            engine->transform(drawable->render_transform);
-            engine->setColor(drawable->color);
-            engine->render();
-        }
+        glVertex3f(line.x(), line.y(), line.z());
     }
-    for (const auto& [texture_id, drawables] : Game::const_image_draw_config_map)
-    {
-        if (texture_id.empty())continue;
-        engine->bindTexture(texture_id);
-        // qDebug()<<texture_id;
-        for (const auto& drawable : drawables)
-        {
-            engine->transform(drawable->render_transform);
-            engine->setColor(drawable->color);
-            engine->render();
-        }
-    }
+    glEnd();
+
+    engine->bind_texture_shader();
+    engine->setView(projection);
+    batch_draw(Game::const_image_draw_config_map);
+    batch_draw(Game::var_image_draw_config_map);
+    batch_draw(Game::ui_image_draw_config_map);
+}
+
+QVector3D BattlefieldWidget::screen_to_world(const QPointF& screen_pos) const
+{
+    const QPointF relate = screen_pos - this->pos();
+    float x = relate.x() * zoom + x_center - this->size().width() * zoom / 2;
+    float y = -relate.y() * zoom + y_center + this->size().height() * zoom / 2;
+    return QVector3D(x, y, 0);
+}
+
+QVector3D BattlefieldWidget::screen_relative_to_world_relative(const QPointF& screen_relative) const
+{
+    return QVector3D(screen_relative.x() * zoom, -screen_relative.y() * zoom, 0);
 }

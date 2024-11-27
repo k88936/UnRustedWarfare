@@ -11,7 +11,7 @@
 
 #include "Tile.h"
 
-std::vector<MetaImage> MapConfig::tile_images;
+std::map<std::string, MetaImage> MapConfig::tile_images;
 std::vector<std::string> MapConfig::index_to_name;
 
 const std::array<std::string, 4u> LayerStrings =
@@ -26,19 +26,41 @@ void MapConfig::init()
 {
 }
 
-void refill(int n)
+void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer)
 {
-    MapConfig::tile_images.resize(n);
-    MapConfig::index_to_name.resize(n);
+    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
+    if (tmx_tiles.empty())
+    {
+        const auto& chunks = layer->getLayerAs<tmx::TileLayer>().getChunks();
+        if (chunks.empty())
+        {
+            qDebug() << "Layer has missing tile data\n";
+        }
+        else
+        {
+            qDebug() << "Layer has " << chunks.size() << " tile chunks.\n";
+        }
+    }
+    else
+    {
+        int width = layer->getSize().x;
+        int height = layer->getSize().y;
+        for (int i = 0; i < height; ++i)
+        {
+            for (int j = 0; j < width; ++j)
+            {
+                tiles.push_back(std::make_unique<Tile>(tmx_tiles[i * width + j].ID, j, height - i));
+            }
+        }
+        std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
+    }
 }
 
-void add()
-{
-}
-
-void MapConfig::loadMap(const std::string& path, std::vector<Tile*>& tiles)
+void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Tile>>& tiles)
 {
     tmx::Map map;
+    tiles.clear();
+    index_to_name.clear();
 
     if (map.load(path))
     {
@@ -63,17 +85,22 @@ void MapConfig::loadMap(const std::string& path, std::vector<Tile*>& tiles)
 
             int w = image.width() / tileset.getTileSize().x;
             int h = image.height() / tileset.getTileSize().y;
-            refill(tileset.getFirstGID() + w * h);
+            MapConfig::index_to_name.resize(tileset.getFirstGID() + w * h);
             for (int i = 0; i < h; i++)
             {
                 for (int j = 0; j < w; j++)
                 {
+                    std::string id = tileset.getName() + std::to_string(i * w + j);
                     int count = tileset.getFirstGID() + i * w + j;
+                    MapConfig::index_to_name[count] = id;
+                    if (tile_images.contains(id))
+                    {
+                        continue;
+                    }
                     QImage img = image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
                                             tileset.getTileSize().x, tileset.getTileSize().y);
-                    MetaImage metaImage(img, 1, false, true,1);
-                    MapConfig::tile_images[count] = metaImage;
-                    MapConfig::index_to_name[count] = tileset.getName() + std::to_string(i * w + j);
+                    MetaImage metaImage(img, 1, false, true, 1);
+                    MapConfig::tile_images[id] = metaImage;
                 }
             }
         }
@@ -125,56 +152,29 @@ void MapConfig::loadMap(const std::string& path, std::vector<Tile*>& tiles)
 
             if (layer->getType() == tmx::Layer::Type::Object)
             {
-                const auto& objects = layer->getLayerAs<tmx::ObjectGroup>().getObjects();
-                std::cout << "Found " << objects.size() << " objects in layer" << std::endl;
-                for (const auto& object : objects)
-                {
-                    std::cout << "Object " << object.getUID() << ", " << object.getName() << std::endl;
-                    const auto& properties = object.getProperties();
-                    std::cout << "Object has " << properties.size() << " properties" << std::endl;
-                    for (const auto& prop : properties)
-                    {
-                        std::cout << "Found property: " << prop.getName() << std::endl;
-                        std::cout << "Type: " << int(prop.getType()) << std::endl;
-                    }
-
-                    if (!object.getTilesetName().empty())
-                    {
-                        std::cout << "Object uses template tile set " << object.getTilesetName() << "\n";
-                    }
-                }
+                // const auto& objects = layer->getLayerAs<tmx::ObjectGroup>().getObjects();
+                // std::cout << "Found " << objects.size() << " objects in layer" << std::endl;
+                // for (const auto& object : objects)
+                // {
+                //     std::cout << "Object " << object.getUID() << ", " << object.getName() << std::endl;
+                //     const auto& properties = object.getProperties();
+                //     std::cout << "Object has " << properties.size() << " properties" << std::endl;
+                //     for (const auto& prop : properties)
+                //     {
+                //         std::cout << "Found property: " << prop.getName() << std::endl;
+                //         std::cout << "Type: " << int(prop.getType()) << std::endl;
+                //     }
+                //
+                //     if (!object.getTilesetName().empty())
+                //     {
+                //         std::cout << "Object uses template tile set " << object.getTilesetName() << "\n";
+                //     }
+                // }
             }
 
             if (layer->getType() == tmx::Layer::Type::Tile)
             {
-                const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
-                if (tmx_tiles.empty())
-                {
-                    const auto& chunks = layer->getLayerAs<tmx::TileLayer>().getChunks();
-                    if (chunks.empty())
-                    {
-                        std::cout << "Layer has missing tile data\n";
-                    }
-                    else
-                    {
-                        std::cout << "Layer has " << chunks.size() << " tile chunks.\n";
-                    }
-                }
-                else
-                {
-                    int width = layer->getSize().x;
-                    int height = layer->getSize().y;
-                    for (int i = 0; i < height; ++i)
-                    {
-                        for (int j = 0; j < width; ++j)
-                        {
-                            tiles.push_back(new Tile(tmx_tiles[i * width + j].ID, j, height - i));
-                        }
-                        std::cout << std::endl;
-                    }
-
-                    std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
-                }
+                config_layer(tiles, layer);
             }
 
             const auto& properties = layer->getProperties();

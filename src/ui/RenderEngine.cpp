@@ -15,7 +15,7 @@ struct VertexData
     QVector2D texCoord;
 };
 
-
+std::unordered_map<std::string, std::pair<QOpenGLTexture*, QOpenGLVertexArrayObject*>> RenderEngine::textures;
 //! [0.5]
 RenderEngine::RenderEngine()
 {
@@ -31,50 +31,58 @@ RenderEngine::~RenderEngine()
 void RenderEngine::initShaders()
 {
     // Compile vertex shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/vshader.glsl"))
-        exit(1);
-
+    if (!texture_shader.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/t_vshader.glsl"))
+        throw std::runtime_error("vertex shader compile error");
     // Compile fragment shader
-    if (!program.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/fshader.glsl"))
-        exit(1);
-
+    if (!texture_shader.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/t_fshader.glsl"))
+        throw std::runtime_error("fragment shader compile error");
     // Link shader pipeline
-    if (!program.link())
-        exit(1);
+    if (!texture_shader.link())
+        throw std::runtime_error("shader link error");
 
-    // Bind shader pipeline for use
-    if (!program.bind())
-        exit(1);
+
+
+    if (!simple_shader.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/s_vshader.glsl"))
+        throw std::runtime_error("vertex shader compile error");
+    if (!simple_shader.link())
+        throw std::runtime_error("shader link error");
+    // // Bind shader pipeline for use
+    // if (!texture_shader.bind())
+    //     throw std::runtime_error("shader bind error");
 }
 
 
 void RenderEngine::transform(const QMatrix4x4& matrix)
 {
-    program.setUniformValue("transform", matrix);
+    texture_shader.setUniformValue("transform", matrix);
 }
 
 void RenderEngine::setColor(const QVector4D& color)
 {
-    program.setUniformValue("color", color);
+    texture_shader.setUniformValue("color", color);
 }
 
 //! [2]
 void RenderEngine::render()
 {
-    ;
     glDrawArrays(GL_QUADS, 0, 4);
 }
 
 void RenderEngine::setView(const QMatrix4x4& view)
 {
-    program.setUniformValue("mvp_matrix", view);
+    texture_shader.setUniformValue("mvp_matrix", view);
+    simple_shader.setUniformValue("mvp_matrix", view);
 }
 
 void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaImage)
 {
-    if (textures.find(id) != textures.end())
+    if (textures.contains(id))
     {
         return;
+    }
+    if (metaImage.image.isNull())
+    {
+        throw std::runtime_error("image is null");
     }
     QOpenGLVertexArrayObject* vao;
     QOpenGLTexture* texture;
@@ -102,22 +110,26 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
             texCoords[2] = QVector2D(1, 1);
             texCoords[3] = QVector2D(1, 0);
         }
-        if (metaImage.rawSize)
+        if (metaImage.is_raw_size)
         {
             vertices[0] = {
-                QVector3D(-static_cast<float>(rect.height()) / 80, -static_cast<float>(rect.width()) / 80, 0),
+                QVector3D(-static_cast<float>(rect.height()) * metaImage.scale / 40,
+                          -static_cast<float>(rect.width()) * metaImage.scale / 40, 0),
                 texCoords[0]
             }; // v0
             vertices[1] = {
-                QVector3D(static_cast<float>(rect.height()) / 80, -static_cast<float>(rect.width()) / 80, 0),
+                QVector3D(static_cast<float>(rect.height()) * metaImage.scale / 40,
+                          -static_cast<float>(rect.width()) * metaImage.scale / 40, 0),
                 texCoords[1]
             }; // v1
             vertices[2] = {
-                QVector3D(static_cast<float>(rect.height()) / 80, static_cast<float>(rect.width()) / 80, 0),
+                QVector3D(static_cast<float>(rect.height()) * metaImage.scale / 40,
+                          static_cast<float>(rect.width()) * metaImage.scale / 40, 0),
                 texCoords[2]
             }; // v3
             vertices[3] = {
-                QVector3D(-static_cast<float>(rect.height()) / 80, static_cast<float>(rect.width()) / 80, 0),
+                QVector3D(-static_cast<float>(rect.height()) * metaImage.scale / 40,
+                          static_cast<float>(rect.width()) * metaImage.scale / 40, 0),
                 texCoords[3]
             }; // v2
         }
@@ -126,26 +138,26 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
             // Vertex data for face 0
             vertices[0] = {
                 QVector3D(
-                    -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
-                    -0.5, 0),
+                    -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5 * metaImage.scale,
+                    -0.5 * metaImage.scale, 0),
                 texCoords[0]
             }; // v0
             vertices[1] = {
                 QVector3D(
-                    static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
-                    -0.5, 0),
+                    static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5 * metaImage.scale,
+                    -0.5 * metaImage.scale, 0),
                 texCoords[1]
             }; // v1
             vertices[2] = {
                 QVector3D(
-                    static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
-                    0.5, 0),
+                    static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5 * metaImage.scale,
+                    0.5 * metaImage.scale, 0),
                 texCoords[2]
             }; // v3
             vertices[3] = {
                 QVector3D(
-                    -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5,
-                    0.5, 0),
+                    -static_cast<float>(rect.height()) / static_cast<float>(rect.width()) * 0.5 * metaImage.scale,
+                    0.5 * metaImage.scale, 0),
                 texCoords[3]
             }; // v2
         }
@@ -157,17 +169,17 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
         quintptr offset = 0;
 
         // Tell OpenGL programmable pipeline how to locate vertex position data
-        int vertexLocation = program.attributeLocation("a_position");
-        program.enableAttributeArray(vertexLocation);
-        program.setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+        int vertexLocation = texture_shader.attributeLocation("a_position");
+        texture_shader.enableAttributeArray(vertexLocation);
+        texture_shader.setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
         // Offset for texture coordinate
         offset += sizeof(QVector3D);
 
         // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
-        int texcoordLocation = program.attributeLocation("a_texcoord");
-        program.enableAttributeArray(texcoordLocation);
-        program.setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+        int texcoordLocation = texture_shader.attributeLocation("a_texcoord");
+        texture_shader.enableAttributeArray(texcoordLocation);
+        texture_shader.setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
         arrayBuf->release();
         vao->release();
 
@@ -191,9 +203,14 @@ void RenderEngine::bindTexture(const std::string& id)
     textures.at(id).second->bind();
 }
 
-void RenderEngine::bindShaderProgram()
+void RenderEngine::bind_texture_shader()
 {
-    this->program.bind();
+    this->texture_shader.bind();
+}
+
+void RenderEngine::bind_simple_shader()
+{
+    this->simple_shader.bind();
 }
 
 //! [2]

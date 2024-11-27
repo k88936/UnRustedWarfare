@@ -391,7 +391,7 @@ QSlider::sub-page {
     <number>0</number>
    </property>
    <item row="0" column="0">
-    <widget class="QWidget" name="widget" native="true">
+    <widget class="BattlefieldWidget" name="widget" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <property name="spacing">
        <number>0</number>
@@ -1040,6 +1040,14 @@ QSlider::sub-page {
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>BattlefieldWidget</class>
+   <extends>QWidget</extends>
+   <header location="global">battlefieldwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

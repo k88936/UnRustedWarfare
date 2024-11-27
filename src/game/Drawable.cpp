@@ -3,9 +3,16 @@
 //
 
 #include "Drawable.h"
+
+#include <random>
 //
 // Drawable::Drawable() {
 // }
 
 void Drawable::draw() {
+}
+QVector3D Drawable::generateRandomSmallVector(float maxOffset) {
+    static std::default_random_engine generator;
+    std::uniform_real_distribution<float> distribution(-maxOffset, maxOffset);
+    return QVector3D(distribution(generator), distribution(generator), distribution(generator));
 }

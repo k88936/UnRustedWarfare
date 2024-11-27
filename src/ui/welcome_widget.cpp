@@ -19,3 +19,9 @@ welcome_widget::~welcome_widget() {
 void welcome_widget::update() {
     this->ui->widget->update();
 }
+
+BattlefieldWidget* welcome_widget::get_battleFieldWidget()
+{
+    return this->ui->widget;
+}
+
