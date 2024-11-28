@@ -5,19 +5,14 @@
 #ifndef METAUNIT_H
 #define METAUNIT_H
 #include <string>
+#include <Structures.h>
 #include <vector>
 
 #include "MetaAttachable.h"
 #include "MetaDrawable.h"
 #include "MetaTurret.h"
 
-// land water sub
- enum movementType {
-        LAND=0x100,
-        AIR=0b111,
-        HOVER=0b110,
-        SUB=0b011,
-    };
+
 
 class MetaUnit :public  MetaAttachable ,public  MetaDrawable{
 public:
@@ -46,7 +41,7 @@ public:
 
     //graphics
 
-    std::string image_wreak;
+    std::string image_wreak="NONE";
 
     //sounds
     std::vector<std::string> soundsOnNewSelection=std::vector<std::string>();

@@ -80,6 +80,10 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
     {
         return;
     }
+    if (id=="NONE")
+    {
+        return;
+    }
     if (metaImage.image.isNull())
     {
         throw std::runtime_error("image is null");

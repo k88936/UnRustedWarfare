@@ -13,7 +13,8 @@
 
 std::map<std::string, MetaImage> MapConfig::tile_images;
 std::vector<std::string> MapConfig::index_to_name;
-
+std::vector<std::vector<int>> MapConfig::tile_passable;
+std::vector<std::unique_ptr<Tile>> MapConfig::tiles;
 const std::array<std::string, 4u> LayerStrings =
 {
     std::string("Tile"),
@@ -26,7 +27,8 @@ void MapConfig::init()
 {
 }
 
-void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer)
+void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer,
+                             const float z)
 {
     const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
     if (tmx_tiles.empty())
@@ -49,14 +51,16 @@ void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const st
         {
             for (int j = 0; j < width; ++j)
             {
-                tiles.push_back(std::make_unique<Tile>(tmx_tiles[i * width + j].ID, j, height - i));
+                // std::cout << " " << tmx_tiles.at(i * width + j).ID;
+                tiles.push_back(std::make_unique<Tile>(tmx_tiles.at(i * width + j).ID, j, height - i, z));
             }
+            std::cout << std::endl;
         }
         std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
     }
 }
 
-void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Tile>>& tiles)
+void MapConfig::loadMap(const std::string& path)
 {
     tmx::Map map;
     tiles.clear();
@@ -80,12 +84,20 @@ void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Til
         // std::cout << "Map tileset has " << map.getTilesets().size() << " tilesets" << std::endl;
         for (const auto& tileset : map.getTilesets())
         {
-            std::string path = tileset.getImagePath();
-            QImage image(QString::fromStdString(path));
+            std::string image_path = tileset.getImagePath();
+            // if (image_path.starts_with("ridges/"||image_path.starts_with("ridges/")))
+            // {
+            //     image_path = image_path.substr()
+            // }
+            QImage image(QString::fromStdString(image_path));
 
+            if (image.isNull())
+            {
+                throw std::runtime_error("Failed to load tileset image: " + image_path);
+            }
             int w = image.width() / tileset.getTileSize().x;
             int h = image.height() / tileset.getTileSize().y;
-            MapConfig::index_to_name.resize(tileset.getFirstGID() + w * h);
+            MapConfig::index_to_name.resize(tileset.getFirstGID() + w * h, "NONE");
             for (int i = 0; i < h; i++)
             {
                 for (int j = 0; j < w; j++)
@@ -99,21 +111,18 @@ void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Til
                     }
                     QImage img = image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
                                             tileset.getTileSize().x, tileset.getTileSize().y);
-                    MetaImage metaImage(img, 1, false, true, 1);
+                    MetaImage metaImage(img, 1.0, false, true, 1);
                     MapConfig::tile_images[id] = metaImage;
                 }
             }
         }
-        MapConfig::index_to_name[0] = "";
-
+        // MapConfig::index_to_name[0] = "NONE";
         for (const auto& prop : mapProperties)
         {
             std::cout << "Found property: " << prop.getName() << std::endl;
             std::cout << "Type: " << static_cast<int>(prop.getType()) << std::endl;
         }
-
         std::cout << std::endl;
-
         const auto& layers = map.getLayers();
         std::cout << "Map has " << layers.size() << " layers" << std::endl;
         for (const auto& layer : layers)
@@ -125,29 +134,29 @@ void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Til
 
             if (layer->getType() == tmx::Layer::Type::Group)
             {
-                std::cout << "Checking sublayers" << std::endl;
-                const auto& sublayers = layer->getLayerAs<tmx::LayerGroup>().getLayers();
-                std::cout << "LayerGroup has " << sublayers.size() << " layers" << std::endl;
-                for (const auto& sublayer : sublayers)
-                {
-                    std::cout << "Found Layer: " << sublayer->getName() << std::endl;
-                    std::cout << "Sub-layer Type: " << LayerStrings[static_cast<std::int32_t>(sublayer->getType())] <<
-                        std::endl;
-                    std::cout << "Sub-layer Class: " << sublayer->getClass() << std::endl;
-                    std::cout << "Sub-layer Dimensions: " << sublayer->getSize() << std::endl;
-                    std::cout << "Sub-layer Tint: " << sublayer->getTintColour() << std::endl;
-
-                    if (sublayer->getType() == tmx::Layer::Type::Object)
-                    {
-                        std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::ObjectGroup>().
-                            getObjects().size() << " objects" << std::endl;
-                    }
-                    else if (sublayer->getType() == tmx::Layer::Type::Tile)
-                    {
-                        std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::TileLayer>().getTiles()
-                                                                               .size() << " tiles" << std::endl;
-                    }
-                }
+                // std::cout << "Checking sublayers" << std::endl;
+                // const auto& sublayers = layer->getLayerAs<tmx::LayerGroup>().getLayers();
+                // std::cout << "LayerGroup has " << sublayers.size() << " layers" << std::endl;
+                // for (const auto& sublayer : sublayers)
+                // {
+                //     std::cout << "Found Layer: " << sublayer->getName() << std::endl;
+                //     std::cout << "Sub-layer Type: " << LayerStrings[static_cast<std::int32_t>(sublayer->getType())] <<
+                //         std::endl;
+                //     std::cout << "Sub-layer Class: " << sublayer->getClass() << std::endl;
+                //     std::cout << "Sub-layer Dimensions: " << sublayer->getSize() << std::endl;
+                //     std::cout << "Sub-layer Tint: " << sublayer->getTintColour() << std::endl;
+                //
+                //     if (sublayer->getType() == tmx::Layer::Type::Object)
+                //     {
+                //         std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::ObjectGroup>().
+                //             getObjects().size() << " objects" << std::endl;
+                //     }
+                //     else if (sublayer->getType() == tmx::Layer::Type::Tile)
+                //     {
+                //         std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::TileLayer>().getTiles()
+                //                                                                .size() << " tiles" << std::endl;
+                //     }
+                // }
             }
 
             if (layer->getType() == tmx::Layer::Type::Object)
@@ -171,10 +180,53 @@ void MapConfig::loadMap(const std::string& path, std::vector<std::unique_ptr<Til
                 //     }
                 // }
             }
+            std::map <std::string, int> tile_pass_config= {
+                {"Shallow Water0", 0b0100},
+                {"Long Grass0", 0b1000},
+                {"Sand0", 0b1000},
+                {"Mountain0",0b0010}
+            };
 
             if (layer->getType() == tmx::Layer::Type::Tile)
             {
-                config_layer(tiles, layer);
+                if (layer->getName() == "Ground")
+                {
+                    config_layer(tiles, layer, -1);
+                }
+                else if (layer->getName() == "Items")
+                {
+                    config_layer(tiles, layer, -0.9);
+                }
+                else if (layer->getName() == "Units")
+                {
+                    qDebug() << "Units";
+                }
+                else if (layer->getName() == "set")
+                {
+                    qDebug() << "set";
+                    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
+                    int width = layer->getSize().x;
+
+                    int height = layer->getSize().y;
+                    tile_passable.resize(width);
+                    for (auto& passable : tile_passable)
+                    {
+                        passable.resize(height);
+                    }
+                    for (int i = 0; i < height; ++i)
+                    {
+                        for (int j = 0; j < width; ++j)
+                        {
+                            auto tmx_tile = tmx_tiles.at(i * width + j);
+                               try{ tile_passable[j][height - i] = tile_pass_config.at(index_to_name.at(tmx_tile.ID));}
+                            catch (const std::out_of_range& e)
+                            {
+                                qDebug() <<"undefined passage for: " <<index_to_name.at(tmx_tile.ID);
+                                tile_passable[j][height - i] = 0b1111;
+                            }
+                        }
+                    }
+                }
             }
 
             const auto& properties = layer->getProperties();

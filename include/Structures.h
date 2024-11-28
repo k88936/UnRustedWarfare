@@ -15,4 +15,11 @@ struct MetaImage
     bool rawRot=false;
     int frames = 1;
 };
+//             land water  cliff sub ;
+enum movementType {
+        LAND=0b1000,
+        AIR=0b1111,
+        HOVER=0b1100,
+        SUB=0b0101,
+    };
 #endif //RESOURCES_H

@@ -14,9 +14,11 @@
 class MapConfig {
 
 public:
+    static std::vector<std::vector<int>> tile_passable;
+    static std::vector<std::unique_ptr<Tile>> tiles;
     static void init();
-    static void config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer);
-    static void loadMap(const std::string& path, std::vector<std::unique_ptr<Tile>>& tiles);
+    static void config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer, float z);
+    static void loadMap(const std::string& path);
     static std::map<std::string,MetaImage> tile_images;
     static std::vector<std::string> index_to_name;
 };

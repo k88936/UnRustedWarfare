@@ -9,9 +9,9 @@
 
 class Tile : public Drawable {
 public:
-    Tile(int index, int x, int y);
     int index=0;
     int x,y;
+    Tile(int index, int x, int y, float z);
     void draw() override;
 
 };

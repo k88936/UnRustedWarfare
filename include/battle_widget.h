@@ -27,16 +27,19 @@ public:
     void mouseMoveEvent(QMouseEvent* event) override;
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
+    void wheelEvent(QWheelEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
     bool m_l_pressing;
     bool m_r_pressing;
+
     QVector3D m_press_pos_world;
     QVector3D m_release_pos_world;
     QPoint m_press_pos_screen;
     QPoint m_release_pos_screen;
 
+    QVector3D camera_pos_when_pressed;
 private:
     Ui::battle_widget *ui;
 };

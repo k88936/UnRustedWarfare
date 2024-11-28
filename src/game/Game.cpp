@@ -25,7 +25,6 @@ std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_c
 std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
 GridsManager Game::grids_manager;
 std::vector<Unit*> Game::units;
-std::vector<std::unique_ptr<Tile>> Game::tiles;
 QBasicTimer Game::timer;
 std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
@@ -45,7 +44,7 @@ void Game::init()
 {
     UnitConfigs::init();
     MapConfig::init();
-    MapConfig::loadMap("../maps/2.tmx", tiles);
+    MapConfig::loadMap("../maps/2.tmx");
     // battleFieldWidget->show();
     // welcome = new welcome_widget();
     // battleFieldWidget = welcome->get_battleFieldWidget();
@@ -53,7 +52,7 @@ void Game::init()
     auto battle = new battle_widget();
     battleFieldWidget = battle->get_battleFieldWidget();
     battle->show();
-    for (const auto& tile : tiles)
+    for (const auto& tile : MapConfig::tiles)
     {
         tile->draw();
     }
@@ -69,8 +68,20 @@ void Game::init()
         };
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
-    Game::units.push_back(new Unit(UnitConfigs::meta_units["m2a3"], QVector3D(40, 50, 0), 5));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units["m2a3"], QVector3D(60, 50 - 0.3, 0), 150));
+
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(120, 120, 0), -135));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(115, 120, 0), -140));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(120, 115, 0), -130));
+    for (int i = 0; i < 50; ++i)
+    {
+        for (int j = 0; j < 50; ++j)
+        {
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i*2+1, 2*j+1, 0), 150));
+        }
+    }
+    // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
+    // units[1]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
+    // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
 }
 
 void Game::clean()
@@ -139,8 +150,9 @@ void Game::step()
         e->before();
     }
     // units[0]->applyForce(QVector3D(units[0]->mass * 1, 0, 0), 0);
-    units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
-    units[1]->attack(units[0]->position);
+    // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
+    // units[1]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
+    // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
     // units[1]->attack(units[0]->position);
     for (const auto u : Game::units)
     {

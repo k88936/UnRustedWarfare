@@ -18,6 +18,9 @@ public:
     QVector3D screen_relative_to_world_relative(const QPointF& screen_relative) const;
     ~BattlefieldWidget() override;
 
+    QVector3D camera_pos=QVector3D(50,50,5);
+    float camera_zoom = 0.05;
+    void update_camera();
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
@@ -25,18 +28,12 @@ protected:
     void paintGL() override;
     void initShaders();
     void update_textures();
-    float x_center = 50;
-    float y_center = 50;
-    float zoom = 0.05;
 
 private:
     QOpenGLShaderProgram program;
     RenderEngine* engine = nullptr;
     QOpenGLTexture* texture = nullptr;
     QMatrix4x4 projection;
-    QVector2D mousePressPosition;
-    QVector3D rotationAxis;
-    qreal angularSpeed = 0;
     QQuaternion rotation;
 };
 

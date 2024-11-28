@@ -26,7 +26,6 @@ public:
    static float deltaTime;
    static GridsManager grids_manager;
    static std::vector<Unit*> units;
-   static std::vector<std::unique_ptr<Tile>> tiles;
    static QBasicTimer timer;
    static std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
    static  void addProjectile(Projectile *projectile);

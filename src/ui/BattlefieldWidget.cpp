@@ -66,22 +66,30 @@ void BattlefieldWidget::update_textures()
     }
 }
 
+void BattlefieldWidget::update_camera()
+{
+    // qDebug()<<camera_pos;
+    // qDebug()<<camera_zoom;
+    constexpr qreal zNear = 3.0, zFar = 7.0;
+    projection.setToIdentity();
+    projection.ortho(-this->size().width() * camera_zoom / 2 + camera_pos.x(), this->size().width() * camera_zoom / 2 + camera_pos.x(),
+                     -this->size().height() * camera_zoom / 2 + camera_pos.y(),
+                     this->size().height() * camera_zoom / 2 + camera_pos.y(), zNear, zFar);
+    QMatrix4x4 matrix;
+    matrix.translate(0.0, 0.0, -camera_pos.z());
+    projection *= matrix;
+}
+
 void BattlefieldWidget::resizeGL(int w, int h)
 {
-    const qreal zNear = 3.0, zFar = 7.0;
-    projection.setToIdentity();
-    projection.ortho(-w * zoom / 2 + x_center, w * zoom / 2 + x_center, -h * zoom / 2 + y_center,
-                     h * zoom / 2 + y_center, zNear, zFar);
-    QMatrix4x4 matrix;
-    matrix.translate(0.0, 0.0, -5.0);
-    projection *= matrix;
+    update_camera();
 }
 
 void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches) const
 {
     for (const auto& [texture_id, drawables] : batches)
     {
-        if (texture_id.empty())continue;
+        if (texture_id=="NONE")continue;
         engine->bindTexture(texture_id);
         // qDebug()<<texture_id;
         for (const auto& drawable : drawables)
@@ -99,10 +107,8 @@ void BattlefieldWidget::paintGL()
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //
-
     engine->bind_simple_shader();
     engine->setView(projection);
-
     glColor3f(48.0 / 256, 246.0 / 256, 217.0 / 256);
     glBegin(GL_LINES);
     for (const auto& line : Game::line_draw_config)
@@ -121,12 +127,12 @@ void BattlefieldWidget::paintGL()
 QVector3D BattlefieldWidget::screen_to_world(const QPointF& screen_pos) const
 {
     const QPointF relate = screen_pos - this->pos();
-    float x = relate.x() * zoom + x_center - this->size().width() * zoom / 2;
-    float y = -relate.y() * zoom + y_center + this->size().height() * zoom / 2;
+    float x = relate.x() * camera_zoom + camera_pos.x() - this->size().width() * camera_zoom / 2;
+    float y = -relate.y() * camera_zoom + camera_pos.y() + this->size().height() * camera_zoom / 2;
     return QVector3D(x, y, 0);
 }
 
 QVector3D BattlefieldWidget::screen_relative_to_world_relative(const QPointF& screen_relative) const
 {
-    return QVector3D(screen_relative.x() * zoom, -screen_relative.y() * zoom, 0);
+    return QVector3D(screen_relative.x() * camera_zoom, -screen_relative.y() * camera_zoom, 0);
 }

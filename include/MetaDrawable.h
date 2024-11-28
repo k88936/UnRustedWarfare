@@ -12,7 +12,7 @@ class MetaDrawable
 {
 public:
     int total_frames = 1;
-    std::string image;
+    std::string image="NONE";
     float scale = 1;
 
     void init_frames();

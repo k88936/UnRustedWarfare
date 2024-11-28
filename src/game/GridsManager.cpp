@@ -16,12 +16,15 @@ void GridsManager::clearGrids() const {
     }
 }
 
-GridsManager::GridsManager() {
+GridsManager::GridsManager(): grid_size(4)
+{
     //fill
     grids.resize(width);
-    for (int i = 0; i < width; ++i) {
+    for (int i = 0; i < width; ++i)
+    {
         grids[i].resize(height);
-        for (int j = 0; j < height; ++j) {
+        for (int j = 0; j < height; ++j)
+        {
             grids[i][j] = new Grid();
         }
     }
