@@ -2,11 +2,14 @@
 <ui version="4.0">
  <class>battle_widget</class>
  <widget class="QWidget" name="battle_widget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>941</width>
+    <width>896</width>
     <height>685</height>
    </rect>
   </property>
@@ -26,7 +29,7 @@ QMainWindow {
 	background-color:#ff000000;
 }
 QWidget{
- 	background-color: #80000000;
+ 	background-color: #50000000;
 }
 QDialog {
 	background-color:#ff000000;
@@ -35,7 +38,7 @@ QColorDialog {
 	background-color:#ff000000;
 }
 QTextEdit {
-	background-color:#80000000;
+	background-color:#50000000;
 	color: #B5B5B5;
 } 
 QPlainTextEdit {
@@ -56,7 +59,7 @@ QPushButton{
 	border-bottom-width: 1px;
 	color: #B5B5B5;
 	padding:5px;
-	background-color: #80151515;	
+	background-color: #50151515;	
 }
 QPushButton::default{
 	border-bottom-width: 2px;
@@ -72,15 +75,15 @@ QPushButton:hover{
 	background-color: #30F6D9;
 	
 }
-QPushButton:pressed{
+QPushButton:pressed,QPushButton:checked{
 	color: #ff000000;
-	border-bottom-color: #2BDABD;
-	background-color: #2BDABD;
+	border-bottom-color: #28CAAF;
+	background-color: #28CAAF;
 }
 QPushButton:disabled{
-	border-bottom-color: #80505050;
+	border-bottom-color: #50505050;
 	color: #505050;
-	background-color: #80151515;
+	background-color: #50151515;
 }
 /* QToolButton {
 	border-style: solid;
@@ -109,18 +112,20 @@ QToolButton:hover{
 QLineEdit {
 	border-width: 1px; 
 	border-radius: 0px;
-	border-color: #80505050;
+	border-color: #50505050;
 	border-style: inset;
 	padding: 0px;
 	color: #B5B5B5;
-	background:#80151515;
-	selection-background-color:#80505050;
-	selection-color: #2BDABD;
+	background:#50151515;
+	selection-background-color:#50505050;
+	selection-color: #28CAAF;
 }
 QLabel {
 	color: #B5B5B5;
 	background-color: transparent;
+	
 }
+
 /* QLCDNumber {
 	color: #37e6b4;
 } */ 
@@ -188,16 +193,16 @@ QTabWidget {
 	
 }
 QTabWidget::pane {
-	border:1px solid #80151515;
+	border:1px solid #50151515;
 	border-radius: 0px;
-	background-color:#80000000;
+	background-color:#50000000;
 }
 QTabBar::tab{
 	border: 1px solid #ff000000;
 	border-radius: 0px;
 	color: #B5B5B5;
 	padding:8px;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QTabBar::tab:top,QTabBar::tab:bottom{
 	min-width:80px;
@@ -286,65 +291,65 @@ QStatusBar {
 }
 QSpinBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDoubleSpinBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QTimeEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDateTimeEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDateEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QComboBox {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 }
 QComboBox:editable {
-	background: #80000000;
+	background: #50000000;
 	color: #B5B5B5;
-	selection-background-color: #80000000;
+	selection-background-color: #50000000;
 }
 QComboBox QAbstractItemView {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 	selection-color: #FFFFFF;
-	selection-background-color: #80000000;
+	selection-background-color: #50000000;
 }
 QComboBox:!editable:on, QComboBox::drop-down:editable:on {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 }
 QFontComboBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QToolBox {
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QToolBox::tab {
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QToolBox::tab:selected {
 	color: #FFFFFF;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QScrollArea {
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QSlider{
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QSlider::groove:horizontal {
 	height: 1px;
@@ -354,7 +359,7 @@ QSlider::groove:vertical {
 }
 QSlider::handle{
 	background-color: #32FFE0;
-	border: 1px solid #80151515;
+	border: 1px solid #50151515;
 	border-radius: 0px;
 }
 QSlider::handle:horizontal {
@@ -369,11 +374,14 @@ QSlider::add-page{
     background: #B5B5B5;
 }
 QSlider::sub-page {
-    background: #2BDABD;
+    background: #28CAAF;
 }
 </string>
   </property>
-  <layout class="QGridLayout" name="gridLayout">
+  <layout class="QVBoxLayout" name="verticalLayout_7">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -386,381 +394,12 @@ QSlider::sub-page {
    <property name="bottomMargin">
     <number>0</number>
    </property>
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <item row="0" column="0">
+   <item>
     <widget class="BattlefieldWidget" name="widget" native="true">
-     <property name="styleSheet">
-      <string notr="true">/*
-Material Dark Style Sheet for QT Applications
-Author: Jaime A. Quiroga P.
-Inspired on https://github.com/jxfwinter/qt-material-stylesheet
-Company: GTRONICK
-Last updated: 04/12/2018, 15:00.
-Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
-*/
-$color_high_light = #2BDABD;
-$color_high_light2 = #30F6D9;
-$color_high_light3 = #32FFE0;
-$color_dark = #000000;
-$color_dark_t = #80000000;
-$color_dark2 = #151515;
-$color_dark2_t = #B4151515;
-$color_dark3 = #505050;
-$color_dark3_t = #80505050;
-$color_gray = #747C87;
-$color_bright = #FFFFFF;
-QMainWindow {
-	background-color:$color_dark;
-}
-QWidget{
- 	background-color: $color_dark_t;
-}
-QDialog {
-	background-color:$color_dark;
-}
-QColorDialog {
-	background-color:$color_dark;
-}
-QTextEdit {
-	background-color:$color_dark_t;
-	color: $color_gray;
-} 
-QPlainTextEdit {
-	selection-background-color:#007b50;
-	background-color:$color_dark;
-	border-style: solid;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
-	border-bottom-color: transparent;
-	border-width: 1px;
-	color: $color_gray;
-} 
-QPushButton{
-	border:0px solid transparent;
-	border-radius:0px;
-	border-bottom-color: $color_high_light2;
-	border-bottom-width: 1px;
-	color: $color_gray;
-	padding:5px;
-	background-color: $color_dark2_t;	
-}
-QPushButton::default{
-	border-bottom-width: 2px;
-	border-bottom-color: $color_high_light3;
-	color: $color_high_light3;
-}
-QPushButton:flat{
-	color:$color_dark;
-	background-color:$color_high_light2;
-}
-QPushButton:hover{
-	color: $color_dark;
-	background-color: $color_high_light2;
-	
-}
-QPushButton:pressed{
-	color: $color_dark;
-	border-bottom-color: $color_high_light;
-	background-color: $color_high_light;
-}
-QPushButton:disabled{
-	border-bottom-color: $color_dark3_t;
-	color: $color_dark3;
-	background-color: $color_dark2_t;
-}
-/* QToolButton {
-	border-style: solid;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
-	border-bottom-color: #04b97f;
-	border-bottom-width: 1px;
-	border-style: solid;
-	color: $color_gray;
-	padding: 2px;
-	background-color: $color_dark;
-}
-QToolButton:hover{
-	border-style: solid;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
-	border-bottom-color: #37efba;
-	border-bottom-width: 2px;
-	border-style: solid;
-	color: #FFFFFF;
-	padding-bottom: 1px;
-	background-color: $color_dark;
-} */ 
-QLineEdit {
-	border-width: 1px; 
-	border-radius: 0px;
-	border-color: $color_dark3_t;
-	border-style: inset;
-	padding: 0px;
-	color: $color_gray;
-	background:$color_dark2_t;
-	selection-background-color:$color_dark3_t;
-	selection-color: $color_high_light;
-}
-QLabel {
-	color: $color_gray;
-	background-color: transparent;
-}
-/* QLCDNumber {
-	color: #37e6b4;
-} */ 
-QProgressBar {
-	color: transparent;
-	border-style:inset;
-	border-width: 1px; 
-	border-radius: 0px;
-	border-color: $color_high_light2;
-	background-color:$color_dark2;
-}
-QProgressBar::chunk {
-	background-color: $color_high_light2;
-	width:5px;
-	margin:0px;
-	border-radius: 0px;
-}
-/* QMenuBar {
-	background-color: $color_dark;
-}
-QMenuBar::item {
-	color: $color_gray;
-  	spacing: 3px;
-  	padding: 1px 4px;
-  	background: $color_dark;
-}
-
-QMenuBar::item:selected {
-  	background:$color_dark;
-	color: #FFFFFF;
-}
-QMenu::item:selected {
-	border-style: solid;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: #04b97f;
-	border-bottom-color: transparent;
-	border-left-width: 2px;
-	color: #FFFFFF;
-	padding-left:15px;
-	padding-top:4px;
-	padding-bottom:4px;
-	padding-right:7px;
-	background-color: $color_dark;
-}
-QMenu::item {
-	border-style: solid;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
-	border-bottom-color: transparent;
-	border-bottom-width: 1px;
-	border-style: solid;
-	color: $color_gray;
-	padding-left:17px;
-	padding-top:4px;
-	padding-bottom:4px;
-	padding-right:7px;
-	background-color: $color_dark;
-}
-QMenu{
-	background-color:$color_dark;
-} */ 
-QTabWidget {
-	color:$color_gray;
-	background-color:$color_dark_t;
-}
-QTabWidget::pane {
-	border:1px solid $color_dark2_t;
-	border-radius: 0px;
-}
-QTabBar::tab{
-	border: 1px solid $color_dark;
-	border-radius: 0px;
-	color: $color_gray;
-	padding:8px;
-	background-color: $color_dark_t;
-}
-QTabBar::tab:top,QTabBar::tab:bottom{
-	min-width:80px;
-}
-QTabBar::tab:left,QTabBar::tab:right{
-	min-height:80px;
-}
- QTabBar::tab:hover {
-	color: $color_high_light2;
-}
-QTabBar::tab:top:hover{
-	border-bottom-color:$color_high_light2;
-}
-QTabBar::tab:bottom:hover{
-	border-top-color:$color_high_light2;
-}
-QTabBar::tab:left:hover{
-	border-right-color:$color_high_light2;
-}
-QTabBar::tab:right:hover{
-	border-left-color:$color_high_light2;
-}
-QTabBar::tab:selected, QTabBar::tab:last:selected {
-	color: $color_dark;
-	border-color: $color_high_light3;
-	background-color: $color_high_light2;
-}
-
-QCheckBox {
-	color: $color_gray;
-	border:1px solid $color_dark2;
-	border-radius:0px;
-	background-color:$color_dark2;
-	padding-left: 4px;
-}
-QCheckBox:hover {
-	border-color: $color_high_light2;
-	color:$color_high_light2;
-}
-QCheckBox::indicator{
-	height: 10px;
-	width: 10px;
-	border-style:solid;
-	border-width: 1px;
-	border-color: $color_gray;
-}
-QCheckBox::indicator:checked {
-	background-color: $color_high_light2;
-	border-color:$color_high_light2
-}
-QCheckBox::indicator:unchecked {
-	background-color: transparent;
-}
-QCheckBox:disabled {
-	color: $color_dark3;
-}
-/* QRadioButton {
-	color: $color_gray;
-	background-color: $color_dark;
-	padding: 1px;
-}
-QRadioButton::indicator:checked {
-	height: 10px;
-	width: 10px;
-	border-style:solid;
-	border-radius:5px;
-	border-width: 1px;
-	border-color: #04b97f;
-	color: $color_gray;
-	background-color: #04b97f;
-}
-QRadioButton::indicator:unchecked {
-	height: 10px;
-	width: 10px;
-	border-style:solid;
-	border-radius:5px;
-	border-width: 1px;
-	border-color: #04b97f;
-	color: $color_gray;
-	background-color: transparent;
-} */ 
-QStatusBar {
-	color:#ffffff;
-}
-QSpinBox {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QDoubleSpinBox {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QTimeEdit {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QDateTimeEdit {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QDateEdit {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QComboBox {
-	color: $color_gray;	
-	background: $color_dark_t;
-}
-QComboBox:editable {
-	background: $color_dark_t;
-	color: $color_gray;
-	selection-background-color: $color_dark_t;
-}
-QComboBox QAbstractItemView {
-	color: $color_gray;	
-	background: $color_dark_t;
-	selection-color: #FFFFFF;
-	selection-background-color: $color_dark_t;
-}
-QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-	color: $color_gray;	
-	background: $color_dark_t;
-}
-QFontComboBox {
-	color: $color_gray;	
-	background-color: $color_dark_t;
-}
-QToolBox {
-	color: $color_gray;
-	background-color: $color_dark_t;
-}
-QToolBox::tab {
-	color: $color_gray;
-	background-color: $color_dark_t;
-}
-QToolBox::tab:selected {
-	color: #FFFFFF;
-	background-color: $color_dark_t;
-}
-QScrollArea {
-	color: $color_gray;
-	background-color: $color_dark_t;
-}
-QSlider{
-	background-color: $color_dark_t;
-}
-QSlider::groove:horizontal {
-	height: 1px;
-}
-QSlider::groove:vertical {
-	width: 1px;
-}
-QSlider::handle{
-	background-color: $color_high_light3;
-	border: 1px solid $color_dark2_t;
-	border-radius: 0px;
-}
-QSlider::handle:horizontal {
-	width: 6px;
-	margin: -4px 0;
-}
-QSlider::handle:vertical {
-	height: 6px;
-	margin: 0 -4px;
-}
-QSlider::add-page{
-    background: $color_gray;
-}
-QSlider::sub-page {
-    background: $color_high_light;
-}
-</string>
+     <property name="enabled">
+      <bool>true</bool>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_5">
+     <layout class="QVBoxLayout" name="verticalLayout_6">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -778,13 +417,56 @@ QSlider::sub-page {
       </property>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QPushButton" name="setting_button">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/quit_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/quit_dark.png);} 
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Orientation::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
         <item>
          <widget class="QLabel" name="label_tasks">
+          <property name="styleSheet">
+           <string notr="true">margin-left:10px;</string>
+          </property>
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Goals:&lt;/p&gt;&lt;p&gt;[ ] survive&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; color:#30f6d9;&quot;&gt;Goals:&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#30f6d9;&quot;&gt;[ ] survive on&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="scaledContents">
+           <bool>false</bool>
           </property>
           <property name="alignment">
            <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
+          </property>
+          <property name="wordWrap">
+           <bool>false</bool>
+          </property>
+          <property name="margin">
+           <number>0</number>
           </property>
          </widget>
         </item>
@@ -804,7 +486,7 @@ QSlider::sub-page {
         <item>
          <widget class="QLabel" name="label_info">
           <property name="text">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;10:27&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#30f6d9;&quot;&gt;10:27&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; color:#30f6d9;&quot;&gt;&lt;br/&gt;&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="scaledContents">
            <bool>false</bool>
@@ -813,19 +495,6 @@ QSlider::sub-page {
            <set>Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignTop</set>
           </property>
          </widget>
-        </item>
-        <item>
-         <spacer name="horizontalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Orientation::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
         </item>
         <item>
          <widget class="QGraphicsView" name="mapView">
@@ -841,10 +510,13 @@ QSlider::sub-page {
       </item>
       <item>
        <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <property name="spacing">
+         <number>0</number>
+        </property>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <property name="spacing">
-           <number>6</number>
+           <number>0</number>
           </property>
           <property name="sizeConstraint">
            <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
@@ -858,10 +530,17 @@ QSlider::sub-page {
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true"/>
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/pause-button_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/pause-button_dark.png);} 
+</string>
             </property>
             <property name="text">
-             <string>p?c</string>
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -869,13 +548,36 @@ QSlider::sub-page {
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="button_speed">
+           <widget class="QPushButton" name="pushButton">
             <property name="styleSheet">
-             <string notr="true">QPushButton{min-width: 32px;min-height: 24px;max-width:32px;max-height:24px;image: url(:/ui/speed_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/speed_dark.png);}
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/play-button_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/play-button_dark.png);} 
 </string>
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="button_speed">
+            <property name="styleSheet">
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/speed_highlight.png);}QPushButton:hover,QPushButton:disabled,QPushButton:checked{image: url(:/ui/speed_dark.png);}
+</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
@@ -971,23 +673,6 @@ QSlider::sub-page {
             <property name="spacing">
              <number>1</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QPushButton" name="button_upgrade">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/upgrade_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/upgrade_dark.png);}
-</string>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QPushButton" name="button_fix">
               <property name="sizePolicy">
@@ -997,16 +682,22 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/repair_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/repair_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/repair_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/repair_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
               </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
-            <item row="1" column="1">
-             <widget class="QPushButton" name="button_march">
+            <item row="0" column="0">
+             <widget class="QPushButton" name="button_upgrade">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1014,28 +705,17 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/march_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/march_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/upgrade_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/upgrade_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
               </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QPushButton" name="button_delete">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
+              <property name="checkable">
+               <bool>true</bool>
               </property>
-              <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/delete_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/delete_dark.png);}
-</string>
-              </property>
-              <property name="text">
-               <string/>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -1048,11 +728,17 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/explore_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/explore_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/explore_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/explore_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -1065,11 +751,40 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/patrol_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/patrol_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/patrol_highlight.png);}QPushButton:hover,QPushButton:disabled,QPushButton:checked{image: url(:/ui/patrol_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QPushButton" name="button_delete">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/delete_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/delete_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checkable">
+               <bool>false</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -1082,11 +797,17 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/attack_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/attack_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/attack_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/attack_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -1099,11 +820,40 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/stay_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/stay_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/stay_highlight.png);}QPushButton:hover,QPushButton:disabled,QPushButton:checked{image: url(:/ui/stay_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QPushButton" name="button_march">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/march_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/march_dark.png);}
+</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -1116,15 +866,24 @@ QSlider::sub-page {
                </sizepolicy>
               </property>
               <property name="styleSheet">
-               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/defence_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/defence_dark.png);}
+               <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width: 32px;max-height: 32px;image: url(:/ui/defence_highlight.png);}QPushButton:hover,QPushButton:disabled,QPushButton:checked{image: url(:/ui/defence_dark.png);}
 </string>
               </property>
               <property name="text">
                <string/>
               </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="checked">
+               <bool>false</bool>
+              </property>
+              <property name="autoExclusive">
+               <bool>false</bool>
+              </property>
              </widget>
             </item>
-            <item row="4" column="0">
+            <item row="4" column="1">
              <spacer name="verticalSpacer_7">
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
@@ -1245,7 +1004,7 @@ QSlider::sub-page {
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/add-group_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/add-group_dark.png);}
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/add-group_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled{image: url(:/ui/add-group_dark.png);}
 </string>
             </property>
             <property name="text">
@@ -1265,11 +1024,14 @@ QSlider::sub-page {
              </sizepolicy>
             </property>
             <property name="styleSheet">
-             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/group_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/group_dark.png);}
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/group_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/group_dark.png);}
 </string>
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
             </property>
             <property name="flat">
              <bool>false</bool>
@@ -1319,6 +1081,9 @@ QSlider::sub-page {
               <property name="text">
                <string>type1</string>
               </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
               <property name="flat">
                <bool>false</bool>
               </property>
@@ -1335,6 +1100,9 @@ QSlider::sub-page {
               <property name="text">
                <string>type1</string>
               </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
               <property name="flat">
                <bool>false</bool>
               </property>
@@ -1350,6 +1118,9 @@ QSlider::sub-page {
               </property>
               <property name="text">
                <string>type1</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
               </property>
               <property name="flat">
                <bool>false</bool>
@@ -1391,11 +1162,17 @@ QSlider::sub-page {
           <item>
            <widget class="QPushButton" name="button_select_all">
             <property name="styleSheet">
-             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/all_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/all_dark.png);}
+             <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/all_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/all_dark.png);}
 </string>
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
             </property>
            </widget>
           </item>

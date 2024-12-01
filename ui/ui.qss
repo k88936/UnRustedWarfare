@@ -10,7 +10,7 @@ QMainWindow {
 	background-color:#ff000000;
 }
 QWidget{
- 	background-color: #80000000;
+ 	background-color: #50000000;
 }
 QDialog {
 	background-color:#ff000000;
@@ -19,7 +19,7 @@ QColorDialog {
 	background-color:#ff000000;
 }
 QTextEdit {
-	background-color:#80000000;
+	background-color:#50000000;
 	color: #B5B5B5;
 } 
 QPlainTextEdit {
@@ -40,7 +40,7 @@ QPushButton{
 	border-bottom-width: 1px;
 	color: #B5B5B5;
 	padding:5px;
-	background-color: #80151515;	
+	background-color: #50151515;	
 }
 QPushButton::default{
 	border-bottom-width: 2px;
@@ -56,15 +56,15 @@ QPushButton:hover{
 	background-color: #30F6D9;
 	
 }
-QPushButton:pressed{
+QPushButton:pressed,QPushButton::checked{
 	color: #ff000000;
-	border-bottom-color: #2BDABD;
-	background-color: #2BDABD;
+	border-bottom-color: #26C3A9;
+	background-color: #26C3A9;
 }
 QPushButton:disabled{
-	border-bottom-color: #80505050;
+	border-bottom-color: #50505050;
 	color: #505050;
-	background-color: #80151515;
+	background-color: #50151515;
 }
 /* QToolButton {
 	border-style: solid;
@@ -93,13 +93,13 @@ QToolButton:hover{
 QLineEdit {
 	border-width: 1px; 
 	border-radius: 0px;
-	border-color: #80505050;
+	border-color: #50505050;
 	border-style: inset;
 	padding: 0px;
 	color: #B5B5B5;
-	background:#80151515;
-	selection-background-color:#80505050;
-	selection-color: #2BDABD;
+	background:#50151515;
+	selection-background-color:#50505050;
+	selection-color: #26C3A9;
 }
 QLabel {
 	color: #B5B5B5;
@@ -172,16 +172,16 @@ QTabWidget {
 	
 }
 QTabWidget::pane {
-	border:1px solid #80151515;
+	border:1px solid #50151515;
 	border-radius: 0px;
-	background-color:#80000000;
+	background-color:#50000000;
 }
 QTabBar::tab{
 	border: 1px solid #ff000000;
 	border-radius: 0px;
 	color: #B5B5B5;
 	padding:8px;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QTabBar::tab:top,QTabBar::tab:bottom{
 	min-width:80px;
@@ -270,65 +270,73 @@ QStatusBar {
 }
 QSpinBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDoubleSpinBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QTimeEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDateTimeEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QDateEdit {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QComboBox {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 }
 QComboBox:editable {
-	background: #80000000;
+	background: #50000000;
 	color: #B5B5B5;
-	selection-background-color: #80000000;
+	selection-background-color: #50000000;
 }
 QComboBox QAbstractItemView {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 	selection-color: #FFFFFF;
-	selection-background-color: #80000000;
+	selection-background-color: #50000000;
 }
 QComboBox:!editable:on, QComboBox::drop-down:editable:on {
 	color: #B5B5B5;	
-	background: #80000000;
+	background: #50000000;
 }
 QFontComboBox {
 	color: #B5B5B5;	
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QToolBox {
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QToolBox::tab {
+	border:0px solid transparent;
+	border-radius:0px;
+	border-bottom-color: #30F6D9;
+	border-bottom-width: 1px;
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
+}
+QToolBox::tab:hover{
+	color: #ff000000;
+	background-color: #30F6D9;
 }
 QToolBox::tab:selected {
-	color: #FFFFFF;
-	background-color: #80000000;
+	color: #ff000000;
+	background-color: #30F6D9;
 }
 QScrollArea {
 	color: #B5B5B5;
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QSlider{
-	background-color: #80000000;
+	background-color: #50000000;
 }
 QSlider::groove:horizontal {
 	height: 1px;
@@ -338,7 +346,7 @@ QSlider::groove:vertical {
 }
 QSlider::handle{
 	background-color: #32FFE0;
-	border: 1px solid #80151515;
+	border: 1px solid #50151515;
 	border-radius: 0px;
 }
 QSlider::handle:horizontal {
@@ -353,5 +361,5 @@ QSlider::add-page{
     background: #B5B5B5;
 }
 QSlider::sub-page {
-    background: #2BDABD;
+    background: #26C3A9;
 }

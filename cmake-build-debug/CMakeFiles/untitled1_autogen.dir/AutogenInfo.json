@@ -429,33 +429,45 @@
 	"HEADERS" : 
 	[
 		[
-			"/root/CLionProjects/untitled1/src/include/battle_widget.h",
-			"MU",
-			"7PH6M6IPMC/moc_battle_widget.cpp",
-			null
-		],
-		[
-			"/root/CLionProjects/untitled1/src/include/splash_widget.h",
-			"MU",
-			"7PH6M6IPMC/moc_splash_widget.cpp",
-			null
-		],
-		[
-			"/root/CLionProjects/untitled1/src/include/welcome_widget.h",
-			"MU",
-			"7PH6M6IPMC/moc_welcome_widget.cpp",
-			null
-		],
-		[
 			"/root/CLionProjects/untitled1/src/tmxlite/miniz.h",
 			"MU",
 			"HEDGOID2P3/moc_miniz.cpp",
 			null
 		],
 		[
-			"/root/CLionProjects/untitled1/src/ui/game_end_widget.h",
+			"/root/CLionProjects/untitled1/src/ui/include/battle_widget.h",
 			"MU",
-			"YPKJ5OE7LN/moc_game_end_widget.cpp",
+			"G2PBYSMF3G/moc_battle_widget.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/include/game_end_widget.h",
+			"MU",
+			"G2PBYSMF3G/moc_game_end_widget.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/include/help_slide_widget.h",
+			"MU",
+			"G2PBYSMF3G/moc_help_slide_widget.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/include/splash_widget.h",
+			"MU",
+			"G2PBYSMF3G/moc_splash_widget.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/include/suspend_menu_widget.h",
+			"MU",
+			"G2PBYSMF3G/moc_suspend_menu_widget.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/include/welcome_widget.h",
+			"MU",
+			"G2PBYSMF3G/moc_welcome_widget.cpp",
 			null
 		]
 	],
@@ -480,6 +492,7 @@
 	"MOC_INCLUDES" : 
 	[
 		"/root/CLionProjects/untitled1/src/include",
+		"/root/CLionProjects/untitled1/src/ui/include",
 		"/usr/include/qt6/QtCore",
 		"/usr/include/qt6",
 		"/usr/lib/qt6/mkspecs/linux-g++",
@@ -614,7 +627,17 @@
 			"MU",
 			null
 		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/help_slide_widget.cpp",
+			"MU",
+			null
+		],
 		[ "/root/CLionProjects/untitled1/src/ui/splash_widget.cpp", "MU", null ],
+		[
+			"/root/CLionProjects/untitled1/src/ui/suspend_menu_widget.cpp",
+			"MU",
+			null
+		],
 		[ "/root/CLionProjects/untitled1/src/ui/welcome_widget.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],

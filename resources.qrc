@@ -66,7 +66,6 @@
 <file>ui/ore.png</file>
 <file>ui/all.png</file>
 <file>ui/play-button.png</file>
-<file>ui/pause-button.png</file>
 <file>ui/speed.png</file>
 <file>ui/group.png</file>
 <file>ui/add-group.png</file>
@@ -96,6 +95,11 @@
 <file>ui/select_highlight.png</file>
 <file>ui/select_orange.png</file>
 <file>ui/select.png</file>
+<file>ui/pause-button.png</file>
+<file>ui/quit.png</file>
+<file>ui/quit_dark.png</file>
+<file>ui/quit_highlight.png</file>
+<file>ui/quit_orange.png</file>
 <file>M2A3/土.png</file>
 <file>M2A3/30.wav</file>
 <file>M2A3/灰尘.png</file>
@@ -115,6 +119,10 @@
 <file>M2A3/M2布雷德利.ini</file>
 <file>M2A3/子弹1.png</file>
 <file>M2A3/曳光弹1.png</file>
+<file>M2A3/牢犬.png</file>
+<file>M2A3/老大.ini</file>
+<file>M2A3/老大.png</file>
+<file>M2A3/血.png</file>
 <file>t_vshader.glsl</file>
 <file>t_fshader.glsl</file>
 <file>s_vshader.glsl</file>

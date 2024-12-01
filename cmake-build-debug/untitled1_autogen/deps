@@ -81,13 +81,9 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/src/include/Sensor.h \
 	/root/CLionProjects/untitled1/src/include/Turret.h \
 	/root/CLionProjects/untitled1/src/include/Unit.h \
-	/root/CLionProjects/untitled1/src/include/battle_widget.h \
-	/root/CLionProjects/untitled1/src/include/battlefieldwidget.h \
-	/root/CLionProjects/untitled1/src/include/splash_widget.h \
 	/root/CLionProjects/untitled1/src/include/structures/grid.h \
 	/root/CLionProjects/untitled1/src/include/structures/meta_image.h \
 	/root/CLionProjects/untitled1/src/include/structures/movement_type.h \
-	/root/CLionProjects/untitled1/src/include/welcome_widget.h \
 	/root/CLionProjects/untitled1/src/main.cpp \
 	/root/CLionProjects/untitled1/src/tmxlite/FreeFuncs.cpp \
 	/root/CLionProjects/untitled1/src/tmxlite/ImageLayer.cpp \
@@ -106,8 +102,16 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/src/ui/RenderEngine.cpp \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.cpp \
 	/root/CLionProjects/untitled1/src/ui/game_end_widget.cpp \
-	/root/CLionProjects/untitled1/src/ui/game_end_widget.h \
+	/root/CLionProjects/untitled1/src/ui/help_slide_widget.cpp \
+	/root/CLionProjects/untitled1/src/ui/include/battle_widget.h \
+	/root/CLionProjects/untitled1/src/ui/include/battlefieldwidget.h \
+	/root/CLionProjects/untitled1/src/ui/include/game_end_widget.h \
+	/root/CLionProjects/untitled1/src/ui/include/help_slide_widget.h \
+	/root/CLionProjects/untitled1/src/ui/include/splash_widget.h \
+	/root/CLionProjects/untitled1/src/ui/include/suspend_menu_widget.h \
+	/root/CLionProjects/untitled1/src/ui/include/welcome_widget.h \
 	/root/CLionProjects/untitled1/src/ui/splash_widget.cpp \
+	/root/CLionProjects/untitled1/src/ui/suspend_menu_widget.cpp \
 	/root/CLionProjects/untitled1/src/ui/welcome_widget.cpp \
 	/usr/include/GL/gl.h \
 	/usr/include/alloca.h \
@@ -586,8 +590,11 @@ untitled1_autogen/timestamp: \
 	/usr/include/qt6/QtOpenGLWidgets/qopenglwidget.h \
 	/usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsexports.h \
 	/usr/include/qt6/QtOpenGLWidgets/qtopenglwidgetsglobal.h \
+	/usr/include/qt6/QtWidgets/QToolBox \
 	/usr/include/qt6/QtWidgets/QWidget \
+	/usr/include/qt6/QtWidgets/qframe.h \
 	/usr/include/qt6/QtWidgets/qsizepolicy.h \
+	/usr/include/qt6/QtWidgets/qtoolbox.h \
 	/usr/include/qt6/QtWidgets/qtwidgets-config.h \
 	/usr/include/qt6/QtWidgets/qtwidgetsexports.h \
 	/usr/include/qt6/QtWidgets/qtwidgetsglobal.h \
@@ -904,6 +911,8 @@ untitled1_autogen/timestamp: \
 	/usr/lib/cmake/zstd/zstdTargets.cmake \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/game_end_widget.ui \
+	/root/CLionProjects/untitled1/src/ui/help_slide_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/splash_widget.ui \
+	/root/CLionProjects/untitled1/src/ui/suspend_menu_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/welcome_widget.ui \
 	/opt/clion/bin/cmake/linux/x64/bin/cmake

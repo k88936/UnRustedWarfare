@@ -16,7 +16,6 @@
 #include "PathFind.h"
 #include "Projectile.h"
 #include "Tile.h"
-#include "welcome_widget.h"
 
 float Game::deltaTime = 1.0 / 40;
 float Game::FPS = 1.0 / deltaTime;

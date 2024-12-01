@@ -30,7 +30,7 @@ def convert_non_transparent(image_path):
     img.save(highlight, "PNG")
     img.putdata(new_data3)
     img.save(os.path.splitext(image_path)[0]+"_orange.png", "PNG")
-    print("QPushButton{min-width: %dpx;min-height: %dpx;max-width:%dpx;max-height:%dpx;image: url(:/%s);}QPushButton:hover,QPushButton:pressed{image: url(:/%s);"%(width,height,width,height,highlight,dark),file=icons_config)
+    print("QPushButton{min-width: %dpx;min-height: %dpx;max-width:%dpx;max-height:%dpx;image: url(:/%s);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/%s);} "%(width,height,width,height,highlight,dark),file=icons_config)
     # print("QTabBar::tab{min-width: %dpx;min-height: %dpx;max-width:%dpx;max-height:%dpx;image: url(:/%s);}QTabBar::tab:hover,QTabBar::tab:selected,QTabBar::tab:last:selected{image: url(:/%s);\n"%(width,height,width,height,highlight,dark),file=icons_config)
 
 convert_non_transparent("ui/github.png")
@@ -60,5 +60,6 @@ convert_non_transparent("ui/group.png")
 convert_non_transparent("ui/add-group.png")
 
 convert_non_transparent("ui/select.png")
+convert_non_transparent("ui/quit.png")
 
 icons_config.close()

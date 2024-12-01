@@ -6,15 +6,15 @@ Company: GTRONICK
 Last updated: 04/12/2018, 15:00.
 Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
 */
-$color_high_light = #2BDABD;
+$color_high_light = #26C3A9;
 $color_high_light2 = #30F6D9;
 $color_high_light3 = #32FFE0;
 $color_dark = #ff000000;
-$color_dark_t = #80000000;
+$color_dark_t = #50000000;
 $color_dark2 = #151515;
-$color_dark2_t = #80151515;
+$color_dark2_t = #50151515;
 $color_dark3 = #505050;
-$color_dark3_t = #80505050;
+$color_dark3_t = #50505050;
 $color_gray = #B5B5B5;
 $color_bright = #FFFFFF;
 QMainWindow {
@@ -67,7 +67,7 @@ QPushButton:hover{
 	background-color: $color_high_light2;
 	
 }
-QPushButton:pressed{
+QPushButton:pressed,QPushButton::checked{
 	color: $color_dark;
 	border-bottom-color: $color_high_light;
 	background-color: $color_high_light;
@@ -327,12 +327,20 @@ QToolBox {
 	background-color: $color_dark_t;
 }
 QToolBox::tab {
+	border:0px solid transparent;
+	border-radius:0px;
+	border-bottom-color: $color_high_light2;
+	border-bottom-width: 1px;
 	color: $color_gray;
 	background-color: $color_dark_t;
 }
+QToolBox::tab:hover{
+	color: $color_dark;
+	background-color: $color_high_light2;
+}
 QToolBox::tab:selected {
-	color: #FFFFFF;
-	background-color: $color_dark_t;
+	color: $color_dark;
+	background-color: $color_high_light2;
 }
 QScrollArea {
 	color: $color_gray;

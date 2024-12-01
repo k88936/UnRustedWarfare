@@ -16,7 +16,6 @@ find_package(Qt6 COMPONENTS
 
 add_executable(untitled1
         src/main.cpp
-        src/ui/BattlefieldWidget.cpp
         src/game/Drawable.cpp
         src/game/Object.cpp
         src/game/Unit.cpp
@@ -35,14 +34,7 @@ add_executable(untitled1
         src/game/MetaDrawable.cpp
         src/game/Effect.cpp
 
-        src/include/battle_widget.h
-        src/ui/welcome_widget.cpp
-        src/include/welcome_widget.h
-        src/ui/splash_widget.cpp
-        src/include/splash_widget.h
-        src/ui/battle_widget.cpp
-        src/include/battle_widget.h
-        src/ui/RenderEngine.cpp
+
 
         src/tmxlite/FreeFuncs.cpp
         src/tmxlite/ImageLayer.cpp
@@ -66,12 +58,31 @@ add_executable(untitled1
         src/game/Tile.cpp
         src/game/path/PathFind.cpp
         src/game/path/FlowField.cpp
+
+        src/ui/RenderEngine.cpp
+        src/ui/BattlefieldWidget.cpp
+
+        src/ui/include/battle_widget.h
+        src/ui/welcome_widget.cpp
+        src/ui/include/welcome_widget.h
+        src/ui/splash_widget.cpp
+        src/ui/include/splash_widget.h
+        src/ui/battle_widget.cpp
+        src/ui/include/battle_widget.h
         src/ui/game_end_widget.cpp
-        src/ui/game_end_widget.h
+        src/ui/include/game_end_widget.h
         src/ui/game_end_widget.ui
+        src/ui/suspend_menu_widget.cpp
+        src/ui/include/suspend_menu_widget.h
+        src/ui/suspend_menu_widget.ui
+        src/ui/help_slide_widget.cpp
+        src/ui/include/help_slide_widget.h
+        src/ui/help_slide_widget.ui
+
 
 )
 include_directories(src/include)
+include_directories(src/ui/include)
 
 find_package(ZLIB REQUIRED)
 find_package(zstd REQUIRED)
