@@ -21,8 +21,8 @@ public:
     static std::vector<std::unique_ptr<Tile>> tiles;
     static int world_width;
     static int world_height;
-    static std::vector<std::vector<TileAttribute*>> tile_attributes;
     static const std::map<std::string, TileAttribute*> tile_configs;
+    static TileAttribute*& get_tile_attribute(int x, int y);
     static int x_in_which(float x);
     static int y_in_which(float y);
     static void init();
@@ -31,6 +31,9 @@ public:
     static void loadMap(const std::string& path);
     static std::map<std::string, MetaImage> tile_images;
     static std::vector<std::string> index_to_name;
+
+private:
+    static std::vector<std::vector<TileAttribute*>> tile_attributes;
 };
 
 

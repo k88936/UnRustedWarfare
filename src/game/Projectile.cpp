@@ -14,7 +14,7 @@ Projectile::Projectile(MetaProjectiles *meta, const QVector3D position, const fl
     this->rotation = rotation;
     this->scale=meta->scale;
     Object::before();
-    this->linearVelocity = linear_velocity_base+vectorDir*meta->speed;
+    this->linearVelocity = linear_velocity_base+vector_dir*meta->speed;
 
 }
 

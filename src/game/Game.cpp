@@ -82,16 +82,16 @@ void Game::init()
 
 
     flowField = new FlowField(80, 50, movementType::LAND);
-    Game::line_draw_config.clear();
-
-    for (int i = 0; i < MapConfig::world_width; ++i)
-    {
-        for (int j = 0; j < MapConfig::world_height; ++j)
-        {
-            Game::line_draw_config.emplace_back(i, j, 0);
-            Game::line_draw_config.emplace_back(flowField->field[i][j] * 0.4 + QVector3D(i, j, 0));
-        }
-    }
+    // Game::line_draw_config.clear();
+    //
+    // for (int i = 0; i < MapConfig::world_width; ++i)
+    // {
+    //     for (int j = 0; j < MapConfig::world_height; ++j)
+    //     {
+    //         Game::line_draw_config.emplace_back(i, j, 0);
+    //         Game::line_draw_config.emplace_back(flowField->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+    //     }
+    // }
 
 
     // for (int i = 0; i < 50; ++i)
@@ -172,10 +172,29 @@ void Game::step()
     // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
     // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
     units[1]->attack(units[0]->position);
-    units[0]->applyForce(
-        flowField->field[MapConfig::x_in_which(units[0]->position.x())][MapConfig::y_in_which(units[0]->position.y())] *
-        units[0]->mass * 6, 0);
+    const auto unit0 = units[0];
+    int x_floor = static_cast<int>(unit0->position.x());
+    int y_floor = static_cast<int>(unit0->position.y());
+    int x_ceil = x_floor + 1;
+    int y_ceil = y_floor + 1;
 
+    QVector3D expected(
+        (flowField->get_vector(x_floor, y_floor).x() + flowField->get_vector(x_floor, y_ceil).x()) * (x_ceil - unit0->
+            position.x())
+        + (flowField->get_vector(x_ceil, y_floor).x() + flowField->get_vector(x_ceil, y_ceil).x()) * (unit0->position.
+            x() - x_floor),
+        (flowField->get_vector(x_floor, y_floor).y() + flowField->get_vector(x_ceil, y_floor).y()) * (y_ceil - unit0->
+            position.y())
+        + (flowField->get_vector(x_floor, y_ceil).y() + flowField->get_vector(x_ceil, y_ceil).y()) * (unit0->position.
+            y() - y_floor),
+        0
+    );
+
+    expected.normalize();
+    expected *= unit0->meta->moveSpeed*3;
+    unit0->applyForce(
+        QVector3D::dotProduct(expected, unit0->vector_dir) * unit0->vector_dir * unit0->mass,
+        QVector3D::dotProduct(expected, unit0->vector_ver) * unit0->mass * 6);
 
     for (const auto u : Game::units)
     {

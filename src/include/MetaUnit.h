@@ -69,7 +69,7 @@ public:
 
     //movement
     movementType movement;
-    float moveSpeed;
+    float moveSpeed=0;
     float moveAcc;
     float moveDec;
     float maxTurnSpeed;

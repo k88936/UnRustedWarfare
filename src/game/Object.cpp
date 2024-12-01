@@ -55,8 +55,8 @@ void Object::before()
     this->checked = false;
     this->linearForces *= 0;
     this->angularForces = 0;
-    vectorDir = QVector3D(std::cos(rotation * M_PIf / 180), std::sin(rotation * M_PIf / 180), 0);
-    vectorVer = QVector3D(-std::sin(rotation * M_PIf / 180), std::cos(rotation * M_PIf / 180), 0);
+    vector_dir = QVector3D(std::cos(rotation * M_PIf / 180), std::sin(rotation * M_PIf / 180), 0);
+    vector_ver = QVector3D(-std::sin(rotation * M_PIf / 180), std::cos(rotation * M_PIf / 180), 0);
 }
 
 void Object::step()
@@ -106,26 +106,28 @@ void Object::after()
     // linearVelocity*=(1-linearDamping);
     // angularVelocity*=(1-angularDamping);
 
+
+
     linearVelocity += (linearForces) * Game::deltaTime * invMass;
 
-    float linearVelocityDir = QVector3D::dotProduct(linearVelocity, vectorDir);
+    float linearVelocityDir = QVector3D::dotProduct(linearVelocity, vector_dir);
     if (fabsf(linearVelocityDir) < linearDampingDir * Game::deltaTime)
     {
-        linearVelocity -= vectorDir * linearVelocityDir;
+        linearVelocity -= vector_dir * linearVelocityDir;
         // float linearForcesDir=QVector3D::dotProduct(linearForces,Dir);
     }
     else
     {
-        linearVelocity -= vectorDir * sign(linearVelocityDir) * linearDampingDir * Game::deltaTime;
+        linearVelocity -= vector_dir * sign(linearVelocityDir) * linearDampingDir * Game::deltaTime;
     }
-    float linearVelocityVer = QVector3D::dotProduct(linearVelocity, vectorVer);
+    float linearVelocityVer = QVector3D::dotProduct(linearVelocity, vector_ver);
     if (fabsf(linearVelocityVer) < linearDampingVer * Game::deltaTime)
     {
-        linearVelocity -= vectorVer * linearVelocityVer;
+        linearVelocity -= vector_ver * linearVelocityVer;
     }
     else
     {
-        linearVelocity -= vectorVer * sign(linearVelocityVer) * linearDampingVer * Game::deltaTime;
+        linearVelocity -= vector_ver * sign(linearVelocityVer) * linearDampingVer * Game::deltaTime;
     }
     angularVelocity += (angularForces) * Game::deltaTime * invInertia;
     if (fabsf(angularVelocity) < angularDamping * Game::deltaTime)
@@ -136,31 +138,29 @@ void Object::after()
     {
         angularVelocity -= sign(angularVelocity) * angularDamping * Game::deltaTime;
     }
-
     position += linearVelocity * Game::deltaTime;
-    if (position.x() < radius-0.5f)
+    if (position.x() < radius - 0.5f)
     {
-        position.setX(radius-0.5f);
+        position.setX(radius - 0.5f);
         linearVelocity.setX(0);
     }
-    else if (position.x() > MapConfig::world_width-0.5f-radius)
+    else if (position.x() > MapConfig::world_width - 0.5f - radius)
     {
-        position.setX(MapConfig::world_width-0.5f-radius);
+        position.setX(MapConfig::world_width - 0.5f - radius);
         linearVelocity.setX(0);
     }
-    if (position.y() < radius-0.5f)
+    if (position.y() < radius - 0.5f)
     {
-        position.setY(radius-0.5f);
+        position.setY(radius - 0.5f);
         linearVelocity.setY(0);
     }
-    else if (position.y() > MapConfig::world_height-0.5f-radius)
+    else if (position.y() > MapConfig::world_height - 0.5f - radius)
     {
-        position.setY(MapConfig::world_height-0.5f-radius);
+        position.setY(MapConfig::world_height - 0.5f - radius);
         linearVelocity.setY(0);
     }
 
     addRotation(angularVelocity * Game::deltaTime);
-
 
 
     // qDebug()<<"object::after";

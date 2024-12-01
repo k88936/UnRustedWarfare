@@ -39,8 +39,8 @@ public:
     float linearDampingDir = 0;
     float linearDampingVer = 0;
     float angularDamping = 0;
-    QVector3D vectorDir ;
-    QVector3D vectorVer;
+    QVector3D vector_dir ;
+    QVector3D vector_ver;
     float mass ;
     float invMass ;
     float inertia ;

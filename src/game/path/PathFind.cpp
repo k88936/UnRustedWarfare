@@ -21,17 +21,13 @@ PathFind::PathFind(float from_x, float from_y, float to_x, float to_y, movementT
 
 float PathFind::pass_look_up(int x, int y) const
 {
-    if (x < 0 || y < 0 || x >= MapConfig::world_width || y >= MapConfig::world_height)
-    {
-        return 0;
-    }
     if (closed_set_.contains(PathNode::hash(x, y)))
     {
         return 0;
     }
-    if (movement_ & MapConfig::tile_attributes.at(x).at(y)->type)
+    if (movement_ & MapConfig::get_tile_attribute(x,y)->type)
     {
-        return MapConfig::tile_attributes.at(x).at(y)->pass_cost;
+        return MapConfig::get_tile_attribute(x,y)->pass_cost;
     }
 
     else

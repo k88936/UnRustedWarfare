@@ -18,7 +18,7 @@ struct PathNode
 
     static int hash(int x, int y)
     {
-        return x * MapConfig::world_height + y;
+        return x * (MapConfig::world_height + 2) + y;
     }
 
     PathNode(int x, int y, PathNode* parent) : x(x), y(y), parent(parent)
