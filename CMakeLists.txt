@@ -25,7 +25,6 @@ add_executable(untitled1
         src/game/MetaEffect.cpp
         src/game/MetaTurret.cpp
         src/game/MetaObject.cpp
-        src/game/UnitConfigs.cpp
         src/game/MetaProjectiles.cpp
         src/game/Turret.cpp
         src/game/Game.cpp
@@ -36,13 +35,13 @@ add_executable(untitled1
         src/game/MetaDrawable.cpp
         src/game/Effect.cpp
 
-        include/battle_widget.h
+        src/include/battle_widget.h
         src/ui/welcome_widget.cpp
-        include/welcome_widget.h
+        src/include/welcome_widget.h
         src/ui/splash_widget.cpp
-        include/splash_widget.h
+        src/include/splash_widget.h
         src/ui/battle_widget.cpp
-        include/battle_widget.h
+        src/include/battle_widget.h
         src/ui/RenderEngine.cpp
 
         src/tmxlite/FreeFuncs.cpp
@@ -61,11 +60,18 @@ add_executable(untitled1
 
         resources.qrc
 
-        src/game/MapConfig.cpp
+        src/game/config/UnitConfigs.cpp
+        src/game/config/MapConfig.cpp
+
         src/game/Tile.cpp
+        src/game/path/PathFind.cpp
+        src/game/path/FlowField.cpp
+        src/ui/game_end_widget.cpp
+        src/ui/game_end_widget.h
+        src/ui/game_end_widget.ui
 
 )
-include_directories(include)
+include_directories(src/include)
 
 find_package(ZLIB REQUIRED)
 find_package(zstd REQUIRED)

@@ -90,6 +90,14 @@ void Unit::draw()
     }
 }
 
+
+void Unit::before()
+{
+    Object::before();
+    this->position.setZ(0);
+    // this->position.setZ(meta->targetHeight);
+}
+
 void Unit::after()
 {
     Object::after();

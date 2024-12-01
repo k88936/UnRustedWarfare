@@ -10,8 +10,8 @@
 Tile::Tile(const int index, const int x, const int y,const float z)
 {
     this->index = index;
-    this->x = x;
-    this->y = y;
+    // this->x = x;
+    // this->y = y;
     this->render_transform.translate(x,y,z);
 }
 

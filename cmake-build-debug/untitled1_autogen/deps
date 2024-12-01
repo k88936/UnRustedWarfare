@@ -46,31 +46,12 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake \
 	/root/CLionProjects/untitled1/cmake-build-debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	/root/CLionProjects/untitled1/cmake-build-debug/untitled1_autogen/moc_predefs.h \
-	/root/CLionProjects/untitled1/include/Attachable.h \
-	/root/CLionProjects/untitled1/include/Drawable.h \
-	/root/CLionProjects/untitled1/include/Grid.h \
-	/root/CLionProjects/untitled1/include/MetaAttachable.h \
-	/root/CLionProjects/untitled1/include/MetaDrawable.h \
-	/root/CLionProjects/untitled1/include/MetaObject.h \
-	/root/CLionProjects/untitled1/include/MetaTurret.h \
-	/root/CLionProjects/untitled1/include/MetaUnit.h \
-	/root/CLionProjects/untitled1/include/Object.h \
-	/root/CLionProjects/untitled1/include/RenderEngine.h \
-	/root/CLionProjects/untitled1/include/Sensor.h \
-	/root/CLionProjects/untitled1/include/Structures.h \
-	/root/CLionProjects/untitled1/include/Turret.h \
-	/root/CLionProjects/untitled1/include/Unit.h \
-	/root/CLionProjects/untitled1/include/battle_widget.h \
-	/root/CLionProjects/untitled1/include/battlefieldwidget.h \
-	/root/CLionProjects/untitled1/include/splash_widget.h \
-	/root/CLionProjects/untitled1/include/welcome_widget.h \
 	/root/CLionProjects/untitled1/resources.qrc \
 	/root/CLionProjects/untitled1/src/game/Attachable.cpp \
 	/root/CLionProjects/untitled1/src/game/Drawable.cpp \
 	/root/CLionProjects/untitled1/src/game/Effect.cpp \
 	/root/CLionProjects/untitled1/src/game/Game.cpp \
 	/root/CLionProjects/untitled1/src/game/GridsManager.cpp \
-	/root/CLionProjects/untitled1/src/game/MapConfig.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaAttachable.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaDrawable.cpp \
 	/root/CLionProjects/untitled1/src/game/MetaEffect.cpp \
@@ -84,7 +65,29 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/src/game/Tile.cpp \
 	/root/CLionProjects/untitled1/src/game/Turret.cpp \
 	/root/CLionProjects/untitled1/src/game/Unit.cpp \
-	/root/CLionProjects/untitled1/src/game/UnitConfigs.cpp \
+	/root/CLionProjects/untitled1/src/game/config/MapConfig.cpp \
+	/root/CLionProjects/untitled1/src/game/config/UnitConfigs.cpp \
+	/root/CLionProjects/untitled1/src/game/path/FlowField.cpp \
+	/root/CLionProjects/untitled1/src/game/path/PathFind.cpp \
+	/root/CLionProjects/untitled1/src/include/Attachable.h \
+	/root/CLionProjects/untitled1/src/include/Drawable.h \
+	/root/CLionProjects/untitled1/src/include/MetaAttachable.h \
+	/root/CLionProjects/untitled1/src/include/MetaDrawable.h \
+	/root/CLionProjects/untitled1/src/include/MetaObject.h \
+	/root/CLionProjects/untitled1/src/include/MetaTurret.h \
+	/root/CLionProjects/untitled1/src/include/MetaUnit.h \
+	/root/CLionProjects/untitled1/src/include/Object.h \
+	/root/CLionProjects/untitled1/src/include/RenderEngine.h \
+	/root/CLionProjects/untitled1/src/include/Sensor.h \
+	/root/CLionProjects/untitled1/src/include/Turret.h \
+	/root/CLionProjects/untitled1/src/include/Unit.h \
+	/root/CLionProjects/untitled1/src/include/battle_widget.h \
+	/root/CLionProjects/untitled1/src/include/battlefieldwidget.h \
+	/root/CLionProjects/untitled1/src/include/splash_widget.h \
+	/root/CLionProjects/untitled1/src/include/structures/grid.h \
+	/root/CLionProjects/untitled1/src/include/structures/meta_image.h \
+	/root/CLionProjects/untitled1/src/include/structures/movement_type.h \
+	/root/CLionProjects/untitled1/src/include/welcome_widget.h \
 	/root/CLionProjects/untitled1/src/main.cpp \
 	/root/CLionProjects/untitled1/src/tmxlite/FreeFuncs.cpp \
 	/root/CLionProjects/untitled1/src/tmxlite/ImageLayer.cpp \
@@ -102,6 +105,8 @@ untitled1_autogen/timestamp: \
 	/root/CLionProjects/untitled1/src/ui/BattlefieldWidget.cpp \
 	/root/CLionProjects/untitled1/src/ui/RenderEngine.cpp \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.cpp \
+	/root/CLionProjects/untitled1/src/ui/game_end_widget.cpp \
+	/root/CLionProjects/untitled1/src/ui/game_end_widget.h \
 	/root/CLionProjects/untitled1/src/ui/splash_widget.cpp \
 	/root/CLionProjects/untitled1/src/ui/welcome_widget.cpp \
 	/usr/include/GL/gl.h \
@@ -898,6 +903,7 @@ untitled1_autogen/timestamp: \
 	/usr/lib/cmake/zstd/zstdTargets-none.cmake \
 	/usr/lib/cmake/zstd/zstdTargets.cmake \
 	/root/CLionProjects/untitled1/src/ui/battle_widget.ui \
+	/root/CLionProjects/untitled1/src/ui/game_end_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/splash_widget.ui \
 	/root/CLionProjects/untitled1/src/ui/welcome_widget.ui \
 	/opt/clion/bin/cmake/linux/x64/bin/cmake

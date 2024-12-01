@@ -5,9 +5,7 @@
 
 #include <QVector2D>
 
-#include <QVector3D>
 #include <QOpenGLBuffer>
-#include <Structures.h>
 
 struct VertexData
 {

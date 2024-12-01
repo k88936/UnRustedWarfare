@@ -11,7 +11,9 @@
 
 #include "Unit.h"
 #include "Effect.h"
+#include "FlowField.h"
 #include "MapConfig.h"
+#include "PathFind.h"
 #include "Projectile.h"
 #include "Tile.h"
 #include "welcome_widget.h"
@@ -40,11 +42,17 @@ void Game::addEffect(Effect* effect)
     Game::effects.push_back(effect);
 }
 
+FlowField* flowField;
+
 void Game::init()
 {
     UnitConfigs::init();
     MapConfig::init();
     MapConfig::loadMap("../maps/2.tmx");
+    //
+    // MapConfig::world_width=100;
+    // MapConfig::world_height=100;
+    grids_manager.init();
     // battleFieldWidget->show();
     // welcome = new welcome_widget();
     // battleFieldWidget = welcome->get_battleFieldWidget();
@@ -69,19 +77,30 @@ void Game::init()
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
 
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(120, 120, 0), -135));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(115, 120, 0), -140));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(120, 115, 0), -130));
-    for (int i = 0; i < 50; ++i)
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(30, 43, 0), -140));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(80, 50, 0), -5));
+
+
+    flowField = new FlowField(80, 50, movementType::LAND);
+    Game::line_draw_config.clear();
+
+    for (int i = 0; i < MapConfig::world_width; ++i)
     {
-        for (int j = 0; j < 50; ++j)
+        for (int j = 0; j < MapConfig::world_height; ++j)
         {
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i*2+1, 2*j+1, 0), 150));
+            Game::line_draw_config.emplace_back(i, j, 0);
+            Game::line_draw_config.emplace_back(flowField->field[i][j] * 0.4 + QVector3D(i, j, 0));
         }
     }
-    // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
-    // units[1]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
-    // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 600, 0);
+
+
+    // for (int i = 0; i < 50; ++i)
+    // {
+    //     for (int j = 0; j < 50; ++j)
+    //     {
+    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i*2+1, 2*j+1, 0), 150));
+    //     }
+    // }
 }
 
 void Game::clean()
@@ -127,15 +146,15 @@ void Game::clean()
 void Game::step()
 {
     // qDebug()<<"step begin";
-    grids_manager.clearGrids();
+    grids_manager.clear_grids();
     Game::var_image_draw_config_map.clear();
     for (const auto u : Game::units)
     {
-        grids_manager.updateObject(u);
+        grids_manager.update_object(u);
     }
     for (const auto p : Game::projectiles)
     {
-        grids_manager.updateObject(p);
+        grids_manager.update_object(p);
     }
     for (const auto u : Game::units)
     {
@@ -151,9 +170,13 @@ void Game::step()
     }
     // units[0]->applyForce(QVector3D(units[0]->mass * 1, 0, 0), 0);
     // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
-    // units[1]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
     // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
-    // units[1]->attack(units[0]->position);
+    units[1]->attack(units[0]->position);
+    units[0]->applyForce(
+        flowField->field[MapConfig::x_in_which(units[0]->position.x())][MapConfig::y_in_which(units[0]->position.y())] *
+        units[0]->mass * 6, 0);
+
+
     for (const auto u : Game::units)
     {
         u->step();

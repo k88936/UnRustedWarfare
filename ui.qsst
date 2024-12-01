@@ -9,18 +9,19 @@ Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
 $color_high_light = #2BDABD;
 $color_high_light2 = #30F6D9;
 $color_high_light3 = #32FFE0;
-
-$color_dark = #000000;
+$color_dark = #ff000000;
+$color_dark_t = #80000000;
 $color_dark2 = #151515;
+$color_dark2_t = #80151515;
 $color_dark3 = #505050;
-
-$color_gray = #a9b7c6;
+$color_dark3_t = #80505050;
+$color_gray = #B5B5B5;
 $color_bright = #FFFFFF;
 QMainWindow {
 	background-color:$color_dark;
 }
 QWidget{
- 	background-color: $color_dark;
+ 	background-color: $color_dark_t;
 }
 QDialog {
 	background-color:$color_dark;
@@ -29,7 +30,7 @@ QColorDialog {
 	background-color:$color_dark;
 }
 QTextEdit {
-	background-color:$color_dark;
+	background-color:$color_dark_t;
 	color: $color_gray;
 } 
 QPlainTextEdit {
@@ -44,20 +45,14 @@ QPlainTextEdit {
 	color: $color_gray;
 } 
 QPushButton{
-	border-style: solid;
+	border:0px solid transparent;
 	border-radius:0px;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
 	border-bottom-color: $color_high_light2;
 	border-bottom-width: 1px;
-	border-style: solid;
 	color: $color_gray;
 	padding:5px;
-	background-color: $color_dark2;
-	
+	background-color: $color_dark2_t;	
 }
-
 QPushButton::default{
 	border-bottom-width: 2px;
 	border-bottom-color: $color_high_light3;
@@ -78,9 +73,9 @@ QPushButton:pressed{
 	background-color: $color_high_light;
 }
 QPushButton:disabled{
-	border-bottom-color: $color_dark3;
+	border-bottom-color: $color_dark3_t;
 	color: $color_dark3;
-	background-color: $color_dark2;
+	background-color: $color_dark2_t;
 }
 /* QToolButton {
 	border-style: solid;
@@ -109,12 +104,12 @@ QToolButton:hover{
 QLineEdit {
 	border-width: 1px; 
 	border-radius: 0px;
-	border-color: $color_dark3;
+	border-color: $color_dark3_t;
 	border-style: inset;
 	padding: 0px;
 	color: $color_gray;
-	background:$color_dark2;
-	selection-background-color:$color_dark3;
+	background:$color_dark2_t;
+	selection-background-color:$color_dark3_t;
 	selection-color: $color_high_light;
 }
 QLabel {
@@ -185,31 +180,32 @@ QMenu{
 	background-color:$color_dark;
 } */ 
 QTabWidget {
-	color:$color_gray;
-	background-color:$color_dark;
 	
 }
 QTabWidget::pane {
-	border:1px solid $color_dark2;
+	border:1px solid $color_dark2_t;
 	border-radius: 0px;
+	background-color:$color_dark_t;
 }
 QTabBar::tab{
-	border:1px solid $color_dark;
+	border: 1px solid $color_dark;
 	border-radius: 0px;
 	color: $color_gray;
 	padding:8px;
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QTabBar::tab:top,QTabBar::tab:bottom{
-min-width:80px;
+	min-width:80px;
 }
 QTabBar::tab:left,QTabBar::tab:right{
-min-height:80px;
+	min-height:80px;
 }
- QTabBar::tab:hover {
+QTabBar::tab:hover {
+	color: $color_dark;
 	color: $color_high_light2;
 }
 QTabBar::tab:top:hover{
+	
 	border-bottom-color:$color_high_light2;
 }
 QTabBar::tab:bottom:hover{
@@ -234,8 +230,6 @@ QCheckBox {
 	background-color:$color_dark2;
 	padding-left: 4px;
 }
-
-
 QCheckBox:hover {
 	border-color: $color_high_light2;
 	color:$color_high_light2;
@@ -287,65 +281,65 @@ QStatusBar {
 }
 QSpinBox {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QDoubleSpinBox {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QTimeEdit {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QDateTimeEdit {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QDateEdit {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QComboBox {
 	color: $color_gray;	
-	background: $color_dark;
+	background: $color_dark_t;
 }
 QComboBox:editable {
-	background: $color_dark;
+	background: $color_dark_t;
 	color: $color_gray;
-	selection-background-color: $color_dark;
+	selection-background-color: $color_dark_t;
 }
 QComboBox QAbstractItemView {
 	color: $color_gray;	
-	background: $color_dark;
+	background: $color_dark_t;
 	selection-color: #FFFFFF;
-	selection-background-color: $color_dark;
+	selection-background-color: $color_dark_t;
 }
 QComboBox:!editable:on, QComboBox::drop-down:editable:on {
 	color: $color_gray;	
-	background: $color_dark;
+	background: $color_dark_t;
 }
 QFontComboBox {
 	color: $color_gray;	
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QToolBox {
 	color: $color_gray;
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QToolBox::tab {
 	color: $color_gray;
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QToolBox::tab:selected {
 	color: #FFFFFF;
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QScrollArea {
 	color: $color_gray;
-	background-color: $color_dark;
+	background-color: $color_dark_t;
 }
 QSlider{
-background-color: $color_dark
+	background-color: $color_dark_t;
 }
 QSlider::groove:horizontal {
 	height: 1px;
@@ -355,7 +349,7 @@ QSlider::groove:vertical {
 }
 QSlider::handle{
 	background-color: $color_high_light3;
-	border: 1px solid $color_dark2;
+	border: 1px solid $color_dark2_t;
 	border-radius: 0px;
 }
 QSlider::handle:horizontal {

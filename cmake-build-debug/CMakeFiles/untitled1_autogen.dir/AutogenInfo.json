@@ -429,27 +429,33 @@
 	"HEADERS" : 
 	[
 		[
-			"/root/CLionProjects/untitled1/include/battle_widget.h",
+			"/root/CLionProjects/untitled1/src/include/battle_widget.h",
 			"MU",
-			"6YEA5652QU/moc_battle_widget.cpp",
+			"7PH6M6IPMC/moc_battle_widget.cpp",
 			null
 		],
 		[
-			"/root/CLionProjects/untitled1/include/splash_widget.h",
+			"/root/CLionProjects/untitled1/src/include/splash_widget.h",
 			"MU",
-			"6YEA5652QU/moc_splash_widget.cpp",
+			"7PH6M6IPMC/moc_splash_widget.cpp",
 			null
 		],
 		[
-			"/root/CLionProjects/untitled1/include/welcome_widget.h",
+			"/root/CLionProjects/untitled1/src/include/welcome_widget.h",
 			"MU",
-			"6YEA5652QU/moc_welcome_widget.cpp",
+			"7PH6M6IPMC/moc_welcome_widget.cpp",
 			null
 		],
 		[
 			"/root/CLionProjects/untitled1/src/tmxlite/miniz.h",
 			"MU",
 			"HEDGOID2P3/moc_miniz.cpp",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/ui/game_end_widget.h",
+			"MU",
+			"YPKJ5OE7LN/moc_game_end_widget.cpp",
 			null
 		]
 	],
@@ -473,7 +479,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
-		"/root/CLionProjects/untitled1/include",
+		"/root/CLionProjects/untitled1/src/include",
 		"/usr/include/qt6/QtCore",
 		"/usr/include/qt6",
 		"/usr/lib/qt6/mkspecs/linux-g++",
@@ -526,7 +532,6 @@
 		[ "/root/CLionProjects/untitled1/src/game/Effect.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/game/Game.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/game/GridsManager.cpp", "MU", null ],
-		[ "/root/CLionProjects/untitled1/src/game/MapConfig.cpp", "MU", null ],
 		[
 			"/root/CLionProjects/untitled1/src/game/MetaAttachable.cpp",
 			"MU",
@@ -548,7 +553,26 @@
 		[ "/root/CLionProjects/untitled1/src/game/Tile.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/game/Turret.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/game/Unit.cpp", "MU", null ],
-		[ "/root/CLionProjects/untitled1/src/game/UnitConfigs.cpp", "MU", null ],
+		[
+			"/root/CLionProjects/untitled1/src/game/config/MapConfig.cpp",
+			"MU",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/game/config/UnitConfigs.cpp",
+			"MU",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/game/path/FlowField.cpp",
+			"MU",
+			null
+		],
+		[
+			"/root/CLionProjects/untitled1/src/game/path/PathFind.cpp",
+			"MU",
+			null
+		],
 		[ "/root/CLionProjects/untitled1/src/main.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/tmxlite/FreeFuncs.cpp", "MU", null ],
 		[
@@ -585,6 +609,11 @@
 		],
 		[ "/root/CLionProjects/untitled1/src/ui/RenderEngine.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/ui/battle_widget.cpp", "MU", null ],
+		[
+			"/root/CLionProjects/untitled1/src/ui/game_end_widget.cpp",
+			"MU",
+			null
+		],
 		[ "/root/CLionProjects/untitled1/src/ui/splash_widget.cpp", "MU", null ],
 		[ "/root/CLionProjects/untitled1/src/ui/welcome_widget.cpp", "MU", null ]
 	],

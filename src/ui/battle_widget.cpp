@@ -10,6 +10,9 @@
 #include <qdatetime.h>
 #include <QMouseEvent>
 
+#include "FlowField.h"
+#include "PathFind.h"
+
 #include "ui_battle_widget.h"
 
 
@@ -31,28 +34,30 @@ BattlefieldWidget* battle_widget::get_battleFieldWidget()
 
 constexpr int DRAG_DELAY = 250;
 
+
 void battle_widget::mouseMoveEvent(QMouseEvent* event)
 {
+    const QVector3D mouse_pos = ui->widget->screen_to_world(event->pos());
+
     int elapsed = m_press_time.msecsTo(QTime::currentTime());
     if (m_l_pressing)
     {
         if (elapsed > DRAG_DELAY)
         {
             units_selected.clear();
-            const int x1 = static_cast<int>(m_press_pos_world.x() / Game::grids_manager.grid_size);
-            const int y1 = static_cast<int>(m_press_pos_world.y() / Game::grids_manager.grid_size);
+            const int x1 = Game::grids_manager.x_in_which(m_press_pos_world.x());
+            const int y1 = Game::grids_manager.y_in_which(m_press_pos_world.y());
             Game::ui_image_draw_config_map["_select"].clear();
-            const QVector3D w2 = ui->widget->screen_to_world(event->pos());
-            const int x2 = static_cast<int>(w2.x() / Game::grids_manager.grid_size);
-            const int y2 = static_cast<int>(w2.y() / Game::grids_manager.grid_size);
+            const int x2 = Game::grids_manager.x_in_which(mouse_pos.x());
+            const int y2 = Game::grids_manager.y_in_which(mouse_pos.y());
             Game::line_draw_config.clear();
             Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(w2.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(w2.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(w2.x(), w2.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(w2.x(), w2.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), w2.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), w2.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
+            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
             Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
 
             for (int x = std::min(x1, x2); x <= std::max(x1, x2); ++x)
@@ -63,9 +68,11 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
                     {
                         if (const auto unit = dynamic_cast<Unit*>(object))
                         {
-                            if ((unit->position.x() - m_press_pos_world.x()) * (unit->position.x() - w2.x()) <= 0
+                            // qDebug()<<unit;
+                            if ((unit->position.x() - m_press_pos_world.x()) * (unit->position.x() - mouse_pos.x()) <= 0
                                 &&
-                                (unit->position.y() - m_press_pos_world.y()) * (unit->position.y() - w2.y()) <= 0)
+                                (unit->position.y() - m_press_pos_world.y()) * (unit->position.y() - mouse_pos.y()) <=
+                                0)
                             {
                                 units_selected.insert(unit);
                                 Game::ui_image_draw_config_map["_select"].push_back(unit);
@@ -124,10 +131,10 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
 void battle_widget::wheelEvent(QWheelEvent* event)
 {
     // qDebug() << event->angleDelta().y();
-    constexpr float delta =0.00001;
+    constexpr float delta = 0.00001;
     // if (event->angleDelta().y()>0)
     // {
-    ui->widget->camera_zoom=std::max(0.02f,ui->widget->camera_zoom+delta*event->angleDelta().y());
+    ui->widget->camera_zoom = std::max(0.02f, ui->widget->camera_zoom + delta * event->angleDelta().y());
     // }
     // else if ( event->angleDelta().y()<0)
     // {
@@ -150,6 +157,29 @@ void battle_widget::mousePressEvent(QMouseEvent* event)
     if (event->button() == Qt::RightButton)
     {
         m_r_pressing = true;
+    }
+    if (event->button() == Qt::MiddleButton)
+    {
+
+        // FlowField flowField(m_press_pos_world.x(), m_press_pos_world.y(), movementType::LAND);
+        //
+        // Game::line_draw_config.clear();
+        //
+        // for (int i = 0; i < MapConfig::world_width; ++i)
+        // {
+        //     for (int j = 0; j < MapConfig::world_height; ++j)
+        //     {
+        //         Game::line_draw_config.emplace_back(i, j, 0);
+        //         Game::line_draw_config.emplace_back(flowField.field[i][j] * 0.4 + QVector3D(i, j, 0));
+        //     }
+        // }
+
+        // PathFind pathFinder(30, 43, m_press_pos_world.x(), m_press_pos_world.y(), movementType::LAND);
+        // Game::line_draw_config.clear();
+        // for (const auto& p : pathFinder.path)
+        // {
+        //     Game::line_draw_config.emplace_back(p.first, p.second, 0);
+        // }
     }
 }
 
