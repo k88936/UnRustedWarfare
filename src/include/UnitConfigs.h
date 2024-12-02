@@ -24,7 +24,7 @@ public:
     static std::unordered_map<std::string, MetaEffect *> meta_effects;
     static std::unordered_map<std::string,MetaImage> images;
     static void parse_effects(const std::string& content, std::vector<std::string>& ans);
-    static void loadIni(const QString &path);
+    static void load_ini(const QString &path);
     static void init();
 };
 

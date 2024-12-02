@@ -23,11 +23,6 @@ public:
     float radius;
     float rotation = 0; //east is zero
     int team;
-
-    void setRotation(float rotation);
-
-    void addRotation(float rotation);
-
     //
     std::vector<Grid *> gridsAcross;
     bool checked = false;
@@ -58,11 +53,11 @@ public:
 
     virtual void after();
 
-    virtual bool onOverlay(Object *obj, QVector3D positionDiff);
-    void applyForce(QVector3D force, float torque);
+    virtual bool on_overlay(Object *obj, QVector3D position_diff);
+    void apply_force(QVector3D force, float torque);
 
 
 private:
-    static void solveCollision(Object *obj1, Object *obj2, QVector3D positionDiff);
+    static void solveCollision(Object *obj1, Object *obj2, QVector3D position_diff);
 };
 #endif //OBJECT_H

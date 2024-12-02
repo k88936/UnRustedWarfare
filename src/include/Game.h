@@ -10,6 +10,7 @@
 #include "battlefieldwidget.h"
 #include "Drawable.h"
 #include "Effect.h"
+#include "FlowField.h"
 #include "GridsManager.h"
 #include "Projectile.h"
 
@@ -28,6 +29,7 @@ public:
    static std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
    static  void addProjectile(Projectile *projectile);
    static void addEffect(Effect* effect);
+   static FlowField* flow_field_for_test;
    static std::vector<Projectile*> projectiles;
    static std::vector<Effect*> effects;
    static BattlefieldWidget *battleFieldWidget;

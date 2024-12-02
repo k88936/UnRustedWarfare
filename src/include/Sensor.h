@@ -9,8 +9,9 @@
 
 class Sensor:public Object {
 public:    Sensor(float radius);
+    void step() override;
 
-    bool onOverlay(Object *obj, QVector3D positionDiff) override;
+    bool on_overlay(Object *obj, QVector3D position_diff) override;
 };
 
 

@@ -25,32 +25,6 @@ Object::Object(float radius, float mass, float inertia)
     this->invInertia = 1 / inertia;
 }
 
-void Object::setRotation(const float rotation)
-{
-    this->rotation = rotation;
-    while (this->rotation >= 180)
-    {
-        this->rotation -= 360;
-    }
-    while (this->rotation < -180)
-    {
-        this->rotation += 360;
-    }
-}
-
-void Object::addRotation(const float rotation)
-{
-    this->rotation += rotation;
-    while (this->rotation >= 180)
-    {
-        this->rotation -= 360;
-    }
-    while (this->rotation < -180)
-    {
-        this->rotation += 360;
-    }
-}
-
 void Object::before()
 {
     this->checked = false;
@@ -75,8 +49,8 @@ void Object::step()
             // float length = positionDiff.length();
             if (positionDiff.lengthSquared() < (this->radius + tar->radius) * (this->radius + tar->radius))
             {
-                const bool thisAgree = this->onOverlay(tar, positionDiff);
-                const bool targetAgree = tar->onOverlay(this, positionDiff);
+                const bool thisAgree = this->on_overlay(tar, positionDiff);
+                const bool targetAgree = tar->on_overlay(this, positionDiff);
                 if (thisAgree && targetAgree)
                 {
                     solveCollision(this, tar, positionDiff);
@@ -124,8 +98,9 @@ void Object::after()
         angularVelocity -= utils::sign(angularVelocity) * angularDamping * Game::deltaTime;
     }
     position += linearVelocity * Game::deltaTime;
-
-    addRotation(angularVelocity * Game::deltaTime);
+    rotation += angularVelocity * Game::deltaTime;
+    utils::angle_ensure(rotation);
+    // addRotation(angularVelocity * Game::deltaTime);
 
 
     // qDebug()<<"object::after";
@@ -138,25 +113,25 @@ void Object::after()
     //
 }
 
-bool Object::onOverlay(Object* obj, QVector3D positionDiff)
+bool Object::on_overlay(Object* obj, const QVector3D position_diff)
 {
     return true;
 }
 
-void Object::applyForce(QVector3D force, float torque)
+void Object::apply_force(const QVector3D force, const float torque)
 {
     this->linearForces += force;
     this->angularForces += torque;
 }
 
-void Object::solveCollision(Object* obj1, Object* obj2, QVector3D positionDiff)
+void Object::solveCollision(Object* obj1, Object* obj2, const QVector3D position_diff)
 {
     // float factor=obj1->radius+obj2->radius-positionDiff.l
-    const QVector3D normDiff = positionDiff.normalized();
+    const QVector3D normDiff = position_diff.normalized();
     const float speedProjected = QVector3D::dotProduct(normDiff, obj1->linearVelocity - obj2->linearVelocity);
     const float force = (2 - obj1->restitution - obj2->restitution) * (speedProjected + 5.0f) * obj1->mass * obj2->mass
         * (obj1->radius + obj2->radius) * (obj1->radius + obj2->radius) / (
-            (obj1->mass + obj2->mass) * (positionDiff.lengthSquared() + 5.0f) * Game::deltaTime);;
+            (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * Game::deltaTime);;
     const QVector3D force3D = normDiff * force;
     // if (force!=force) {
     //      qDebug()<<"nan";
@@ -164,7 +139,7 @@ void Object::solveCollision(Object* obj1, Object* obj2, QVector3D positionDiff)
     //  }
     const float torqueBefore = 256 * force * obj1->friction * obj2->friction;
     // qDebug()<<torqueBefore;
-    obj1->applyForce(-force3D, torqueBefore * obj1->radius);
-    obj2->applyForce(force3D, -torqueBefore * obj2->radius);
+    obj1->apply_force(-force3D, torqueBefore * obj1->radius);
+    obj2->apply_force(force3D, -torqueBefore * obj2->radius);
     // qDebug()<<"hit";
 }

@@ -99,7 +99,7 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
 {
     for (std::vector<std::string> effects = split(content, ','); const auto& str : effects)
     {
-        if(str=="NONE")return;
+        if (str == "NONE")return;
         std::vector<std::string> word_and_num = split(str, '*');
         int n = 1;
         if (word_and_num.size() == 2)n = std::stoi(word_and_num[1]);
@@ -110,11 +110,11 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
     }
 }
 
-void UnitConfigs::loadIni(const QString& path)
+void UnitConfigs::load_ini(const QString& path)
 {
     const float scale_rw2sw = 1.0 / 20;
     const float turnSpeed_rw2sw = Game::FPS;
-    const float speed_rw2sw = scale_rw2sw * Game::FPS;
+    const float speed_rw2sw = 2.5f * scale_rw2sw * Game::FPS;
     const float time_rw2sw = 1.0f / Game::FPS;
     const float animate_speed_rw2sw = 0.3;
     // int index = 0;
@@ -231,16 +231,16 @@ void UnitConfigs::loadIni(const QString& path)
                 if (fst == "movementType")
                 {
                     //TODO
-                    if (snd == "land")unit->movement = LAND;
-                    else if (snd == "air")unit->movement = AIR;
-                    else if (snd == "hover")unit->movement = HOVER;
-                    else if (snd == "sub")unit->movement = SUB;
+                    if (snd == "LAND")unit->movement = LAND;
+                    else if (snd == "AIR")unit->movement = AIR;
+                    else if (snd == "HOVER")unit->movement = HOVER;
+                    else if (snd == "SUB")unit->movement = SUB;
                 }
                 else if (fst == "moveSpeed")unit->moveSpeed = std::stof(snd) * speed_rw2sw;
-                else if (fst == "moveAccelerationSpeed")unit->moveAcc = std::stof(snd) * speed_rw2sw;
-                else if (fst == "moveDecelerationSpeed")unit->moveDec = std::stof(snd) * speed_rw2sw;
+                else if (fst == "moveAccelerationSpeed")unit->moveAcc = std::stof(snd) * speed_rw2sw / time_rw2sw;
+                else if (fst == "moveDecelerationSpeed")unit->moveDec = std::stof(snd) * speed_rw2sw / time_rw2sw;
                 else if (fst == "maxTurnSpeed")unit->maxTurnSpeed = std::stof(snd) * turnSpeed_rw2sw;
-                else if (fst == "turnAcceleration")unit->turnAcc = std::stof(snd) * turnSpeed_rw2sw;
+                else if (fst == "turnAcceleration")unit->turnAcc = std::stof(snd) * turnSpeed_rw2sw / time_rw2sw;
                 else if (fst == "targetHeight")unit->targetHeight = std::stof(snd);
                 else if (fst == "joinGroup")unit->joinGroup = snd == "true";
 
@@ -426,7 +426,7 @@ void UnitConfigs::init()
     {
         if (file_name.endsWith(".ini"))
         {
-            loadIni(path + file_name);
+            load_ini(path + file_name);
         }
         else if (file_name.endsWith(".png"))
         {

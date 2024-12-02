@@ -30,7 +30,8 @@ void Turret::updateSlots(QMatrix4x4 transform) {
         QMatrix4x4 push_this=transform;
         push_this.translate(slot->slot_translation);
         slot->position=transform.map(slot->slot_translation);
-        slot->setRotation(slot->relative_rotation+rotation);
+        slot->rotation=slot->relative_rotation+rotation;
+        utils::angle_ensure(slot->rotation);
         slot->updateSlots(push_this);
     }
 

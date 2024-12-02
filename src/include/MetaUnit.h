@@ -70,10 +70,10 @@ public:
     //movement
     movementType movement;
     float moveSpeed=0;
-    float moveAcc;
-    float moveDec;
-    float maxTurnSpeed;
-    float turnAcc;
+    float moveAcc=1;
+    float moveDec=4;
+    float maxTurnSpeed=1;
+    float turnAcc=1;
     float targetHeight=0;
     bool joinGroup;
 

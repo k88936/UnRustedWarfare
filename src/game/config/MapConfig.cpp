@@ -31,7 +31,7 @@ const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
     {"Shallow Water0", new TileAttribute(0b0100, 1)},
     {"Long Grass0", new TileAttribute(0b1000, 1)},
     {"Sand0", new TileAttribute(0b1000, 1)},
-    {"Mountain0", new TileAttribute(0b1000, 3)},
+    {"Mountain0", new TileAttribute(0b1000, 1.1)},
 };
 
 int MapConfig::x_in_which(const float x)

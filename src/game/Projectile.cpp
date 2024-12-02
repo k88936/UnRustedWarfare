@@ -35,7 +35,7 @@ void Projectile::after() {
    if(!marked_for_delete) draw();
 }
 
-bool Projectile::onOverlay(Object *obj, QVector3D positionDiff) {
+bool Projectile::on_overlay(Object *obj, QVector3D positionDiff) {
     if(obj->team==this->team){
         return false;
     }

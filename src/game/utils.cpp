@@ -49,3 +49,38 @@ void utils::angle_ensure(float& angle)
         angle += 360;
     }
 }
+
+void utils::limit(float& value, float min, float max)
+{
+    if (value < min)
+    {
+        value = min;
+    }
+    else if (value > max)
+    {
+        value = max;
+    }
+}
+void utils::limit_soft_r(float& value, const float min, const float max, const float soft)
+{
+    if (value < min)
+    {
+        value = min + (value - min) * soft;
+    }
+    else if (value > max)
+    {
+        value = max + (value - max) * soft;
+    }
+}
+float utils::limit_soft_v(const float value, const float min, const float max, const float soft)
+{
+    if (value < min)
+    {
+        return min + (value - min) * soft;
+    }
+    if (value > max)
+    {
+        return max + (value - max) * soft;
+    }
+    return value;
+}

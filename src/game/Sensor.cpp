@@ -3,11 +3,15 @@
 //
 
 #include "Sensor.h"
-
-Sensor::Sensor(float radius): Object(radius,0,0) {
+Sensor::Sensor(const float radius): Object(radius,0,0) {
 
 }
 
-bool Sensor::onOverlay(Object *obj, QVector3D positionDiff) {
+void Sensor::step()
+{
+    Object::step();
+}
+
+bool Sensor::on_overlay(Object *obj, const QVector3D position_diff) {
     return false;
 }

@@ -10,6 +10,8 @@
 
 
 
+class BoidSensor;
+
 class Unit : public Attachable, public Drawable, public Object
 {
 public:
@@ -17,12 +19,14 @@ public:
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
     bool isAttached = false;
+    BoidSensor* boid_sensor;
     void attack(const QVector3D& target);
     void draw() override;
     std::vector<Turret*> turrets;
     std::vector<Object*> watchers;
 
     void before() override;
+    void step() override;
     void after() override;
 };
 

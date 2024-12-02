@@ -77,6 +77,7 @@ void BattlefieldWidget::update_camera()
                      this->size().height() * camera_zoom / 2 + camera_pos.y(), zNear, zFar);
     QMatrix4x4 matrix;
     matrix.translate(0.0, 0.0, -camera_pos.z());
+    // matrix.rotate(0,0,0,1);
     projection *= matrix;
 }
 
