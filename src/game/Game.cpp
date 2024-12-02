@@ -16,6 +16,7 @@
 #include "PathFind.h"
 #include "Projectile.h"
 #include "Tile.h"
+#include "utils.h"
 
 float Game::deltaTime = 1.0 / 40;
 float Game::FPS = 1.0 / deltaTime;
@@ -76,21 +77,28 @@ void Game::init()
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
 
+    for (int i = 100; i < 120; ++i)
+    {
+        for (int j = 100; j < 120; ++j)
+        {
+            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i, j, 0), i + j));
+        }
+    }
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(30, 43, 0), -140));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(80, 50, 0), -5));
+    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(80, 50, 0), -5));
 
 
     flowField = new FlowField(80, 50, movementType::LAND);
     // Game::line_draw_config.clear();
     //
-    // for (int i = 0; i < MapConfig::world_width; ++i)
-    // {
-    //     for (int j = 0; j < MapConfig::world_height; ++j)
-    //     {
-    //         Game::line_draw_config.emplace_back(i, j, 0);
-    //         Game::line_draw_config.emplace_back(flowField->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
-    //     }
-    // }
+    for (int i = 0; i < MapConfig::world_width; ++i)
+    {
+        for (int j = 0; j < MapConfig::world_height; ++j)
+        {
+            Game::line_draw_config.emplace_back(i, j, 0);
+            Game::line_draw_config.emplace_back(flowField->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+        }
+    }
 
 
     // for (int i = 0; i < 50; ++i)
@@ -170,31 +178,60 @@ void Game::step()
     // units[0]->applyForce(QVector3D(units[0]->mass * 1, 0, 0), 0);
     // units[0]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
     // units[2]->applyForce(units[0]->vectorDir * units[0]->mass * 6, 0);
-    units[1]->attack(units[0]->position);
-    const auto unit0 = units[0];
-    int x_floor = static_cast<int>(unit0->position.x());
-    int y_floor = static_cast<int>(unit0->position.y());
-    int x_ceil = x_floor + 1;
-    int y_ceil = y_floor + 1;
+    for (auto unit0 : Game::units)
+    {
+        int x_floor = static_cast<int>(unit0->position.x());
+        int y_floor = static_cast<int>(unit0->position.y());
+        int x_ceil = x_floor + 1;
+        int y_ceil = y_floor + 1;
 
-    QVector3D expected(
-        (flowField->get_vector(x_floor, y_floor).x() + flowField->get_vector(x_floor, y_ceil).x()) * (x_ceil - unit0->
-            position.x())
-        + (flowField->get_vector(x_ceil, y_floor).x() + flowField->get_vector(x_ceil, y_ceil).x()) * (unit0->position.
-            x() - x_floor),
-        (flowField->get_vector(x_floor, y_floor).y() + flowField->get_vector(x_ceil, y_floor).y()) * (y_ceil - unit0->
-            position.y())
-        + (flowField->get_vector(x_floor, y_ceil).y() + flowField->get_vector(x_ceil, y_ceil).y()) * (unit0->position.
-            y() - y_floor),
-        0
-    );
+        QVector3D expected(
+            (flowField->get_vector(x_floor, y_floor).x() + flowField->get_vector(x_floor, y_ceil).x()) * (x_ceil - unit0
+                ->
+                position.x())
+            + (flowField->get_vector(x_ceil, y_floor).x() + flowField->get_vector(x_ceil, y_ceil).x()) * (unit0->
+                position.
+                x() - x_floor),
+            (flowField->get_vector(x_floor, y_floor).y() + flowField->get_vector(x_ceil, y_floor).y()) * (y_ceil - unit0
+                ->
+                position.y())
+            + (flowField->get_vector(x_floor, y_ceil).y() + flowField->get_vector(x_ceil, y_ceil).y()) * (unit0->
+                position.
+                y() - y_floor),
+            0
+        );
 
-    expected.normalize();
-    expected *= unit0->meta->moveSpeed*3;
-    unit0->applyForce(
-        QVector3D::dotProduct(expected, unit0->vector_dir) * unit0->vector_dir * unit0->mass,
-        QVector3D::dotProduct(expected, unit0->vector_ver) * unit0->mass * 6);
+        float angle_step = unit0->meta->maxTurnSpeed * (QVector3D::dotProduct(unit0->linearVelocity, unit0->vector_dir))
+            / unit0->meta->moveSpeed;
+        expected.normalize();
 
+        const float target = utils::dir_of(expected);
+        float diff = target - unit0->rotation;
+        utils::angle_ensure(diff);
+        if (std::fabsf(diff) < angle_step * Game::deltaTime)
+        {
+            unit0->rotation = target;
+        }
+        else
+        {
+            if (diff < 0)
+            {
+                unit0->rotation -= angle_step * Game::deltaTime;
+            }
+            else
+            {
+                unit0->rotation += angle_step * Game::deltaTime;
+            }
+        }
+
+        expected *= unit0->meta->moveSpeed;
+        unit0->applyForce(
+            unit0->mass * unit0->vector_dir * 6,
+            // QVector3D::dotProduct(expected-unit0->linearVelocity, unit0->vector_dir) * unit0->vector_dir * unit0->
+            // mass / Game::deltaTime,
+            0
+            );
+    }
     for (const auto u : Game::units)
     {
         u->step();

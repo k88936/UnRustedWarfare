@@ -18,14 +18,14 @@ std::vector<std::vector<TileAttribute*>> MapConfig::tile_attributes;
 
 TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
-    return tile_attributes.at(x+1).at(y+1);
+    return tile_attributes.at(x + 1).at(y + 1);
 }
 
 std::vector<std::unique_ptr<Tile>> MapConfig::tiles;
 int MapConfig::world_width = 0;
 int MapConfig::world_height = 0;
 const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
-    {"None",new TileAttribute(0b0000,0)},
+    {"None", new TileAttribute(0b0000, 0)},
     // {"Grass0", new TileAttribute(0b0001, 1)},
     // {"Water0", new TileAttribute(0b0010, 1)},
     {"Shallow Water0", new TileAttribute(0b0100, 1)},
@@ -36,13 +36,16 @@ const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
 
 int MapConfig::x_in_which(const float x)
 {
-    return std::min(world_width, std::max(static_cast<int>(x + 0.5f), 0));
+    // return std::min(world_width, std::max(static_cast<int>(x + 0.5f), 0));
+    return static_cast<int>(x + 0.5f);
 }
 
 int MapConfig::y_in_which(const float y)
 {
-    return std::min(world_height, std::max(static_cast<int>(y + 0.5f), 0));
+    // return std::min(world_height, std::max(static_cast<int>(y + 0.5f), 0));
+    return static_cast<int>(y + 0.5f);
 }
+
 
 const std::array<std::string, 4u> LayerStrings =
 {
@@ -232,7 +235,7 @@ void MapConfig::loadMap(const std::string& path)
                     tile_attributes.resize(world_width + 2);
                     for (auto& passable : tile_attributes)
                     {
-                        passable.resize(world_height + 2,tile_configs.at("None"));
+                        passable.resize(world_height + 2, tile_configs.at("None"));
                     }
 
 

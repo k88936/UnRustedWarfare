@@ -5,6 +5,7 @@
 #include "Unit.h"
 
 #include "Game.h"
+#include "MapConfig.h"
 #include "Sensor.h"
 
 
@@ -26,9 +27,9 @@ Unit::Unit(MetaUnit* meta, const QVector3D position, const float rotation): Atta
     auto* mar = new Sensor(meta->maxAttackRange);
     watchers.push_back(mar);
     restitution = 0.8;
-    linearDampingDir = 1.6;
-    linearDampingVer = 3.2;
-    angularDamping = 24.0;
+    linearDampingDir = 4;
+    linearDampingVer = 6;
+    angularDamping = 32;
 }
 
 void Unit::updateSlots(QMatrix4x4 transform)
@@ -101,6 +102,38 @@ void Unit::before()
 void Unit::after()
 {
     Object::after();
+    int tile_x = MapConfig::x_in_which(position.x());
+    int tile_y = MapConfig::y_in_which(position.y());
+    if (!MapConfig::get_tile_attribute(tile_x - 1, tile_y
+        )->
+        type & this->meta->movement)
+    {
+        position.setX(std::max(position.x(), tile_x + 0.5f));
+        linearVelocity.setX(std::max(linearVelocity.x(), 0.0f));
+    }
+
+    if (!MapConfig::get_tile_attribute(tile_x + 1, tile_y
+        )->
+        type & this->meta->movement)
+    {
+        position.setX(std::min(position.x(), tile_x - 0.5f));
+        linearVelocity.setX(std::min(linearVelocity.x(), 0.0f));
+    }
+    if (!MapConfig::get_tile_attribute(tile_x, tile_y - 1
+        )->
+        type & this->meta->movement)
+    {
+        position.setY(std::max(position.y(), tile_y + 0.5f));
+        linearVelocity.setY(std::max(linearVelocity.y(), 0.0f));
+    }
+    if (!MapConfig::get_tile_attribute(tile_x, tile_y + 1
+        )->
+        type & this->meta->movement)
+    {
+        position.setY(std::min(position.y(), tile_y - 0.5f));
+        linearVelocity.setY(std::min(linearVelocity.y(), 0.0f));
+    }
+
     if (!this->isAttached)
     {
         QMatrix4x4 transform;

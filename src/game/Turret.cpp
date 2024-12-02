@@ -9,6 +9,7 @@
 #include "UnitConfigs.h"
 #include "Effect.h"
 #include "Game.h"
+#include "utils.h"
 
 
 Turret::Turret(MetaTurret *meta) : Attachable(), Drawable(), Sensor(meta->range) {
@@ -37,8 +38,8 @@ void Turret::updateSlots(QMatrix4x4 transform) {
 
 float Turret::aim(const QVector3D target) {
     QVector3D relative = target- position;
-    float angle_target = std::atan2(relative.y(), relative.x())/std::numbers::pi *180;
 
+    float angle_target=utils::dir_of(relative);
 
     float angle_diff = angle_target - rotation;
     if(angle_diff>=180) {

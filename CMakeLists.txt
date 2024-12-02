@@ -78,6 +78,7 @@ add_executable(untitled1
         src/ui/help_slide_widget.cpp
         src/ui/include/help_slide_widget.h
         src/ui/help_slide_widget.ui
+        src/game/utils.cpp
 
 
 )
