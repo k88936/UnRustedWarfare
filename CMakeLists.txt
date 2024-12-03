@@ -85,15 +85,16 @@ add_executable(untitled1
 include_directories(src/include)
 include_directories(src/ui/include)
 
-find_package(ZLIB REQUIRED)
-find_package(zstd REQUIRED)
+add_subdirectory(zlib)
+add_subdirectory(zstd/build/cmake/)
+#find_package(ZLIB REQUIRED)
+#find_package(zstd REQUIRED)
 target_link_libraries(untitled1
         Qt::Core
         Qt::Gui
         Qt::Widgets
         Qt::OpenGL
         Qt::OpenGLWidgets
-        ZLIB::ZLIB
-        zstd
+        zlibstatic
+        libzstd_static
 )
-
