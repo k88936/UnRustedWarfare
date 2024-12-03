@@ -97,4 +97,6 @@ target_link_libraries(untitled1
         Qt::OpenGLWidgets
         zlibstatic
         libzstd_static
+        opengl32
+        glu32
 )

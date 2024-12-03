@@ -7,6 +7,7 @@
 #include "Game.h"
 #include "utils.h"
 
+#include <numbers>
 BoidSensor::~BoidSensor()
 {
     if (flock != nullptr)

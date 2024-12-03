@@ -5,7 +5,6 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 #include <QVector3D>
-
 #include "structures/grid.h"
 
 

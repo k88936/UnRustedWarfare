@@ -9,8 +9,6 @@
 #include <QWidget>
 #include <set>
 #include <Unit.h>
-#include <oneapi/tbb/detail/_config.h>
-
 #include "welcome_widget.h"
 
 

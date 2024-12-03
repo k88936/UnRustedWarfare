@@ -15,7 +15,6 @@
 #define SOURCE_PUGIXML_CPP
 
 #include "tmxlite/pugixml.hpp"
-#include <tmxlite/detail/Android.hpp>
 
 #include <stdlib.h>
 #include <stdio.h>

@@ -5,7 +5,7 @@
 #include "utils.h"
 
 #include <QVector2D>
-
+#include <numbers>
 float utils::sign(const float value)
 {
     if (value > 0)

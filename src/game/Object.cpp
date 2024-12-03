@@ -3,13 +3,10 @@
 //
 
 #include "Object.h"
-
 #include <MapConfig.h>
-
-
 #include "Game.h"
 #include "utils.h"
-
+#include <numbers>
 // Object::Object(QVector3D position, float rotation) {
 //     this->position=position;
 //     this->rotation=rotation;
@@ -30,8 +27,8 @@ void Object::before()
     this->checked = false;
     this->linearForces *= 0;
     this->angularForces = 0;
-    vector_dir = QVector3D(std::cos(rotation * M_PIf / 180), std::sin(rotation * M_PIf / 180), 0);
-    vector_ver = QVector3D(-std::sin(rotation * M_PIf / 180), std::cos(rotation * M_PIf / 180), 0);
+    vector_dir = QVector3D(std::cos(rotation * std::numbers::pi / 180), std::sin(rotation * std::numbers::pi / 180), 0);
+    vector_ver = QVector3D(-std::sin(rotation * std::numbers::pi / 180), std::cos(rotation * std::numbers::pi / 180), 0);
 }
 
 void Object::step()
