@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <set>
 #include <Unit.h>
+#include <oneapi/tbb/detail/_config.h>
 
 #include "welcome_widget.h"
 
@@ -28,6 +29,7 @@ public:
     void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
+    void keyReleaseEvent(QKeyEvent* event) override;
     void paintEvent(QPaintEvent* event) override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
@@ -42,6 +44,8 @@ public:
     QVector3D camera_pos_when_pressed;
 private:
     Ui::battle_widget *ui;
+
+    Drawable* move_flag=new Drawable();
 };
 
 

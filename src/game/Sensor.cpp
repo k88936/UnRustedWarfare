@@ -3,13 +3,23 @@
 //
 
 #include "Sensor.h"
-Sensor::Sensor(const float radius): Object(radius,0,0) {
+Sensor::Sensor(const float radius,int team): Object(radius,0,0) {
 
+    this->team=team;
+}
+
+void Sensor::before()
+{
+    Object::before();
 }
 
 void Sensor::step()
 {
     Object::step();
+}
+
+void Sensor::after()
+{
 }
 
 bool Sensor::on_overlay(Object *obj, const QVector3D position_diff) {

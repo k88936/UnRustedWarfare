@@ -80,7 +80,7 @@ add_executable(untitled1
         src/ui/help_slide_widget.ui
         src/game/utils.cpp
         src/game/BoidSensor.cpp
-        src/game/BoidSensor.h
+        src/game/Flock.cpp
 )
 include_directories(src/include)
 include_directories(src/ui/include)

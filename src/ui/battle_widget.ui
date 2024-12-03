@@ -424,12 +424,24 @@ QSlider::sub-page {
          <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
            <widget class="QPushButton" name="setting_button">
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LayoutDirection::LeftToRight</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/quit_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/quit_dark.png);} 
 </string>
             </property>
             <property name="text">
              <string/>
+            </property>
+            <property name="shortcut">
+             <string>Esc</string>
             </property>
            </widget>
           </item>
@@ -504,6 +516,9 @@ QSlider::sub-page {
             <verstretch>0</verstretch>
            </sizepolicy>
           </property>
+          <property name="focusPolicy">
+           <enum>Qt::FocusPolicy::NoFocus</enum>
+          </property>
          </widget>
         </item>
        </layout>
@@ -529,6 +544,9 @@ QSlider::sub-page {
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/pause-button_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/pause-button_dark.png);} 
 </string>
@@ -549,6 +567,9 @@ QSlider::sub-page {
           </item>
           <item>
            <widget class="QPushButton" name="pushButton">
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/play-button_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/play-button_dark.png);} 
 </string>
@@ -566,6 +587,12 @@ QSlider::sub-page {
           </item>
           <item>
            <widget class="QPushButton" name="button_speed">
+            <property name="tabletTracking">
+             <bool>false</bool>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/speed_highlight.png);}QPushButton:hover,QPushButton:disabled,QPushButton:checked{image: url(:/ui/speed_dark.png);}
 </string>
@@ -616,6 +643,9 @@ QSlider::sub-page {
             <horstretch>0</horstretch>
             <verstretch>0</verstretch>
            </sizepolicy>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::FocusPolicy::NoFocus</enum>
           </property>
           <property name="acceptDrops">
            <bool>false</bool>
@@ -1003,6 +1033,9 @@ QSlider::sub-page {
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/add-group_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled{image: url(:/ui/add-group_dark.png);}
 </string>
@@ -1022,6 +1055,9 @@ QSlider::sub-page {
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/group_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/group_dark.png);}
@@ -1078,6 +1114,9 @@ QSlider::sub-page {
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::FocusPolicy::NoFocus</enum>
+              </property>
               <property name="text">
                <string>type1</string>
               </property>
@@ -1097,6 +1136,9 @@ QSlider::sub-page {
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
+              <property name="focusPolicy">
+               <enum>Qt::FocusPolicy::NoFocus</enum>
+              </property>
               <property name="text">
                <string>type1</string>
               </property>
@@ -1115,6 +1157,9 @@ QSlider::sub-page {
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+              <property name="focusPolicy">
+               <enum>Qt::FocusPolicy::NoFocus</enum>
               </property>
               <property name="text">
                <string>type1</string>
@@ -1161,6 +1206,9 @@ QSlider::sub-page {
           </item>
           <item>
            <widget class="QPushButton" name="button_select_all">
+            <property name="focusPolicy">
+             <enum>Qt::FocusPolicy::NoFocus</enum>
+            </property>
             <property name="styleSheet">
              <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/all_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/all_dark.png);}
 </string>
@@ -1193,6 +1241,29 @@ QSlider::sub-page {
    <container>1</container>
   </customwidget>
  </customwidgets>
+ <tabstops>
+  <tabstop>button_patrol</tabstop>
+  <tabstop>setting_button</tabstop>
+  <tabstop>pushButton</tabstop>
+  <tabstop>button_speed</tabstop>
+  <tabstop>button_pause</tabstop>
+  <tabstop>button_fix</tabstop>
+  <tabstop>button_upgrade</tabstop>
+  <tabstop>button_explore</tabstop>
+  <tabstop>tabs_actions</tabstop>
+  <tabstop>mapView</tabstop>
+  <tabstop>button_delete</tabstop>
+  <tabstop>button_attack</tabstop>
+  <tabstop>button_stay</tabstop>
+  <tabstop>button_march</tabstop>
+  <tabstop>button_defence</tabstop>
+  <tabstop>button_queue_new</tabstop>
+  <tabstop>button_queue</tabstop>
+  <tabstop>button_type</tabstop>
+  <tabstop>pushButton_9</tabstop>
+  <tabstop>pushButton_10</tabstop>
+  <tabstop>button_select_all</tabstop>
+ </tabstops>
  <resources>
   <include location="../../resources.qrc"/>
  </resources>

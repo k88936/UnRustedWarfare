@@ -84,3 +84,7 @@ float utils::limit_soft_v(const float value, const float min, const float max, c
     }
     return value;
 }
+bool utils::within(const QVector3D& v1, const QVector3D& v2, const float range)
+{
+    return (v1 - v2).lengthSquared() < range * range;
+}

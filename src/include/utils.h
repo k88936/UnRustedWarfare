@@ -16,6 +16,7 @@ public:
     static void limit(float& value, float min, float max);
     static void limit_soft_r(float& value, float min, float max, float soft);
     static float limit_soft_v(float value, float min, float max, float soft);
+    static bool within(const QVector3D& v1, const QVector3D& v2, float range);
 };
 
 

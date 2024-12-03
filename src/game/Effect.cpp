@@ -7,23 +7,29 @@
 #include "Game.h"
 
 
-Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,const QVector3D &linear_velocity_base): Object(1, 1, 1)
+Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
+               const QVector3D& linear_velocity_base): Object(1, 1, 1)
 {
     this->meta = meta;
     this->position = position;
     if (meta->drawUnderUnits)
     {
         this->position.setZ(-1);
+        //
+        // Drawable::Drawable() {
+        // }
     }
-    if(meta->xSpeedAbsolute!=0||meta->ySpeedAbsolute!=0)
+    if (meta->xSpeedAbsolute != 0 || meta->ySpeedAbsolute != 0)
     {
         this->linearVelocity = linear_velocity_base + QVector3D(meta->xSpeedAbsolute, meta->ySpeedAbsolute, 0);
     }
     else
     {
-        this->linearVelocity = linear_velocity_base + QVector3D(meta->xSpeedRelativeRandom * (rand() % 100) / 100 + meta->xSpeedRelative, meta->ySpeedRelativeRandom * (rand() % 100) / 100 + meta->ySpeedRelative, 0);
+        this->linearVelocity = linear_velocity_base + QVector3D(
+            meta->xSpeedRelativeRandom * (rand() % 100) / 100 + meta->xSpeedRelative,
+            meta->ySpeedRelativeRandom * (rand() % 100) / 100 + meta->ySpeedRelative, 0);
     }
-    this->alpha = meta->alpha;
+    this->color.setZ(meta->alpha);
     this->rotation = rotation;
     this->scale = meta->scaleFrom;
     this->animate_timer = 0;
@@ -46,13 +52,11 @@ void Effect::after()
     animate_timer += Game::deltaTime;
     if (meta->fadeOut && has_life > meta->life - meta->fadeInTime)
     {
-        this->alpha = meta->alpha * (meta->life - has_life) / meta->fadeInTime;
-        this->color.setZ(alpha);
+        this->color.setZ(meta->alpha * (meta->life - has_life) / meta->fadeInTime);
     }
     else if (has_life < meta->fadeInTime)
     {
-        this->alpha = meta->alpha * has_life / meta->fadeInTime;
-        this->color.setZ(alpha);
+        this->color.setZ(meta->alpha * has_life / meta->fadeInTime);
     }
 
     if ((this->has_life += Game::deltaTime) >= meta->life)
@@ -69,5 +73,5 @@ void Effect::after()
             // frame_id=meta->animateFrameEnd;
         }
     }
-    if(!marked_for_delete)draw();
+    if (!marked_for_delete)draw();
 }

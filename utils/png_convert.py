@@ -61,5 +61,6 @@ convert_non_transparent("ui/add-group.png")
 
 convert_non_transparent("ui/select.png")
 convert_non_transparent("ui/quit.png")
+convert_non_transparent("ui/arrow.png")
 
 icons_config.close()

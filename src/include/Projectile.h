@@ -11,10 +11,10 @@
 
 class Projectile :public Drawable,public Object{
 public:
-    float has_life=0;
+    float has_lived=0;
     MetaProjectiles * meta;
 
-    Projectile(MetaProjectiles* meta, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
+    Projectile(MetaProjectiles* meta,int team, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
     void draw() override;
     void after() override;
     bool on_overlay(Object *obj, QVector3D positionDiff) override;

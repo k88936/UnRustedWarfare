@@ -11,6 +11,7 @@
 
 #include "Unit.h"
 #include "Effect.h"
+#include "Flock.h"
 #include "FlowField.h"
 #include "MapConfig.h"
 #include "PathFind.h"
@@ -27,6 +28,7 @@ std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_c
 std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
 GridsManager Game::grids_manager;
 std::vector<Unit*> Game::units;
+std::set<Flock*> Game::flocks;
 QBasicTimer Game::timer;
 std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
@@ -77,29 +79,31 @@ void Game::init()
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
 
-    for (int i = 100; i < 120; ++i)
+    for (int i = 25; i < 35; ++i)
     {
-        for (int j = 100; j < 110; ++j)
+        for (int j = 25; j < 35; ++j)
         {
-            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i, j, 0), i + j));
+            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), i%2, QVector3D(i, j, 0), i + j));
         }
     }
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), QVector3D(30, 43, 0), -140));
+
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(25, 25, 0), 50));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -140));
 
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(133, 120, 0), -5));
 
 
-    flow_field_for_test = new FlowField(80, 50, movementType::LAND);
-    // Game::line_draw_config.clear();
-    //
-    for (int i = 0; i < MapConfig::world_width; ++i)
-    {
-        for (int j = 0; j < MapConfig::world_height; ++j)
-        {
-            Game::line_draw_config.emplace_back(i, j, 0);
-            Game::line_draw_config.emplace_back(flow_field_for_test->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
-        }
-    }
+    // flow_field_for_test = new FlowField(80, 50, movementType::LAND);
+    // // Game::line_draw_config.clear();
+    // //
+    // for (int i = 0; i < MapConfig::world_width; ++i)
+    // {
+    //     for (int j = 0; j < MapConfig::world_height; ++j)
+    //     {
+    //         Game::line_draw_config.emplace_back(i, j, 0);
+    //         Game::line_draw_config.emplace_back(flow_field_for_test->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+    //     }
+    // }
 
 
     // for (int i = 0; i < 50; ++i)
@@ -149,6 +153,25 @@ void Game::clean()
             ++it;
         }
     }
+    for (auto flock : flocks)
+    {
+        if (flock->boids.empty())
+        {
+            flock->mark_as_delete = true;
+        }
+    }
+    for (auto it = Game::flocks.begin(); it != Game::flocks.end();)
+    {
+        if ((*it)->mark_as_delete)
+        {
+            delete *it;
+            it = Game::flocks.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
 }
 
 void Game::step()
@@ -162,6 +185,10 @@ void Game::step()
         for (const auto w : u->watchers)
         {
             grids_manager.update_object(w);
+        }
+        for (const auto  turret : u->turrets)
+        {
+            grids_manager.update_object(turret);
         }
     }
     for (const auto p : Game::projectiles)

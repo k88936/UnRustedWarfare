@@ -13,29 +13,30 @@ class MetaTurret :public MetaAttachable ,public  MetaObject,public MetaDrawable
     // QVector4D barrelTransform;
 public:
     MetaTurret();
-    QVector3D barrelPosition=QVector3D(0,0,0.1);
-    float turnSpeed=-1;
-    float turnAcc;
-    std::string shootSound;
-    float shootSoundVolume;
+    QVector3D barrel_position=QVector3D(0,0,0.1);
+    float turn_speed=-1;
+    float turn_acc;
+    std::string shoot_sound;
+    float shoot_sound_volume;
 
-    float recoilOffset;
-    float recoilOutTime;
-    float recoilReturnTime;
+    float recoil_offset;
+    float recoil_out_time;
+    float recoil_return_time;
 
-    float range;
-    float rangeMin;
+    float range=-1;
+    float range_min=-1;
     float delay;
     bool invisible=false;
-    float turnSpeedAcceleration;
-    std::string attachedTo;
+    float turn_speed_acceleration;
+    std::string attached_to;
     std::vector<MetaTurret*> attached_turrets=std::vector<MetaTurret*>();
 
-    bool canShoot=true;
-    float limitingMinRange;
+    bool can_shoot=true;
+    float limiting_min_range;
     std::string projectile;
     bool slave=false;
     std::vector<std::string> shoot_flame;
+   void init_frames() override;
 };
 
 

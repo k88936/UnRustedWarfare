@@ -10,11 +10,12 @@
 #include <qdatetime.h>
 #include <QMouseEvent>
 
+#include "BoidSensor.h"
 #include "FlowField.h"
 #include "PathFind.h"
 
 #include "ui_battle_widget.h"
-
+#include "Flock.h"
 
 battle_widget::battle_widget(QWidget* parent) :
     QWidget(parent), ui(new Ui::battle_widget)
@@ -42,12 +43,13 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
     int elapsed = m_press_time.msecsTo(QTime::currentTime());
     if (m_l_pressing)
     {
-        if (elapsed > DRAG_DELAY)
+        if (elapsed > DRAG_DELAY) //drag
         {
-            units_selected.clear();
             const int x1 = Game::grids_manager.x_in_which(m_press_pos_world.x());
             const int y1 = Game::grids_manager.y_in_which(m_press_pos_world.y());
+            units_selected.clear();
             Game::ui_image_draw_config_map["_select"].clear();
+            Game::ui_image_draw_config_map["_arrow_highlight"].clear();
             const int x2 = Game::grids_manager.x_in_which(mouse_pos.x());
             const int y2 = Game::grids_manager.y_in_which(mouse_pos.y());
             Game::line_draw_config.clear();
@@ -68,6 +70,10 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
                     {
                         if (const auto unit = dynamic_cast<Unit*>(object))
                         {
+                            if (unit->team != 0)
+                            {
+                                continue;
+                            }
                             // qDebug()<<unit;
                             if ((unit->position.x() - m_press_pos_world.x()) * (unit->position.x() - mouse_pos.x()) <= 0
                                 &&
@@ -86,7 +92,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
 
     if (m_r_pressing)
     {
-        QVector3D move = ui->widget->screen_relative_to_world_relative(event->pos() - m_press_pos_screen);
+        const QVector3D move = ui->widget->screen_relative_to_world_relative(event->pos() - m_press_pos_screen);
         ui->widget->camera_pos = camera_pos_when_pressed - move;
         ui->widget->update_camera();
     }
@@ -101,10 +107,10 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
         m_l_pressing = false;
         Game::line_draw_config.clear();
         int elapsed = m_press_time.msecsTo(QTime::currentTime());
-        if (elapsed <= DRAG_DELAY)
+        if (elapsed <= DRAG_DELAY) //click
         {
-            units_selected.clear();
-            Game::ui_image_draw_config_map["_select"].clear();
+            std::set<Unit*> units_to_select;
+            std::set<Unit*> enermy_to_select;
             int x = static_cast<int>(m_press_pos_world.x() / Game::grids_manager.grid_size);
             int y = static_cast<int>(m_press_pos_world.y() / Game::grids_manager.grid_size);
             for (const auto& object : Game::grids_manager.grids[x][y]->objects)
@@ -114,10 +120,60 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                 {
                     if (QVector2D(unit->position - m_press_pos_world).lengthSquared() < unit->radius * unit->radius)
                     {
-                        units_selected.insert(unit);
-                        Game::ui_image_draw_config_map["_select"].push_back(unit);
+                        if (unit->team == 0)
+                            units_to_select.insert(unit);
+                        else if (unit->team == 1)
+                        {
+                            enermy_to_select.insert(unit);
+                        }
                         break;
                     }
+                }
+            }
+            if (!units_to_select.empty())
+            {
+                units_selected = units_to_select;
+                Game::ui_image_draw_config_map["_select"].clear();
+                for (auto& selected : units_selected)
+                {
+                    Game::ui_image_draw_config_map["_select"].push_back(selected);
+                }
+            }
+            else
+            {
+                auto flock = new Flock();
+
+                for (auto& selected : units_selected)
+                {
+                    if (selected->boid_sensor->flock != nullptr)
+                    {
+                        selected->boid_sensor->flock->boids.erase(selected);
+                    }
+                    flock->boids.insert(selected);
+                    selected->boid_sensor->flock = flock;
+                }
+
+                if (!flock->boids.empty())
+                {
+                    flock->move(m_press_pos_world);
+                    move_flag->render_transform.setToIdentity();
+                    move_flag->render_transform.translate(m_press_pos_world);
+                    Game::ui_image_draw_config_map["_arrow_orange"].clear();
+                    Game::ui_image_draw_config_map["_arrow_highlight"].clear();
+                    if (!enermy_to_select.empty())
+                    {
+                        flock->preferred_target=*(enermy_to_select.begin());
+                        Game::ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
+                    }
+                    else
+                    {
+                        Game::ui_image_draw_config_map["_arrow_highlight"].push_back(move_flag);
+                    }
+                    Game::flocks.insert(flock);
+                }
+                else
+                {
+                    delete flock;
                 }
             }
         }
@@ -144,6 +200,19 @@ void battle_widget::wheelEvent(QWheelEvent* event)
     ui->widget->update_camera();
 }
 
+void battle_widget::keyReleaseEvent(QKeyEvent* event)
+{
+    // qDebug()<<event->key();
+    if (event->key() == Qt::Key_Space)
+    {
+        // qDebug()<<"space";
+        event->accept();
+        units_selected.clear();
+        Game::ui_image_draw_config_map["_select"].clear();
+        Game::ui_image_draw_config_map["_arrow_highlight"].clear();
+    }
+}
+
 void battle_widget::mousePressEvent(QMouseEvent* event)
 {
     m_press_pos_screen = event->pos();
@@ -160,7 +229,6 @@ void battle_widget::mousePressEvent(QMouseEvent* event)
     }
     if (event->button() == Qt::MiddleButton)
     {
-
         // FlowField flowField(m_press_pos_world.x(), m_press_pos_world.y(), movementType::LAND);
         //
         // Game::line_draw_config.clear();

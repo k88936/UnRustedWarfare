@@ -18,23 +18,23 @@ public:
     //core
     std::string name; //name
     std::string displayText; //display name
-    std::string displayDescription;
+    std::string display_description;
     int price;
-    float maxHp;
+    float max_hp;
     float mass;
-    int techLevel;
+    int tech_level;
     float radius; //contact radius
-    float displayRadius;
-    float fogOfWarSightRange;
-    int transportSlotsNeeded = 1;
-    float buildSpeed;
-    float energyMax;
-    float energyRegen;
+    float display_radius;
+    float fog_of_war_sight_range;
+    int transport_slots_needed = 1;
+    float build_speed;
+    float energy_max;
+    float energy_regen;
     std::vector<std::string> tags=std::vector<std::string>();
 
     //
-    int maxTransportingUnits;
-    std::vector<std::string> transportUnitsRequireTag=std::vector<std::string>();
+    int max_transporting_units;
+    std::vector<std::string> transport_units_require_tag=std::vector<std::string>();
     float exit_x;
     float exit_y;
 
@@ -43,39 +43,38 @@ public:
     std::string image_wreak="NONE";
 
     //sounds
-    std::vector<std::string> soundsOnNewSelection=std::vector<std::string>();
-    std::vector<std::string> soundsOnMoveOrder=std::vector<std::string>();
-    std::vector<std::string> soundsOnDeath=std::vector<std::string>();
-    std::vector<std::string> soundsOnHit=std::vector<std::string>();
-    std::vector<std::string> soundsOnFire=std::vector<std::string>();
-    std::vector<std::string> soundsOnMove=std::vector<std::string>();
-
-
+    std::vector<std::string> sounds_on_new_selection=std::vector<std::string>();
+    std::vector<std::string> sounds_on_move_order=std::vector<std::string>();
+    std::vector<std::string> sounds_on_death=std::vector<std::string>();
+    std::vector<std::string> sounds_on_hit=std::vector<std::string>();
+    std::vector<std::string> sounds_on_fire=std::vector<std::string>();
+    std::vector<std::string> sounds_on_move=std::vector<std::string>();
     //
-    std::vector<std::string> effectOnDeath=std::vector<std::string>();
+    std::vector<std::string> effect_on_death=std::vector<std::string>();
 
 
     //attack
-    bool canAttack;
-    bool canAttackFlyingUnits;
-    bool canAttackLandUnits;
-    bool canAttackUnderWaterUnits;
-    float shootDelay;
-    float maxAttackRange;
-    bool showRangeUIGuide;
-    bool turretMultiTargeting;
-    float turretSize=1;
-    float turretTurnSpeed;
+    bool can_attack;
+    bool can_attack_flying_units;
+    bool can_attack_land_units;
+    bool can_attack_under_water_units;
+    float shoot_delay;
+    float max_attack_range;
+    bool show_range_ui_guide;
+    bool turret_multi_targeting;
+    float turret_size=1;
+    float turret_turn_speed;
 
     //movement
     movementType movement;
-    float moveSpeed=0;
-    float moveAcc=1;
-    float moveDec=4;
-    float maxTurnSpeed=1;
-    float turnAcc=1;
-    float targetHeight=0;
-    bool joinGroup;
+    float move_speed=0;
+    float move_acc=1;
+    float move_dec=4;
+    float max_turn_speed=1;
+    float turn_acc=1;
+    float target_height=0;
+    bool join_group;
+    bool is_wheel_powered=false;
 
     std::vector<MetaTurret*> attached_turret=std::vector<MetaTurret*>();
     float scaleTurret=1;

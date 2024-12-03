@@ -114,9 +114,10 @@ void UnitConfigs::load_ini(const QString& path)
 {
     const float scale_rw2sw = 1.0 / 20;
     const float turnSpeed_rw2sw = Game::FPS;
-    const float speed_rw2sw = 2.5f * scale_rw2sw * Game::FPS;
+    const float speed_rw2sw = 1.0f * scale_rw2sw * Game::FPS;
     const float time_rw2sw = 1.0f / Game::FPS;
     const float animate_speed_rw2sw = 0.3;
+                const float  turret_turn_speed_factor=2.5;
     // int index = 0;
     auto* unit = new MetaUnit();
     std::unordered_map<std::string, MetaTurret*> turretData;
@@ -148,29 +149,29 @@ void UnitConfigs::load_ini(const QString& path)
             {
                 if (fst == "name")unit->name = snd;
                 else if (fst == "displayText")unit->displayText = snd;
-                else if (fst == "displayDescription")unit->displayDescription = snd;
+                else if (fst == "displayDescription")unit->display_description = snd;
                 else if (fst == "price")unit->price = std::stoi(snd);
-                else if (fst == "maxHp")unit->maxHp = std::stof(snd);
-                else if (fst == "techLevel")unit->techLevel = std::stoi(snd);
-                else if (fst == "buildSpeed")unit->buildSpeed = std::stof(snd);
-                else if (fst == "energyMax")unit->energyMax = std::stof(snd);
-                else if (fst == "energyRegen")unit->energyRegen = std::stof(snd);
+                else if (fst == "maxHp")unit->max_hp = std::stof(snd);
+                else if (fst == "techLevel")unit->tech_level = std::stoi(snd);
+                else if (fst == "buildSpeed")unit->build_speed = std::stof(snd);
+                else if (fst == "energyMax")unit->energy_max = std::stof(snd);
+                else if (fst == "energyRegen")unit->energy_regen = std::stof(snd);
                 else if (fst == "mass")unit->mass = std::stof(snd);
                 else if (fst == "radius")unit->radius = std::stof(snd) * scale_rw2sw;
-                else if (fst == "displayRadius")unit->displayRadius = std::stof(snd) * scale_rw2sw;
-                else if (fst == "fogOfWarSightRange")unit->fogOfWarSightRange = std::stof(snd) * scale_rw2sw;
-                else if (fst == "transportSlotsNeeded")unit->transportSlotsNeeded = std::stoi(snd);
+                else if (fst == "displayRadius")unit->display_radius = std::stof(snd) * scale_rw2sw;
+                else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
+                else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = split(snd, ',');
-                else if (fst == "soundsOnNewSelection")unit->soundsOnNewSelection = split(snd, ',');
-                else if (fst == "soundsOnMoveOrder")unit->soundsOnMoveOrder = split(snd, ',');
-                else if (fst == "soundsOnDeath")unit->soundsOnDeath = split(snd, ',');
-                else if (fst == "soundsOnHit")unit->soundsOnHit = split(snd, ',');
-                else if (fst == "soundsOnFire")unit->soundsOnFire = split(snd, ',');
-                else if (fst == "soundsOnMove")unit->soundsOnMove = split(snd, ',');
+                else if (fst == "soundsOnNewSelection")unit->sounds_on_new_selection = split(snd, ',');
+                else if (fst == "soundsOnMoveOrder")unit->sounds_on_move_order = split(snd, ',');
+                else if (fst == "soundsOnDeath")unit->sounds_on_death = split(snd, ',');
+                else if (fst == "soundsOnHit")unit->sounds_on_hit = split(snd, ',');
+                else if (fst == "soundsOnFire")unit->sounds_on_fire = split(snd, ',');
+                else if (fst == "soundsOnMove")unit->sounds_on_move = split(snd, ',');
 
                     //
-                else if (fst == "maxTransportingUnits")unit->maxTransportingUnits = std::stoi(snd);
-                else if (fst == "transportUnitsRequireTag")unit->transportUnitsRequireTag = split(snd, ',');
+                else if (fst == "maxTransportingUnits")unit->max_transporting_units = std::stoi(snd);
+                else if (fst == "transportUnitsRequireTag")unit->transport_units_require_tag = split(snd, ',');
                 else if (fst == "exit_x")unit->exit_y = std::stof(snd) * scale_rw2sw;
                 else if (fst == "exit_y")unit->exit_x = std::stof(snd) * scale_rw2sw;
                 else
@@ -208,16 +209,16 @@ void UnitConfigs::load_ini(const QString& path)
         {
             for (const auto& [fst, snd] : content)
             {
-                if (fst == "canAttack")unit->canAttack = snd == "true";
-                else if (fst == "canAttackFlyingUnits")unit->canAttackFlyingUnits = snd == "true";
-                else if (fst == "canAttackLandUnits")unit->canAttackLandUnits = snd == "true";
-                else if (fst == "canAttackUnderwaterUnits")unit->canAttackUnderWaterUnits = snd == "true";
-                else if (fst == "shootDelay")unit->shootDelay = std::stof(snd) * time_rw2sw;
-                else if (fst == "maxAttackRange")unit->maxAttackRange = std::stof(snd);
-                else if (fst == "showRangeUIGuide")unit->showRangeUIGuide = snd == "true";
-                else if (fst == "turretMultiTargeting")unit->turretMultiTargeting = snd == "true";
-                else if (fst == "turretSize")unit->turretSize = std::stof(snd);
-                else if (fst == "turretTurnSpeed")unit->turretTurnSpeed = std::stof(snd) * turnSpeed_rw2sw;
+                if (fst == "canAttack")unit->can_attack = snd == "true";
+                else if (fst == "canAttackFlyingUnits")unit->can_attack_flying_units = snd == "true";
+                else if (fst == "canAttackLandUnits")unit->can_attack_land_units = snd == "true";
+                else if (fst == "canAttackUnderwaterUnits")unit->can_attack_under_water_units = snd == "true";
+                else if (fst == "shootDelay")unit->shoot_delay = std::stof(snd) * time_rw2sw;
+                else if (fst == "maxAttackRange")unit->max_attack_range = std::stof(snd)*scale_rw2sw;
+                else if (fst == "showRangeUIGuide")unit->show_range_ui_guide = snd == "true";
+                else if (fst == "turretMultiTargeting")unit->turret_multi_targeting = snd == "true";
+                else if (fst == "turretSize")unit->turret_size = std::stof(snd);
+                else if (fst == "turretTurnSpeed")unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw*turret_turn_speed_factor;
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -236,13 +237,13 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (snd == "HOVER")unit->movement = HOVER;
                     else if (snd == "SUB")unit->movement = SUB;
                 }
-                else if (fst == "moveSpeed")unit->moveSpeed = std::stof(snd) * speed_rw2sw;
-                else if (fst == "moveAccelerationSpeed")unit->moveAcc = std::stof(snd) * speed_rw2sw / time_rw2sw;
-                else if (fst == "moveDecelerationSpeed")unit->moveDec = std::stof(snd) * speed_rw2sw / time_rw2sw;
-                else if (fst == "maxTurnSpeed")unit->maxTurnSpeed = std::stof(snd) * turnSpeed_rw2sw;
-                else if (fst == "turnAcceleration")unit->turnAcc = std::stof(snd) * turnSpeed_rw2sw / time_rw2sw;
-                else if (fst == "targetHeight")unit->targetHeight = std::stof(snd);
-                else if (fst == "joinGroup")unit->joinGroup = snd == "true";
+                else if (fst == "moveSpeed")unit->move_speed = std::stof(snd) * speed_rw2sw;
+                else if (fst == "moveAccelerationSpeed")unit->move_acc = std::stof(snd) * speed_rw2sw / time_rw2sw;
+                else if (fst == "moveDecelerationSpeed")unit->move_dec = std::stof(snd) * speed_rw2sw / time_rw2sw;
+                else if (fst == "maxTurnSpeed")unit->max_turn_speed = std::stof(snd) * turnSpeed_rw2sw;
+                else if (fst == "turnAcceleration")unit->turn_acc = std::stof(snd) * turnSpeed_rw2sw / time_rw2sw;
+                else if (fst == "targetHeight")unit->target_height = std::stof(snd);
+                else if (fst == "joinGroup")unit->join_group = snd == "true";
 
                 else
                 {
@@ -255,26 +256,27 @@ void UnitConfigs::load_ini(const QString& path)
             if (section_id.starts_with("turret"))
             {
                 auto* turret = turretData[section_id.substr(7)];
-                turret->turnSpeed = unit->turretTurnSpeed;
-                turret->delay = unit->shootDelay;
+                turret->turn_speed = unit->turret_turn_speed;
+                turret->delay = unit->shoot_delay;
                 turret->scale = unit->scaleTurret;
+                turret->range=unit->max_attack_range;
                 bool attachToUnit = true;
                 for (const auto& [fst, snd] : content)
                 {
-                    if (fst == "barrelX")turret->barrelPosition.setY(std::stof(snd) * scale_rw2sw);
-                    else if (fst == "barrelY")turret->barrelPosition.setX(std::stof(snd) * scale_rw2sw);
+                    if (fst == "barrelX")turret->barrel_position.setY(std::stof(snd) * scale_rw2sw);
+                    else if (fst == "barrelY")turret->barrel_position.setX(std::stof(snd) * scale_rw2sw);
                     else if (fst == "x")turret->slot_translation.setY(std::stof(snd) * scale_rw2sw);
                     else if (fst == "y")turret->slot_translation.setX(std::stof(snd) * scale_rw2sw);
                     else if (fst == "image")turret->image = snd;
-                    else if (fst == "turnSpeed")turret->turnSpeed = std::stof(snd) * turnSpeed_rw2sw;
-                    else if (fst == "turnAcc")turret->turnAcc = std::stof(snd);
-                    else if (fst == "shootSound")turret->shootSound = snd;
-                    else if (fst == "shootSoundVolume")turret->shootSoundVolume = std::stof(snd);
-                    else if (fst == "recoilOffset")turret->recoilOffset = std::stof(snd);
-                    else if (fst == "recoilOutTime")turret->recoilOutTime = std::stof(snd);
-                    else if (fst == "recoilReturnTime")turret->recoilReturnTime = std::stof(snd);
+                    else if (fst == "turnSpeed")turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw*turret_turn_speed_factor;
+                    else if (fst == "turnAcc")turret->turn_acc = std::stof(snd);
+                    else if (fst == "shootSound")turret->shoot_sound = snd;
+                    else if (fst == "shootSoundVolume")turret->shoot_sound_volume = std::stof(snd);
+                    else if (fst == "recoilOffset")turret->recoil_offset = std::stof(snd);
+                    else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd);
+                    else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd);
                     else if (fst == "range")turret->range = std::stof(snd) * scale_rw2sw;
-                    else if (fst == "rangeMin")turret->rangeMin = std::stof(snd) * scale_rw2sw;
+                    else if (fst == "rangeMin")turret->range_min = std::stof(snd) * scale_rw2sw;
                     else if (fst == "invisible")
                     {
                         turret->invisible = snd == "true";
@@ -283,14 +285,14 @@ void UnitConfigs::load_ini(const QString& path)
                     {
                         turret->delay = std::stof(snd) * time_rw2sw;
                     }
-                    else if (fst == "turnSpeedAcceleration")turret->turnSpeedAcceleration = std::stof(snd);
+                    else if (fst == "turnSpeedAcceleration")turret->turn_speed_acceleration = std::stof(snd);
                     else if (fst == "attachedTo")
                     {
-                        turret->attachedTo = snd;
+                        turret->attached_to = snd;
                         attachToUnit = false;
                     }
-                    else if (fst == "canShoot")turret->canShoot = snd == "true";
-                    else if (fst == "limitingMinRange")turret->limitingMinRange = std::stof(snd) * scale_rw2sw;
+                    else if (fst == "canShoot")turret->can_shoot = snd == "true";
+                    else if (fst == "limitingMinRange")turret->limiting_min_range = std::stof(snd) * scale_rw2sw;
                     else if (fst == "projectile")turret->projectile = snd;
                     else if (fst == "slave")
                     {
@@ -312,11 +314,15 @@ void UnitConfigs::load_ini(const QString& path)
                 }
                 else
                 {
-                    turretData[turret->attachedTo]->attached_turrets.push_back(turret);
+                    turretData[turret->attached_to]->attached_turrets.push_back(turret);
                 }
-                if (turret->turnSpeed == -1)
+                if (turret->turn_speed == -1)
                 {
-                    turret->turnSpeed = unit->turretTurnSpeed;
+                    turret->turn_speed = unit->turret_turn_speed;
+                }
+                if (turret->range==-1)
+                {
+                    turret->range=unit->max_attack_range;
                 }
                 turret->init_frames();
             }

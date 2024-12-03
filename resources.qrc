@@ -100,6 +100,10 @@
 <file>ui/quit_dark.png</file>
 <file>ui/quit_highlight.png</file>
 <file>ui/quit_orange.png</file>
+<file>ui/arrow.png</file>
+<file>ui/arrow_dark.png</file>
+<file>ui/arrow_highlight.png</file>
+<file>ui/arrow_orange.png</file>
 <file>M2A3/土.png</file>
 <file>M2A3/30.wav</file>
 <file>M2A3/灰尘.png</file>

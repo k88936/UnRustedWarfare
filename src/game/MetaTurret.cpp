@@ -7,3 +7,13 @@
 MetaTurret::MetaTurret()
 {
 }
+
+void MetaTurret::init_frames()
+{
+    if (image=="NONE")
+    {
+        this->slot_inVisible=true;
+        return;
+    }
+    MetaDrawable::init_frames();
+}

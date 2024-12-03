@@ -50,7 +50,7 @@ void Object::step()
             if (positionDiff.lengthSquared() < (this->radius + tar->radius) * (this->radius + tar->radius))
             {
                 const bool thisAgree = this->on_overlay(tar, positionDiff);
-                const bool targetAgree = tar->on_overlay(this, positionDiff);
+                const bool targetAgree = tar->on_overlay(this, -positionDiff);
                 if (thisAgree && targetAgree)
                 {
                     solveCollision(this, tar, positionDiff);

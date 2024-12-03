@@ -7,13 +7,16 @@
 #include "Object.h"
 
 
-class Sensor:public Object {
-public:    Sensor(float radius);
+class Sensor : public Object
+{
+public:
+    Sensor(float radius, int team);
+    void before() override;
     void step() override;
+    void after() override;
 
-    bool on_overlay(Object *obj, QVector3D position_diff) override;
+    bool on_overlay(Object* obj, QVector3D position_diff) override;
 };
-
 
 
 #endif //SENSOR_H
