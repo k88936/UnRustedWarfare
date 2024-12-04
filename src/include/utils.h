@@ -23,6 +23,7 @@ public:
     static QVector3D linear_limit_soft_v(const QVector3D& v, float min_length, float max_length, float soft);
     static QVector3D linear_limit_max_soft_v(const QVector3D& v, float max_length, float soft);
     static bool within(const QVector3D& v1, const QVector3D& v2, float range);
+    static QVector3D generate_random_small_vector(float max_offset);
 };
 
 

@@ -13,7 +13,7 @@
 // }
 
 
-Object::Object(float radius, float mass, float inertia)
+Object::Object(const float radius, const float mass, const float inertia): team(-1)
 {
     this->mass = mass;
     this->inertia = inertia;

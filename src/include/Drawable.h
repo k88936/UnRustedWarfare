@@ -15,7 +15,7 @@ public:
     QVector4D color = QVector4D(1, 1, 1, 1);
     float scale = 1;
     virtual void draw();
-    static QVector3D generate_random_small_vector(float maxOffset);
+
 };
 
 

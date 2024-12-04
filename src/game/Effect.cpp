@@ -5,6 +5,7 @@
 #include "Effect.h"
 
 #include "Game.h"
+#include "utils.h"
 
 
 Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
@@ -12,28 +13,34 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
 {
     this->meta = meta;
     this->position = position;
-    if (meta->drawUnderUnits)
+    if (meta->draw_under_units)
     {
         this->position.setZ(-1);
-        //
-        // Drawable::Drawable() {
-        // }
     }
-    if (meta->xSpeedAbsolute != 0 || meta->ySpeedAbsolute != 0)
+    if (meta->attached_to_unit)
     {
-        this->linear_velocity = linear_velocity_base + QVector3D(meta->xSpeedAbsolute, meta->ySpeedAbsolute, 0);
+        this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_relative, meta->y_speed_relative, 0) +
+            utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     else
     {
-        this->linear_velocity = linear_velocity_base + QVector3D(
-            meta->xSpeedRelativeRandom * (rand() % 100) / 100 + meta->xSpeedRelative,
-            meta->ySpeedRelativeRandom * (rand() % 100) / 100 + meta->ySpeedRelative, 0);
+        this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, 0) +
+            utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
+    // if (meta->x_speed_absolute != 0 || meta->y_speed_absolute != 0)
+    // {
+    //     this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, 0);
+    // }
+    // else
+    // {
+    //     this->linear_velocity = linear_velocity_base + QVector3D(
+    //         meta->x_speed_relative_random * (std::rand() % 100) / 100 + meta->x_speed_relative,
+    //         meta->y_speed_relative_random * (std::rand() % 100) / 100 + meta->y_speed_relative, 0);
+    // }
     this->color.setZ(meta->alpha);
     this->rotation = rotation;
-    this->scale = meta->scaleFrom;
+    this->scale = meta->scale_from;
     this->animate_timer = 0;
-    Object::before();
 }
 
 void Effect::draw()
@@ -45,33 +52,42 @@ void Effect::draw()
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
+void Effect::before()
+{
+}
+
+
+void Effect::step()
+{
+}
+
 void Effect::after()
 {
-    this->scale = meta->scaleFrom + (meta->scaleTo - meta->scaleFrom) * (has_life) / meta->life;
     Object::after();
+    this->scale = meta->scale_from + (meta->scale_to - meta->scale_from) * (has_life) / meta->life;
     animate_timer += Game::deltaTime;
-    if (meta->fadeOut && has_life > meta->life - meta->fadeInTime)
+    if (meta->fade_out && has_life > meta->life - meta->fade_in_time)
     {
-        this->color.setZ(meta->alpha * (meta->life - has_life) / meta->fadeInTime);
+        this->color.setZ(meta->alpha * (meta->life - has_life) / meta->fade_in_time);
     }
-    else if (has_life < meta->fadeInTime)
+    else if (has_life < meta->fade_in_time)
     {
-        this->color.setZ(meta->alpha * has_life / meta->fadeInTime);
+        this->color.setZ(meta->alpha * has_life / meta->fade_in_time);
     }
 
     if ((this->has_life += Game::deltaTime) >= meta->life)
     {
         marked_for_delete = true;
     };
-    if (animate_timer > meta->animateFrameDelay)
+    if (animate_timer > meta->animate_frame_delay)
     {
-        animate_timer -= meta->animateFrameDelay;
+        animate_timer -= meta->animate_frame_delay;
         frame_id++;
-        if (frame_id > meta->animateFrameEnd)
+        if (frame_id > meta->animate_frame_end)
         {
             marked_for_delete = true;
-            // frame_id=meta->animateFrameEnd;
+            return;
         }
     }
-    if (!marked_for_delete)draw();
+    draw();
 }

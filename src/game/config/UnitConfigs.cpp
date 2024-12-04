@@ -116,11 +116,11 @@ void UnitConfigs::load_ini(const QString& path)
     const float turnSpeed_rw2sw = Game::FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * Game::FPS;
     const float time_rw2sw = 1.0f / Game::FPS;
-    const float animate_speed_rw2sw = 0.3;
-                const float  turret_turn_speed_factor=2.5;
+    const float animate_delay_rw2sw = 1;
+    const float turret_turn_speed_factor = 2.5;
     // int index = 0;
     auto* unit = new MetaUnit();
-    std::unordered_map<std::string, MetaTurret*> turretData;
+    std::unordered_map<std::string, MetaTurret*> turret_data;
     IniParser::IniData data = IniParser::parse(path);
     for (const auto&
          [section_id, snd] : data)
@@ -128,7 +128,7 @@ void UnitConfigs::load_ini(const QString& path)
         if (section_id.starts_with("turret"))
         {
             auto* turret = new MetaTurret();
-            turretData[section_id.substr(7)] = turret;
+            turret_data[section_id.substr(7)] = turret;
         }
         else if (section_id.starts_with("projectile"))
         {
@@ -214,11 +214,12 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "canAttackLandUnits")unit->can_attack_land_units = snd == "true";
                 else if (fst == "canAttackUnderwaterUnits")unit->can_attack_under_water_units = snd == "true";
                 else if (fst == "shootDelay")unit->shoot_delay = std::stof(snd) * time_rw2sw;
-                else if (fst == "maxAttackRange")unit->max_attack_range = std::stof(snd)*scale_rw2sw;
+                else if (fst == "maxAttackRange")unit->max_attack_range = std::stof(snd) * scale_rw2sw;
                 else if (fst == "showRangeUIGuide")unit->show_range_ui_guide = snd == "true";
                 else if (fst == "turretMultiTargeting")unit->turret_multi_targeting = snd == "true";
                 else if (fst == "turretSize")unit->turret_size = std::stof(snd);
-                else if (fst == "turretTurnSpeed")unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw*turret_turn_speed_factor;
+                else if (fst == "turretTurnSpeed")unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw *
+                    turret_turn_speed_factor;
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -255,11 +256,11 @@ void UnitConfigs::load_ini(const QString& path)
         {
             if (section_id.starts_with("turret"))
             {
-                auto* turret = turretData[section_id.substr(7)];
+                auto* turret = turret_data[section_id.substr(7)];
                 turret->turn_speed = unit->turret_turn_speed;
                 turret->delay = unit->shoot_delay;
                 turret->scale = unit->scaleTurret;
-                turret->range=unit->max_attack_range;
+                turret->range = unit->max_attack_range;
                 bool attachToUnit = true;
                 for (const auto& [fst, snd] : content)
                 {
@@ -268,7 +269,8 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "x")turret->slot_translation.setY(std::stof(snd) * scale_rw2sw);
                     else if (fst == "y")turret->slot_translation.setX(std::stof(snd) * scale_rw2sw);
                     else if (fst == "image")turret->image = snd;
-                    else if (fst == "turnSpeed")turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw*turret_turn_speed_factor;
+                    else if (fst == "turnSpeed")turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw *
+                        turret_turn_speed_factor;
                     else if (fst == "turnAcc")turret->turn_acc = std::stof(snd);
                     else if (fst == "shootSound")turret->shoot_sound = snd;
                     else if (fst == "shootSoundVolume")turret->shoot_sound_volume = std::stof(snd);
@@ -314,15 +316,15 @@ void UnitConfigs::load_ini(const QString& path)
                 }
                 else
                 {
-                    turretData[turret->attached_to]->attached_turrets.push_back(turret);
+                    turret_data[turret->attached_to]->attached_turrets.push_back(turret);
                 }
                 if (turret->turn_speed == -1)
                 {
                     turret->turn_speed = unit->turret_turn_speed;
                 }
-                if (turret->range==-1)
+                if (turret->range == -1)
                 {
-                    turret->range=unit->max_attack_range;
+                    turret->range = unit->max_attack_range;
                 }
                 turret->init_frames();
             }
@@ -363,32 +365,32 @@ void UnitConfigs::load_ini(const QString& path)
                 for (const auto& [fst, snd] : content)
                 {
                     if (fst == "total_frames")effect->total_frames = std::stoi(snd);
-                    else if (fst == "attachedToUnit")effect->attachedToUnit = snd == "true";
+                    else if (fst == "attachedToUnit")effect->attached_to_unit = snd == "true";
                     else if (fst == "image")
                     {
                         effect->image = snd;
                     }
-                    else if (fst == "animateFrameStart")effect->animateFrameStart = std::stoi(snd);
-                    else if (fst == "animateFrameEnd")effect->animateFrameEnd = std::stoi(snd);
+                    else if (fst == "animateFrameStart")effect->animate_frame_start = std::stoi(snd);
+                    else if (fst == "animateFrameEnd")effect->animate_frame_end = std::stoi(snd);
                     else if (fst == "animateFrameSpeed")
                     {
-                        effect->animateFrameDelay = animate_speed_rw2sw * time_rw2sw / std::stof(snd);
+                        effect->animate_frame_delay = animate_delay_rw2sw * time_rw2sw / std::stof(snd);
                     }
                     else if (fst == "life")effect->life = std::stof(snd) * time_rw2sw;
-                    else if (fst == "scaleFrom")effect->scaleFrom = std::stof(snd);
-                    else if (fst == "scaleTo")effect->scaleTo = std::stof(snd);
+                    else if (fst == "scaleFrom")effect->scale_from = std::stof(snd);
+                    else if (fst == "scaleTo")effect->scale_to = std::stof(snd);
                     else if (fst == "alpha")effect->alpha = std::stof(snd);
-                    else if (fst == "spawnChance")effect->spawnChance = std::stof(snd);
-                    else if (fst == "xSpeedRelative")effect->xSpeedRelative = std::stof(snd);
-                    else if (fst == "ySpeedRelative")effect->ySpeedRelative = std::stof(snd);
-                    else if (fst == "xSpeedAbsolute")effect->xSpeedAbsolute = std::stof(snd);
-                    else if (fst == "ySpeedAbsolute")effect->ySpeedAbsolute = std::stof(snd);
-                    else if (fst == "xSpeedRelativeRandom")effect->xSpeedRelativeRandom = std::stof(snd);
-                    else if (fst == "ySpeedRelativeRandom")effect->ySpeedRelativeRandom = std::stof(snd);
-                    else if (fst == "hSpeed")effect->hSpeed = std::stof(snd);
-                    else if (fst == "drawUnderUnits")effect->drawUnderUnits = snd == "true";
-                    else if (fst == "fadeInTime")effect->fadeInTime = std::stof(snd);
-                    else if (fst == "fadeOut")effect->fadeOut = snd == "true";
+                    else if (fst == "spawnChance")effect->spawn_chance = std::stof(snd);
+                    else if (fst == "xSpeedRelative")effect->x_speed_relative = std::stof(snd);
+                    else if (fst == "ySpeedRelative")effect->y_speed_relative = std::stof(snd);
+                    else if (fst == "xSpeedAbsolute")effect->x_speed_absolute = std::stof(snd);
+                    else if (fst == "ySpeedAbsolute")effect->y_speed_absolute = std::stof(snd);
+                    else if (fst == "xSpeedRelativeRandom")effect->x_speed_relative_random = std::stof(snd);
+                    else if (fst == "ySpeedRelativeRandom")effect->y_speed_relative_random = std::stof(snd);
+                    else if (fst == "hSpeed")effect->h_speed = std::stof(snd);
+                    else if (fst == "drawUnderUnits")effect->draw_under_units = snd == "true";
+                    else if (fst == "fadeInTime")effect->fade_in_time = std::stof(snd);
+                    else if (fst == "fadeOut")effect->fade_out = snd == "true";
                     else if (fst == "priority")
                     {
                         if (snd == "high")effect->priority = high;
@@ -396,12 +398,12 @@ void UnitConfigs::load_ini(const QString& path)
                         else if (snd == "low")effect->priority = low;
                     }
                     else if (fst == "atmospheric")effect->atmospheric = snd == "true";
-                    else if (fst == "delayedStartTimer")effect->delayedStartTimer = std::stof(snd);
+                    else if (fst == "delayedStartTimer")effect->delayed_start_timer = std::stof(snd);
                     else if (fst == "alsoPlaySound")
                     {
                         auto name_and_volume = split(snd, ':');
-                        effect->alsoPlaySound = name_and_volume[0];
-                        effect->alsoPlaySoundVolume = std::stof(name_and_volume[1]);
+                        effect->also_play_sound = name_and_volume[0];
+                        effect->also_play_sound_volume = std::stof(name_and_volume[1]);
                     }
                     else
                     {

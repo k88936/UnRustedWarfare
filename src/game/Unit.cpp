@@ -58,12 +58,14 @@ void Unit::updateSlots(QMatrix4x4 transform)
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
+        slot->linear_velocity=this->linear_velocity;
         utils::angle_ensure(slot->rotation);
         slot->updateSlots(push_this);
     }
     for (const auto watcher : watchers)
     {
         watcher->position = this->position;
+        watcher->linear_velocity=this->linear_velocity;
     }
 }
 

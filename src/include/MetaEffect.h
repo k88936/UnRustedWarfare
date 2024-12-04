@@ -18,31 +18,31 @@ enum Priority {
 
 class MetaEffect :public MetaObject ,public  MetaDrawable{
 public:
-    bool attachedToUnit;
-    int animateFrameStart=0;
-    int animateFrameEnd=0;
-    float animateFrameDelay=1;
+    bool attached_to_unit;
+    int animate_frame_start=0;
+    int animate_frame_end=0;
+    float animate_frame_delay=1;
 
     float life; //secends
-    float scaleFrom=1;
-    float scaleTo=1;
-    float xSpeedRelativeRandom=0;
-    float ySpeedRelativeRandom=0;
-    float xSpeedRelative=0;
-    float ySpeedRelative=0;
-    float xSpeedAbsolute=0;
-    float ySpeedAbsolute=0;
-    float spawnChance=1;
-    float fadeInTime=0;
-    bool fadeOut=false;
+    float scale_from=1;
+    float scale_to=1;
+    float x_speed_relative_random=0;
+    float y_speed_relative_random=0;
+    float x_speed_relative=0;
+    float y_speed_relative=0;
+    float x_speed_absolute=0;
+    float y_speed_absolute=0;
+    float spawn_chance=1;
+    float fade_in_time=0;
+    bool fade_out=false;
     float alpha=1;
-    float hSpeed;
-    bool drawUnderUnits=false;
+    float h_speed;
+    bool draw_under_units=false;
     Priority priority;
     bool atmospheric;
-    float delayedStartTimer;
-    std::string alsoPlaySound;
-    float alsoPlaySoundVolume;
+    float delayed_start_timer;
+    std::string also_play_sound;
+    float also_play_sound_volume;
 };
 
 

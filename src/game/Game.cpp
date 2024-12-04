@@ -87,7 +87,7 @@ void Game::init()
     //     }
     // }
 
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -140));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
 
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(30, 20, 0), 50));
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));

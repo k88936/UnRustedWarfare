@@ -44,6 +44,7 @@ void Turret::updateSlots(QMatrix4x4 transform)
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
+        slot->linear_velocity=this->linear_velocity;
         utils::angle_ensure(slot->rotation);
         slot->updateSlots(push_this);
     }
@@ -94,8 +95,8 @@ bool Turret::shoot()
         QMatrix4x4 transform;
         transform.translate(position);
         transform.rotate(rotation, 0, 0, 1);
-        const auto metaProjectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
-        Game::addProjectile(new Projectile(metaProjectiles, this->team, transform.map(meta->barrel_position), rotation,
+        const auto meta_projectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
+        Game::addProjectile(new Projectile(meta_projectiles, this->team, transform.map(meta->barrel_position), rotation,
                                            QVector3D(0, 0, 0)));
         for (const auto& shoot_flame : meta->shoot_flame)
         {
