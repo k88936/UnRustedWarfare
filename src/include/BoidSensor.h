@@ -15,7 +15,7 @@ public:
     float angular_target=0;
     QVector3D speed_target;
     int nearby_count=1;
-    float nearby_even_rotation;
+    float nearby_even_rotation=0;
     QVector3D nearby_even_speed;
     QVector3D nearby_even_center;
     Flock* flock = nullptr;

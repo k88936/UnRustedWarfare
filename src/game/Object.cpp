@@ -18,15 +18,16 @@ Object::Object(float radius, float mass, float inertia)
     this->mass = mass;
     this->inertia = inertia;
     this->radius = radius;
-    this->invMass = 1 / mass;
-    this->invInertia = 1 / inertia;
+    this->inv_mass = 1 / mass;
+    this->inv_inertia = 1 / inertia;
 }
 
 void Object::before()
 {
+    Game::grids_manager.update_object(this);
     this->checked = false;
-    this->linearForces *= 0;
-    this->angularForces = 0;
+    this->linear_forces *= 0;
+    this->angular_forces = 0;
     vector_dir = QVector3D(std::cos(rotation * std::numbers::pi / 180), std::sin(rotation * std::numbers::pi / 180), 0);
     vector_ver = QVector3D(-std::sin(rotation * std::numbers::pi / 180), std::cos(rotation * std::numbers::pi / 180), 0);
 }
@@ -64,38 +65,38 @@ void Object::after()
     // angularVelocity*=(1-angularDamping);
 
 
-    linearVelocity += (linearForces) * Game::deltaTime * invMass;
+    linear_velocity += (linear_forces) * Game::deltaTime * inv_mass;
 
-    float linearVelocityDir = QVector3D::dotProduct(linearVelocity, vector_dir);
-    if (fabsf(linearVelocityDir) < linearDampingDir * Game::deltaTime)
+    float linearVelocityDir = QVector3D::dotProduct(linear_velocity, vector_dir);
+    if (fabsf(linearVelocityDir) < linear_damping_dir * Game::deltaTime)
     {
-        linearVelocity -= vector_dir * linearVelocityDir;
+        linear_velocity -= vector_dir * linearVelocityDir;
         // float linearForcesDir=QVector3D::dotProduct(linearForces,Dir);
     }
     else
     {
-        linearVelocity -= vector_dir * utils::sign(linearVelocityDir) * linearDampingDir * Game::deltaTime;
+        linear_velocity -= vector_dir * utils::sign(linearVelocityDir) * linear_damping_dir * Game::deltaTime;
     }
-    float linearVelocityVer = QVector3D::dotProduct(linearVelocity, vector_ver);
-    if (fabsf(linearVelocityVer) < linearDampingVer * Game::deltaTime)
+    float linearVelocityVer = QVector3D::dotProduct(linear_velocity, vector_ver);
+    if (fabsf(linearVelocityVer) < linear_damping_ver * Game::deltaTime)
     {
-        linearVelocity -= vector_ver * linearVelocityVer;
+        linear_velocity -= vector_ver * linearVelocityVer;
     }
     else
     {
-        linearVelocity -= vector_ver * utils::sign(linearVelocityVer) * linearDampingVer * Game::deltaTime;
+        linear_velocity -= vector_ver * utils::sign(linearVelocityVer) * linear_damping_ver * Game::deltaTime;
     }
-    angularVelocity += (angularForces) * Game::deltaTime * invInertia;
-    if (fabsf(angularVelocity) < angularDamping * Game::deltaTime)
+    angular_velocity += (angular_forces) * Game::deltaTime * inv_inertia;
+    if (fabsf(angular_velocity) < angular_damping * Game::deltaTime)
     {
-        angularVelocity = 0;
+        angular_velocity = 0;
     }
     else
     {
-        angularVelocity -= utils::sign(angularVelocity) * angularDamping * Game::deltaTime;
+        angular_velocity -= utils::sign(angular_velocity) * angular_damping * Game::deltaTime;
     }
-    position += linearVelocity * Game::deltaTime;
-    rotation += angularVelocity * Game::deltaTime;
+    position += linear_velocity * Game::deltaTime;
+    rotation += angular_velocity * Game::deltaTime;
     utils::angle_ensure(rotation);
     // addRotation(angularVelocity * Game::deltaTime);
 
@@ -117,15 +118,15 @@ bool Object::on_overlay(Object* obj, const QVector3D position_diff)
 
 void Object::apply_force(const QVector3D force, const float torque)
 {
-    this->linearForces += force;
-    this->angularForces += torque;
+    this->linear_forces += force;
+    this->angular_forces += torque;
 }
 
 void Object::solveCollision(Object* obj1, Object* obj2, const QVector3D position_diff)
 {
     // float factor=obj1->radius+obj2->radius-positionDiff.l
     const QVector3D normDiff = position_diff.normalized();
-    const float speedProjected = QVector3D::dotProduct(normDiff, obj1->linearVelocity - obj2->linearVelocity);
+    const float speedProjected = QVector3D::dotProduct(normDiff, obj1->linear_velocity - obj2->linear_velocity);
     const float force = (2 - obj1->restitution - obj2->restitution) * (speedProjected + 5.0f) * obj1->mass * obj2->mass
         * (obj1->radius + obj2->radius) * (obj1->radius + obj2->radius) / (
             (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * Game::deltaTime);;

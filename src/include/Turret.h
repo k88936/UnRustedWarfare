@@ -13,6 +13,7 @@
 class Turret :public Attachable,public Drawable,public Sensor{
 public:
     Turret(MetaTurret* meta,int team);
+    ~Turret() override;
     MetaTurret *meta;
     float rotationSpeed=0;
     float coolDown=0;

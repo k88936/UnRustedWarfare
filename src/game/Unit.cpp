@@ -19,9 +19,9 @@ Unit::Unit(MetaUnit* meta, int team, const QVector3D position, const float rotat
     this->scale = meta->scale;
     this->team = team;
     restitution = 0.8;
-    linearDampingDir = 0.8;
-    linearDampingVer = 1.2;
-    angularDamping = 40;
+    linear_damping_dir = 0.8;
+    linear_damping_ver = 1.2;
+    angular_damping = 40;
     auto* mar = new Sensor(meta->max_attack_range, team);
     watchers.push_back(mar);
     boid_sensor = new BoidSensor(4, this);
@@ -111,6 +111,7 @@ void Unit::draw()
 
 void Unit::before()
 {
+    Game::grids_manager.update_object(this);
     for (const auto& watcher : watchers)
     {
         watcher->before();
@@ -163,31 +164,31 @@ void Unit::after()
     int tile_y = MapConfig::y_in_which(position.y());
     if (!(MapConfig::get_tile_attribute(tile_x, tile_y)->type & this->meta->movement))
     {
-        linearVelocity *= 0.1;
+        linear_velocity *= 0.1;
     }
     else
     {
         if (!(MapConfig::get_tile_attribute(tile_x - 1, tile_y)->type & this->meta->movement))
         {
             position.setX(utils::linear_limit_soft_v(position.x(), tile_x - space, std::numeric_limits<float>::max(), soft));
-            linearVelocity.setX(utils::linear_limit_soft_v(linearVelocity.x(), 0.0f, std::numeric_limits<float>::max(), soft));
+            linear_velocity.setX(utils::linear_limit_soft_v(linear_velocity.x(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x + 1, tile_y)->type & this->meta->movement))
         {
             position.setX(
                 utils::linear_limit_soft_v(position.x(), std::numeric_limits<float>::min(), tile_x  + space, soft));
-            linearVelocity.setX(utils::linear_limit_soft_v(linearVelocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
+            linear_velocity.setX(utils::linear_limit_soft_v(linear_velocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x, tile_y - 1)->type & this->meta->movement))
         {
             position.setY(utils::linear_limit_soft_v(position.y(), tile_y - space, std::numeric_limits<float>::max(), soft));
-            linearVelocity.setY(utils::linear_limit_soft_v(linearVelocity.y(), 0.0f, std::numeric_limits<float>::max(), soft));
+            linear_velocity.setY(utils::linear_limit_soft_v(linear_velocity.y(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x, tile_y + 1)->type & this->meta->movement))
         {
             position.setY(
                 utils::linear_limit_soft_v(position.y(), std::numeric_limits<float>::min(), tile_y + space, soft));
-            linearVelocity.setY(utils::linear_limit_soft_v(linearVelocity.y(), std::numeric_limits<float>::min(), 0.0f, soft));
+            linear_velocity.setY(utils::linear_limit_soft_v(linear_velocity.y(), std::numeric_limits<float>::min(), 0.0f, soft));
         }
     }
 

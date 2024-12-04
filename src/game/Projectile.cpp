@@ -17,7 +17,7 @@ Projectile::Projectile(MetaProjectiles* meta, int team, const QVector3D position
     this->rotation = rotation;
     this->scale = meta->scale;
     Object::before();
-    this->linearVelocity = linear_velocity_base + vector_dir * meta->speed;
+    this->linear_velocity = linear_velocity_base + vector_dir * meta->speed;
 }
 
 void Projectile::draw()
@@ -27,6 +27,12 @@ void Projectile::draw()
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+}
+
+void Projectile::before()
+{
+    Game::grids_manager.update_object(this);
+    Object::before();
 }
 
 void Projectile::after()
@@ -62,7 +68,7 @@ void Projectile::hit(Unit* unit) const
     for (const auto& explode_effect : meta->explode_effect)
     {
         auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        Game::addEffect(new Effect(meta_effect, position, rotation, unit->linearVelocity));
+        Game::addEffect(new Effect(meta_effect, position, rotation, unit->linear_velocity));
     }
     // Game::addEffect()
 }

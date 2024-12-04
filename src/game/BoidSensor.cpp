@@ -31,7 +31,7 @@ void BoidSensor::before()
     angular_target = 0;
     speed_target *= 0;
     nearby_even_rotation = boid->rotation;
-    nearby_even_speed = boid->linearVelocity;
+    nearby_even_speed = boid->linear_velocity;
     nearby_even_center = boid->position;
 }
 
@@ -123,7 +123,7 @@ void BoidSensor::after()
     }
     angular_target += 0.2 * nearby_even_rotation / nearby_count;
     utils::angle_ensure(angular_target);
-    float speed_projected = QVector3D::dotProduct(boid->linearVelocity, boid->vector_dir);
+    float speed_projected = QVector3D::dotProduct(boid->linear_velocity, boid->vector_dir);
     float angle_step = boid->meta->max_turn_speed;
     if (boid->meta->is_wheel_powered)
     {
@@ -134,22 +134,22 @@ void BoidSensor::after()
     if (std::fabsf(diff) < angle_step * Game::deltaTime)
     {
         // unit0->rotation = target;
-        boid->angularVelocity *= 0.8;
+        boid->angular_velocity *= 0.8;
     }
     else
     {
         const float acc = boid->meta->turn_acc * boid->inertia;
         boid->apply_force(
-            boid->vector_ver * speed_projected * boid->mass * boid->angularVelocity * std::numbers::pi / 180,
+            boid->vector_ver * speed_projected * boid->mass * boid->angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(boid->angularVelocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime, 0.8);
+        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime, 0.8);
     }
 
 
     // speed_target *= 0.99;
     if (arrived_flock_target_offset)
     {
-        boid->apply_force(-boid->mass * boid->linearVelocity * boid->meta->move_dec, 0);
+        boid->apply_force(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
     }
     else
     {
@@ -204,7 +204,7 @@ bool BoidSensor::on_overlay(Object* obj, const QVector3D position_diff)
         if (flock->boids.contains(unit))
         {
             this->nearby_even_rotation += unit->rotation;
-            this->nearby_even_speed += unit->linearVelocity;
+            this->nearby_even_speed += unit->linear_velocity;
             this->nearby_even_center += unit->position;
             //position
             nearby_count++;

@@ -8,41 +8,43 @@
 #include "structures/grid.h"
 
 
-enum ObjectType {
+enum ObjectType
+{
     static_body,
     dynamic_body,
 };
 
-class Object {
+class Object
+{
 public:
     virtual ~Object() = default;
-    Object(float radius ,float mass, float inertia);
+    Object(float radius, float mass, float inertia);
 
     QVector3D position = QVector3D(0, 0, 0);
     float radius;
     float rotation = 0; //east is zero
     int team;
     //
-    std::vector<Grid *> gridsAcross;
+    std::vector<Grid*> gridsAcross;
     bool checked = false;
-    QVector3D linearVelocity = QVector3D(0, 0, 0);
-    QVector3D linearForces= QVector3D(0, 0, 0);
-    float angularVelocity = 0;
-    float angularForces = 0;
+    QVector3D linear_velocity = QVector3D(0, 0, 0);
+    QVector3D linear_forces = QVector3D(0, 0, 0);
+    float angular_velocity = 0;
+    float angular_forces = 0;
     // float angularAcceleration;
-    float linearDampingDir = 0;
-    float linearDampingVer = 0;
-    float angularDamping = 0;
-    QVector3D vector_dir ;
+    float linear_damping_dir = 0;
+    float linear_damping_ver = 0;
+    float angular_damping = 0;
+    QVector3D vector_dir;
     QVector3D vector_ver;
-    float mass ;
-    float invMass ;
-    float inertia ;
-    float invInertia ;
+    float mass;
+    float inv_mass;
+    float inertia;
+    float inv_inertia;
     ObjectType type = dynamic_body;
     bool sleep = false;
     float friction = 0.1;
-    float restitution=0.1 ;
+    float restitution = 0.1;
 
     bool marked_for_delete = false;
 
@@ -52,11 +54,10 @@ public:
 
     virtual void after();
 
-    virtual bool on_overlay(Object *obj, QVector3D position_diff);
+    virtual bool on_overlay(Object* obj, QVector3D position_diff);
     void apply_force(QVector3D force, float torque);
 
-
 private:
-    static void solveCollision(Object *obj1, Object *obj2, QVector3D position_diff);
+    static void solveCollision(Object* obj1, Object* obj2, QVector3D position_diff);
 };
 #endif //OBJECT_H

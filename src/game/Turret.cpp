@@ -27,6 +27,14 @@ Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(met
     this->scale = meta->scale;
 }
 
+Turret::~Turret()
+{
+    for (auto turret : turrets_attached)
+    {
+        delete turret;
+    }
+}
+
 void Turret::updateSlots(QMatrix4x4 transform)
 {
     transform.rotate(this->relative_rotation, 0, 0, 1);
@@ -92,7 +100,7 @@ bool Turret::shoot()
         for (const auto& shoot_flame : meta->shoot_flame)
         {
             Game::addEffect(new Effect(UnitConfigs::meta_effects.at(shoot_flame), transform.map(meta->barrel_position),
-                                       rotation, this->linearVelocity));
+                                       rotation, this->linear_velocity));
         }
         coolDown = meta->delay;
         return true;
@@ -136,6 +144,7 @@ void Turret::draw()
 
 void Turret::before()
 {
+    Game::grids_manager.update_object(this);
     Sensor::before();
 }
 

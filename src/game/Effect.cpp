@@ -21,11 +21,11 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     }
     if (meta->xSpeedAbsolute != 0 || meta->ySpeedAbsolute != 0)
     {
-        this->linearVelocity = linear_velocity_base + QVector3D(meta->xSpeedAbsolute, meta->ySpeedAbsolute, 0);
+        this->linear_velocity = linear_velocity_base + QVector3D(meta->xSpeedAbsolute, meta->ySpeedAbsolute, 0);
     }
     else
     {
-        this->linearVelocity = linear_velocity_base + QVector3D(
+        this->linear_velocity = linear_velocity_base + QVector3D(
             meta->xSpeedRelativeRandom * (rand() % 100) / 100 + meta->xSpeedRelative,
             meta->ySpeedRelativeRandom * (rand() % 100) / 100 + meta->ySpeedRelative, 0);
     }

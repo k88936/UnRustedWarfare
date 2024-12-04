@@ -180,22 +180,22 @@ void Game::step()
     // qDebug()<<"step begin";
     grids_manager.clear_grids();
     Game::var_image_draw_config_map.clear();
-    for (const auto u : Game::units)
-    {
-        grids_manager.update_object(u);
-        for (const auto w : u->watchers)
-        {
-            grids_manager.update_object(w);
-        }
-        for (const auto  turret : u->turrets)
-        {
-            grids_manager.update_object(turret);
-        }
-    }
-    for (const auto p : Game::projectiles)
-    {
-        grids_manager.update_object(p);
-    }
+    // for (const auto u : Game::units)
+    // {
+    //     grids_manager.update_object(u);
+    //     for (const auto w : u->watchers)
+    //     {
+    //         grids_manager.update_object(w);
+    //     }
+    //     for (const auto  turret : u->turrets)
+    //     {
+    //         grids_manager.update_object(turret);
+    //     }
+    // }
+    // for (const auto p : Game::projectiles)
+    // {
+    //     grids_manager.update_object(p);
+    // }
     for (const auto u : Game::units)
     {
         u->before();
@@ -226,7 +226,5 @@ void Game::step()
         e->after();
     }
     clean();
-    // welcome->update();
-
     battleFieldWidget->update();
 }
