@@ -6,6 +6,7 @@
 
 #include <QVector2D>
 #include <numbers>
+
 float utils::sign(const float value)
 {
     if (value > 0)
@@ -50,7 +51,7 @@ void utils::angle_ensure(float& angle)
     }
 }
 
-void utils::limit(float& value, float min, float max)
+void utils::limit(float& value, const float min, const float max)
 {
     if (value < min)
     {
@@ -61,7 +62,19 @@ void utils::limit(float& value, float min, float max)
         value = max;
     }
 }
-void utils::limit_soft_r(float& value, const float min, const float max, const float soft)
+float utils::limit(QVector3D &v, const float min_length, const float max_length)
+{
+    const float length=v.length();
+    if (length<min_length)
+    {
+        v=v.normalized()*min_length;
+    }else if (length>max_length)
+    {
+        v=v.normalized()*max_length;
+    }
+    return length;
+}
+void utils::linear_limit_soft_r(float& value, const float min, const float max, const float soft)
 {
     if (value < min)
     {
@@ -72,7 +85,26 @@ void utils::limit_soft_r(float& value, const float min, const float max, const f
         value = max + (value - max) * soft;
     }
 }
-float utils::limit_soft_v(const float value, const float min, const float max, const float soft)
+void utils::linear_limit_soft_r(QVector3D& v,const float min_length,const float max_length,const float soft)
+{
+    const float length=v.lengthSquared();
+    if (length<min_length*min_length)
+    {
+        v=v.normalized()*min_length+(v-v.normalized()*min_length)*soft;
+    }else if (length>max_length*max_length)
+    {
+        v=v.normalized()*max_length+(v-v.normalized()*max_length)*soft;
+    }
+}
+void utils::linear_limit_max_soft_r(QVector3D& v,const float max_length,const float soft)
+{
+   if (v.lengthSquared()>max_length*max_length)
+    {
+        v=v.normalized()*max_length+(v-v.normalized()*max_length)*soft;
+    }
+}
+
+float utils::linear_limit_soft_v(const float value, const float min, const float max, const float soft)
 {
     if (value < min)
     {
@@ -84,6 +116,27 @@ float utils::limit_soft_v(const float value, const float min, const float max, c
     }
     return value;
 }
+QVector3D utils::linear_limit_soft_v(const QVector3D& v, const float min_length, const float max_length, const float soft)
+{
+    const float length=v.length();
+    if (length<min_length)
+    {
+        return v.normalized()*min_length+(v-v.normalized()*min_length)*soft;
+    }else if (length>max_length)
+    {
+        return v.normalized()*max_length+(v-v.normalized()*max_length)*soft;
+    }
+    return v;
+}
+QVector3D utils::linear_limit_max_soft_v(const QVector3D& v, const float max_length, const float soft)
+{
+    if (v.length()>max_length)
+    {
+        return v.normalized()*max_length+(v-v.normalized()*max_length)*soft;
+    }
+    return v;
+}
+
 bool utils::within(const QVector3D& v1, const QVector3D& v2, const float range)
 {
     return (v1 - v2).lengthSquared() < range * range;

@@ -134,6 +134,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
             {
                 units_selected = units_to_select;
                 Game::ui_image_draw_config_map["_select"].clear();
+                Game::ui_image_draw_config_map["_arrow_highlight"].clear();
                 for (auto& selected : units_selected)
                 {
                     Game::ui_image_draw_config_map["_select"].push_back(selected);
@@ -162,7 +163,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     Game::ui_image_draw_config_map["_arrow_highlight"].clear();
                     if (!enermy_to_select.empty())
                     {
-                        flock->preferred_target=*(enermy_to_select.begin());
+                        flock->preferred_target = *(enermy_to_select.begin());
                         Game::ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
                     }
                     else

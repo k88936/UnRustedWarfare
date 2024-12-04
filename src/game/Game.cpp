@@ -83,13 +83,14 @@ void Game::init()
     {
         for (int j = 25; j < 35; ++j)
         {
-            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), i%2, QVector3D(i, j, 0), i + j));
+            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
         }
     }
 
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(25, 25, 0), 50));
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -140));
 
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(133, 120, 0), -5));
 
 

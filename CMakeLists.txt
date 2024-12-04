@@ -35,7 +35,6 @@ add_executable(untitled1
         src/game/Effect.cpp
 
 
-
         src/tmxlite/FreeFuncs.cpp
         src/tmxlite/ImageLayer.cpp
         src/tmxlite/Map.cpp
@@ -97,6 +96,12 @@ target_link_libraries(untitled1
         Qt::OpenGLWidgets
         zlibstatic
         libzstd_static
-        opengl32
-        glu32
+
 )
+
+if (CMAKE_HOST_WIN32)
+    target_link_libraries(untitled1
+            opengl32
+            glu32
+    )
+endif ()

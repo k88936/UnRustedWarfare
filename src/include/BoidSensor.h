@@ -12,20 +12,24 @@
 class BoidSensor : public Sensor
 {
 public:
-    float angular_target;
-    float speed_target;
-    int nearby_count;
+    float angular_target=0;
+    QVector3D speed_target;
+    int nearby_count=1;
     float nearby_even_rotation;
     QVector3D nearby_even_speed;
     QVector3D nearby_even_center;
-    Flock* flock=nullptr;
+    Flock* flock = nullptr;
+    QVector3D target_offset;
 
-    BoidSensor(const float radius, Unit* boid): Sensor(radius,boid->team)
+    BoidSensor(const float radius, Unit* boid): Sensor(radius, boid->team)
     {
         this->boid = boid;
     }
-    ~BoidSensor()override ;
 
+    ~BoidSensor() override;
+
+    bool arrived_flock_target = false;
+    bool arrived_flock_target_offset = false;
     Unit* boid;
     void before() override;
     void step() override;

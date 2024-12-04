@@ -14,6 +14,7 @@ class Flock
 {
 public:
     Flock();
+    void move(const QVector3D& target);
 
 
     std::set<Unit*> boids;
@@ -22,8 +23,11 @@ public:
     QVector3D speed;
     FlowField* flow_field = nullptr;
     Object* preferred_target=nullptr;
+    QVector3D pos_target;
+    bool arrived=false;
+    float arrived_range;
 
-    void move(const QVector3D& target);
+    void gather(const QVector3D& target);
 };
 
 

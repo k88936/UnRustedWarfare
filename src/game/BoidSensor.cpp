@@ -8,6 +8,7 @@
 #include "utils.h"
 
 #include <numbers>
+
 BoidSensor::~BoidSensor()
 {
     if (flock != nullptr)
@@ -22,17 +23,16 @@ void BoidSensor::before()
     {
         return Sensor::before();
     }
-    if (flock->preferred_target!=nullptr)
+    if (flock->preferred_target != nullptr)
     {
-
-        boid->prefered_target=flock->preferred_target;
+        boid->prefered_target = flock->preferred_target;
     }
     nearby_count = 1;
     angular_target = 0;
-    speed_target = 0;
-    nearby_even_rotation = 0;
-    nearby_even_speed *= 0;
-    nearby_even_center *= 0;
+    speed_target *= 0;
+    nearby_even_rotation = boid->rotation;
+    nearby_even_speed = boid->linearVelocity;
+    nearby_even_center = boid->position;
 }
 
 void BoidSensor::step()
@@ -47,32 +47,60 @@ void BoidSensor::step()
     const int y_ceil = y_floor + 1;
     if (flock->flow_field != nullptr)
     {
-        QVector3D flow_field_expected(
-            (flock->flow_field->get_vector(x_floor, y_floor).x() + flock->flow_field->
-                                                                          get_vector(x_floor, y_ceil).x()) * (x_ceil -
-                boid
-                ->
-                position.x())
-            + (flock->flow_field->get_vector(x_ceil, y_floor).x() + flock->flow_field->
-                                                                           get_vector(x_ceil, y_ceil).x()) * (boid->
-                position.
-                x() - x_floor),
-            (flock->flow_field->get_vector(x_floor, y_floor).y() + flock->flow_field->
-                                                                          get_vector(x_ceil, y_floor).y()) * (y_ceil -
-                boid
-                ->
-                position.y())
-            + (flock->flow_field->get_vector(x_floor, y_ceil).y() + flock->flow_field->
-                                                                           get_vector(x_ceil, y_ceil).y()) * (boid->
-                position.
-                y() - y_floor),
-            0
-        );
-
-        if (flow_field_expected.lengthSquared() > 0.01)
+        QVector3D flow_field_expected;
+        if (arrived_flock_target)
         {
-            angular_target += utils::dir_of(flow_field_expected) * 0.8f;
-            speed_target += 0.8f * boid->meta->move_speed;
+            flow_field_expected = target_offset - boid->position;
+        }
+        else
+            flow_field_expected = QVector3D(
+                (flock->flow_field->get_vector(x_floor, y_floor).x() + flock->flow_field->
+                                                                              get_vector(x_floor, y_ceil).x()) * (x_ceil
+                    -
+                    boid
+                    ->
+                    position.x())
+                + (flock->flow_field->get_vector(x_ceil, y_floor).x() + flock->flow_field->
+                                                                               get_vector(x_ceil, y_ceil).x()) * (boid->
+                    position.
+                    x() - x_floor),
+                (flock->flow_field->get_vector(x_floor, y_floor).y() + flock->flow_field->
+                                                                              get_vector(x_ceil, y_floor).y()) * (y_ceil
+                    -
+                    boid
+                    ->
+                    position.y())
+                + (flock->flow_field->get_vector(x_floor, y_ceil).y() + flock->flow_field->
+                                                                               get_vector(x_ceil, y_ceil).y()) * (boid->
+                    position.
+                    y() - y_floor),
+                0
+            );
+
+
+        // qDebug()<<flow_field_expected.lengthSquared();
+        if (utils::within(this->position, flock->pos_target, flock->arrived_range))
+        {
+            this->arrived_flock_target = true;
+        }
+        if (utils::within(this->position, target_offset, 0.6))
+        {
+            this->arrived_flock_target_offset = true;
+        }
+
+        if (this->arrived_flock_target_offset)
+        {
+            if (!utils::within(this->position, target_offset, 1))
+            {
+                this->arrived_flock_target_offset = false;
+            }
+        }
+        else
+        {
+            if (flow_field_expected.lengthSquared() > 0.1)
+            {
+                speed_target += 0.8f * boid->meta->move_speed * flow_field_expected.normalized();
+            }
         }
     }
 }
@@ -80,6 +108,15 @@ void BoidSensor::step()
 void BoidSensor::after()
 
 {
+    speed_target += nearby_even_speed / nearby_count * 0.2f;
+    if (this->arrived_flock_target_offset)
+    {
+        angular_target += boid->rotation * 0.8f;
+    }
+    else
+    {
+        angular_target += utils::dir_of(speed_target) * 0.8f;
+    }
     if (flock == nullptr)
     {
         return Sensor::after();
@@ -105,46 +142,54 @@ void BoidSensor::after()
         boid->apply_force(
             boid->vector_ver * speed_projected * boid->mass * boid->angularVelocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::limit_soft_r(boid->angularVelocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime, 0.8);
+        utils::linear_limit_soft_r(boid->angularVelocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime, 0.8);
     }
 
 
-    speed_target += nearby_even_speed.length() / nearby_count * 0.2;
-    if (speed_projected > 0)
+    // speed_target *= 0.99;
+    if (arrived_flock_target_offset)
     {
-        if (speed_target > speed_projected)
+        boid->apply_force(-boid->mass * boid->linearVelocity * boid->meta->move_dec, 0);
+    }
+    else
+    {
+        float speed_target_length = speed_target.length();
+        if (speed_projected > 0)
+        {
+            if (speed_target_length > speed_projected)
+            {
+                boid->apply_force(
+                    boid->mass * boid->vector_dir * boid->meta->move_acc,
+                    0);
+            }
+            else
+            {
+                boid->apply_force(
+                    -boid->mass * boid->vector_dir * boid->meta->move_dec,
+                    0);
+            }
+        }
+        else if (speed_projected < 0)
+        {
+            if (speed_target_length > speed_projected)
+            {
+                boid->apply_force(
+                    boid->mass * boid->vector_dir * boid->meta->move_dec,
+                    0);
+            }
+            else
+            {
+                boid->apply_force(
+                    -boid->mass * boid->vector_dir * boid->meta->move_acc,
+                    0);
+            }
+        }
+        else
         {
             boid->apply_force(
                 boid->mass * boid->vector_dir * boid->meta->move_acc,
                 0);
         }
-        else
-        {
-            boid->apply_force(
-                -boid->mass * boid->vector_dir * boid->meta->move_dec,
-                0);
-        }
-    }
-    else if (speed_projected < 0)
-    {
-        if (speed_target > speed_projected)
-        {
-            boid->apply_force(
-                boid->mass * boid->vector_dir * boid->meta->move_dec,
-                0);
-        }
-        else
-        {
-            boid->apply_force(
-                -boid->mass * boid->vector_dir * boid->meta->move_acc,
-                0);
-        }
-    }
-    else
-    {
-        boid->apply_force(
-            boid->mass * boid->vector_dir * boid->meta->move_acc,
-            0);
     }
 }
 
@@ -154,7 +199,7 @@ bool BoidSensor::on_overlay(Object* obj, const QVector3D position_diff)
     {
         return Sensor::on_overlay(obj, position_diff);
     }
-    if (Unit* unit = dynamic_cast<Unit*>(obj))
+    if (auto unit = dynamic_cast<Unit*>(obj))
     {
         if (flock->boids.contains(unit))
         {
@@ -163,6 +208,11 @@ bool BoidSensor::on_overlay(Object* obj, const QVector3D position_diff)
             this->nearby_even_center += unit->position;
             //position
             nearby_count++;
+            if (position_diff.lengthSquared() < this->radius * this->radius / 4)
+            {
+                this->angular_target += 10 * QVector3D::dotProduct(boid->vector_ver, position_diff) / position_diff.
+                    lengthSquared();
+            }
         }
     }
     return Sensor::on_overlay(obj, position_diff);
