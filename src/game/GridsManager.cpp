@@ -15,6 +15,10 @@ void GridsManager::clear_grids() const
     {
         for (int j = 0; j < height; ++j)
         {
+            // for (auto object : grids[i][j]->objects)
+            // {
+            //
+            // }
             grids[i][j]->objects.clear();
         }
     }
@@ -48,7 +52,7 @@ int GridsManager::x_in_which(const float x) const
 
 int GridsManager::y_in_which(const float y) const
 {
-    return std::min(height, std::max(static_cast<int>((y + 0.5f )/ grid_size), 0));
+    return std::min(height, std::max(static_cast<int>((y + 0.5f) / grid_size), 0));
 }
 
 // grid *SpaceEngine::whichIn(const float x, const float y) const {
@@ -85,22 +89,31 @@ void GridsManager::update_object(Object* object) const
     // int y1 =static_cast<int> ((object->position.y() - object->radius) / grid_size);
     // int y2=static_cast<int>((object->position.y()+object->radius)/grid_size);
     // std::cout<<object<<std::endl;
-    int i = x1;
-    while (i <= x2)
+    for (int i = x1; i <= x2; ++i)
     {
-        int j = y1;
-        while (j <= y2)
+        for (int j = y1; j <= y2; ++j)
         {
-            if (i < 0 || j < 0 || i >= width || j >= height)
-            {
-                j++;
-                continue;
-            }
             grids[i][j]->objects.push_back(object);
             object->gridsAcross.push_back(grids[i][j]);
-            j++;
         }
-        i++;
     }
     // std::cout.flush();
+}
+
+
+std::vector<Grid*> GridsManager::scan(const QVector3D& pos, const float radius)
+{
+    int x1 = x_in_which(pos.x() - radius);
+    int x2 = x_in_which(pos.x() + radius);
+    int y1 = y_in_which(pos.y() - radius);
+    int y2 = y_in_which(pos.y() + radius);
+    std::vector<Grid*> grids_across;
+    for (int i = x1; i <= x2; ++i)
+    {
+        for (int j = y1; j <= y2; ++j)
+        {
+            grids_across.push_back(grids[i][j]);
+        }
+    }
+    return grids_across;
 }

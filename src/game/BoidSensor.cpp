@@ -23,10 +23,7 @@ void BoidSensor::before()
     {
         return Sensor::before();
     }
-    if (flock->preferred_target != nullptr)
-    {
-        boid->prefered_target = flock->preferred_target;
-    }
+
     nearby_count = 1;
     angular_target = 0;
     speed_target *= 0;

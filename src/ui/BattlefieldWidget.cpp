@@ -113,6 +113,7 @@ void BattlefieldWidget::paintGL()
     engine->bind_simple_shader();
     engine->setView(projection);
     glColor3f(48.0 / 256, 246.0 / 256, 217.0 / 256);
+    glLineWidth(2);
     glBegin(GL_LINES);
     for (const auto& line : Game::line_draw_config)
     {

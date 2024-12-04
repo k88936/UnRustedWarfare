@@ -12,12 +12,12 @@
 #include "utils.h"
 
 
-Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(meta->range,team)
+Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(meta->range, team)
 {
     this->meta = meta;
     for (const auto& slot : meta->attached_turrets)
     {
-        auto turret = new Turret(slot,team);
+        auto turret = new Turret(slot, team);
         turret->slot_translation = slot->slot_translation;
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
@@ -95,7 +95,7 @@ bool Turret::shoot()
         transform.translate(position);
         transform.rotate(rotation, 0, 0, 1);
         const auto metaProjectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
-        Game::addProjectile(new Projectile(metaProjectiles,this->team, transform.map(meta->barrel_position), rotation,
+        Game::addProjectile(new Projectile(metaProjectiles, this->team, transform.map(meta->barrel_position), rotation,
                                            QVector3D(0, 0, 0)));
         for (const auto& shoot_flame : meta->shoot_flame)
         {
@@ -150,13 +150,15 @@ void Turret::before()
 
 void Turret::step()
 {
-    if (preferred_target != nullptr && utils::within(preferred_target->position, position, meta->range))
+    if (is_valid(preferred_target) && utils::within(preferred_target->position, position, meta->range))
     {
         attack(preferred_target->position);
+        has_target = true;
     }
-    else if (current_target != nullptr && utils::within(current_target->position, position, meta->range))
+    else if (is_valid(current_target) && utils::within(current_target->position, position, meta->range))
     {
         attack(current_target->position);
+        has_target = true;
     }
     else
     {
@@ -184,10 +186,10 @@ bool Turret::on_overlay(Object* obj, QVector3D position_diff)
         {
             if (unit->team != this->team)
             {
-                current_target = unit;
+                Object::ptr_change_to(current_target, unit);
                 has_target = true;
             }
         }
     }
-        return Sensor::on_overlay(obj, position_diff);
+    return Sensor::on_overlay(obj, position_diff);
 }

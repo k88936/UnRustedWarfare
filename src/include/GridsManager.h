@@ -24,7 +24,7 @@ public:
     // void whichAcross(float x, float y, float r, std::vector<grid*> &gridsAcross) const;
     //
     void update_object(Object *object) const;
-
+    std::vector<Grid*> scan(const QVector3D& pos, float radius);
 };
 
 #endif //SPACEDEVIDEENGINE_H

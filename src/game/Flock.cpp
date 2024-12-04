@@ -36,7 +36,6 @@ void Flock::move(const QVector3D& target)
         b->boid_sensor->arrived_flock_target = false;
         b->boid_sensor->arrived_flock_target_offset = false;
     }
-    arrived = false;
     flow_field = new FlowField(target.x(), target.y(), movementType::LAND);
 }
 
@@ -47,7 +46,6 @@ void Flock::gather(const QVector3D& target)
     {
         delete flow_field;
     }
-    arrived = false;
     flow_field = new FlowField(target.x(), target.y(), movementType::LAND);
     // for (const auto& boid : boids)
     // {

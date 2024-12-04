@@ -79,18 +79,27 @@ void Game::init()
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
 
-    for (int i = 25; i < 35; ++i)
-    {
-        for (int j = 25; j < 35; ++j)
-        {
-            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
-        }
-    }
+    // for (int i = 25; i < 35; ++i)
+    // {
+    //     for (int j = 25; j < 35; ++j)
+    //     {
+    //         Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
+    //     }
+    // }
 
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -140));
 
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
+    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(30, 20, 0), 50));
+    // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
+    // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
+    //
+    for (int i = 40; i < 41; ++i)
+    {
+        for (int j = 40; j < 43; ++j)
+        {
+            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
+        }
+    }
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(133, 120, 0), -5));
 
 
@@ -144,7 +153,7 @@ void Game::clean()
     }
     for (auto it = Game::units.begin(); it != Game::units.end();)
     {
-        if ((*it)->marked_for_delete)
+        if ((*it)->marked_for_delete && (*it)->reference_count == 0)
         {
             delete *it;
             it = Game::units.erase(it);
@@ -173,29 +182,13 @@ void Game::clean()
             ++it;
         }
     }
+    Game::grids_manager.clear_grids();
 }
 
 void Game::step()
 {
-    // qDebug()<<"step begin";
-    grids_manager.clear_grids();
+    clean();
     Game::var_image_draw_config_map.clear();
-    // for (const auto u : Game::units)
-    // {
-    //     grids_manager.update_object(u);
-    //     for (const auto w : u->watchers)
-    //     {
-    //         grids_manager.update_object(w);
-    //     }
-    //     for (const auto  turret : u->turrets)
-    //     {
-    //         grids_manager.update_object(turret);
-    //     }
-    // }
-    // for (const auto p : Game::projectiles)
-    // {
-    //     grids_manager.update_object(p);
-    // }
     for (const auto u : Game::units)
     {
         u->before();
@@ -225,6 +218,5 @@ void Game::step()
     {
         e->after();
     }
-    clean();
     battleFieldWidget->update();
 }

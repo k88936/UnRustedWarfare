@@ -14,6 +14,7 @@ Unit::Unit(MetaUnit* meta, int team, const QVector3D position, const float rotat
     Object(meta->radius, meta->mass, meta->mass)
 {
     this->meta = meta;
+    this->hp=meta->max_hp;
     this->position = position;
     this->rotation = rotation;
     this->scale = meta->scale;
@@ -86,26 +87,10 @@ void Unit::attack(const QVector3D& target)
 void Unit::draw()
 {
     render_transform.setToIdentity();
-    // if (this->linearVelocity.lengthSquared() == 0 && this->angularVelocity == 0)
-    // {
-    //     render_transform.translate(this->position);
-    // }
-    // else
-    // {
-    //     render_transform.translate(position + generateRandomSmallVector(0.025));
-    // }
     render_transform.translate(this->position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    // for (const auto& slot : turrets)
-    // {
-    //     if (slot->slot_inVisible)
-    //     {
-    //         continue;
-    //     }
-    //     slot->draw();
-    // }
 }
 
 
@@ -118,7 +103,6 @@ void Unit::before()
     }
     for (const auto turret : turrets)
     {
-        turret->preferred_target = this->prefered_target;
         turret->before();
     }
     Object::before();
@@ -170,28 +154,40 @@ void Unit::after()
     {
         if (!(MapConfig::get_tile_attribute(tile_x - 1, tile_y)->type & this->meta->movement))
         {
-            position.setX(utils::linear_limit_soft_v(position.x(), tile_x - space, std::numeric_limits<float>::max(), soft));
-            linear_velocity.setX(utils::linear_limit_soft_v(linear_velocity.x(), 0.0f, std::numeric_limits<float>::max(), soft));
+            position.setX(utils::linear_limit_soft_v(position.x(), tile_x - space, std::numeric_limits<float>::max(),
+                                                     soft));
+            linear_velocity.setX(
+                utils::linear_limit_soft_v(linear_velocity.x(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x + 1, tile_y)->type & this->meta->movement))
         {
             position.setX(
-                utils::linear_limit_soft_v(position.x(), std::numeric_limits<float>::min(), tile_x  + space, soft));
-            linear_velocity.setX(utils::linear_limit_soft_v(linear_velocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
+                utils::linear_limit_soft_v(position.x(), std::numeric_limits<float>::min(), tile_x + space, soft));
+            linear_velocity.setX(
+                utils::linear_limit_soft_v(linear_velocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x, tile_y - 1)->type & this->meta->movement))
         {
-            position.setY(utils::linear_limit_soft_v(position.y(), tile_y - space, std::numeric_limits<float>::max(), soft));
-            linear_velocity.setY(utils::linear_limit_soft_v(linear_velocity.y(), 0.0f, std::numeric_limits<float>::max(), soft));
+            position.setY(utils::linear_limit_soft_v(position.y(), tile_y - space, std::numeric_limits<float>::max(),
+                                                     soft));
+            linear_velocity.setY(
+                utils::linear_limit_soft_v(linear_velocity.y(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
         if (!(MapConfig::get_tile_attribute(tile_x, tile_y + 1)->type & this->meta->movement))
         {
             position.setY(
                 utils::linear_limit_soft_v(position.y(), std::numeric_limits<float>::min(), tile_y + space, soft));
-            linear_velocity.setY(utils::linear_limit_soft_v(linear_velocity.y(), std::numeric_limits<float>::min(), 0.0f, soft));
+            linear_velocity.setY(
+                utils::linear_limit_soft_v(linear_velocity.y(), std::numeric_limits<float>::min(), 0.0f, soft));
         }
     }
 
+
+
+    if (this->hp<=0)
+    {
+        this->marked_for_delete=true;
+    }
 
     this->draw();
 }

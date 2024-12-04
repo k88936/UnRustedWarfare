@@ -29,7 +29,8 @@ void Object::before()
     this->linear_forces *= 0;
     this->angular_forces = 0;
     vector_dir = QVector3D(std::cos(rotation * std::numbers::pi / 180), std::sin(rotation * std::numbers::pi / 180), 0);
-    vector_ver = QVector3D(-std::sin(rotation * std::numbers::pi / 180), std::cos(rotation * std::numbers::pi / 180), 0);
+    vector_ver = QVector3D(-std::sin(rotation * std::numbers::pi / 180), std::cos(rotation * std::numbers::pi / 180),
+                           0);
 }
 
 void Object::step()
@@ -51,7 +52,7 @@ void Object::step()
                 const bool targetAgree = tar->on_overlay(this, -positionDiff);
                 if (thisAgree && targetAgree)
                 {
-                    solveCollision(this, tar, positionDiff);
+                    solve_collision(this, tar, positionDiff);
                 }
             }
         }
@@ -122,7 +123,7 @@ void Object::apply_force(const QVector3D force, const float torque)
     this->angular_forces += torque;
 }
 
-void Object::solveCollision(Object* obj1, Object* obj2, const QVector3D position_diff)
+void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D position_diff)
 {
     // float factor=obj1->radius+obj2->radius-positionDiff.l
     const QVector3D normDiff = position_diff.normalized();
@@ -140,4 +141,35 @@ void Object::solveCollision(Object* obj1, Object* obj2, const QVector3D position
     obj1->apply_force(-force3D, torqueBefore * obj1->radius);
     obj2->apply_force(force3D, -torqueBefore * obj2->radius);
     // qDebug()<<"hit";
+}
+
+bool Object::is_valid(Object*& obj)
+{
+    if (obj == nullptr)
+    {
+        return false;
+    }
+    if (obj->marked_for_delete)
+    {
+        obj->reference_count--;
+        obj = nullptr;
+        return false;
+    }
+    return true;
+}
+
+void Object::ptr_change_to(Object*& obj, Object* new_obj)
+{
+    if (is_valid(obj))
+    {
+        obj->reference_count--;
+    }
+    if (new_obj != nullptr && !new_obj->marked_for_delete)
+    {
+        obj = new_obj;
+        obj->reference_count++;
+    }else
+    {
+        obj=nullptr;
+    }
 }

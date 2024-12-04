@@ -163,7 +163,14 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     Game::ui_image_draw_config_map["_arrow_highlight"].clear();
                     if (!enermy_to_select.empty())
                     {
-                        flock->preferred_target = *(enermy_to_select.begin());
+                        auto preferred_target = *(enermy_to_select.begin());
+                        for (auto& selected : units_selected)
+                        {
+                            for (const auto turret : selected->turrets)
+                            {
+                                Object::ptr_change_to(turret->preferred_target, preferred_target);
+                            }
+                        }
                         Game::ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
                     }
                     else

@@ -18,9 +18,9 @@ public:
     ~Unit() override;
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
+    float hp;
     bool isAttached = false;
     BoidSensor* boid_sensor;
-    Object* prefered_target = nullptr;
     void attack(const QVector3D& target);
     void draw() override;
     std::vector<Turret*> turrets;

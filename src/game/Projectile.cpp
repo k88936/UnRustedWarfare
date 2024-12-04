@@ -6,8 +6,9 @@
 
 #include "UnitConfigs.h"
 #include "Game.h"
+#include "utils.h"
 
-Projectile::Projectile(MetaProjectiles* meta, int team, const QVector3D position, const float rotation,
+Projectile::Projectile(MetaProjectiles* meta, const int team, const QVector3D position, const float rotation,
                        const QVector3D& linear_velocity_base
 ): Object(0.3f, 10, 1000), Drawable()
 {
@@ -49,25 +50,55 @@ void Projectile::after()
 
 bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
 {
+    if (marked_for_delete)
+    {
+        return false;
+    }
     if (obj->team == this->team)
     {
         return false;
     }
 
-    if (auto unit = dynamic_cast<Unit*>(obj))
+    if (const auto unit = dynamic_cast<Unit*>(obj))
     {
-        hit(unit);
+        unit->hp -= meta->directDamage;
+        hit_effect(unit);
+        if (meta->areaDamage != 0 && meta->areaRadius != 0)
+        {
+            //aoe damage = - center_damage/r**2 +center_damage
+            const float factor = -meta->areaDamage / (meta->areaRadius * meta->areaRadius);
+            for (const auto grids = Game::grids_manager.scan(position, meta->areaRadius); const auto grids_across :grids)
+            {
+                for (const auto object : grids_across->objects) //has bug actually
+                {
+                    if (const auto u = dynamic_cast<Unit*>(object))
+                    {
+                        if (u->team == this->team)
+                            continue;
+                        QVector3D offset = (u->position - this->position);
+                        if (const auto distance = offset.lengthSquared(); distance < meta->areaRadius * meta->
+                            areaRadius)
+                        {
+                            u->hp -= factor * distance + meta->areaDamage;
+                            u->apply_force(offset / (distance + 0.1) * mass * meta->areaDamage, 0);
+                        }
+                    }
+                }
+            }
+        }
+
+
         marked_for_delete = true;
         return true;
     }
     return false;
 }
 
-void Projectile::hit(Unit* unit) const
+void Projectile::hit_effect(const Unit* unit) const
 {
     for (const auto& explode_effect : meta->explode_effect)
     {
-        auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
+        const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
         Game::addEffect(new Effect(meta_effect, position, rotation, unit->linear_velocity));
     }
     // Game::addEffect()

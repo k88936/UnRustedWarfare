@@ -20,7 +20,7 @@ public:
     void after() override;
     bool on_overlay(Object *obj, QVector3D positionDiff) override;
 
-    void hit(Unit *unit) const;
+    void hit_effect(const Unit *unit) const;
 };
 
 
