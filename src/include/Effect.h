@@ -16,6 +16,7 @@ public:
 
     MetaEffect *meta;
 
+    Effect();
     Effect(MetaEffect* meta, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
     void draw() override;
     void before() override;

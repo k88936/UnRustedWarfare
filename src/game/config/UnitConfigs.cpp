@@ -168,6 +168,8 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "soundsOnHit")unit->sounds_on_hit = split(snd, ',');
                 else if (fst == "soundsOnFire")unit->sounds_on_fire = split(snd, ',');
                 else if (fst == "soundsOnMove")unit->sounds_on_move = split(snd, ',');
+                else if (fst=="effectOnDeath")parse_effects(snd, unit->effect_on_death);
+                else if (fst=="isBio")unit->is_bio = snd == "true";
 
                     //
                 else if (fst == "maxTransportingUnits")unit->max_transporting_units = std::stoi(snd);
@@ -271,12 +273,12 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "image")turret->image = snd;
                     else if (fst == "turnSpeed")turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw *
                         turret_turn_speed_factor;
-                    else if (fst == "turnAcc")turret->turn_acc = std::stof(snd);
+                    else if (fst == "turnAcc")turret->turn_acc = std::stof(snd)*turnSpeed_rw2sw*turret_turn_speed_factor/time_rw2sw;
                     else if (fst == "shootSound")turret->shoot_sound = snd;
                     else if (fst == "shootSoundVolume")turret->shoot_sound_volume = std::stof(snd);
-                    else if (fst == "recoilOffset")turret->recoil_offset = std::stof(snd);
-                    else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd);
-                    else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd);
+                    else if (fst == "recoilOffset")turret->recoil_offset = std::stof(snd)*scale_rw2sw;
+                    else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd)*time_rw2sw;
+                    else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd)*time_rw2sw;
                     else if (fst == "range")turret->range = std::stof(snd) * scale_rw2sw;
                     else if (fst == "rangeMin")turret->range_min = std::stof(snd) * scale_rw2sw;
                     else if (fst == "invisible")

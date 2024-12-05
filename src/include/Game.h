@@ -29,6 +29,7 @@ public:
     static std::vector<Unit*> units;
     static QBasicTimer timer;
     static std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
+    static QTime start_time;
     static void addProjectile(Projectile* projectile);
     static void addEffect(Effect* effect);
     static FlowField* flow_field_for_test;

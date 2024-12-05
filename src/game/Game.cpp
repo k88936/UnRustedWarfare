@@ -33,6 +33,7 @@ QBasicTimer Game::timer;
 std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
 BattlefieldWidget* Game::battleFieldWidget;
+QTime Game::start_time=QTime::currentTime();
 
 void Game::addProjectile(Projectile* projectile)
 {
@@ -93,7 +94,7 @@ void Game::init()
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
     //
-    for (int i = 40; i < 41; ++i)
+    for (int i = 40; i < 43; ++i)
     {
         for (int j = 40; j < 43; ++j)
         {
@@ -155,6 +156,7 @@ void Game::clean()
     {
         if ((*it)->marked_for_delete && (*it)->reference_count == 0)
         {
+            (*it)->on_death();
             delete *it;
             it = Game::units.erase(it);
         }

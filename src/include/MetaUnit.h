@@ -78,6 +78,7 @@ public:
 
     std::vector<MetaTurret*> attached_turret=std::vector<MetaTurret*>();
     float scaleTurret=1;
+    bool is_bio=false;
 
     void attack();
 };

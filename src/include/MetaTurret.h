@@ -19,9 +19,9 @@ public:
     std::string shoot_sound;
     float shoot_sound_volume;
 
-    float recoil_offset;
-    float recoil_out_time;
-    float recoil_return_time;
+    float recoil_offset=0;
+    float recoil_out_time=0;
+    float recoil_return_time=0;
 
     float range=-1;
     float range_min=-1;

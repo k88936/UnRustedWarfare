@@ -28,6 +28,7 @@ public:
 
     void before() override;
     void step() override;
+    void on_death();
     void after() override;
 
 };

@@ -8,23 +8,28 @@
 #include "Drawable.h"
 #include "MetaTurret.h"
 #include "Sensor.h"
+#include "utils.h"
 
 
-class Turret :public Attachable,public Drawable,public Sensor{
+class Turret : public Attachable, public Drawable, public Sensor
+{
 public:
-    Turret(MetaTurret* meta,int team);
+    Turret(MetaTurret* meta, int team);
     ~Turret() override;
-    MetaTurret *meta;
-    float rotationSpeed=0;
-    float coolDown=0;
-    Object* current_target=nullptr;
-    Object* preferred_target =nullptr;
-    bool has_target=false;
+    MetaTurret* meta;
+    float rotationSpeed = 0;
+    float coolDown = 0;
+    Object* current_target = nullptr;
+    Object* preferred_target = nullptr;
+    bool has_target = false;
+    bool is_aimed = false;
+
+    utils::animater recoil_animater;
     void updateSlots(QMatrix4x4 transform) override;
     std::vector<Turret*> turrets_attached;
     float aim(QVector3D target);
     bool shoot();
-    bool attack(const QVector3D &target);
+    bool attack(const QVector3D& target);
     void draw() override;
 
 
@@ -32,9 +37,7 @@ public:
     void step() override;
     void after() override;
     bool on_overlay(Object* obj, QVector3D position_diff) override;
-
 };
-
 
 
 #endif //TURRET_H

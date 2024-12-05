@@ -80,7 +80,7 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
                             areaRadius)
                         {
                             u->hp -= factor * distance + meta->areaDamage;
-                            u->apply_force(offset / (distance + 0.1) * mass * meta->areaDamage, 0);
+                            u->apply_force(offset / (distance + 1) * mass * meta->areaDamage, 0);
                         }
                     }
                 }

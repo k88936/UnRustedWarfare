@@ -12,7 +12,8 @@
 #include "utils.h"
 
 
-Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(meta->range, team)
+Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(meta->range, team),
+                                            recoil_animater(meta->recoil_return_time, meta->recoil_offset, 0)
 {
     this->meta = meta;
     for (const auto& slot : meta->attached_turrets)
@@ -44,7 +45,7 @@ void Turret::updateSlots(QMatrix4x4 transform)
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
-        slot->linear_velocity=this->linear_velocity;
+        slot->linear_velocity = this->linear_velocity;
         utils::angle_ensure(slot->rotation);
         slot->updateSlots(push_this);
     }
@@ -57,14 +58,8 @@ float Turret::aim(const QVector3D target)
     float angle_target = utils::dir_of(relative);
 
     float angle_diff = angle_target - rotation;
-    if (angle_diff >= 180)
-    {
-        angle_diff -= 360;
-    }
-    else if (angle_diff < -180)
-    {
-        angle_diff += 360;
-    }
+
+    utils::angle_ensure(angle_diff);
     if (fabsf(angle_diff) < meta->turn_speed * Game::deltaTime)
     {
         relative_rotation += angle_diff;
@@ -103,6 +98,7 @@ bool Turret::shoot()
             Game::addEffect(new Effect(UnitConfigs::meta_effects.at(shoot_flame), transform.map(meta->barrel_position),
                                        rotation, this->linear_velocity));
         }
+        recoil_animater.reset();
         coolDown = meta->delay;
         return true;
     }
@@ -113,20 +109,21 @@ bool Turret::shoot()
 
 bool Turret::attack(const QVector3D& target)
 {
-    const bool isAimed = aim(target) == 0;
+    is_aimed = aim(target) == 0;
     for (const auto& attached : turrets_attached)
     {
         if (attached->meta->slave)
         {
-            if (isAimed)attached->shoot();
+            if (is_aimed)attached->shoot();
         }
         else
         {
             attached->attack(target);
+            qDebug() << "independent turret problem";
         }
     }
     // qDebug()<<meta->projectile;
-    if (!isAimed)
+    if (!is_aimed)
     {
         return false;
     }
@@ -137,7 +134,11 @@ void Turret::draw()
 {
     if (slot_inVisible)return;
     render_transform.setToIdentity();
-    render_transform.translate(position);
+    if (this->has_target && !this->is_aimed)
+    {
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+    }
+    else render_transform.translate(this->position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
@@ -145,12 +146,27 @@ void Turret::draw()
 
 void Turret::before()
 {
-    Game::grids_manager.update_object(this);
-    Sensor::before();
+    float offset = recoil_animater.get_value();
+    // qDebug()<<offset;
+    this->slot_translation.setX(meta->slot_translation.x() + offset);
+    if (!meta->slave)
+    {
+        Sensor::before();
+    }
+    for (auto attached : turrets_attached)
+    {
+        attached->before();
+    }
 }
 
 void Turret::step()
 {
+    for (auto attached : turrets_attached)
+    {
+        attached->step();
+    }
+    if (meta->slave)
+        return;
     if (is_valid(preferred_target) && utils::within(preferred_target->position, position, meta->range))
     {
         attack(preferred_target->position);
@@ -165,6 +181,7 @@ void Turret::step()
     {
         has_target = false;
     }
+
     Sensor::step();
 }
 
@@ -172,7 +189,6 @@ void Turret::after()
 {
     Sensor::after();
     this->draw();
-
     for (auto attached : turrets_attached)
     {
         attached->after();

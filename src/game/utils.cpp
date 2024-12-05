@@ -8,6 +8,33 @@
 #include <numbers>
 #include <random>
 
+#include "Game.h"
+
+utils::animater::animater(const float duration, const float from, const float to): duration_(duration * 1000), to_(to),
+    from_(from)
+{
+    // qDebug()<<duration_;
+    start_ = Game::start_time;
+}
+
+void utils::animater::reset()
+{
+    start_ = QTime::currentTime();
+}
+
+float utils::animater::get_value()
+{
+    float passed = start_.msecsTo(QTime::currentTime());
+    if (passed >= duration_)
+    {
+        return to_;
+    }
+    else
+    {
+        return from_ + (to_ - from_) * passed / duration_;
+    }
+}
+
 float utils::sign(const float value)
 {
     if (value > 0)
@@ -161,5 +188,5 @@ QVector3D utils::generate_random_small_vector(const float max_offset)
 {
     static std::default_random_engine generator;
     std::uniform_real_distribution distribution(-max_offset, max_offset);
-    return QVector3D(distribution(generator), distribution(generator), distribution(generator));
+    return QVector3D(distribution(generator), distribution(generator), 0);
 }

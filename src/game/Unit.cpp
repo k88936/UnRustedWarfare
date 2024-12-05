@@ -7,6 +7,8 @@
 #include "Game.h"
 #include "MapConfig.h"
 #include "Sensor.h"
+#include "SimpleEffect.h"
+#include "UnitConfigs.h"
 #include "utils.h"
 
 
@@ -14,7 +16,7 @@ Unit::Unit(MetaUnit* meta, int team, const QVector3D position, const float rotat
     Object(meta->radius, meta->mass, meta->mass)
 {
     this->meta = meta;
-    this->hp=meta->max_hp;
+    this->hp = meta->max_hp;
     this->position = position;
     this->rotation = rotation;
     this->scale = meta->scale;
@@ -58,14 +60,14 @@ void Unit::updateSlots(QMatrix4x4 transform)
         push_this.translate(slot->slot_translation);
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
-        slot->linear_velocity=this->linear_velocity;
+        slot->linear_velocity = this->linear_velocity;
         utils::angle_ensure(slot->rotation);
         slot->updateSlots(push_this);
     }
     for (const auto watcher : watchers)
     {
         watcher->position = this->position;
-        watcher->linear_velocity=this->linear_velocity;
+        watcher->linear_velocity = this->linear_velocity;
     }
 }
 
@@ -89,7 +91,11 @@ void Unit::attack(const QVector3D& target)
 void Unit::draw()
 {
     render_transform.setToIdentity();
-    render_transform.translate(this->position);
+    if (!meta->is_bio&&this->linear_velocity.lengthSquared() > 0)
+    {
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+    }
+    else render_transform.translate(this->position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
@@ -99,6 +105,7 @@ void Unit::draw()
 void Unit::before()
 {
     Game::grids_manager.update_object(this);
+    Object::before();
     for (const auto& watcher : watchers)
     {
         watcher->before();
@@ -107,7 +114,7 @@ void Unit::before()
     {
         turret->before();
     }
-    Object::before();
+
     if (!this->isAttached)
     {
         QMatrix4x4 transform;
@@ -132,9 +139,21 @@ void Unit::step()
     }
 }
 
+void Unit::on_death()
+{
+    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000, position, rotation, scale, linear_velocity,
+                                     angular_velocity));
+    for (auto effect_on_death : meta->effect_on_death)
+    {
+        Game::addEffect(new Effect(UnitConfigs::meta_effects.at(effect_on_death), position, rotation, linear_velocity));
+    }
+}
 
 void Unit::after()
 {
+    if (this->marked_for_delete)
+    {
+    }
     for (const auto& watcher : watchers)
     {
         watcher->after();
@@ -143,8 +162,6 @@ void Unit::after()
     {
         turret->after();
     }
-    constexpr float space = 0.4f;
-    constexpr float soft = 0.8;
     Object::after();
     const int tile_x = MapConfig::x_in_which(position.x());
     int tile_y = MapConfig::y_in_which(position.y());
@@ -154,6 +171,8 @@ void Unit::after()
     }
     else
     {
+        constexpr float soft = 0.8;
+        constexpr float space = 0.4f;
         if (!(MapConfig::get_tile_attribute(tile_x - 1, tile_y)->type & this->meta->movement))
         {
             position.setX(utils::linear_limit_soft_v(position.x(), tile_x - space, std::numeric_limits<float>::max(),
@@ -185,10 +204,9 @@ void Unit::after()
     }
 
 
-
-    if (this->hp<=0)
+    if (this->hp <= 0)
     {
-        this->marked_for_delete=true;
+        this->marked_for_delete = true;
     }
 
     this->draw();

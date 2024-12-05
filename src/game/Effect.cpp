@@ -8,6 +8,11 @@
 #include "utils.h"
 
 
+Effect::Effect():Object(1,1,1)
+{
+
+}
+
 Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
                const QVector3D& linear_velocity_base): Object(1, 1, 1)
 {
@@ -54,6 +59,7 @@ void Effect::draw()
 
 void Effect::before()
 {
+    Object::before();
 }
 
 

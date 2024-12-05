@@ -3,6 +3,9 @@
 //
 
 #include "Sensor.h"
+
+#include "Game.h"
+
 Sensor::Sensor(const float radius,int team): Object(radius,0,0) {
 
     this->team=team;
@@ -10,6 +13,7 @@ Sensor::Sensor(const float radius,int team): Object(radius,0,0) {
 
 void Sensor::before()
 {
+    Game::grids_manager.update_object(this);
     Object::before();
 }
 

@@ -4,12 +4,27 @@
 
 #ifndef UTILS_H
 #define UTILS_H
+#include <qdatetime.h>
 #include <qvectornd.h>
 
 
 class utils
 {
 public:
+    class animater
+    {
+        // float start_=0;
+        QTime start_;
+        float duration_;
+
+        float to_;
+        float from_;
+
+    public:
+        animater(float duration,float from ,float to);
+        void reset();
+        float get_value();
+    };
     static float sign(float value);
     static float dir_of(QVector3D vector);
     static float dir_diff(QVector3D vector, float angle);

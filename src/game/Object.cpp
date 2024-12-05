@@ -24,7 +24,6 @@ Object::Object(const float radius, const float mass, const float inertia): team(
 
 void Object::before()
 {
-    Game::grids_manager.update_object(this);
     this->checked = false;
     this->linear_forces *= 0;
     this->angular_forces = 0;

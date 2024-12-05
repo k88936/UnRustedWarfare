@@ -80,6 +80,8 @@ add_executable(untitled1
         src/game/utils.cpp
         src/game/BoidSensor.cpp
         src/game/Flock.cpp
+        src/game/SimpleEffect.cpp
+        src/game/SimpleEffect.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)
