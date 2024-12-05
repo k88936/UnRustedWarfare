@@ -4,6 +4,7 @@
 
 #ifndef METAEFFECT_H
 #define METAEFFECT_H
+#include <qvectornd.h>
 #include <string>
 #include <vector>
 
@@ -22,7 +23,6 @@ public:
     int animate_frame_start=0;
     int animate_frame_end=0;
     float animate_frame_delay=1;
-
     float life; //secends
     float scale_from=1;
     float scale_to=1;
@@ -35,6 +35,7 @@ public:
     float spawn_chance=1;
     float fade_in_time=0;
     bool fade_out=false;
+    bool physics=false;
     float alpha=1;
     float h_speed;
     bool draw_under_units=false;
@@ -43,6 +44,7 @@ public:
     float delayed_start_timer;
     std::string also_play_sound;
     float also_play_sound_volume;
+    QVector4D color={1,1,1,1};
 };
 
 

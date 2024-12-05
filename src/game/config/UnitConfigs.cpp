@@ -1,6 +1,7 @@
 //
 // Created by root on 11/6/24.
 //
+#include <QDirIterator>
 #include <QDir>
 
 #include <fstream>
@@ -31,7 +32,7 @@ std::vector<std::string> split(const std::string& str, const char delimiter)
     return tokens;
 }
 
-QVector4D parseColor(const std::string& colorStr)
+QVector4D parse_color(const std::string& colorStr)
 {
     QColor color(QString::fromStdString(colorStr));
     return {color.redF(), color.greenF(), color.blueF(), 1.0f};
@@ -168,8 +169,8 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "soundsOnHit")unit->sounds_on_hit = split(snd, ',');
                 else if (fst == "soundsOnFire")unit->sounds_on_fire = split(snd, ',');
                 else if (fst == "soundsOnMove")unit->sounds_on_move = split(snd, ',');
-                else if (fst=="effectOnDeath")parse_effects(snd, unit->effect_on_death);
-                else if (fst=="isBio")unit->is_bio = snd == "true";
+                else if (fst == "effectOnDeath")parse_effects(snd, unit->effect_on_death);
+                else if (fst == "isBio")unit->is_bio = snd == "true";
 
                     //
                 else if (fst == "maxTransportingUnits")unit->max_transporting_units = std::stoi(snd);
@@ -220,8 +221,9 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "showRangeUIGuide")unit->show_range_ui_guide = snd == "true";
                 else if (fst == "turretMultiTargeting")unit->turret_multi_targeting = snd == "true";
                 else if (fst == "turretSize")unit->turret_size = std::stof(snd);
-                else if (fst == "turretTurnSpeed")unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw *
-                    turret_turn_speed_factor;
+                else if (fst == "turretTurnSpeed")
+                    unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw *
+                        turret_turn_speed_factor;
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -271,14 +273,17 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "x")turret->slot_translation.setY(std::stof(snd) * scale_rw2sw);
                     else if (fst == "y")turret->slot_translation.setX(std::stof(snd) * scale_rw2sw);
                     else if (fst == "image")turret->image = snd;
-                    else if (fst == "turnSpeed")turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw *
-                        turret_turn_speed_factor;
-                    else if (fst == "turnAcc")turret->turn_acc = std::stof(snd)*turnSpeed_rw2sw*turret_turn_speed_factor/time_rw2sw;
+                    else if (fst == "turnSpeed")
+                        turret->turn_speed = std::stof(snd) * turnSpeed_rw2sw *
+                            turret_turn_speed_factor;
+                    else if (fst == "turnAcc")
+                        turret->turn_acc = std::stof(snd) * turnSpeed_rw2sw *
+                            turret_turn_speed_factor / time_rw2sw;
                     else if (fst == "shootSound")turret->shoot_sound = snd;
                     else if (fst == "shootSoundVolume")turret->shoot_sound_volume = std::stof(snd);
-                    else if (fst == "recoilOffset")turret->recoil_offset = std::stof(snd)*scale_rw2sw;
-                    else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd)*time_rw2sw;
-                    else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd)*time_rw2sw;
+                    else if (fst == "recoilOffset")turret->recoil_offset = std::stof(snd) * scale_rw2sw;
+                    else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd) * time_rw2sw;
+                    else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd) * time_rw2sw;
                     else if (fst == "range")turret->range = std::stof(snd) * scale_rw2sw;
                     else if (fst == "rangeMin")turret->range_min = std::stof(snd) * scale_rw2sw;
                     else if (fst == "invisible")
@@ -344,7 +349,7 @@ void UnitConfigs::load_ini(const QString& path)
                     }
                     else if (fst == "frame")projectile->frame = std::stoi(snd);
                     else if (fst == "lightSize")projectile->lightSize = std::stof(snd);
-                    else if (fst == "lightColor")projectile->lightColor = parseColor(snd);
+                    else if (fst == "lightColor")projectile->lightColor = parse_color(snd);
                     else if (fst == "explodeEffect")
                     {
                         parse_effects(snd, projectile->explode_effect);
@@ -372,6 +377,11 @@ void UnitConfigs::load_ini(const QString& path)
                     {
                         effect->image = snd;
                     }
+                    else if (fst == "stripIndex")
+                    {
+                        effect->image = snd + ".png";
+                    }
+                    else if (fst == "color") effect->color = parse_color(snd);
                     else if (fst == "animateFrameStart")effect->animate_frame_start = std::stoi(snd);
                     else if (fst == "animateFrameEnd")effect->animate_frame_end = std::stoi(snd);
                     else if (fst == "animateFrameSpeed")
@@ -389,10 +399,11 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "ySpeedAbsolute")effect->y_speed_absolute = std::stof(snd);
                     else if (fst == "xSpeedRelativeRandom")effect->x_speed_relative_random = std::stof(snd);
                     else if (fst == "ySpeedRelativeRandom")effect->y_speed_relative_random = std::stof(snd);
-                    else if (fst == "hSpeed")effect->h_speed = std::stof(snd);
+                    else if (fst == "hSpeed")effect->h_speed = std::stof(snd)*scale_rw2sw;
                     else if (fst == "drawUnderUnits")effect->draw_under_units = snd == "true";
                     else if (fst == "fadeInTime")effect->fade_in_time = std::stof(snd);
                     else if (fst == "fadeOut")effect->fade_out = snd == "true";
+                    else if (fst == "physics")effect->physics = snd == "true";
                     else if (fst == "priority")
                     {
                         if (snd == "high")effect->priority = high;
@@ -428,19 +439,24 @@ void UnitConfigs::load_ini(const QString& path)
 void UnitConfigs::init()
 {
     QString path = "../M2A3/";
-    QDir dir(path);
-    dir.setFilter(QDir::Files);
-    // IniParser parser;
-    QStringList files = dir.entryList();
-    for (const auto& file_name : files)
+
+    QDirIterator iter(path, QDir::NoDotAndDotDot | QDir::AllEntries, QDirIterator::Subdirectories);
+    while (iter.hasNext())
     {
-        if (file_name.endsWith(".ini"))
+        iter.next();
+        if (iter.fileInfo().isFile())
         {
-            load_ini(path + file_name);
-        }
-        else if (file_name.endsWith(".png"))
-        {
-            images[file_name.toStdString()].image = QImage(path + file_name);
+            QString file_name = iter.fileInfo().fileName();
+            if (file_name.endsWith(".ini"))
+            {
+                load_ini(path + file_name);
+            }
+            else if (file_name.endsWith(".png"))
+            {
+                QImage img(iter.filePath());
+                // images[file_name.toStdString()].image = std::move(img);
+                images[file_name.toStdString()].image = img;
+            }
         }
     }
 }

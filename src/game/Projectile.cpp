@@ -67,7 +67,8 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
         {
             //aoe damage = - center_damage/r**2 +center_damage
             const float factor = -meta->areaDamage / (meta->areaRadius * meta->areaRadius);
-            for (const auto grids = Game::grids_manager.scan(position, meta->areaRadius); const auto grids_across :grids)
+            for (const auto grids = Game::grids_manager.scan(position, meta->areaRadius); const auto grids_across :
+                 grids)
             {
                 for (const auto object : grids_across->objects) //has bug actually
                 {
@@ -96,10 +97,12 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
 
 void Projectile::hit_effect(const Unit* unit) const
 {
+   float diff=0;
     for (const auto& explode_effect : meta->explode_effect)
     {
+        diff+=0.01;
         const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        Game::addEffect(new Effect(meta_effect, position, rotation, unit->linear_velocity));
+        Game::addEffect(new Effect(meta_effect, QVector3D(position.x(),position.y(),position.z()+diff), rotation, unit->linear_velocity));
     }
     // Game::addEffect()
 }

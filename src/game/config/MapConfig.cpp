@@ -91,6 +91,8 @@ void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const st
     }
 }
 
+const std::string bitmap_base = "../maps/bitmaps/";
+
 void MapConfig::loadMap(const std::string& path)
 {
     tmx::Map map;
@@ -124,7 +126,12 @@ void MapConfig::loadMap(const std::string& path)
 
             if (image.isNull())
             {
-                throw std::runtime_error("Failed to load tileset image: " + image_path);
+                size_t pos = image_path.find_last_of("/\\");
+                if (pos == std::string::npos)
+                {
+                    throw std::runtime_error("Failed to load tileset image: " + image_path);
+                }
+                image = QImage(QString::fromStdString(bitmap_base + image_path.substr(pos + 1)));
             }
             int w = image.width() / tileset.getTileSize().x;
             int h = image.height() / tileset.getTileSize().y;

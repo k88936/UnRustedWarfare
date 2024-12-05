@@ -9,12 +9,13 @@
 #include "Object.h"
 
 
-class Effect :public Object ,public  Drawable{
+class Effect : public Object, public Drawable
+{
 public:
-    float has_life=0;
-    float animate_timer;
+    float has_life = 0;
+    float animate_timer = 0;
 
-    MetaEffect *meta;
+    MetaEffect* meta = nullptr;
 
     Effect();
     Effect(MetaEffect* meta, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
@@ -23,8 +24,6 @@ public:
     void step() override;
     void after() override;
 };
-
-
 
 
 #endif //EFFECT_H

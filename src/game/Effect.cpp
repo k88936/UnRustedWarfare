@@ -8,9 +8,8 @@
 #include "utils.h"
 
 
-Effect::Effect():Object(1,1,1)
+Effect::Effect(): Object(1, 1, 1)
 {
-
 }
 
 Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
@@ -24,12 +23,13 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     }
     if (meta->attached_to_unit)
     {
-        this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_relative, meta->y_speed_relative, 0) +
+        this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_relative, meta->y_speed_relative,
+                                                                 meta->h_speed) +
             utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     else
     {
-        this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, 0) +
+        this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, meta->h_speed) +
             utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     // if (meta->x_speed_absolute != 0 || meta->y_speed_absolute != 0)
@@ -42,6 +42,15 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     //         meta->x_speed_relative_random * (std::rand() % 100) / 100 + meta->x_speed_relative,
     //         meta->y_speed_relative_random * (std::rand() % 100) / 100 + meta->y_speed_relative, 0);
     // }
+
+    if (meta->physics)
+    {
+        restitution = 0.8;
+        linear_damping_dir = 8;
+        linear_damping_ver = 8;
+        angular_damping = 40;
+    }
+    this->color = meta->color;
     this->color.setZ(meta->alpha);
     this->rotation = rotation;
     this->scale = meta->scale_from;
@@ -85,15 +94,20 @@ void Effect::after()
     {
         marked_for_delete = true;
     };
-    if (animate_timer > meta->animate_frame_delay)
+
+    if (meta->animate_frame_start != meta->animate_frame_end)
     {
-        animate_timer -= meta->animate_frame_delay;
-        frame_id++;
-        if (frame_id > meta->animate_frame_end)
+        if (animate_timer > meta->animate_frame_delay)
         {
-            marked_for_delete = true;
-            return;
+            animate_timer -= meta->animate_frame_delay;
+            frame_id++;
+            if (frame_id > meta->animate_frame_end)
+            {
+                marked_for_delete = true;
+                return;
+            }
         }
     }
+
     draw();
 }

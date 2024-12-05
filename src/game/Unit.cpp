@@ -204,6 +204,12 @@ void Unit::after()
     }
 
 
+    if (meta->is_bio&&this->linear_forces.lengthSquared()>mass*mass*100)
+    {
+        this->hp=0;
+    }
+
+
     if (this->hp <= 0)
     {
         this->marked_for_delete = true;
