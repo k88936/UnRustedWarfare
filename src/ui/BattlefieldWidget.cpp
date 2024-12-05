@@ -41,7 +41,7 @@ void BattlefieldWidget::initializeGL()
     // Enable back face culling
     glEnable(GL_CULL_FACE);
     glEnable(GL_ALPHA_TEST);
-    glAlphaFunc(GL_GREATER, 0.3);
+    glAlphaFunc(GL_GREATER, 0.5);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glBlendEquation(GL_FUNC_ADD_EXT);

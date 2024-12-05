@@ -62,6 +62,7 @@ void MapConfig::init()
 void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer,
                              const float z)
 {
+    // static float of=0;
     const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
     if (tmx_tiles.empty())
     {
@@ -85,6 +86,7 @@ void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const st
             {
                 // std::cout << " " << tmx_tiles.at(i * width + j).ID;
                 tiles.push_back(std::make_unique<Tile>(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
+                // of-=0.00001;
             }
         }
         std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
@@ -132,6 +134,10 @@ void MapConfig::loadMap(const std::string& path)
                     throw std::runtime_error("Failed to load tileset image: " + image_path);
                 }
                 image = QImage(QString::fromStdString(bitmap_base + image_path.substr(pos + 1)));
+                if (image.isNull())
+                {
+                    throw std::runtime_error("Failed to load tileset image: " + image_path);
+                }
             }
             int w = image.width() / tileset.getTileSize().x;
             int h = image.height() / tileset.getTileSize().y;
@@ -149,7 +155,7 @@ void MapConfig::loadMap(const std::string& path)
                     }
                     QImage img = image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
                                             tileset.getTileSize().x, tileset.getTileSize().y);
-                    MetaImage metaImage(img, 1.0, false, true, 1);
+                    MetaImage metaImage(img, 1, false, true, 1);
                     MapConfig::tile_images[id] = metaImage;
                 }
             }
@@ -227,7 +233,7 @@ void MapConfig::loadMap(const std::string& path)
                 }
                 else if (layer->getName() == "Items")
                 {
-                    config_layer(tiles, layer, -0.9);
+                    config_layer(tiles, layer, -1);
                 }
                 else if (layer->getName() == "Units")
                 {
@@ -244,8 +250,6 @@ void MapConfig::loadMap(const std::string& path)
                     {
                         passable.resize(world_height + 2, tile_configs.at("None"));
                     }
-
-
                     // return;
                     for (int i = 0; i < world_height; ++i)
                     {
