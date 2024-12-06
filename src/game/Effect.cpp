@@ -24,7 +24,7 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     if (meta->attached_to_unit)
     {
         this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_relative, meta->y_speed_relative,
-                                                                 -meta->h_speed - 0.01) +
+                                                                 -meta->h_speed - 0.1) +
             utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     else

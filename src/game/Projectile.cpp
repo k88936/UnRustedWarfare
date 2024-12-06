@@ -97,12 +97,11 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
 
 void Projectile::hit_effect(const Unit* unit) const
 {
-   float diff=0;
     for (const auto& explode_effect : meta->explode_effect)
     {
-        diff+=0.01;
         const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        Game::addEffect(new Effect(meta_effect, QVector3D(position.x(),position.y(),position.z()+diff), rotation, unit->linear_velocity));
+        Game::addEffect(new Effect(meta_effect, utils::set_offset_z(position, Game::LayerConfig::SHELL), rotation,
+                                   this->linear_velocity));
     }
     // Game::addEffect()
 }

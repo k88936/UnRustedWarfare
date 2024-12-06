@@ -21,10 +21,11 @@ public:
         float from_;
 
     public:
-        animater(float duration,float from ,float to);
+        animater(float duration, float from, float to);
         void reset();
         float get_value();
     };
+
     static float sign(float value);
     static float dir_of(QVector3D vector);
     static float dir_diff(QVector3D vector, float angle);
@@ -42,6 +43,9 @@ public:
     static QVector3D add_offset_x(const QVector3D& v, float offset);
     static QVector3D add_offset_y(const QVector3D& v, float offset);
     static QVector3D add_offset_z(const QVector3D& v, float offset);
+    static QVector3D set_offset_x(const QVector3D& v, float offset);
+    static QVector3D set_offset_y(const QVector3D& v, float offset);
+    static QVector3D set_offset_z(const QVector3D& v, float offset);
 };
 
 

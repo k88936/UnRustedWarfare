@@ -50,7 +50,8 @@ public:
     static std::vector<Projectile*> projectiles;
     static std::vector<Effect*> effects;
     static std::set<Flock*> flocks;
-    static BattlefieldWidget* battleFieldWidget;
+    static BattlefieldWidget* battle_field_widget;
+    static float volume;
     static void init();
     static void clean();
     static void step();

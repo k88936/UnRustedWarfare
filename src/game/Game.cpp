@@ -36,7 +36,7 @@ std::set<Flock*> Game::flocks;
 QBasicTimer Game::timer;
 std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
-BattlefieldWidget* Game::battleFieldWidget;
+BattlefieldWidget* Game::battle_field_widget;
 QTime Game::start_time = QTime::currentTime();
 
 void Game::addProjectile(Projectile* projectile)
@@ -75,7 +75,7 @@ void Game::init()
     // battleFieldWidget = welcome->get_battleFieldWidget();
     // welcome->show();
     auto battle = new battle_widget();
-    battleFieldWidget = battle->get_battleFieldWidget();
+    battle_field_widget = battle->get_battleFieldWidget();
     battle->show();
     for (const auto& tile : MapConfig::tiles)
     {
@@ -236,5 +236,5 @@ void Game::step()
     {
         e->after();
     }
-    battleFieldWidget->update();
+    battle_field_widget->update();
 }

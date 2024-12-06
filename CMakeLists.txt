@@ -84,6 +84,11 @@ add_executable(untitled1
         src/game/Flock.cpp
         src/game/SimpleEffect.cpp
         src/game/SimpleEffect.h
+        src/ui/settings_widget.cpp
+        src/ui/settings_widget.h
+        src/ui/settings_widget.ui
+        src/game/AudioManager.cpp
+        src/game/AudioManager.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

@@ -108,5 +108,4 @@
 <file>t_fshader.glsl</file>
 <file>s_vshader.glsl</file>
 
-    <file>b.ogg</file>
 </qresource></RCC>

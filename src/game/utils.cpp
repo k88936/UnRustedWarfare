@@ -205,3 +205,15 @@ QVector3D utils::add_offset_z(const QVector3D& v, const float offset)
 {
     return QVector3D(v.x(), v.y(), v.z() + offset);
 }
+QVector3D utils::set_offset_x(const QVector3D& v, const float offset)
+{
+    return QVector3D(offset, v.y(), v.z());
+}
+QVector3D utils::set_offset_y(const QVector3D& v, const float offset)
+{
+    return QVector3D(v.x(), offset, v.z());
+}
+QVector3D utils::set_offset_z(const QVector3D& v, const float offset)
+{
+    return QVector3D(v.x(), v.y(), offset);
+}

@@ -2,13 +2,43 @@
 // SPDX-License-Identifier: LicenseRef-Qt-Commercial OR BSD-3-Clause
 
 #include <QApplication>
+#include <QRandomGenerator>
 #include <QAudioOutput>
+#include <QDir>
 #include <QLabel>
 #include <QMediaPlayer>
 #include <QSoundEffect>
 
 #include "UnitConfigs.h"
 #include "Game.h"
+
+QString getRandomFileName(const QString& directoryPath)
+{
+    QDir dir(directoryPath);
+    if (!dir.exists())
+    {
+        qWarning() << "Directory does not exist:" << directoryPath;
+        return QString();
+    }
+
+    QStringList fileNames = dir.entryList(QDir::Files);
+    if (fileNames.isEmpty())
+    {
+        qWarning() << "No files found in directory:" << directoryPath;
+        return QString();
+    }
+
+    int randomIndex = QRandomGenerator::global()->bounded(fileNames.size());
+    return fileNames.at(randomIndex);
+}
+
+void do_work(QMediaPlayer* player, QString path)
+{
+    QString fileName = getRandomFileName(path);
+
+    player->setSource(QUrl::fromLocalFile(path + fileName));
+    player->play();
+}
 
 int main(int argc, char* argv[])
 {
@@ -21,20 +51,31 @@ int main(int argc, char* argv[])
 
 
     auto* music = new QSoundEffect();
-    // music->setSource(QUrl::fromLocalFile(":/1.wav"));
-    music->setSource(QUrl("qrc:/1.wav"));
+    music->setSource(QUrl::fromLocalFile("../b.wav"));
+    // music->setSource(QUrl("qrc:/1.wav"));
     music->setLoopCount(QSoundEffect::Infinite); //设置无限循环
     music->setVolume(0.5f); //设置音量，在0到1之间
-    // music->play();
+    music->play();
 
     auto player = new QMediaPlayer();
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
     audio->setVolume(0.5);
-    player->setSource(QUrl::fromLocalFile("../music/starting/battletanks1B.ogg"));
+    // do_work(player, "../music/starting/");
+    // do_work(player, "../music/starting/");
+// )    do_work(player, "../music/starting/");
+    QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)
+    {
+        if (status == QMediaPlayer::EndOfMedia)
+        {
+            do_work(player, "../music/starting/");
+        }
+        else if (status == QMediaPlayer::InvalidMedia)
+        {
+            do_work(player, "../music/starting/");
+        }
+    });
     // player->setSource(QUrl("qrc:/b.ogg"));
-    audio->setVolume(1.0);
-    player->play();
     Game::init();
     return app.exec();
 }
