@@ -233,7 +233,7 @@ void MapConfig::loadMap(const std::string& path)
                 }
                 else if (layer->getName() == "Items")
                 {
-                    config_layer(tiles, layer, -1);
+                    config_layer(tiles, layer, -0.9);
                 }
                 else if (layer->getName() == "Units")
                 {

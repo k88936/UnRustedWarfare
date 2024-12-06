@@ -49,26 +49,18 @@ void Game::addEffect(Effect* effect)
 }
 
 
-auto player = new QMediaPlayer();
-auto audio = new QAudioOutput();
+auto ef = QSoundEffect();
 
-auto ef =QSoundEffect();
 void Game::init()
 {
-    // player->setAudioOutput(audio);
-    // audio->setVolume(0.5);
-    // // player->setSource(QUrl("../music/starting/battletanks1B.ogg"));
-    // player->setSource(QUrl(":/b.ogg"));
-    // audio->setMuted(false);
-    // audio->setVolume(1.0);
-    // player->play();
 
-    ef.setSource(QUrl(":/b.ogg"));
-    ef.setLoopCount(10);
-    ef.setMuted(false);
-    ef.setVolume(1.0);
-    ef.play();
 
+    // ef.setSource(QUrl(":/b.ogg"));
+    // ef.setLoopCount(10);
+    // ef.setMuted(false);
+    // ef.setVolume(1.0);
+    // ef.play();
+    //
 
     UnitConfigs::init();
     MapConfig::init();
