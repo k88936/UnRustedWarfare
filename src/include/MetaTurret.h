@@ -4,6 +4,7 @@
 
 #ifndef METATURRET_H
 #define METATURRET_H
+#include "Game.h"
 #include "MetaAttachable.h"
 #include "MetaObject.h"
 #include "MetaDrawable.h"
@@ -13,11 +14,12 @@ class MetaTurret :public MetaAttachable ,public  MetaObject,public MetaDrawable
     // QVector4D barrelTransform;
 public:
     MetaTurret();
-    QVector3D barrel_position=QVector3D(0,0,0.1);
+    QVector3D barrel_position=QVector3D(0,0,Game::LayerConfig::TURRET_OFFSET);
     float turn_speed=-1;
     float turn_acc;
-    std::string shoot_sound;
-    float shoot_sound_volume;
+    QVector4D  shoot_light;
+    std::string shoot_sound="NONE";
+    float shoot_sound_volume=0;
 
     float recoil_offset=0;
     float recoil_out_time=0;

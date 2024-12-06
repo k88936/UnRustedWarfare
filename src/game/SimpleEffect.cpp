@@ -7,22 +7,28 @@
 #include <utility>
 
 #include "Game.h"
+#include "utils.h"
 
-SimpleEffect::SimpleEffect(std::string image, const float life, const QVector3D position, const float rotation,
+SimpleEffect::SimpleEffect(std::string image, const float life, const QVector3D& position, const float rotation,
                            const float scale,
-                           const QVector3D linear_velocity, const float angular_velocity): max_life(life),
-    image(std::move(image))
+                           const QVector3D& linear_velocity, const float angular_velocity, const QVector4D& color,
+                           const bool physics): max_life(life),
+                                          image(std::move(image))
 {
     this->position = position;
     this->rotation = rotation;
     this->scale = scale;
-    this->linear_velocity = linear_velocity;
+    this->linear_velocity = utils::add_offset_z(linear_velocity, -0.01);
     this->angular_velocity = angular_velocity;
+    this->color = color;
 
-    restitution = 0.8;
-    linear_damping_dir = 0.8;
-    linear_damping_ver = 1.2;
-    angular_damping = 40;
+    if (physics)
+    {
+        restitution = 0.8;
+        linear_damping_dir = 0.8;
+        linear_damping_ver = 1.2;
+        angular_damping = 40;
+    }
 }
 
 void SimpleEffect::draw()
@@ -31,13 +37,11 @@ void SimpleEffect::draw()
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    color = QVector4D(0.1, 0.1, 0.1, 1);
-    Game::var_image_draw_config_map[image].push_back(this);
+    Game::var_transparent_image_draw_config_map[image].push_back(this);
 }
 
 void SimpleEffect::before()
 {
-    this->position.setZ(-0.1);
     Effect::before();
 }
 

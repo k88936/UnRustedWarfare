@@ -130,6 +130,17 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     }
                 }
             }
+            for (auto i = units_selected.begin(); i != units_selected.end();)
+            {
+                if ((*i)->marked_for_delete)
+                {
+                    i = units_selected.erase(i);
+                }
+                else
+                {
+                    ++i;
+                }
+            }
             if (!units_to_select.empty())
             {
                 units_selected = units_to_select;

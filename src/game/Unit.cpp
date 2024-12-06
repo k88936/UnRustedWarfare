@@ -94,7 +94,7 @@ void Unit::draw()
     render_transform.setToIdentity();
     shadow->render_transform.setToIdentity();
     // QVector3D shadow_pos = meta->shadowOffset;
-    QVector3D shadow_pos=QVector3D(-0.3,-0.3,-0.05);
+    QVector3D shadow_pos = QVector3D(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     if (!meta->is_bio && this->linear_velocity.lengthSquared() > 0)
     {
         const QVector3D random = position + utils::generate_random_small_vector(0.025);
@@ -113,9 +113,9 @@ void Unit::draw()
     shadow->render_transform.translate(shadow_pos);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
-    shadow->color = QVector4D(0, 0, 0, 0.55);
-    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    shadow->color = QVector4D(0, 0, 0, 0.6);
+    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 
@@ -158,8 +158,8 @@ void Unit::step()
 
 void Unit::on_death()
 {
-    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000, position, rotation, scale, linear_velocity,
-                                     angular_velocity));
+    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000, utils::add_offset_z(position,Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation, scale, linear_velocity,
+                                     angular_velocity, QVector4D(0.1, 0.1, 0.1, 1),true));
     for (const auto& effect_on_death : meta->effect_on_death)
     {
         Game::addEffect(new Effect(UnitConfigs::meta_effects.at(effect_on_death), position, rotation, linear_velocity));
@@ -221,16 +221,19 @@ void Unit::after()
     }
 
 
-    if (meta->is_bio && this->linear_forces.lengthSquared() > mass * mass * 100)
-    {
-        this->hp = 0;
-    }
-
-
     if (this->hp <= 0)
     {
         this->marked_for_delete = true;
     }
 
     this->draw();
+}
+
+void Unit::on_collision(const QVector3D& force, float torque, Object* other)
+{
+    if (this->meta->is_bio && other->team != this->team && force.lengthSquared() > mass * mass * 100)
+    {
+        this->hp -= 10;
+    }
+    Object::on_collision(force, torque, other);
 }

@@ -32,6 +32,7 @@ public:
     void on_death();
     void after() override;
 
+    void on_collision(const QVector3D& force, float torque, Object* other) override;
 };
 
 

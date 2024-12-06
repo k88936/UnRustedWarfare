@@ -56,7 +56,8 @@ public:
     virtual void after();
 
     virtual bool on_overlay(Object* obj, QVector3D position_diff);
-    void apply_force(QVector3D force, float torque);
+    virtual void on_collision(const QVector3D& force, float torque, Object* other);
+    void apply_force(const QVector3D& force, float torque);
 
     static bool is_valid(Object*& obj);
     static void ptr_change_to(Object*& obj, Object* new_obj);

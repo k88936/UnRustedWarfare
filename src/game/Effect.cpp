@@ -19,17 +19,17 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     this->position = position;
     if (meta->draw_under_units)
     {
-        this->position.setZ(-1);
+        this->position.setZ(Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     }
     if (meta->attached_to_unit)
     {
         this->linear_velocity = linear_velocity_base + QVector3D(meta->x_speed_relative, meta->y_speed_relative,
-                                                                 meta->h_speed) +
+                                                                 -meta->h_speed - 0.01) +
             utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     else
     {
-        this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, meta->h_speed) +
+        this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, -meta->h_speed - 0.01) +
             utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     // if (meta->x_speed_absolute != 0 || meta->y_speed_absolute != 0)
@@ -63,7 +63,7 @@ void Effect::draw()
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Effect::before()

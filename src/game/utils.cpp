@@ -190,3 +190,18 @@ QVector3D utils::generate_random_small_vector(const float max_offset)
     std::uniform_real_distribution distribution(-max_offset, max_offset);
     return QVector3D(distribution(generator), distribution(generator), 0);
 }
+
+QVector3D utils::add_offset_x(const QVector3D& v, const float offset)
+{
+    return QVector3D(v.x() + offset, v.y(), v.z());
+}
+
+QVector3D utils::add_offset_y(const QVector3D& v, const float offset)
+{
+    return QVector3D(v.x(), v.y() + offset, v.z());
+}
+
+QVector3D utils::add_offset_z(const QVector3D& v, const float offset)
+{
+    return QVector3D(v.x(), v.y(), v.z() + offset);
+}

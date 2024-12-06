@@ -9,6 +9,7 @@
 #include "UnitConfigs.h"
 #include "Effect.h"
 #include "Game.h"
+#include "SimpleEffect.h"
 #include "utils.h"
 
 
@@ -91,6 +92,7 @@ bool Turret::shoot()
         QMatrix4x4 transform;
         transform.translate(position);
         transform.rotate(rotation, 0, 0, 1);
+
         const auto meta_projectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
         Game::addProjectile(new Projectile(meta_projectiles, this->team, transform.map(meta->barrel_position), rotation,
                                            QVector3D(0, 0, 0)));
@@ -98,6 +100,14 @@ bool Turret::shoot()
         {
             Game::addEffect(new Effect(UnitConfigs::meta_effects.at(shoot_flame), transform.map(meta->barrel_position),
                                        rotation, this->linear_velocity));
+        }
+        if (!meta->shoot_light.isNull())
+        {
+            Game::addEffect(new SimpleEffect("light_50.png", 0.1,
+                                             transform.map(utils::add_offset_z(
+                                                 meta->barrel_position, Game::LayerConfig::UPPER_EFFECT_OFFSET))
+                                             , rotation, 0.8,
+                                             QVector3D(0, 0, 0), 0, meta->shoot_light,false));
         }
         recoil_animater.reset();
         coolDown = meta->delay;
@@ -138,7 +148,7 @@ void Turret::draw()
     render_transform.setToIdentity();
     shadow->render_transform.setToIdentity();
     // QVector3D shadow_pos = meta->shadowOffset;
-    QVector3D shadow_pos = QVector3D(-0.3, -0.3, -0.05);
+    QVector3D shadow_pos = QVector3D(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     if (this->has_target && !this->is_aimed)
     {
         const QVector3D random = position + utils::generate_random_small_vector(0.025);
@@ -152,12 +162,12 @@ void Turret::draw()
     }
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     shadow->render_transform.translate(shadow_pos);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
-    shadow->color = QVector4D(0, 0, 0, 0.55);
-    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    shadow->color = QVector4D(0, 0, 0, 0.6);
+    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 void Turret::before()

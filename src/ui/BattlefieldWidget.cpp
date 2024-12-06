@@ -41,7 +41,6 @@ void BattlefieldWidget::initializeGL()
     // Enable back face culling
     glEnable(GL_CULL_FACE);
     glEnable(GL_ALPHA_TEST);
-    glAlphaFunc(GL_GREATER, 0.5);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // glBlendEquation(GL_FUNC_ADD_EXT);
@@ -74,9 +73,10 @@ void BattlefieldWidget::update_camera()
 {
     // qDebug()<<camera_pos;
     // qDebug()<<camera_zoom;
-    constexpr qreal zNear = 3.0, zFar = 7.0;
+    constexpr qreal zNear = 2.0, zFar = 8.0;
     projection.setToIdentity();
-    projection.ortho(-this->size().width() * camera_zoom / 2 + camera_pos.x(), this->size().width() * camera_zoom / 2 + camera_pos.x(),
+    projection.ortho(-this->size().width() * camera_zoom / 2 + camera_pos.x(),
+                     this->size().width() * camera_zoom / 2 + camera_pos.x(),
                      -this->size().height() * camera_zoom / 2 + camera_pos.y(),
                      this->size().height() * camera_zoom / 2 + camera_pos.y(), zNear, zFar);
     QMatrix4x4 matrix;
@@ -94,7 +94,7 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
 {
     for (const auto& [texture_id, drawables] : batches)
     {
-        if (texture_id=="NONE")continue;
+        if (texture_id == "NONE")continue;
         engine->bindTexture(texture_id);
         // qDebug()<<texture_id;
         for (const auto& drawable : drawables)
@@ -109,6 +109,7 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
 //! [5]
 void BattlefieldWidget::paintGL()
 {
+    glAlphaFunc(GL_GREATER, 0.9);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //
@@ -126,7 +127,10 @@ void BattlefieldWidget::paintGL()
     engine->bind_texture_shader();
     engine->setView(projection);
     batch_draw(Game::const_image_draw_config_map);
-    batch_draw(Game::var_image_draw_config_map);
+    batch_draw(Game::var_solid_image_draw_config_map);
+
+    glAlphaFunc(GL_GREATER, 0.1);
+    batch_draw(Game::var_transparent_image_draw_config_map);
     batch_draw(Game::ui_image_draw_config_map);
 }
 

@@ -9,6 +9,7 @@
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
 
+#include "Game.h"
 #include "Tile.h"
 #include "structures/tile_attribute.h"
 
@@ -155,7 +156,7 @@ void MapConfig::loadMap(const std::string& path)
                     }
                     QImage img = image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
                                             tileset.getTileSize().x, tileset.getTileSize().y);
-                    MetaImage metaImage(img, 1, false, true, 1);
+                    MetaImage metaImage(img, 1.025, false, true, 1);
                     MapConfig::tile_images[id] = metaImage;
                 }
             }
@@ -229,11 +230,11 @@ void MapConfig::loadMap(const std::string& path)
             {
                 if (layer->getName() == "Ground")
                 {
-                    config_layer(tiles, layer, -1);
+                    config_layer(tiles, layer, Game::LayerConfig::TILE_GROUND);
                 }
                 else if (layer->getName() == "Items")
                 {
-                    config_layer(tiles, layer, -0.9);
+                    config_layer(tiles, layer, Game::LayerConfig::TILE_ITEM);
                 }
                 else if (layer->getName() == "Units")
                 {

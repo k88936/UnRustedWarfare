@@ -116,7 +116,11 @@ bool Object::on_overlay(Object* obj, const QVector3D position_diff)
     return true;
 }
 
-void Object::apply_force(const QVector3D force, const float torque)
+void Object::on_collision(const QVector3D &force, const float torque,Object* other)
+{
+    apply_force(force ,torque);
+}
+void Object::apply_force(const QVector3D &force, const float torque)
 {
     this->linear_forces += force;
     this->angular_forces += torque;
@@ -137,8 +141,8 @@ void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D positio
     //  }
     const float torqueBefore = 256 * force * obj1->friction * obj2->friction;
     // qDebug()<<torqueBefore;
-    obj1->apply_force(-force3D, torqueBefore * obj1->radius);
-    obj2->apply_force(force3D, -torqueBefore * obj2->radius);
+    obj1->on_collision(-force3D, torqueBefore * obj1->radius,obj2);
+    obj2->on_collision(force3D, -torqueBefore * obj2->radius,obj1);
     // qDebug()<<"hit";
 }
 

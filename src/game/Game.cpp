@@ -26,7 +26,8 @@ float Game::deltaTime = 1.0 / 40;
 float Game::FPS = 1.0 / deltaTime;
 
 std::vector<QVector3D> Game::line_draw_config;
-std::unordered_map<std::string, std::vector<Drawable*>> Game::var_image_draw_config_map;
+std::unordered_map<std::string, std::vector<Drawable*>> Game::var_solid_image_draw_config_map;
+std::unordered_map<std::string, std::vector<Drawable*>> Game::var_transparent_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
 GridsManager Game::grids_manager;
@@ -93,21 +94,22 @@ void Game::init()
     };
     timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
 
-    // for (int i = 25; i < 35; ++i)
-    // {
-    //     for (int j = 25; j < 35; ++j)
-    //     {
-    //         Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
-    //     }
-    // }
+    for (int i = 25; i < 35; ++i)
+    {
+        for (int j = 25; j < 35; ++j)
+        {
+            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
+        }
+    }
 
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37,  32,0), -20));
 
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(30, 20, 0), 50));
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
     //
-    for (int i = 40; i < 43; ++i)
+    for (int i = 57; i < 60; ++i)
     {
         for (int j = 40; j < 43; ++j)
         {
@@ -198,12 +200,13 @@ void Game::clean()
         }
     }
     Game::grids_manager.clear_grids();
+    Game::var_solid_image_draw_config_map.clear();
+    Game::var_transparent_image_draw_config_map.clear();
 }
 
 void Game::step()
 {
     clean();
-    Game::var_image_draw_config_map.clear();
     for (const auto u : Game::units)
     {
         u->before();

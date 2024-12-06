@@ -35,7 +35,7 @@ std::vector<std::string> split(const std::string& str, const char delimiter)
 QVector4D parse_color(const std::string& colorStr)
 {
     QColor color(QString::fromStdString(colorStr));
-    return {color.redF(), color.greenF(), color.blueF(), 1.0f};
+    return {color.redF(), color.greenF(), color.blueF(), color.alphaF()};
 }
 
 class IniParser
@@ -304,6 +304,13 @@ void UnitConfigs::load_ini(const QString& path)
                         attachToUnit = false;
                     }
                     else if (fst == "canShoot")turret->can_shoot = snd == "true";
+                    else if (fst=="shoot_light")
+                    {
+                        turret->shoot_light = parse_color(snd);
+                        turret->shoot_light.setW(0.6);
+                    }
+                    else if (fst=="shoot_sound")turret->shoot_sound = snd;
+                    else if (fst=="shoot_sound_vol")turret->shoot_sound_volume = std::stof(snd);
                     else if (fst == "limitingMinRange")turret->limiting_min_range = std::stof(snd) * scale_rw2sw;
                     else if (fst == "projectile")turret->projectile = snd;
                     else if (fst == "slave")
