@@ -198,7 +198,10 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "image_wreak")unit->image_wreak = snd;
                 else if (fst == "scale")unit->scale = std::stof(snd) * scale_rw2sw;
                 else if (fst == "scaleImagesTo")unit->scale *= std::stof(snd) * scale_rw2sw;
-
+                //
+                // else if (fst=="shadowOffsetX")unit->shadowOffset.setX(std::stof(snd) * scale_rw2sw);
+                // else if (fst=="shadowOffsetY")unit->shadowOffset.setY(std::stof(snd) * scale_rw2sw);
+                //
                 else if (fst == "scaleTurretImagesTo")unit->scaleTurret *= std::stof(snd) * scale_rw2sw;
                 else
                 {
@@ -399,7 +402,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "ySpeedAbsolute")effect->y_speed_absolute = std::stof(snd);
                     else if (fst == "xSpeedRelativeRandom")effect->x_speed_relative_random = std::stof(snd);
                     else if (fst == "ySpeedRelativeRandom")effect->y_speed_relative_random = std::stof(snd);
-                    else if (fst == "hSpeed")effect->h_speed = std::stof(snd)*scale_rw2sw;
+                    else if (fst == "hSpeed")effect->h_speed = std::stof(snd) * scale_rw2sw;
                     else if (fst == "drawUnderUnits")effect->draw_under_units = snd == "true";
                     else if (fst == "fadeInTime")effect->fade_in_time = std::stof(snd);
                     else if (fst == "fadeOut")effect->fade_out = snd == "true";
@@ -433,6 +436,7 @@ void UnitConfigs::load_ini(const QString& path)
             }
         }
     }
+
     meta_units[unit->name] = unit;
 }
 

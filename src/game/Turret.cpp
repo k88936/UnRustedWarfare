@@ -34,6 +34,7 @@ Turret::~Turret()
     {
         delete turret;
     }
+    delete shadow;
 }
 
 void Turret::updateSlots(QMatrix4x4 transform)
@@ -133,15 +134,30 @@ bool Turret::attack(const QVector3D& target)
 void Turret::draw()
 {
     if (slot_inVisible)return;
+
     render_transform.setToIdentity();
+    shadow->render_transform.setToIdentity();
+    // QVector3D shadow_pos = meta->shadowOffset;
+    QVector3D shadow_pos = QVector3D(-0.3, -0.3, -0.05);
     if (this->has_target && !this->is_aimed)
     {
-        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+        const QVector3D random = position + utils::generate_random_small_vector(0.025);
+        render_transform.translate(random);
+        shadow_pos += random;
     }
-    else render_transform.translate(this->position);
+    else
+    {
+        shadow_pos += position;
+        render_transform.translate(this->position);
+    }
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    shadow->render_transform.translate(shadow_pos);
+    shadow->render_transform.rotate(rotation, 0, 0, 1);
+    shadow->render_transform.scale(this->scale);
+    shadow->color = QVector4D(0, 0, 0, 0.55);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 void Turret::before()

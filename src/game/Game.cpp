@@ -2,6 +2,9 @@
 // Created by root on 11/10/24.
 //
 
+#include <QMediaPlayer>
+#include <QAudioOutput>
+#include <QSoundEffect>
 #include "Game.h"
 
 #include <QObject>
@@ -33,7 +36,7 @@ QBasicTimer Game::timer;
 std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
 BattlefieldWidget* Game::battleFieldWidget;
-QTime Game::start_time=QTime::currentTime();
+QTime Game::start_time = QTime::currentTime();
 
 void Game::addProjectile(Projectile* projectile)
 {
@@ -45,10 +48,28 @@ void Game::addEffect(Effect* effect)
     Game::effects.push_back(effect);
 }
 
-FlowField* Game::flow_field_for_test;
 
+auto player = new QMediaPlayer();
+auto audio = new QAudioOutput();
+
+auto ef =QSoundEffect();
 void Game::init()
 {
+    // player->setAudioOutput(audio);
+    // audio->setVolume(0.5);
+    // // player->setSource(QUrl("../music/starting/battletanks1B.ogg"));
+    // player->setSource(QUrl(":/b.ogg"));
+    // audio->setMuted(false);
+    // audio->setVolume(1.0);
+    // player->play();
+
+    ef.setSource(QUrl(":/b.ogg"));
+    ef.setLoopCount(10);
+    ef.setMuted(false);
+    ef.setVolume(1.0);
+    ef.play();
+
+
     UnitConfigs::init();
     MapConfig::init();
     MapConfig::loadMap("../maps/2.tmx");

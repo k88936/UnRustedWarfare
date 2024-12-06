@@ -32,7 +32,6 @@ public:
     static QTime start_time;
     static void addProjectile(Projectile* projectile);
     static void addEffect(Effect* effect);
-    static FlowField* flow_field_for_test;
     static std::vector<Projectile*> projectiles;
     static std::vector<Effect*> effects;
     static std::set<Flock*> flocks;

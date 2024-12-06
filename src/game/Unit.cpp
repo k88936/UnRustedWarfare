@@ -49,6 +49,7 @@ Unit::~Unit()
     {
         delete watcher;
     }
+    delete this->shadow;
 }
 
 void Unit::updateSlots(QMatrix4x4 transform)
@@ -91,14 +92,30 @@ void Unit::attack(const QVector3D& target)
 void Unit::draw()
 {
     render_transform.setToIdentity();
-    if (!meta->is_bio&&this->linear_velocity.lengthSquared() > 0)
+    shadow->render_transform.setToIdentity();
+    // QVector3D shadow_pos = meta->shadowOffset;
+    QVector3D shadow_pos=QVector3D(-0.3,-0.3,-0.05);
+    if (!meta->is_bio && this->linear_velocity.lengthSquared() > 0)
     {
-        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+        const QVector3D random = position + utils::generate_random_small_vector(0.025);
+        render_transform.translate(random);
+        shadow_pos += random;
     }
-    else render_transform.translate(this->position);
+    else
+    {
+        shadow_pos += position;
+        render_transform.translate(this->position);
+    }
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
+
+    // shadow_pos.setZ(0);
+    shadow->render_transform.translate(shadow_pos);
+    shadow->render_transform.rotate(rotation, 0, 0, 1);
+    shadow->render_transform.scale(this->scale);
+    shadow->color = QVector4D(0, 0, 0, 0.55);
     Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    Game::var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 
@@ -143,7 +160,7 @@ void Unit::on_death()
 {
     Game::addEffect(new SimpleEffect(meta->image_wreak, 1000, position, rotation, scale, linear_velocity,
                                      angular_velocity));
-    for (auto effect_on_death : meta->effect_on_death)
+    for (const auto& effect_on_death : meta->effect_on_death)
     {
         Game::addEffect(new Effect(UnitConfigs::meta_effects.at(effect_on_death), position, rotation, linear_velocity));
     }
@@ -204,9 +221,9 @@ void Unit::after()
     }
 
 
-    if (meta->is_bio&&this->linear_forces.lengthSquared()>mass*mass*100)
+    if (meta->is_bio && this->linear_forces.lengthSquared() > mass * mass * 100)
     {
-        this->hp=0;
+        this->hp = 0;
     }
 
 

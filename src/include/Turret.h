@@ -23,6 +23,7 @@ public:
     Object* preferred_target = nullptr;
     bool has_target = false;
     bool is_aimed = false;
+Drawable*     shadow=new Drawable();
 
     utils::animater recoil_animater;
     void updateSlots(QMatrix4x4 transform) override;

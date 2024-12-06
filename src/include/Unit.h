@@ -18,6 +18,7 @@ public:
     ~Unit() override;
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
+    Drawable* shadow = new Drawable();
     float hp;
     bool isAttached = false;
     BoidSensor* boid_sensor;

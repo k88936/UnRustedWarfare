@@ -12,6 +12,7 @@ find_package(Qt6 COMPONENTS
         Widgets
         OpenGL
         OpenGLWidgets
+        Multimedia
         REQUIRED)
 
 add_executable(untitled1
@@ -96,6 +97,7 @@ target_link_libraries(untitled1
         Qt::Widgets
         Qt::OpenGL
         Qt::OpenGLWidgets
+        Qt::Multimedia
         zlibstatic
         libzstd_static
 

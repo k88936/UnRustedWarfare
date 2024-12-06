@@ -40,7 +40,9 @@ public:
 
     //graphics
 
+
     std::string image_wreak="NONE";
+    // QVector3D shadowOffset=QVector3D(-0.3,-0.3,0);
 
     //sounds
     std::vector<std::string> sounds_on_new_selection=std::vector<std::string>();
