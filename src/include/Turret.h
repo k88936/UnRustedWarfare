@@ -26,6 +26,7 @@ public:
 Drawable*     shadow=new Drawable();
 
     utils::animater recoil_animater;
+    bool is_driving;
     void updateSlots(QMatrix4x4 transform) override;
     std::vector<Turret*> turrets_attached;
     float aim(QVector3D target);

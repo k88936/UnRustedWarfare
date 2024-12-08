@@ -24,6 +24,7 @@ class MetaAttachable;
 
 class MetaAttachable{
 public:
+    virtual ~MetaAttachable() = default;
     MetaAttachable();
     QVector3D slot_translation=QVector3D(0,0,0.1);
     bool slot_isFixed=false;

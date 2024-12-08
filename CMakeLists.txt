@@ -88,7 +88,6 @@ add_executable(untitled1
         src/ui/settings_widget.h
         src/ui/settings_widget.ui
         src/game/AudioManager.cpp
-        src/game/AudioManager.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)
@@ -106,11 +105,11 @@ target_link_libraries(untitled1
         Qt::Multimedia
         zlibstatic
         libzstd_static
-
 )
 
 if (CMAKE_HOST_WIN32)
     target_link_libraries(untitled1
+            WIN32
             opengl32
             glu32
     )

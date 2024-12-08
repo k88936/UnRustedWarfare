@@ -53,9 +53,9 @@ void BattlefieldWidget::initializeGL()
 void BattlefieldWidget::update_textures()
 {
     //for ui
-    engine->resisterTexture("_select", MetaImage(QImage(":ui/select_highlight.png"), 2, false, false));
-    engine->resisterTexture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 2, false, false));
-    engine->resisterTexture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 2, false, false));
+    engine->resisterTexture("_select", MetaImage(QImage(":ui/select_highlight.png"), 1.2, false, false));
+    engine->resisterTexture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 1, false, false));
+    engine->resisterTexture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 1, false, false));
 
     for (const auto& [id, image] : UnitConfigs::images)
     {

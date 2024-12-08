@@ -5,6 +5,7 @@
 #ifndef UNIT_CONFIGS_H
 #define UNIT_CONFIGS_H
 #include <qimage.h>
+#include <QSoundEffect>
 
 #include "MetaEffect.h"
 #include "MetaProjectiles.h"
@@ -23,8 +24,10 @@ public:
     static std::unordered_map<std::string, MetaProjectiles *> meta_projectiles;
     static std::unordered_map<std::string, MetaEffect *> meta_effects;
     static std::unordered_map<std::string,MetaImage> images;
+    static std::unordered_map<std::string ,QSoundEffect*> sounds;
     static void parse_effects(const std::string& content, std::vector<std::string>& ans);
     static void load_ini(const QString &path);
+    static void scan_dir(QString path);
     static void init();
 };
 

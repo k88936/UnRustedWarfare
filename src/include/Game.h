@@ -7,11 +7,14 @@
 #include <QBasicTimer>
 #include <unordered_map>
 #include <vector>
+
+#include "AudioManager.h"
 #include "battlefieldwidget.h"
 #include "Drawable.h"
 #include "Effect.h"
 #include "FlowField.h"
 #include "GridsManager.h"
+#include "structures/sound_event.h"
 
 
 class Unit;
@@ -40,18 +43,20 @@ public:
     static float FPS;
     static float deltaTime;
     static GridsManager grids_manager;
+    static AudioManager audio_manager;
     static std::vector<Unit*> units;
     static QBasicTimer timer;
     static std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
     static QTime start_time;
     static std::unordered_map<std::string, std::vector<Drawable*>> var_transparent_image_draw_config_map;
-    static void addProjectile(Projectile* projectile);
-    static void addEffect(Effect* effect);
+    static std::unordered_map<std::string, std::vector<struct SoundEvent>> sound_event_config_map;
     static std::vector<Projectile*> projectiles;
     static std::vector<Effect*> effects;
     static std::set<Flock*> flocks;
     static BattlefieldWidget* battle_field_widget;
     static float volume;
+    static void addProjectile(Projectile* projectile);
+    static void addEffect(Effect* effect);
     static void init();
     static void clean();
     static void step();

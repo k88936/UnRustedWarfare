@@ -19,6 +19,7 @@ std::unordered_map<std::string, MetaUnit*> UnitConfigs::meta_units;
 std::unordered_map<std::string, MetaProjectiles*> UnitConfigs::meta_projectiles;
 std::unordered_map<std::string, MetaEffect*> UnitConfigs::meta_effects;
 std::unordered_map<std::string, MetaImage> UnitConfigs::images;
+std::unordered_map<std::string, QSoundEffect*> UnitConfigs::sounds;
 
 std::vector<std::string> split(const std::string& str, const char delimiter)
 {
@@ -198,10 +199,10 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "image_wreak")unit->image_wreak = snd;
                 else if (fst == "scale")unit->scale = std::stof(snd) * scale_rw2sw;
                 else if (fst == "scaleImagesTo")unit->scale *= std::stof(snd) * scale_rw2sw;
-                //
-                // else if (fst=="shadowOffsetX")unit->shadowOffset.setX(std::stof(snd) * scale_rw2sw);
-                // else if (fst=="shadowOffsetY")unit->shadowOffset.setY(std::stof(snd) * scale_rw2sw);
-                //
+                    //
+                    // else if (fst=="shadowOffsetX")unit->shadowOffset.setX(std::stof(snd) * scale_rw2sw);
+                    // else if (fst=="shadowOffsetY")unit->shadowOffset.setY(std::stof(snd) * scale_rw2sw);
+                    //
                 else if (fst == "scaleTurretImagesTo")unit->scaleTurret *= std::stof(snd) * scale_rw2sw;
                 else
                 {
@@ -209,7 +210,6 @@ void UnitConfigs::load_ini(const QString& path)
                 }
             }
             images[unit->image].frames = unit->total_frames;
-            unit->init_frames();
         }
         else if (section_id == "attack")
         {
@@ -304,13 +304,13 @@ void UnitConfigs::load_ini(const QString& path)
                         attachToUnit = false;
                     }
                     else if (fst == "canShoot")turret->can_shoot = snd == "true";
-                    else if (fst=="shoot_light")
+                    else if (fst == "shoot_light")
                     {
                         turret->shoot_light = parse_color(snd);
                         turret->shoot_light.setW(0.6);
                     }
-                    else if (fst=="shoot_sound")turret->shoot_sound = snd;
-                    else if (fst=="shoot_sound_vol")turret->shoot_sound_volume = std::stof(snd);
+                    else if (fst == "shoot_sound")turret->shoot_sound = snd;
+                    else if (fst == "shoot_sound_vol")turret->shoot_sound_volume = std::stof(snd);
                     else if (fst == "limitingMinRange")turret->limiting_min_range = std::stof(snd) * scale_rw2sw;
                     else if (fst == "projectile")turret->projectile = snd;
                     else if (fst == "slave")
@@ -343,7 +343,7 @@ void UnitConfigs::load_ini(const QString& path)
                 {
                     turret->range = unit->max_attack_range;
                 }
-                turret->init_frames();
+                turret->init();
             }
             else if (section_id.starts_with("projectile"))
             {
@@ -374,7 +374,7 @@ void UnitConfigs::load_ini(const QString& path)
                     }
                 }
                 images[projectile->image].is_raw_size = true;
-                projectile->init_frames();
+                projectile->init();
             }
             else if (section_id.starts_with("effect"))
             {
@@ -435,7 +435,7 @@ void UnitConfigs::load_ini(const QString& path)
                 }
                 images[effect->image].is_raw_size = true;
                 images[effect->image].frames = effect->total_frames;
-                effect->init_frames();
+                effect->init();
             }
             else
             {
@@ -445,12 +445,11 @@ void UnitConfigs::load_ini(const QString& path)
     }
 
     meta_units[unit->name] = unit;
+    unit->init();
 }
 
-void UnitConfigs::init()
+void UnitConfigs::scan_dir(QString path)
 {
-    QString path = "../M2A3/";
-
     QDirIterator iter(path, QDir::NoDotAndDotDot | QDir::AllEntries, QDirIterator::Subdirectories);
     while (iter.hasNext())
     {
@@ -468,6 +467,20 @@ void UnitConfigs::init()
                 // images[file_name.toStdString()].image = std::move(img);
                 images[file_name.toStdString()].image = img;
             }
+            else if (file_name.endsWith(".wav"))
+            {
+                auto sound = new QSoundEffect;
+                sound->setSource(QUrl::fromLocalFile(iter.filePath()));
+                sounds[file_name.toStdString()] = sound;
+            }
         }
     }
+}
+
+void UnitConfigs::init()
+{
+    QString path = "../M2A3/";
+
+    scan_dir(path);
+    scan_dir("../sound");
 }

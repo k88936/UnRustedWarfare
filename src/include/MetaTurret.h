@@ -38,7 +38,7 @@ public:
     std::string projectile;
     bool slave=false;
     std::vector<std::string> shoot_flame;
-   void init_frames() override;
+   void init() override;
 };
 
 

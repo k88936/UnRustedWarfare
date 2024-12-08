@@ -4,8 +4,15 @@
 
 #include "MetaDrawable.h"
 
-void MetaDrawable::init_frames()
+void MetaDrawable::init()
 {
+
+
+
+
+
+
+
     if (total_frames == 1)
     {
         texture_frames.push_back(image);

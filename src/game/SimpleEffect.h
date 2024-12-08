@@ -12,8 +12,6 @@ class SimpleEffect : public Effect
 public:
     float max_life;
     std::string image;
-
-
     SimpleEffect(std::string image, float life, const QVector3D& position, float rotation, float scale,
                  const QVector3D& linear_velocity, float angular_velocity, const QVector4D& color, bool physics);
     void draw() override;

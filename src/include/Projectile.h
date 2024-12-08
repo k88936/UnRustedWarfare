@@ -9,20 +9,21 @@
 #include "Unit.h"
 
 
-class Projectile :public Drawable,public Object{
+class Projectile : public Drawable, public Object
+{
 public:
-    float has_lived=0;
-    MetaProjectiles * meta;
+    float has_lived = 0;
+    MetaProjectiles* meta;
 
-    Projectile(MetaProjectiles* meta,int team, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
+    Projectile(MetaProjectiles* meta, int team, QVector3D position, float rotation,
+               const QVector3D& linear_velocity_base);
     void draw() override;
     void before() override;
     void after() override;
-    bool on_overlay(Object *obj, QVector3D positionDiff) override;
+    bool on_overlay(Object* obj, QVector3D positionDiff) override;
 
-    void hit_effect(const Unit *unit) const;
+    void hit_effect(const Unit* unit) const;
 };
-
 
 
 #endif //PROJECTILE_H

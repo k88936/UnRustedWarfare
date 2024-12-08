@@ -139,14 +139,15 @@ void BoidSensor::after()
         boid->apply_force(
             boid->vector_ver * speed_projected * boid->mass * boid->angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime, 0.8);
+        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime,
+                                   0.8);
     }
 
 
     // speed_target *= 0.99;
     if (arrived_flock_target_offset)
     {
-        boid->apply_force(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
+        boid->drive(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
     }
     else
     {
@@ -155,13 +156,13 @@ void BoidSensor::after()
         {
             if (speed_target_length > speed_projected)
             {
-                boid->apply_force(
+                boid->drive(
                     boid->mass * boid->vector_dir * boid->meta->move_acc,
                     0);
             }
             else
             {
-                boid->apply_force(
+                boid->drive(
                     -boid->mass * boid->vector_dir * boid->meta->move_dec,
                     0);
             }
@@ -170,20 +171,20 @@ void BoidSensor::after()
         {
             if (speed_target_length > speed_projected)
             {
-                boid->apply_force(
+                boid->drive(
                     boid->mass * boid->vector_dir * boid->meta->move_dec,
                     0);
             }
             else
             {
-                boid->apply_force(
+                boid->drive(
                     -boid->mass * boid->vector_dir * boid->meta->move_acc,
                     0);
             }
         }
         else
         {
-            boid->apply_force(
+            boid->drive(
                 boid->mass * boid->vector_dir * boid->meta->move_acc,
                 0);
         }

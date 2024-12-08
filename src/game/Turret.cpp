@@ -68,6 +68,7 @@ float Turret::aim(const QVector3D target)
         rotationSpeed = 0;
         return 0;
     }
+    // is_driving = true;
     if (angle_diff < 0)
     {
         rotationSpeed = -meta->turn_speed;
@@ -107,7 +108,7 @@ bool Turret::shoot()
                                              transform.map(utils::add_offset_z(
                                                  meta->barrel_position, Game::LayerConfig::UPPER_EFFECT_OFFSET))
                                              , rotation, 0.8,
-                                             QVector3D(0, 0, 0), 0, meta->shoot_light,false));
+                                             QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
         recoil_animater.reset();
         coolDown = meta->delay;
@@ -146,32 +147,31 @@ void Turret::draw()
     if (slot_inVisible)return;
 
     render_transform.setToIdentity();
-    shadow->render_transform.setToIdentity();
-    // QVector3D shadow_pos = meta->shadowOffset;
-    QVector3D shadow_pos = QVector3D(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
-    if (this->has_target && !this->is_aimed)
+
+    if (is_driving)
     {
-        const QVector3D random = position + utils::generate_random_small_vector(0.025);
-        render_transform.translate(random);
-        shadow_pos += random;
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
     }
     else
     {
-        shadow_pos += position;
         render_transform.translate(this->position);
     }
+    shadow->render_transform = render_transform;
+
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    shadow->render_transform.translate(shadow_pos);
+    shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
     Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
+
 void Turret::before()
 {
+    is_driving = false;
     float offset = recoil_animater.get_value();
     // qDebug()<<offset;
     this->slot_translation.setX(meta->slot_translation.x() + offset);
