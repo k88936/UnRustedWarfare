@@ -16,6 +16,7 @@
 
 #include "ui_battle_widget.h"
 #include "Flock.h"
+#include "UnitConfigs.h"
 
 battle_widget::battle_widget(QWidget* parent) :
     QWidget(parent), ui(new Ui::battle_widget)
@@ -130,6 +131,10 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     }
                 }
             }
+
+            //select by rect is solved at func on mouse move
+
+
             for (auto i = units_selected.begin(); i != units_selected.end();)
             {
                 if ((*i)->marked_for_delete)
@@ -141,8 +146,11 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     ++i;
                 }
             }
-            if (!units_to_select.empty())
+
+
+            if (!units_to_select.empty()) //new select
             {
+                (*units_to_select.begin())->on_new_selection();
                 units_selected = units_to_select;
                 Game::ui_image_draw_config_map["_select"].clear();
                 Game::ui_image_draw_config_map["_arrow_highlight"].clear();
@@ -151,10 +159,10 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     Game::ui_image_draw_config_map["_select"].push_back(selected);
                 }
             }
-            else
+            else // new order
             {
+                (*units_selected.begin())->on_move_order();
                 auto flock = new Flock();
-
                 for (auto& selected : units_selected)
                 {
                     if (selected->boid_sensor->flock != nullptr)

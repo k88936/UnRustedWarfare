@@ -30,11 +30,11 @@ public:
     float build_speed;
     float energy_max;
     float energy_regen;
-    std::vector<std::string> tags=std::vector<std::string>();
+    std::vector<std::string> tags;//=std::vector<std::string>();
 
     //
     int max_transporting_units;
-    std::vector<std::string> transport_units_require_tag=std::vector<std::string>();
+    std::vector<std::string> transport_units_require_tag;//=std::vector<std::string>();
     float exit_x;
     float exit_y;
 
@@ -45,14 +45,14 @@ public:
     // QVector3D shadowOffset=QVector3D(-0.3,-0.3,0);
 
     //sounds
-    std::vector<std::string> sounds_on_new_selection=std::vector<std::string>();
-    std::vector<std::string> sounds_on_move_order=std::vector<std::string>();
-    std::vector<std::string> sounds_on_death=std::vector<std::string>();
-    std::vector<std::string> sounds_on_hit=std::vector<std::string>();
-    std::vector<std::string> sounds_on_fire=std::vector<std::string>();
-    std::vector<std::string> sounds_on_move=std::vector<std::string>();
+    std::vector<std::string> sounds_on_new_selection;//=std::vector<std::string>();
+    std::vector<std::string> sounds_on_move_order;//=std::vector<std::string>();
+    std::vector<std::string> sounds_on_death;//=std::vector<std::string>();
+    std::vector<std::string> sounds_on_hit;//=std::vector<std::string>();
+    std::vector<std::string> sounds_on_fire;//=std::vector<std::string>();
+    std::vector<std::string> sounds_on_move;//=std::vector<std::string>();
     //
-    std::vector<std::string> effect_on_death=std::vector<std::string>();
+    std::vector<std::string> effect_on_death;//=std::vector<std::string>();
 
 
     //attack
@@ -78,11 +78,11 @@ public:
     bool join_group;
     bool is_wheel_powered=false;
 
-    std::vector<MetaTurret*> attached_turret=std::vector<MetaTurret*>();
+    std::vector<MetaTurret*> attached_turret;//=std::vector<MetaTurret*>();
     float scaleTurret=1;
     bool is_bio=false;
 
-    void attack();
+    void init();
 };
 
 

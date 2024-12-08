@@ -92,35 +92,40 @@ void Unit::attack(const QVector3D& target)
 void Unit::draw()
 {
     render_transform.setToIdentity();
-    shadow->render_transform.setToIdentity();
-    // QVector3D shadow_pos = meta->shadowOffset;
-    QVector3D shadow_pos = QVector3D(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
-    if (!meta->is_bio && this->linear_velocity.lengthSquared() > 0)
+
+    if (is_driving)
     {
-        const QVector3D random = position + utils::generate_random_small_vector(0.025);
-        render_transform.translate(random);
-        shadow_pos += random;
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
     }
     else
     {
-        shadow_pos += position;
         render_transform.translate(this->position);
     }
+    shadow->render_transform = render_transform;
+
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
+    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
-    // shadow_pos.setZ(0);
-    shadow->render_transform.translate(shadow_pos);
+    shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+}
+
+void Unit::drive(const QVector3D& force, const float torque)
+{
+    if (!meta->is_bio &&
+        (force.lengthSquared() != 0 || torque != 0))
+        is_driving = true;
+    Object::apply_force(force, torque);
 }
 
 
 void Unit::before()
 {
+    is_driving = false;
     Game::grids_manager.update_object(this);
     Object::before();
     for (const auto& watcher : watchers)
@@ -158,12 +163,35 @@ void Unit::step()
 
 void Unit::on_death()
 {
-    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000, utils::add_offset_z(position,Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation, scale, linear_velocity,
-                                     angular_velocity, QVector4D(0.1, 0.1, 0.1, 1),true));
+    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000,
+                                     utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
+                                     scale, linear_velocity,
+                                     angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)
     {
         Game::addEffect(new Effect(UnitConfigs::meta_effects.at(effect_on_death), position, rotation, linear_velocity));
     }
+}
+
+void Unit::on_drive()
+{
+    const std::string id = utils::random_element(meta->sounds_on_move);
+    Game::audio_manager.sound_event_config_map[id].emplace_back(
+        this->position, 1);
+}
+
+void Unit::on_new_selection()
+{
+    const std::string id = utils::random_element(meta->sounds_on_move);
+    Game::audio_manager.sound_event_config_map[id].emplace_back(
+        this->position, 1);
+}
+
+void Unit::on_move_order()
+{
+    const std::string id = utils::random_element(meta->sounds_on_move);
+    Game::audio_manager.sound_event_config_map[id].emplace_back(
+        this->position, 1);
 }
 
 void Unit::after()
@@ -221,9 +249,14 @@ void Unit::after()
     }
 
 
-    if (this->hp <= 0)
+    if (is_driving)
     {
-        this->marked_for_delete = true;
+        on_drive();
+    }
+
+    if (hp <= 0)
+    {
+        marked_for_delete = true;
     }
 
     this->draw();

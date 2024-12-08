@@ -15,7 +15,7 @@ public:
     std::string image="NONE";
     float scale = 1;
 
-   virtual void init_frames();
+   virtual void init();
     std::vector<std::string> texture_frames;
 
 };

@@ -2,13 +2,14 @@
 // Created by root on 11/10/24.
 //
 
+#include "Game.h"
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QSoundEffect>
-#include "Game.h"
 
 #include <QObject>
 
+#include "AudioManager.h"
 #include "battle_widget.h"
 #include "UnitConfigs.h"
 
@@ -30,7 +31,10 @@ std::unordered_map<std::string, std::vector<Drawable*>> Game::var_solid_image_dr
 std::unordered_map<std::string, std::vector<Drawable*>> Game::var_transparent_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
+
+std::unordered_map<std::string, std::vector<SoundEvent>> Game::sound_event_config_map;
 GridsManager Game::grids_manager;
+AudioManager Game::audio_manager;
 std::vector<Unit*> Game::units;
 std::set<Flock*> Game::flocks;
 QBasicTimer Game::timer;
@@ -54,8 +58,6 @@ auto ef = QSoundEffect();
 
 void Game::init()
 {
-
-
     // ef.setSource(QUrl(":/b.ogg"));
     // ef.setLoopCount(10);
     // ef.setMuted(false);
@@ -64,12 +66,14 @@ void Game::init()
     //
 
     UnitConfigs::init();
+
     MapConfig::init();
     MapConfig::loadMap("../maps/2.tmx");
     //
     // MapConfig::world_width=100;
     // MapConfig::world_height=100;
     grids_manager.init();
+    audio_manager.init();
     // battleFieldWidget->show();
     // welcome = new welcome_widget();
     // battleFieldWidget = welcome->get_battleFieldWidget();
@@ -103,7 +107,7 @@ void Game::init()
     }
 
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37,  32,0), -20));
+    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
     // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(30, 20, 0), 50));
     // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
@@ -202,6 +206,7 @@ void Game::clean()
     Game::grids_manager.clear_grids();
     Game::var_solid_image_draw_config_map.clear();
     Game::var_transparent_image_draw_config_map.clear();
+    Game::audio_manager.sound_event_config_map.clear();
 }
 
 void Game::step()
@@ -236,5 +241,6 @@ void Game::step()
     {
         e->after();
     }
+    audio_manager.play(battle_field_widget->camera_pos);
     battle_field_widget->update();
 }

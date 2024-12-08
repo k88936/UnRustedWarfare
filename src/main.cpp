@@ -51,11 +51,14 @@ int main(int argc, char* argv[])
 
 
     auto* music = new QSoundEffect();
-    music->setSource(QUrl::fromLocalFile("../b.wav"));
+    // music->setSource(QUrl::fromLocalFile("../sound/attack.wav"));
+    music->setSource(QUrl::fromLocalFile("../sound/tank_moving0.wav"));
     // music->setSource(QUrl("qrc:/1.wav"));
     music->setLoopCount(QSoundEffect::Infinite); //设置无限循环
     music->setVolume(0.5f); //设置音量，在0到1之间
     music->play();
+    music->stop();
+
 
     auto player = new QMediaPlayer();
     auto audio = new QAudioOutput();

@@ -22,14 +22,19 @@ public:
     float hp;
     bool isAttached = false;
     BoidSensor* boid_sensor;
+    bool is_driving=false;
     void attack(const QVector3D& target);
     void draw() override;
+    void drive(const QVector3D& force, float torque);
     std::vector<Turret*> turrets;
     std::vector<Object*> watchers;
 
     void before() override;
     void step() override;
     void on_death();
+    void on_drive();
+    void on_new_selection();
+    void on_move_order();
     void after() override;
 
     void on_collision(const QVector3D& force, float torque, Object* other) override;

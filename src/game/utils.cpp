@@ -1,4 +1,4 @@
-//
+
 // Created by root on 12/2/24.
 //
 
@@ -24,8 +24,7 @@ void utils::animater::reset()
 
 float utils::animater::get_value()
 {
-    float passed = start_.msecsTo(QTime::currentTime());
-    if (passed >= duration_)
+    if (float passed = start_.msecsTo(QTime::currentTime()); passed >= duration_)
     {
         return to_;
     }
