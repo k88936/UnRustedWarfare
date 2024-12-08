@@ -16,7 +16,7 @@ find_package(Qt6 COMPONENTS
         Multimedia
         REQUIRED)
 
-add_executable(untitled1
+add_executable(untitled1 WIN32
         src/main.cpp
         src/game/Drawable.cpp
         src/game/Object.cpp
@@ -109,7 +109,6 @@ target_link_libraries(untitled1
 
 if (CMAKE_HOST_WIN32)
     target_link_libraries(untitled1
-            WIN32
             opengl32
             glu32
     )
