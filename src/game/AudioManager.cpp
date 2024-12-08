@@ -14,6 +14,7 @@ void AudioManager::play(QVector3D listener_pos)
     {
         for (auto sound_event : sound_events)
         {
+            float dis = (sound_event.position - listener_pos).lengthSquared();
             QSoundEffect* sound = pool.front();
             qDebug() << sound->isPlaying();
             qDebug() << sound->source();
@@ -22,10 +23,14 @@ void AudioManager::play(QVector3D listener_pos)
             if (sound->isPlaying())
             {
                 pool.push_back(sound);
+                for (int i = 0; i < 32; ++i)
+                {
+                    pool.push_back(new QSoundEffect());
+                }
                 sound = new QSoundEffect();
             }
             sound->setSource(UnitConfigs::sounds.at(id));
-            sound->setVolume(global_volume / ((sound_event.position - listener_pos).lengthSquared() + 1.0f));
+            sound->setVolume(global_volume / (dis + 1.0f));
             sound->play();
             pool.push_back(sound);
         }
