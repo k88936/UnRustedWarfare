@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
     audio->setVolume(0.5);
-     do_work(player, "../music/MW3/");
+     // do_work(player, "../music/MW3/");
     // do_work(player, "../music/starting/");
 // )    do_work(player, "../music/starting/");
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)

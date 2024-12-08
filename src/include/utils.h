@@ -26,6 +26,7 @@ namespace utils
         float get_value();
     };
 
+    constexpr std::string EMPTY_STR = "NONE";
     extern float sign(float value);
     extern float dir_of(QVector3D vector);
     extern float dir_diff(QVector3D vector, float angle);
@@ -48,13 +49,16 @@ namespace utils
     extern QVector3D set_offset_z(const QVector3D& v, float offset);
 
     template <typename T>
-    extern T random_element(const std::vector<T>& vec)
+    extern T random_element(const std::vector<T>& vec, T default_on_empty)
     {
+        if (vec.empty())
+        {
+            return default_on_empty;
+        }
         static std::default_random_engine generator;
         std::uniform_int_distribution<std::size_t> distribution(0, vec.size() - 1);
-        return vec[distribution(generator)];
+        return vec.at(distribution(generator));;
     }
-
 };
 
 

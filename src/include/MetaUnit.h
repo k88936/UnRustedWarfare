@@ -45,12 +45,12 @@ public:
     // QVector3D shadowOffset=QVector3D(-0.3,-0.3,0);
 
     //sounds
-    std::vector<std::string> sounds_on_new_selection;//=std::vector<std::string>();
-    std::vector<std::string> sounds_on_move_order;//=std::vector<std::string>();
-    std::vector<std::string> sounds_on_death;//=std::vector<std::string>();
-    std::vector<std::string> sounds_on_hit;//=std::vector<std::string>();
-    std::vector<std::string> sounds_on_fire;//=std::vector<std::string>();
-    std::vector<std::string> sounds_on_move;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_new_selection;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_move_order;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_death;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_hit;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_fire;//=std::vector<std::string>();
+    std::vector<std::string> sound_on_move;//=std::vector<std::string>();
     //
     std::vector<std::string> effect_on_death;//=std::vector<std::string>();
 

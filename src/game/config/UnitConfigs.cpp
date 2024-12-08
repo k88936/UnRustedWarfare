@@ -164,12 +164,12 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = split(snd, ',');
-                else if (fst == "soundsOnNewSelection")unit->sounds_on_new_selection = split(snd, ',');
-                else if (fst == "soundsOnMoveOrder")unit->sounds_on_move_order = split(snd, ',');
-                else if (fst == "soundsOnDeath")unit->sounds_on_death = split(snd, ',');
-                else if (fst == "soundsOnHit")unit->sounds_on_hit = split(snd, ',');
-                else if (fst == "soundsOnFire")unit->sounds_on_fire = split(snd, ',');
-                else if (fst == "soundsOnMove")unit->sounds_on_move = split(snd, ',');
+                else if (fst == "soundOnNewSelection")unit->sound_on_new_selection = split(snd, ',');
+                else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = split(snd, ',');
+                else if (fst == "soundOnDeath")unit->sound_on_death = split(snd, ',');
+                else if (fst == "soundOnHit")unit->sound_on_hit = split(snd, ',');
+                else if (fst == "soundOnFire")unit->sound_on_fire = split(snd, ',');
+                else if (fst == "soundOnMove")unit->sound_on_move = split(snd, ',');
                 else if (fst == "effectOnDeath")parse_effects(snd, unit->effect_on_death);
                 else if (fst == "isBio")unit->is_bio = snd == "true";
 

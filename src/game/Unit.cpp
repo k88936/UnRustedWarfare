@@ -175,21 +175,21 @@ void Unit::on_death()
 
 void Unit::on_drive()
 {
-    const std::string id = utils::random_element(meta->sounds_on_move);
+    const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
     Game::audio_manager.sound_event_config_map[id].emplace_back(
         this->position, 1);
 }
 
 void Unit::on_new_selection()
 {
-    const std::string id = utils::random_element(meta->sounds_on_move);
+    const std::string id = utils::random_element(meta->sound_on_new_selection, utils::EMPTY_STR);
     Game::audio_manager.sound_event_config_map[id].emplace_back(
         this->position, 1);
 }
 
 void Unit::on_move_order()
 {
-    const std::string id = utils::random_element(meta->sounds_on_move);
+    const std::string id = utils::random_element(meta->sound_on_move_order, utils::EMPTY_STR);
     Game::audio_manager.sound_event_config_map[id].emplace_back(
         this->position, 1);
 }
