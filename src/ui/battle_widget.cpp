@@ -161,7 +161,6 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
             }
             else // new order
             {
-                (*units_selected.begin())->on_move_order();
                 auto flock = new Flock();
                 for (auto& selected : units_selected)
                 {
@@ -175,6 +174,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
 
                 if (!flock->boids.empty())
                 {
+                    (*units_selected.begin())->on_move_order();
                     flock->move(m_press_pos_world);
                     move_flag->render_transform.setToIdentity();
                     move_flag->render_transform.translate(m_press_pos_world);

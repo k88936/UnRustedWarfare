@@ -206,7 +206,6 @@ void Game::clean()
     Game::grids_manager.clear_grids();
     Game::var_solid_image_draw_config_map.clear();
     Game::var_transparent_image_draw_config_map.clear();
-    Game::audio_manager.sound_event_config_map.clear();
 }
 
 void Game::step()

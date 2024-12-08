@@ -25,6 +25,7 @@ void AudioManager::play(QVector3D listener_pos)
         if (sound->isPlaying())continue;
         sound->play();
     }
+    sound_event_config_map.clear();
 }
 
 void AudioManager::init()

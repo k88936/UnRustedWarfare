@@ -11,13 +11,13 @@ void MetaUnit::init()
 
     if (is_bio)
     {
-        sound_on_move.push_back("footstep0.wav");
+        sound_on_move.emplace_back("footstep0.wav");
     }
     else
     {
-        sound_on_move.push_back("tank_moving0.wav");
-        sound_on_move.push_back("tank_moving1.wav");
-        sound_on_move.push_back("tank_moving2.wav");
-        sound_on_move.push_back("tank_moving3.wav");
+        sound_on_move.emplace_back("tank_moving0.wav");
+        sound_on_move.emplace_back("tank_moving1.wav");
+        sound_on_move.emplace_back("tank_moving2.wav");
+        sound_on_move.emplace_back("tank_moving3.wav");
     }
 }
