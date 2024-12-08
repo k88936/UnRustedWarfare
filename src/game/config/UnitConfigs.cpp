@@ -19,7 +19,7 @@ std::unordered_map<std::string, MetaUnit*> UnitConfigs::meta_units;
 std::unordered_map<std::string, MetaProjectiles*> UnitConfigs::meta_projectiles;
 std::unordered_map<std::string, MetaEffect*> UnitConfigs::meta_effects;
 std::unordered_map<std::string, MetaImage> UnitConfigs::images;
-std::unordered_map<std::string, QSoundEffect*> UnitConfigs::sounds;
+std::unordered_map<std::string, QUrl> UnitConfigs::sounds;
 
 std::vector<std::string> split(const std::string& str, const char delimiter)
 {
@@ -469,9 +469,7 @@ void UnitConfigs::scan_dir(QString path)
             }
             else if (file_name.endsWith(".wav"))
             {
-                auto sound = new QSoundEffect;
-                sound->setSource(QUrl::fromLocalFile(iter.filePath()));
-                sounds[file_name.toStdString()] = sound;
+                sounds[file_name.toStdString()] = QUrl::fromLocalFile(iter.filePath());
             }
         }
     }

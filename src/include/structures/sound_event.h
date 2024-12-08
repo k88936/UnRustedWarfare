@@ -4,6 +4,7 @@
 
 #ifndef SOUND_EVENT_H
 #define SOUND_EVENT_H
+#include <QSoundEffect>
 #include <QVector3D>
 
 struct SoundEvent
