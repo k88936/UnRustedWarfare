@@ -11,7 +11,7 @@ void MetaUnit::init()
 
     if (is_bio)
     {
-        sound_on_move.emplace_back("footstep0.wav");
+        // sound_on_move.emplace_back("footstep0.wav");
     }
     else
     {
