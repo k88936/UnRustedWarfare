@@ -15,6 +15,7 @@ void AudioManager::play(QVector3D listener_pos)
         for (auto sound_event : sound_events)
         {
             float dis = (sound_event.position - listener_pos).lengthSquared();
+            if (dis>400)continue;
             QSoundEffect* sound = pool.front();
             qDebug() << sound->isPlaying();
             qDebug() << sound->source();
