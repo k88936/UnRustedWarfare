@@ -21,8 +21,8 @@ void AudioManager::play(QVector3D listener_pos)
             cnt++;
         }
         QSoundEffect* sound = UnitConfigs::sounds.at(id);
-        sound->setVolume(v / cnt);
-        if (sound->isPlaying())continue;
+        sound->setVolume(v*global_volume / cnt);
+        // if (sound->isPlaying())continue;
         sound->play();
     }
     sound_event_config_map.clear();
