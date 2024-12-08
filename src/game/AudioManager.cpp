@@ -10,36 +10,41 @@
 
 void AudioManager::play(QVector3D listener_pos)
 {
+    sound_event_config_map["NONE"].clear();
     for (const auto& [id, sound_events] : sound_event_config_map)
     {
-        float cnt = 0;
-        float v = 0;
-
+        int cnt=0;
         for (auto sound_event : sound_events)
         {
-            v += 1.0 / ((sound_event.position - listener_pos).lengthSquared() + 1.0f);
+            float dis = (sound_event.position - listener_pos).lengthSquared();
+            if (dis>400)continue;
+            if(cnt>8)break;
+            QSoundEffect* sound = pool.front();
+            qDebug() << sound->isPlaying();
+            qDebug() << sound->source();
+            qDebug() << sound->status();
+            pool.pop_front();
+            if (sound->isPlaying())
+            {
+                pool.push_back(sound);
+                sound = new QSoundEffect();
+            }
+            sound->setSource(UnitConfigs::sounds.at(id));
+            sound->setVolume(global_volume / (dis + 1.0f));
+            sound->play();
+            pool.push_back(sound);
             cnt++;
         }
-        QSoundEffect* sound = UnitConfigs::sounds.at(id);
-        sound->setVolume(v / cnt);
-        if (sound->isPlaying())continue;
-        sound->play();
     }
+    sound_event_config_map.clear();
 }
 
 void AudioManager::init()
 {
-    auto empty = new QSoundEffect();
-    // empty->setSource(QUrl::fromLocalFile("../sound/empty.wav"));
-    UnitConfigs::sounds["NONE"] = empty;
-    // for (auto& [id, sound_effect] : UnitConfigs::sounds)
-    // {
-    //     QObject::connect(sound_effect, &QSoundEffect::playingChanged, [=](const bool playing)
-    //     {
-    //         if (!playing)
-    //         {
-    //             sound_effect->play();
-    //         }
-    //     });
-    // }
+    UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty.wav"];
+
+    for (int i = 0; i < 32; ++i)
+    {
+        pool.push_back(new QSoundEffect());
+    }
 }

@@ -59,6 +59,8 @@ namespace utils
         std::uniform_int_distribution<std::size_t> distribution(0, vec.size() - 1);
         return vec.at(distribution(generator));;
     }
+    extern bool random_bool(float chance);
+    extern bool freq_bool(float freq);
 };
 
 

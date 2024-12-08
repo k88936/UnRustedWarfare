@@ -147,7 +147,10 @@ void BoidSensor::after()
     // speed_target *= 0.99;
     if (arrived_flock_target_offset)
     {
-        boid->drive(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
+        if (!utils::within(this->position, target_offset, 0.2))
+        {
+            boid->drive(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
+        }
     }
     else
     {
