@@ -116,7 +116,7 @@ void Unit::draw()
 
 void Unit::drive(const QVector3D& force, const float torque)
 {
-    if ((force.lengthSquared()>this->mass*this->mass*1 || torque != 0))
+    if ((force.lengthSquared() > this->mass * this->mass * 1 || torque != 0))
         is_driving = true;
     Object::apply_force(force, torque);
 }
@@ -174,9 +174,12 @@ void Unit::on_death()
 
 void Unit::on_drive()
 {
-    const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
-    Game::audio_manager.sound_event_config_map[id].emplace_back(
-        this->position, 1);
+    if (utils::freq_bool(2))
+    {
+        const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
+        Game::audio_manager.sound_event_config_map[id].emplace_back(
+            this->position, 1);
+    }
 }
 
 void Unit::on_new_selection()

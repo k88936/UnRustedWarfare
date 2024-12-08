@@ -23,10 +23,6 @@ void AudioManager::play(QVector3D listener_pos)
             if (sound->isPlaying())
             {
                 pool.push_back(sound);
-                for (int i = 0; i < 32; ++i)
-                {
-                    pool.push_back(new QSoundEffect());
-                }
                 sound = new QSoundEffect();
             }
             sound->setSource(UnitConfigs::sounds.at(id));

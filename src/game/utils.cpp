@@ -216,3 +216,14 @@ QVector3D utils::set_offset_z(const QVector3D& v, const float offset)
 {
     return QVector3D(v.x(), v.y(), offset);
 }
+
+bool utils::random_bool(float chance) {
+    static std::default_random_engine generator;
+    std::uniform_real_distribution<float> distribution(0.0, 1.0);
+    return distribution(generator) < chance;
+}
+
+bool utils::freq_bool(float freq) {
+
+    return random_bool(freq*Game::deltaTime);
+}
