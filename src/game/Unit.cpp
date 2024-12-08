@@ -116,8 +116,7 @@ void Unit::draw()
 
 void Unit::drive(const QVector3D& force, const float torque)
 {
-    if (!meta->is_bio &&
-        (force.lengthSquared() != 0 || torque != 0))
+    if ((force.lengthSquared()>this->mass*this->mass*1 || torque != 0))
         is_driving = true;
     Object::apply_force(force, torque);
 }

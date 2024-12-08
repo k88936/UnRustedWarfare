@@ -15,9 +15,9 @@ void AudioManager::play(QVector3D listener_pos)
         for (auto sound_event : sound_events)
         {
             QSoundEffect* sound = pool.front();
-            qDebug()<<sound->isPlaying();
-            qDebug()<<sound->source();
-            qDebug()<<sound->status();
+            qDebug() << sound->isPlaying();
+            qDebug() << sound->source();
+            qDebug() << sound->status();
             pool.pop_front();
             if (sound->isPlaying())
             {
@@ -35,7 +35,7 @@ void AudioManager::play(QVector3D listener_pos)
 
 void AudioManager::init()
 {
-    UnitConfigs::sounds["NONE"] = QUrl::fromLocalFile("../sound/empty.wav");
+    UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty.wav"];
 
     for (int i = 0; i < 32; ++i)
     {
