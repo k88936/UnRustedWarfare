@@ -164,7 +164,7 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = split(snd, ',');
-                else if (fst == "soundOnNewSelection")unit->sound_on_new_selection = split(snd, ',');
+                else if (fst == "soundOnNewSelection")unit->sound_on_new_selection = utils::without_extend(split(snd, ','));
                 else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = utils::without_extend(split(snd, ','));
                 else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(split(snd, ','));
                 else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(split(snd, ','));
@@ -463,13 +463,17 @@ void UnitConfigs::scan_dir(QString path)
             }
             else if (file_name.endsWith(".png"))
             {
-                QImage img(iter.filePath());
+                qDebug() << iter.filePath();
                 // images[file_name.toStdString()].image = std::move(img);
-                images[utils::without_extend(file_name.toStdString())].image = img;
+                images[(file_name.toStdString())].image = QImage(iter.filePath());
             }
             else if (file_name.endsWith(".wav"))
             {
-                sounds[file_name.toStdString()] = QUrl::fromLocalFile(iter.filePath());
+                sounds[utils::without_extend(file_name.toStdString())] = QUrl::fromLocalFile(iter.filePath());
+            }
+            else if (file_name.endsWith(".ogg"))
+            {
+                throw std::runtime_error("ogg not supported");
             }
         }
     }
@@ -477,8 +481,6 @@ void UnitConfigs::scan_dir(QString path)
 
 void UnitConfigs::init()
 {
-    QString path = "../M2A3/";
-
-    scan_dir(path);
-    scan_dir("../sound");
+    scan_dir("../M2A3/");
+    scan_dir("../sound/");
 }

@@ -92,9 +92,9 @@ void BattlefieldWidget::resizeGL(int w, int h)
 
 void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches) const
 {
+    batches.erase("NONE");
     for (const auto& [texture_id, drawables] : batches)
     {
-        if (texture_id == "NONE")continue;
         engine->bindTexture(texture_id);
         // qDebug()<<texture_id;
         for (const auto& drawable : drawables)

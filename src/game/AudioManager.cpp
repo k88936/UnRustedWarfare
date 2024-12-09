@@ -41,7 +41,7 @@ void AudioManager::play(QVector3D listener_pos)
 
 void AudioManager::init()
 {
-    UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty.wav"];
+    UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty"];
 
     for (int i = 0; i < 32; ++i)
     {
