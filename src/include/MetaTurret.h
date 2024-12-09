@@ -18,8 +18,8 @@ public:
     float turn_speed=-1;
     float turn_acc;
     QVector4D  shoot_light;
-    std::string shoot_sound="NONE";
-    float shoot_sound_volume=0;
+    std::string shoot_sound=utils::EMPTY_STR;
+    float shoot_sound_volume=1;
 
     float recoil_offset=0;
     float recoil_out_time=0;

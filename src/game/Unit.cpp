@@ -178,7 +178,7 @@ void Unit::on_drive()
     {
         const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
         Game::audio_manager.sound_event_config_map[id].emplace_back(
-            this->position, 1);
+            this->position, 0.4);
     }
 }
 

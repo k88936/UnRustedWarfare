@@ -10,6 +10,7 @@
 
 #include "MetaDrawable.h"
 #include "MetaObject.h"
+#include "utils.h"
 
 enum Priority {
     high = 0,
@@ -42,8 +43,8 @@ public:
     Priority priority;
     bool atmospheric;
     float delayed_start_timer;
-    std::string also_play_sound;
-    float also_play_sound_volume;
+    std::string also_play_sound=utils::EMPTY_STR;
+    float also_play_sound_volume=1;
     QVector4D color={1,1,1,1};
 };
 

@@ -20,9 +20,9 @@ void AudioManager::play(QVector3D listener_pos)
             if (dis>400)continue;
             if(cnt>8)break;
             QSoundEffect* sound = pool.front();
-            qDebug() << sound->isPlaying();
-            qDebug() << sound->source();
-            qDebug() << sound->status();
+            // qDebug() << sound->isPlaying();
+            // qDebug() << sound->source();
+            // qDebug() << sound->status();
             pool.pop_front();
             if (sound->isPlaying())
             {
