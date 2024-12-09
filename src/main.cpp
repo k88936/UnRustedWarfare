@@ -12,7 +12,7 @@
 
 #include "UnitConfigs.h"
 #include "Game.h"
-#include "ui/main_window.h"
+#include "main_window.h"
 
 QString getRandomFileName(const QString& directoryPath)
 {
@@ -84,8 +84,6 @@ int main(int argc, char* argv[])
 
     main_window window;
     window.showMaximized();
-
-
     // Game::init();
     return app.exec();
 }

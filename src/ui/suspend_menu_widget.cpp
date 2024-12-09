@@ -6,13 +6,13 @@
 
 #include "suspend_menu_widget.h"
 #include "ui_suspend_menu_widget.h"
-
-
-suspend_menu_widget::suspend_menu_widget(QWidget *parent) :
-    QWidget(parent), ui(new Ui::suspend_menu_widget) {
+suspend_menu_widget::suspend_menu_widget(QWidget* parent) :
+    ::QFrame(parent), ui(new Ui::suspend_menu_widget)
+{
     ui->setupUi(this);
 }
 
-suspend_menu_widget::~suspend_menu_widget() {
+suspend_menu_widget::~suspend_menu_widget()
+{
     delete ui;
 }

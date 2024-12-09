@@ -22,11 +22,6 @@ RenderEngine::RenderEngine()
 
 RenderEngine::~RenderEngine()
 {
-    for (auto&& texture : textures_)
-    {
-        delete texture.second.first;
-        delete texture.second.second;
-    }
 }
 
 //! [0]
@@ -77,6 +72,10 @@ void RenderEngine::setView(const QMatrix4x4& view)
 
 void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaImage)
 {
+    if (textures_.contains(id))
+    {
+        return;
+    }
     if (id == "NONE")
     {
         return;

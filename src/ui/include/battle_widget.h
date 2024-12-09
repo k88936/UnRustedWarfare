@@ -9,6 +9,8 @@
 #include <QWidget>
 #include <set>
 #include <Unit.h>
+
+#include "suspend_menu_widget.h"
 #include "welcome_widget.h"
 
 
@@ -16,19 +18,22 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class battle_widget; }
 QT_END_NAMESPACE
 
-class battle_widget : public QWidget {
+class battle_widget : public BattlefieldWidget {
 Q_OBJECT
 
 public:
-    explicit battle_widget(QWidget *parent = nullptr);
+    suspend_menu_widget* suspend_menu;
+    explicit battle_widget(main_window *parent = nullptr);
+    battle_widget(main_window *parent, const std::string& map_path);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
     void mouseMoveEvent(QMouseEvent* event) override;
-    void mousePressEvent(QMouseEvent* event) override;
+void clean_selected();
+void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
-    void paintEvent(QPaintEvent* event) override;
+    void resizeEvent(QResizeEvent* event) override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
     bool m_l_pressing;

@@ -73,7 +73,9 @@ public:
     static TimerDoer* timer_doer;
     static void start_on(const std::string& map_path, BattlefieldWidget* widget);
     static void clean();
-    static void end();
+    static void pause();
+    static void resume();
+    static void stop();
     static void step();
 };
 

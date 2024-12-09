@@ -5,6 +5,8 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_settings_widget.h" resolved
 
 #include "settings_widget.h"
+
+#include "main_window.h"
 #include "ui_settings_widget.h"
 
 

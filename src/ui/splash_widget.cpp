@@ -5,6 +5,8 @@
 // You may need to build the project (run Qt uic code generator) to get "ui_splash_widget.h" resolved
 
 #include "splash_widget.h"
+
+#include "main_window.h"
 #include "ui_splash_widget.h"
 
 
