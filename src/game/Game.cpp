@@ -71,7 +71,7 @@ void Game::start_on(const std::string& map_path, BattlefieldWidget* widget)
     {
         tile->draw();
     }
-    timer.start(0, timer_doer);
+    resume();
     for (int i = 25; i < 35; ++i)
     {
         for (int j = 25; j < 35; ++j)
@@ -181,8 +181,20 @@ void Game::clean()
     Game::var_transparent_image_draw_config_map.clear();
 }
 
-void Game::end()
+void Game::pause()
 {
+    timer.stop();
+}
+
+void Game::resume()
+{
+    // if (timer.isActive())
+    timer.start(0, timer_doer);
+}
+
+void Game::stop()
+{
+    pause();
     for (auto unit : units)delete unit;
     units.clear();
     for (auto projectile : projectiles)delete projectile;
@@ -197,7 +209,6 @@ void Game::end()
     Game::ui_image_draw_config_map.clear();
     line_draw_config.clear();
     Game::sound_event_config_map.clear();
-    timer.stop();
 }
 
 void Game::step()

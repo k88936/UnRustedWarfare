@@ -59,6 +59,10 @@ add_executable(untitled1
         src/game/Tile.cpp
         src/game/path/PathFind.cpp
         src/game/path/FlowField.cpp
+        src/game/utils.cpp
+        src/game/BoidSensor.cpp
+        src/game/Flock.cpp
+        src/game/SimpleEffect.cpp
 
         src/ui/RenderEngine.cpp
         src/ui/BattlefieldWidget.cpp
@@ -79,17 +83,12 @@ add_executable(untitled1
         src/ui/help_slide_widget.cpp
         src/ui/include/help_slide_widget.h
         src/ui/help_slide_widget.ui
-        src/game/utils.cpp
-        src/game/BoidSensor.cpp
-        src/game/Flock.cpp
-        src/game/SimpleEffect.cpp
-        src/game/SimpleEffect.h
         src/ui/settings_widget.cpp
-        src/ui/settings_widget.h
+        src/ui/include/settings_widget.h
         src/ui/settings_widget.ui
         src/game/AudioManager.cpp
         src/ui/main_window.cpp
-        src/ui/main_window.h
+        src/ui/include/main_window.h
         src/ui/main_window.ui
 )
 include_directories(src/include)

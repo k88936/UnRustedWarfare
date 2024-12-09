@@ -17,7 +17,6 @@ public:
     QVector3D screen_to_world(const QPointF& screen_pos) const;
     QVector3D screen_relative_to_world_relative(const QPointF& screen_relative) const;
     ~BattlefieldWidget() override;
-
     QVector3D camera_pos = QVector3D(50, 50, 5);
     float camera_zoom = 0.05;
     void update_camera();

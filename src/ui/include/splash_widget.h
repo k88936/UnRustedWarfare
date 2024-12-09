@@ -8,6 +8,7 @@
 #include <QWidget>
 
 
+class main_window;
 QT_BEGIN_NAMESPACE
 namespace Ui { class splash_widget; }
 QT_END_NAMESPACE

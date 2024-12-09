@@ -6,6 +6,7 @@
 #define MAIN_WINDOW_H
 
 #include <QMainWindow>
+#include <stack>
 
 #include "battle_widget.h"
 #include "welcome_widget.h"
@@ -26,11 +27,13 @@ class main_window : public QMainWindow
 
 public:
     explicit main_window(QWidget* parent = nullptr);
+    void widget_push(QWidget* widget);
+    void widget_change(QWidget* widget);
+    void widget_pop();
     ~main_window() override;
 
     Ui::main_window* ui;
-    welcome_widget* welcome_widget_;
-    battle_widget* battle_widget_;
+    std::stack<QWidget*> widget_stack;
 };
 
 

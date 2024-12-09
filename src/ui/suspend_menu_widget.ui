@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>suspend_menu_widget</class>
- <widget class="QWidget" name="suspend_menu_widget">
+ <widget class="QFrame" name="suspend_menu_widget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -12,6 +15,9 @@
   </property>
   <property name="windowTitle">
    <string>suspend_menu_widget</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
   </property>
   <property name="styleSheet">
    <string notr="true">/*
@@ -26,10 +32,14 @@ QMainWindow {
 	background-color:#ff000000;
 }
 QWidget{
- 	background-color: #80000000;
+ 	background-color: #50000000;
 }
 QDialog {
 	background-color:#ff000000;
+}
+QFrame{
+	border:1px solid #32FFE0;
+	border-radius:0px;
 }
 QColorDialog {
 	background-color:#ff000000;
@@ -72,10 +82,10 @@ QPushButton:hover{
 	background-color: #30F6D9;
 	
 }
-QPushButton:pressed,QPushButton:checked{
+QPushButton:pressed,QPushButton::checked{
 	color: #ff000000;
-	border-bottom-color: #28CAAF;
-	background-color: #28CAAF;
+	border-bottom-color: #26C3A9;
+	background-color: #26C3A9;
 }
 QPushButton:disabled{
 	border-bottom-color: #50505050;
@@ -115,14 +125,13 @@ QLineEdit {
 	color: #B5B5B5;
 	background:#50151515;
 	selection-background-color:#50505050;
-	selection-color: #28CAAF;
+	selection-color: #26C3A9;
 }
 QLabel {
 	color: #B5B5B5;
+	border:0px solid transparent;
 	background-color: transparent;
-	
 }
-
 /* QLCDNumber {
 	color: #37e6b4;
 } */ 
@@ -334,12 +343,20 @@ QToolBox {
 	background-color: #50000000;
 }
 QToolBox::tab {
+	border:0px solid transparent;
+	border-radius:0px;
+	border-bottom-color: #30F6D9;
+	border-bottom-width: 1px;
 	color: #B5B5B5;
 	background-color: #50000000;
 }
+QToolBox::tab:hover{
+	color: #ff000000;
+	background-color: #30F6D9;
+}
 QToolBox::tab:selected {
-	color: #FFFFFF;
-	background-color: #50000000;
+	color: #ff000000;
+	background-color: #30F6D9;
 }
 QScrollArea {
 	color: #B5B5B5;
@@ -371,7 +388,7 @@ QSlider::add-page{
     background: #B5B5B5;
 }
 QSlider::sub-page {
-    background: #28CAAF;
+    background: #26C3A9;
 }
 </string>
   </property>

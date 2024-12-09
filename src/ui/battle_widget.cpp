@@ -11,27 +11,48 @@
 #include <QMouseEvent>
 
 #include "BoidSensor.h"
-#include "FlowField.h"
 #include "PathFind.h"
+#include <QStyle>
+#include <ui_suspend_menu_widget.h>
 
 #include "ui_battle_widget.h"
 #include "Flock.h"
+#include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
-battle_widget::battle_widget(QWidget* parent) :
-    QWidget(parent), ui(new Ui::battle_widget)
+battle_widget::battle_widget(main_window* parent) :
+    BattlefieldWidget(reinterpret_cast<QWidget*>(parent)), ui(new Ui::battle_widget)
 {
     ui->setupUi(this);
+    suspend_menu = new suspend_menu_widget(this);
+    suspend_menu->setVisible(false);
+    connect(ui->button_quit, &QPushButton::clicked, this, [&]()
+    {
+        Game::pause();
+        suspend_menu->setVisible(true);
+    });
+    connect(suspend_menu->ui->countinue_button, &QPushButton::clicked, this, [&]()
+    {
+        Game::resume();
+        suspend_menu->setVisible(false);
+    });
+}
+
+battle_widget::battle_widget(main_window* parent, const std::string& map_path): battle_widget(parent)
+{
+    qDebug()<<"new battle_widget";
+    Game::start_on(map_path, this);
 }
 
 battle_widget::~battle_widget()
 {
+    qDebug()<<"delete battle_widget";
     delete ui;
 }
 
 BattlefieldWidget* battle_widget::get_battleFieldWidget()
 {
-    return ui->widget;
+    return this;
 }
 
 constexpr int DRAG_DELAY = 250;
@@ -39,7 +60,7 @@ constexpr int DRAG_DELAY = 250;
 
 void battle_widget::mouseMoveEvent(QMouseEvent* event)
 {
-    const QVector3D mouse_pos = ui->widget->screen_to_world(event->pos());
+    const QVector3D mouse_pos = screen_to_world(event->pos());
 
     int elapsed = m_press_time.msecsTo(QTime::currentTime());
     if (m_l_pressing)
@@ -93,16 +114,31 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
 
     if (m_r_pressing)
     {
-        const QVector3D move = ui->widget->screen_relative_to_world_relative(event->pos() - m_press_pos_screen);
-        ui->widget->camera_pos = camera_pos_when_pressed - move;
-        ui->widget->update_camera();
+        const QVector3D move = screen_relative_to_world_relative(event->pos() - m_press_pos_screen);
+        camera_pos = camera_pos_when_pressed - move;
+        update_camera();
+    }
+}
+
+void battle_widget::clean_selected()
+{
+    for (auto i = units_selected.begin(); i != units_selected.end();)
+    {
+        if ((*i)->marked_for_delete)
+        {
+            i = units_selected.erase(i);
+        }
+        else
+        {
+            ++i;
+        }
     }
 }
 
 void battle_widget::mouseReleaseEvent(QMouseEvent* event)
 {
     m_release_pos_screen = event->pos();
-    m_release_pos_world = ui->widget->screen_to_world(event->pos());
+    m_release_pos_world = screen_to_world(event->pos());
     if (event->button() == Qt::LeftButton)
     {
         m_l_pressing = false;
@@ -135,19 +171,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
             //select by rect is solved at func on mouse move
 
 
-            for (auto i = units_selected.begin(); i != units_selected.end();)
-            {
-                if ((*i)->marked_for_delete)
-                {
-                    i = units_selected.erase(i);
-                }
-                else
-                {
-                    ++i;
-                }
-            }
-
-
+            clean_selected();
             if (!units_to_select.empty()) //new select
             {
                 (*units_to_select.begin())->on_new_selection();
@@ -217,14 +241,14 @@ void battle_widget::wheelEvent(QWheelEvent* event)
     constexpr float delta = 0.00001;
     // if (event->angleDelta().y()>0)
     // {
-    ui->widget->camera_zoom = std::max(0.02f, ui->widget->camera_zoom + delta * event->angleDelta().y());
+    camera_zoom = std::max(0.02f, camera_zoom + delta * event->angleDelta().y());
     // }
     // else if ( event->angleDelta().y()<0)
     // {
     //
     //     // ui->widget->camera_zoom=std::max(0.02f,ui->widget->camera_zoom-delta);
     // }
-    ui->widget->update_camera();
+    update_camera();
 }
 
 void battle_widget::keyReleaseEvent(QKeyEvent* event)
@@ -240,11 +264,21 @@ void battle_widget::keyReleaseEvent(QKeyEvent* event)
     }
 }
 
+void battle_widget::resizeEvent(QResizeEvent* event)
+{
+    BattlefieldWidget::resizeEvent(event);
+
+
+    suspend_menu->setGeometry((this->width() - suspend_menu->width()) / 2,
+                              (this->height() - suspend_menu->height()) / 2, suspend_menu->width(),
+                              suspend_menu->height());
+}
+
 void battle_widget::mousePressEvent(QMouseEvent* event)
 {
     m_press_pos_screen = event->pos();
-    m_press_pos_world = ui->widget->screen_to_world(event->pos());
-    camera_pos_when_pressed = ui->widget->camera_pos;
+    m_press_pos_world = screen_to_world(event->pos());
+    camera_pos_when_pressed = camera_pos;
     if (event->button() == Qt::LeftButton)
     {
         m_l_pressing = true;
@@ -276,8 +310,4 @@ void battle_widget::mousePressEvent(QMouseEvent* event)
         //     Game::line_draw_config.emplace_back(p.first, p.second, 0);
         // }
     }
-}
-
-void battle_widget::paintEvent(QPaintEvent* event)
-{
 }

@@ -9,6 +9,7 @@
 #include <QToolBox>
 
 
+class main_window;
 QT_BEGIN_NAMESPACE
 namespace Ui { class help_slide_widget; }
 QT_END_NAMESPACE
