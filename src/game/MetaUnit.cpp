@@ -15,9 +15,9 @@ void MetaUnit::init()
     }
     else
     {
-        sound_on_move.emplace_back("tank_moving0.wav");
-        sound_on_move.emplace_back("tank_moving1.wav");
-        sound_on_move.emplace_back("tank_moving2.wav");
-        sound_on_move.emplace_back("tank_moving3.wav");
+        sound_on_move.emplace_back("tank_moving0");
+        sound_on_move.emplace_back("tank_moving1");
+        sound_on_move.emplace_back("tank_moving2");
+        sound_on_move.emplace_back("tank_moving3");
     }
 }

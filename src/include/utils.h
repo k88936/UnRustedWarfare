@@ -61,6 +61,8 @@ namespace utils
     }
     extern bool random_bool(float chance);
     extern bool freq_bool(float freq);
+    extern std::string without_extend(const std::string& file_name);
+    extern std::vector<std::string> without_extend(const std::vector<std::string>& file_names);
 };
 
 

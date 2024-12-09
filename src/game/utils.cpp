@@ -1,4 +1,3 @@
-
 // Created by root on 12/2/24.
 //
 
@@ -204,26 +203,51 @@ QVector3D utils::add_offset_z(const QVector3D& v, const float offset)
 {
     return QVector3D(v.x(), v.y(), v.z() + offset);
 }
+
 QVector3D utils::set_offset_x(const QVector3D& v, const float offset)
 {
     return QVector3D(offset, v.y(), v.z());
 }
+
 QVector3D utils::set_offset_y(const QVector3D& v, const float offset)
 {
     return QVector3D(v.x(), offset, v.z());
 }
+
 QVector3D utils::set_offset_z(const QVector3D& v, const float offset)
 {
     return QVector3D(v.x(), v.y(), offset);
 }
 
-bool utils::random_bool(float chance) {
+bool utils::random_bool(float chance)
+{
     static std::default_random_engine generator;
     std::uniform_real_distribution<float> distribution(0.0, 1.0);
     return distribution(generator) < chance;
 }
 
-bool utils::freq_bool(float freq) {
+bool utils::freq_bool(float freq)
+{
+    return random_bool(freq * Game::deltaTime);
+}
 
-    return random_bool(freq*Game::deltaTime);
+std::string utils::without_extend(const std::string& file_name)
+{
+    auto pos = file_name.find_last_of('.');
+    if (pos == std::string::npos)
+    {
+        return file_name;
+    }
+    return file_name.substr(0, pos);
+}
+
+std::vector<std::string> utils::without_extend(const std::vector<std::string>& file_names)
+{
+    std::vector<std::string> ans;
+    ans.reserve(file_names.size());
+    for (const auto& file_name : file_names)
+    {
+        ans.push_back(without_extend(file_name));
+    }
+    return ans;
 }
