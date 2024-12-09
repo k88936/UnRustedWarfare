@@ -110,7 +110,7 @@ bool Turret::shoot()
                                              , rotation, 0.8,
                                              QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
-        Game::audio_manager.sound_event_config_map[meta->shoot_sound].emplace_back(
+        Game::sound_event_config_map[meta->shoot_sound].emplace_back(
             this->position, meta->shoot_sound_volume);
         recoil_animater.reset();
         coolDown = meta->delay;

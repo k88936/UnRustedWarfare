@@ -35,7 +35,8 @@ void GridsManager::init()
         grids[i].resize(height);
         for (int j = 0; j < height; ++j)
         {
-            grids[i][j] = new Grid();
+            if (grids[i][j] == nullptr)
+                grids[i][j] = new Grid();
             // std::cout << grids[i][j];
         }
     }

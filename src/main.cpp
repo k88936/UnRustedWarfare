@@ -6,11 +6,13 @@
 #include <QAudioOutput>
 #include <QDir>
 #include <QLabel>
+#include <QMainWindow>
 #include <QMediaPlayer>
 #include <QSoundEffect>
 
 #include "UnitConfigs.h"
 #include "Game.h"
+#include "ui/main_window.h"
 
 QString getRandomFileName(const QString& directoryPath)
 {
@@ -62,9 +64,7 @@ int main(int argc, char* argv[])
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
     audio->setVolume(0.5);
-     // do_work(player, "../music/MW3/");
-    // do_work(player, "../music/starting/");
-// )    do_work(player, "../music/starting/");
+    do_work(player, "../music/MW3/");
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)
     {
         if (status == QMediaPlayer::EndOfMedia)
@@ -76,7 +76,16 @@ int main(int argc, char* argv[])
             do_work(player, "../music/starting/");
         }
     });
+
+
+
+
     // player->setSource(QUrl("qrc:/b.ogg"));
-    Game::init();
+
+    main_window window;
+    window.showMaximized();
+
+
+    // Game::init();
     return app.exec();
 }

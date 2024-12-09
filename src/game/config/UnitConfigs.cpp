@@ -114,10 +114,11 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
 
 void UnitConfigs::load_ini(const QString& path)
 {
+    constexpr float designed_FPS=100;
     const float scale_rw2sw = 1.0 / 20;
-    const float turnSpeed_rw2sw = Game::FPS;
-    const float speed_rw2sw = 1.0f * scale_rw2sw * Game::FPS;
-    const float time_rw2sw = 1.0f / Game::FPS;
+    const float turnSpeed_rw2sw = designed_FPS;
+    const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;
+    const float time_rw2sw = 1.0f / designed_FPS;
     const float animate_delay_rw2sw = 1;
     const float turret_turn_speed_factor = 2.5;
     // int index = 0;

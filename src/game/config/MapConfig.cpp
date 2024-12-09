@@ -101,7 +101,6 @@ void MapConfig::loadMap(const std::string& path)
     tmx::Map map;
     tiles.clear();
     index_to_name.clear();
-
     if (map.load(path))
     {
         // std::cout << "Loaded Map version: " << map.getVersion().upper << ", " << map.getVersion().lower << std::endl;
@@ -154,9 +153,9 @@ void MapConfig::loadMap(const std::string& path)
                     {
                         continue;
                     }
-                    QImage img = image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
-                                            tileset.getTileSize().x, tileset.getTileSize().y);
-                    MetaImage metaImage(img, 1.025, false, true, 1);
+                    MetaImage metaImage((image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
+                                                    tileset.getTileSize().x, tileset.getTileSize().y)), 1.025, false,
+                                        true, 1);
                     MapConfig::tile_images[id] = metaImage;
                 }
             }
@@ -270,7 +269,6 @@ void MapConfig::loadMap(const std::string& path)
                     }
                 }
             }
-
             const auto& properties = layer->getProperties();
             std::cout << properties.size() << " Layer Properties:" << std::endl;
             for (const auto& prop : properties)

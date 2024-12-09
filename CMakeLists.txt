@@ -16,7 +16,7 @@ find_package(Qt6 COMPONENTS
         Multimedia
         REQUIRED)
 
-add_executable(untitled1 WIN32
+add_executable(untitled1
         src/main.cpp
         src/game/Drawable.cpp
         src/game/Object.cpp
@@ -88,6 +88,9 @@ add_executable(untitled1 WIN32
         src/ui/settings_widget.h
         src/ui/settings_widget.ui
         src/game/AudioManager.cpp
+        src/ui/main_window.cpp
+        src/ui/main_window.h
+        src/ui/main_window.ui
 )
 include_directories(src/include)
 include_directories(src/ui/include)

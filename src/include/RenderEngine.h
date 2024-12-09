@@ -12,7 +12,8 @@
 #include "structures/meta_image.h"
 
 
-class RenderEngine : protected QOpenGLFunctions {
+class RenderEngine : protected QOpenGLFunctions
+{
 public:
     RenderEngine();
 
@@ -20,24 +21,25 @@ public:
 
     void initShaders();
 
-    void transform(const QMatrix4x4 &matrix);
+    void transform(const QMatrix4x4& matrix);
 
-    void setColor(const QVector4D &color);
+    void setColor(const QVector4D& color);
 
     void render();
 
-    void setView(const QMatrix4x4 &matrix4_x4);
+    void setView(const QMatrix4x4& matrix4_x4);
 
-    void resisterTexture(const std::string &, const MetaImage &metaImage);
+    void resisterTexture(const std::string&, const MetaImage& metaImage);
     void bindTexture(const std::string& id, int index);
     void bindTexture(const std::string&);
     void bind_texture_shader();
     void bind_simple_shader();
+
 private:
-    static std::unordered_map<std::string,std::pair<QOpenGLTexture*,QOpenGLVertexArrayObject*> > textures;
-    QOpenGLShaderProgram texture_shader;
-    QOpenGLShaderProgram simple_shader;
-    QMatrix4x4 view;
+    std::unordered_map<std::string, std::pair<QOpenGLTexture*, QOpenGLVertexArrayObject*>> textures_;
+    QOpenGLShaderProgram texture_shader_;
+    QOpenGLShaderProgram simple_shader_;
+    QMatrix4x4 view_;
 };
 
 #endif // GEOMETRYENGINE_H

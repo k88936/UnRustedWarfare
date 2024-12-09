@@ -57,7 +57,7 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     this->animate_timer = 0;
 
 
-    Game::audio_manager.sound_event_config_map[meta->also_play_sound].emplace_back(
+    Game::sound_event_config_map[meta->also_play_sound].emplace_back(
         this->position, meta->also_play_sound_volume);
 }
 

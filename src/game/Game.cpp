@@ -23,15 +23,13 @@
 #include "Tile.h"
 #include "utils.h"
 
-float Game::deltaTime = 1.0 / 40;
-float Game::FPS = 1.0 / deltaTime;
+float Game::deltaTime = 0;
 
 std::vector<QVector3D> Game::line_draw_config;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::var_solid_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::var_transparent_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_config_map;
 std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
-
 std::unordered_map<std::string, std::vector<SoundEvent>> Game::sound_event_config_map;
 GridsManager Game::grids_manager;
 AudioManager Game::audio_manager;
@@ -42,6 +40,8 @@ std::vector<Projectile*> Game::projectiles;
 std::vector<Effect*> Game::effects;
 BattlefieldWidget* Game::battle_field_widget;
 QTime Game::start_time = QTime::currentTime();
+
+Game::TimerDoer* Game::timer_doer = new Game::TimerDoer();
 
 void Game::addProjectile(Projectile* projectile)
 {
@@ -54,50 +54,24 @@ void Game::addEffect(Effect* effect)
 }
 
 
-auto ef = QSoundEffect();
-
 void Game::init()
 {
-    // ef.setSource(QUrl(":/b.ogg"));
-    // ef.setLoopCount(10);
-    // ef.setMuted(false);
-    // ef.setVolume(1.0);
-    // ef.play();
-    //
-
     UnitConfigs::init();
+}
 
-    MapConfig::init();
-    MapConfig::loadMap("../maps/2.tmx");
-    //
-    // MapConfig::world_width=100;
-    // MapConfig::world_height=100;
-    grids_manager.init();
+
+void Game::start_on(const std::string& map_path, BattlefieldWidget* widget)
+{
+    Game::battle_field_widget = widget;
     audio_manager.init();
-    // battleFieldWidget->show();
-    // welcome = new welcome_widget();
-    // battleFieldWidget = welcome->get_battleFieldWidget();
-    // welcome->show();
-    auto battle = new battle_widget();
-    battle_field_widget = battle->get_battleFieldWidget();
-    battle->show();
+    MapConfig::init();
+    MapConfig::loadMap(map_path);
+    grids_manager.init();
     for (const auto& tile : MapConfig::tiles)
     {
         tile->draw();
     }
-    // welcome->setWidget( battleFieldWidget);
-    class TimerDoer : public QObject
-    {
-        QOBJECT_H
-
-    public:
-        void timerEvent(QTimerEvent* event) override
-        {
-            Game::step();
-        };
-    };
-    timer.start(static_cast<int>(deltaTime * 1000), new TimerDoer());
-
+    timer.start(0, timer_doer);
     for (int i = 25; i < 35; ++i)
     {
         for (int j = 25; j < 35; ++j)
@@ -105,7 +79,6 @@ void Game::init()
             Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
         }
     }
-
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
     Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
@@ -206,6 +179,25 @@ void Game::clean()
     Game::grids_manager.clear_grids();
     Game::var_solid_image_draw_config_map.clear();
     Game::var_transparent_image_draw_config_map.clear();
+}
+
+void Game::end()
+{
+    for (auto unit : units)delete unit;
+    units.clear();
+    for (auto projectile : projectiles)delete projectile;
+    projectiles.clear();
+    for (auto effect : effects)delete effect;
+    effects.clear();
+    for (auto flock : flocks)delete flock;
+    flocks.clear();
+    Game::var_solid_image_draw_config_map.clear();
+    Game::var_transparent_image_draw_config_map.clear();
+    Game::const_image_draw_config_map.clear();
+    Game::ui_image_draw_config_map.clear();
+    line_draw_config.clear();
+    Game::sound_event_config_map.clear();
+    timer.stop();
 }
 
 void Game::step()

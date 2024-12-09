@@ -177,23 +177,23 @@ void Unit::on_drive()
     if (utils::freq_bool(2))
     {
         const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
-        Game::audio_manager.sound_event_config_map[id].emplace_back(
-            this->position, 0.4);
+        Game::sound_event_config_map[id].emplace_back(
+            this->position, 0.2);
     }
 }
 
 void Unit::on_new_selection()
 {
     const std::string id = utils::random_element(meta->sound_on_new_selection, utils::EMPTY_STR);
-    Game::audio_manager.sound_event_config_map[id].emplace_back(
-        this->position, 1);
+    Game::sound_event_config_map[id].emplace_back(
+        this->position, 2);
 }
 
 void Unit::on_move_order()
 {
     const std::string id = utils::random_element(meta->sound_on_move_order, utils::EMPTY_STR);
-    Game::audio_manager.sound_event_config_map[id].emplace_back(
-        this->position, 1);
+    Game::sound_event_config_map[id].emplace_back(
+        this->position, 2);
 }
 
 void Unit::after()

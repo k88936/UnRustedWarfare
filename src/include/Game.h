@@ -37,10 +37,22 @@ public:
         constexpr static float UPPER_EFFECT_OFFSET = 0.05;
     };
 
+    class TimerDoer : public QObject
+    {
+        QOBJECT_H
+
+    public:
+        void timerEvent(QTimerEvent* event) override
+        {
+            const QTime start = QTime::currentTime();
+            Game::step();
+            Game::deltaTime = start.msecsTo(QTime::currentTime()) / 1000.0;
+        };
+    };
+
     static std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
     static std::vector<QVector3D> line_draw_config;
     static std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
-    static float FPS;
     static float deltaTime;
     static GridsManager grids_manager;
     static AudioManager audio_manager;
@@ -58,7 +70,10 @@ public:
     static void addProjectile(Projectile* projectile);
     static void addEffect(Effect* effect);
     static void init();
+    static TimerDoer* timer_doer;
+    static void start_on(const std::string& map_path, BattlefieldWidget* widget);
     static void clean();
+    static void end();
     static void step();
 };
 

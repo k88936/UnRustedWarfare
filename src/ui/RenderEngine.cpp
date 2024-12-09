@@ -13,7 +13,6 @@ struct VertexData
     QVector2D texCoord;
 };
 
-std::unordered_map<std::string, std::pair<QOpenGLTexture*, QOpenGLVertexArrayObject*>> RenderEngine::textures;
 //! [0.5]
 RenderEngine::RenderEngine()
 {
@@ -23,26 +22,30 @@ RenderEngine::RenderEngine()
 
 RenderEngine::~RenderEngine()
 {
+    for (auto&& texture : textures_)
+    {
+        delete texture.second.first;
+        delete texture.second.second;
+    }
 }
 
 //! [0]
 void RenderEngine::initShaders()
 {
     // Compile vertex shader
-    if (!texture_shader.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/t_vshader.glsl"))
+    if (!texture_shader_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/t_vshader.glsl"))
         throw std::runtime_error("vertex shader compile error");
     // Compile fragment shader
-    if (!texture_shader.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/t_fshader.glsl"))
+    if (!texture_shader_.addShaderFromSourceFile(QOpenGLShader::Fragment, ":/t_fshader.glsl"))
         throw std::runtime_error("fragment shader compile error");
     // Link shader pipeline
-    if (!texture_shader.link())
+    if (!texture_shader_.link())
         throw std::runtime_error("shader link error");
 
 
-
-    if (!simple_shader.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/s_vshader.glsl"))
+    if (!simple_shader_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/s_vshader.glsl"))
         throw std::runtime_error("vertex shader compile error");
-    if (!simple_shader.link())
+    if (!simple_shader_.link())
         throw std::runtime_error("shader link error");
     // // Bind shader pipeline for use
     // if (!texture_shader.bind())
@@ -52,12 +55,12 @@ void RenderEngine::initShaders()
 
 void RenderEngine::transform(const QMatrix4x4& matrix)
 {
-    texture_shader.setUniformValue("transform", matrix);
+    texture_shader_.setUniformValue("transform", matrix);
 }
 
 void RenderEngine::setColor(const QVector4D& color)
 {
-    texture_shader.setUniformValue("color", color);
+    texture_shader_.setUniformValue("color", color);
 }
 
 //! [2]
@@ -68,17 +71,13 @@ void RenderEngine::render()
 
 void RenderEngine::setView(const QMatrix4x4& view)
 {
-    texture_shader.setUniformValue("mvp_matrix", view);
-    simple_shader.setUniformValue("mvp_matrix", view);
+    texture_shader_.setUniformValue("mvp_matrix", view);
+    simple_shader_.setUniformValue("mvp_matrix", view);
 }
 
 void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaImage)
 {
-    if (textures.contains(id))
-    {
-        return;
-    }
-    if (id=="NONE")
+    if (id == "NONE")
     {
         return;
     }
@@ -171,17 +170,17 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
         quintptr offset = 0;
 
         // Tell OpenGL programmable pipeline how to locate vertex position data
-        int vertexLocation = texture_shader.attributeLocation("a_position");
-        texture_shader.enableAttributeArray(vertexLocation);
-        texture_shader.setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
+        int vertexLocation = texture_shader_.attributeLocation("a_position");
+        texture_shader_.enableAttributeArray(vertexLocation);
+        texture_shader_.setAttributeBuffer(vertexLocation, GL_FLOAT, offset, 3, sizeof(VertexData));
 
         // Offset for texture coordinate
         offset += sizeof(QVector3D);
 
         // Tell OpenGL programmable pipeline how to locate vertex texture coordinate data
-        int texcoordLocation = texture_shader.attributeLocation("a_texcoord");
-        texture_shader.enableAttributeArray(texcoordLocation);
-        texture_shader.setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
+        int texcoordLocation = texture_shader_.attributeLocation("a_texcoord");
+        texture_shader_.enableAttributeArray(texcoordLocation);
+        texture_shader_.setAttributeBuffer(texcoordLocation, GL_FLOAT, offset, 2, sizeof(VertexData));
         arrayBuf->release();
         vao->release();
 
@@ -190,29 +189,29 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
         texture->setMinificationFilter(QOpenGLTexture::Linear);
         // Set bilinear filtering mode for texture magnification
         texture->setMagnificationFilter(QOpenGLTexture::Linear);
-        textures[(id + "_" + std::to_string(i))] = std::make_pair(texture, vao);
+        textures_[(id + "_" + std::to_string(i))] = std::make_pair(texture, vao);
     }
     if (metaImage.frames == 1)
     {
-        textures[id] = std::make_pair(texture, vao);
+        textures_[id] = std::make_pair(texture, vao);
     }
 }
 
 
 void RenderEngine::bindTexture(const std::string& id)
 {
-    textures.at(id).first->bind();
-    textures.at(id).second->bind();
+    textures_.at(id).first->bind();
+    textures_.at(id).second->bind();
 }
 
 void RenderEngine::bind_texture_shader()
 {
-    this->texture_shader.bind();
+    this->texture_shader_.bind();
 }
 
 void RenderEngine::bind_simple_shader()
 {
-    this->simple_shader.bind();
+    this->simple_shader_.bind();
 }
 
 //! [2]

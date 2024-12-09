@@ -23,70 +23,64 @@ Last updated: 04/12/2018, 15:00.
 Available at: https://github.com/GTRONICK/QSS/blob/master/MaterialDark.qss
 */
 QMainWindow {
-	background-color:#000000;
+	background-color:#ff000000;
 }
 QWidget{
- 	background-color: #000000;
+ 	background-color: #50000000;
 }
 QDialog {
-	background-color:#000000;
+	background-color:#ff000000;
 }
 QColorDialog {
-	background-color:#000000;
+	background-color:#ff000000;
 }
 QTextEdit {
-	background-color:#000000;
-	color: #a9b7c6;
+	background-color:#50000000;
+	color: #B5B5B5;
 } 
 QPlainTextEdit {
 	selection-background-color:#007b50;
-	background-color:#000000;
+	background-color:#ff000000;
 	border-style: solid;
 	border-top-color: transparent;
 	border-right-color: transparent;
 	border-left-color: transparent;
 	border-bottom-color: transparent;
 	border-width: 1px;
-	color: #a9b7c6;
+	color: #B5B5B5;
 } 
 QPushButton{
-	border-style: solid;
+	border:0px solid transparent;
 	border-radius:0px;
-	border-top-color: transparent;
-	border-right-color: transparent;
-	border-left-color: transparent;
 	border-bottom-color: #30F6D9;
 	border-bottom-width: 1px;
-	border-style: solid;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	padding:5px;
-	background-color: #151515;
-	
+	background-color: #50151515;	
 }
-
 QPushButton::default{
 	border-bottom-width: 2px;
 	border-bottom-color: #32FFE0;
 	color: #32FFE0;
 }
 QPushButton:flat{
-	color:#000000;
+	color:#ff000000;
 	background-color:#30F6D9;
 }
 QPushButton:hover{
-	color: #000000;
+	color: #ff000000;
 	background-color: #30F6D9;
 	
 }
-QPushButton:pressed{
-	color: #000000;
-	border-bottom-color: #2BDABD;
-	background-color: #2BDABD;
+QPushButton:pressed,QPushButton::checked{
+	color: #ff000000;
+	border-bottom-color: #26C3A9;
+	background-color: #26C3A9;
 }
 QPushButton:disabled{
-	border-bottom-color: #505050;
+	border-bottom-color: #50505050;
 	color: #505050;
-	background-color: #151515;
+	background-color: #50151515;
 }
 /* QToolButton {
 	border-style: solid;
@@ -96,9 +90,9 @@ QPushButton:disabled{
 	border-bottom-color: #04b97f;
 	border-bottom-width: 1px;
 	border-style: solid;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	padding: 2px;
-	background-color: #000000;
+	background-color: #ff000000;
 }
 QToolButton:hover{
 	border-style: solid;
@@ -110,21 +104,21 @@ QToolButton:hover{
 	border-style: solid;
 	color: #FFFFFF;
 	padding-bottom: 1px;
-	background-color: #000000;
+	background-color: #ff000000;
 } */ 
 QLineEdit {
 	border-width: 1px; 
 	border-radius: 0px;
-	border-color: #505050;
+	border-color: #50505050;
 	border-style: inset;
 	padding: 0px;
-	color: #a9b7c6;
-	background:#151515;
-	selection-background-color:#505050;
-	selection-color: #2BDABD;
+	color: #B5B5B5;
+	background:#50151515;
+	selection-background-color:#50505050;
+	selection-color: #26C3A9;
 }
 QLabel {
-	color: #a9b7c6;
+	color: #B5B5B5;
 	background-color: transparent;
 }
 /* QLCDNumber {
@@ -145,17 +139,17 @@ QProgressBar::chunk {
 	border-radius: 0px;
 }
 /* QMenuBar {
-	background-color: #000000;
+	background-color: #ff000000;
 }
 QMenuBar::item {
-	color: #a9b7c6;
+	color: #B5B5B5;
   	spacing: 3px;
   	padding: 1px 4px;
-  	background: #000000;
+  	background: #ff000000;
 }
 
 QMenuBar::item:selected {
-  	background:#000000;
+  	background:#ff000000;
 	color: #FFFFFF;
 }
 QMenu::item:selected {
@@ -170,7 +164,7 @@ QMenu::item:selected {
 	padding-top:4px;
 	padding-bottom:4px;
 	padding-right:7px;
-	background-color: #000000;
+	background-color: #ff000000;
 }
 QMenu::item {
 	border-style: solid;
@@ -180,36 +174,43 @@ QMenu::item {
 	border-bottom-color: transparent;
 	border-bottom-width: 1px;
 	border-style: solid;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	padding-left:17px;
 	padding-top:4px;
 	padding-bottom:4px;
 	padding-right:7px;
-	background-color: #000000;
+	background-color: #ff000000;
 }
 QMenu{
-	background-color:#000000;
+	background-color:#ff000000;
 } */ 
 QTabWidget {
-	color:#a9b7c6;
-	background-color:#000000;
 	
 }
 QTabWidget::pane {
-	border:1px solid #151515;
+	border:1px solid #50151515;
 	border-radius: 0px;
+	background-color:#50000000;
 }
 QTabBar::tab{
-	border:1px solid #000000;
+	border: 1px solid #ff000000;
 	border-radius: 0px;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	padding:8px;
-	background-color: #000000;
+	background-color: #50000000;
 }
- QTabBar::tab:hover {
+QTabBar::tab:top,QTabBar::tab:bottom{
+	min-width:80px;
+}
+QTabBar::tab:left,QTabBar::tab:right{
+	min-height:80px;
+}
+QTabBar::tab:hover {
+	color: #ff000000;
 	color: #30F6D9;
 }
 QTabBar::tab:top:hover{
+	
 	border-bottom-color:#30F6D9;
 }
 QTabBar::tab:bottom:hover{
@@ -222,20 +223,18 @@ QTabBar::tab:right:hover{
 	border-left-color:#30F6D9;
 }
 QTabBar::tab:selected, QTabBar::tab:last:selected {
-	color: #000000;
+	color: #ff000000;
 	border-color: #32FFE0;
 	background-color: #30F6D9;
 }
 
 QCheckBox {
-	color: #a9b7c6;
+	color: #B5B5B5;
 	border:1px solid #151515;
 	border-radius:0px;
 	background-color:#151515;
 	padding-left: 4px;
 }
-
-
 QCheckBox:hover {
 	border-color: #30F6D9;
 	color:#30F6D9;
@@ -245,7 +244,7 @@ QCheckBox::indicator{
 	width: 10px;
 	border-style:solid;
 	border-width: 1px;
-	border-color: #a9b7c6;
+	border-color: #B5B5B5;
 }
 QCheckBox::indicator:checked {
 	background-color: #30F6D9;
@@ -258,8 +257,8 @@ QCheckBox:disabled {
 	color: #505050;
 }
 /* QRadioButton {
-	color: #a9b7c6;
-	background-color: #000000;
+	color: #B5B5B5;
+	background-color: #ff000000;
 	padding: 1px;
 }
 QRadioButton::indicator:checked {
@@ -269,7 +268,7 @@ QRadioButton::indicator:checked {
 	border-radius:5px;
 	border-width: 1px;
 	border-color: #04b97f;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	background-color: #04b97f;
 }
 QRadioButton::indicator:unchecked {
@@ -279,73 +278,81 @@ QRadioButton::indicator:unchecked {
 	border-radius:5px;
 	border-width: 1px;
 	border-color: #04b97f;
-	color: #a9b7c6;
+	color: #B5B5B5;
 	background-color: transparent;
 } */ 
 QStatusBar {
 	color:#ffffff;
 }
 QSpinBox {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QDoubleSpinBox {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QTimeEdit {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QDateTimeEdit {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QDateEdit {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QComboBox {
-	color: #a9b7c6;	
-	background: #000000;
+	color: #B5B5B5;	
+	background: #50000000;
 }
 QComboBox:editable {
-	background: #000000;
-	color: #a9b7c6;
-	selection-background-color: #000000;
+	background: #50000000;
+	color: #B5B5B5;
+	selection-background-color: #50000000;
 }
 QComboBox QAbstractItemView {
-	color: #a9b7c6;	
-	background: #000000;
+	color: #B5B5B5;	
+	background: #50000000;
 	selection-color: #FFFFFF;
-	selection-background-color: #000000;
+	selection-background-color: #50000000;
 }
 QComboBox:!editable:on, QComboBox::drop-down:editable:on {
-	color: #a9b7c6;	
-	background: #000000;
+	color: #B5B5B5;	
+	background: #50000000;
 }
 QFontComboBox {
-	color: #a9b7c6;	
-	background-color: #000000;
+	color: #B5B5B5;	
+	background-color: #50000000;
 }
 QToolBox {
-	color: #a9b7c6;
-	background-color: #000000;
+	color: #B5B5B5;
+	background-color: #50000000;
 }
 QToolBox::tab {
-	color: #a9b7c6;
-	background-color: #000000;
+	border:0px solid transparent;
+	border-radius:0px;
+	border-bottom-color: #30F6D9;
+	border-bottom-width: 1px;
+	color: #B5B5B5;
+	background-color: #50000000;
+}
+QToolBox::tab:hover{
+	color: #ff000000;
+	background-color: #30F6D9;
 }
 QToolBox::tab:selected {
-	color: #FFFFFF;
-	background-color: #000000;
+	color: #ff000000;
+	background-color: #30F6D9;
 }
 QScrollArea {
-	color: #a9b7c6;
-	background-color: #000000;
+	color: #B5B5B5;
+	background-color: #50000000;
 }
 QSlider{
-background-color: #000000
+	background-color: #50000000;
 }
 QSlider::groove:horizontal {
 	height: 1px;
@@ -355,7 +362,7 @@ QSlider::groove:vertical {
 }
 QSlider::handle{
 	background-color: #32FFE0;
-	border: 1px solid #151515;
+	border: 1px solid #50151515;
 	border-radius: 0px;
 }
 QSlider::handle:horizontal {
@@ -367,10 +374,10 @@ QSlider::handle:vertical {
 	margin: 0 -4px;
 }
 QSlider::add-page{
-    background: #a9b7c6;
+    background: #B5B5B5;
 }
 QSlider::sub-page {
-    background: #2BDABD;
+    background: #26C3A9;
 }
 </string>
   </property>
@@ -411,7 +418,7 @@ QSlider::sub-page {
       </size>
      </property>
      <property name="styleSheet">
-      <string notr="true">image: url(:/ui/title.png);</string>
+      <string notr="true">image: url(:/ui/title_t.png);</string>
      </property>
      <property name="text">
       <string/>
@@ -579,6 +586,17 @@ QSlider::sub-page {
         </spacer>
        </item>
        <item>
+        <widget class="QPushButton" name="button_help">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/help_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/help_dark.png);} 
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="button_github">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
@@ -620,7 +638,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Button">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -647,7 +665,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Base">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -656,7 +674,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Window">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -694,7 +712,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Button">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -721,7 +739,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Base">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -730,7 +748,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Window">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -768,7 +786,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Button">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -795,7 +813,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Base">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>
@@ -804,7 +822,7 @@ QSlider::sub-page {
             </colorrole>
             <colorrole role="Window">
              <brush brushstyle="SolidPattern">
-              <color alpha="255">
+              <color alpha="80">
                <red>21</red>
                <green>21</green>
                <blue>21</blue>

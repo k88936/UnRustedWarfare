@@ -24,7 +24,6 @@ BattlefieldWidget::~BattlefieldWidget()
     // Make sure the context is current when deleting the texture
     // and the buffers.
     makeCurrent();
-    delete texture;
     delete engine;
     doneCurrent();
 }
