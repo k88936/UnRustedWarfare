@@ -14,9 +14,10 @@
 #include "BoidSensor.h"
 #include "PathFind.h"
 #include <QStyle>
-#include <ui_suspend_menu_widget.h>
+#include "ui_suspend_menu_widget.h"
 
 #include "Flock.h"
+#include "FlowField.h"
 #include "main_window.h"
 #include "settings_widget.h"
 #include "suspend_menu_widget.h"
@@ -233,6 +234,16 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                         game->ui_image_draw_config_map["_arrow_highlight"].push_back(move_flag);
                     }
                     game->flocks.insert(flock);
+
+                    //
+                    // for (int i = 0; i < game->map_config.world_width; ++i)
+                    // {
+                    //     for (int j = 0; j < game->map_config.world_height; ++j)
+                    //     {
+                    //         game->line_draw_config.emplace_back(i, j, 0);
+                    //         game->line_draw_config.emplace_back(flock->flow_field->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+                    //     }
+                    // }
                 }
                 else
                 {

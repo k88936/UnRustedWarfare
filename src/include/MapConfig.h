@@ -31,6 +31,7 @@ public:
     void loadMap(const std::string& path);
     std::map<std::string, MetaImage> tile_images;
     std::vector<std::string> index_to_name;
+    std::vector<TileAttribute*> index_to_attribute;
     std::vector<std::vector<TileAttribute*>> tile_attributes;// Warning all is copies of tile_configs, forbidden to delete
 };
 

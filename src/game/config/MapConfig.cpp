@@ -78,16 +78,25 @@ void MapConfig::config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tm
         {
             for (int j = 0; j < width; ++j)
             {
-                // std::cout << " " << tmx_tiles.at(i * width + j).ID;
+                // std::cout <<std::setfill(' ')<<std::setw(4)<<tmx_tiles.at(i * width + j).ID<<' ';
                 tiles.push_back(new Tile(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
                 // of-=0.00001;
             }
+            // std::cout << std::endl;
         }
         std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
     }
 }
 
 const std::string bitmap_base = "../maps/bitmaps/";
+
+QImage base64ToImage(const QString& base64String)
+{
+    QByteArray byteArray = QByteArray::fromBase64(base64String.toUtf8());
+    QImage image;
+    image.loadFromData(byteArray);
+    return image;
+}
 
 void MapConfig::loadMap(const std::string& path)
 {
@@ -96,35 +105,30 @@ void MapConfig::loadMap(const std::string& path)
     index_to_name.clear();
     if (map.load(path))
     {
-        // std::cout << "Loaded Map version: " << map.getVersion().upper << ", " << map.getVersion().lower << std::endl;
         if (map.isInfinite())
         {
-            // std::cout << "Map is infinite.\n";
+            throw std::runtime_error("infinte map not supported");
         }
-        else
-        {
-            // std::cout << "Map Dimensions: " << map.getBounds() << std::endl;
-        }
-
         const auto& mapProperties = map.getProperties();
-        // std::cout << "Map class: " << map.getClass() << std::endl;
-
-        // std::cout << "Map tileset has " << map.getTilesets().size() << " tilesets" << std::endl;
+        //
         for (const auto& tileset : map.getTilesets())
         {
             std::string image_path = tileset.getImagePath();
-            // if (image_path.starts_with("ridges/"||image_path.starts_with("ridges/")))
-            // {
-            //     image_path = image_path.substr()
-            // }
             QImage image(QString::fromStdString(image_path));
-
+            auto properties = tileset.getProperties();
+            for (auto property : properties)
+            {
+                if (property.getName() == "embedded_png")
+                {
+                    image = base64ToImage(QString::fromStdString(property.getStringValue()));
+                }
+            }
             if (image.isNull())
             {
                 size_t pos = image_path.find_last_of("/\\");
                 if (pos == std::string::npos)
                 {
-                    throw std::runtime_error("Failed to load tileset image: " + image_path);
+                    pos = -1;
                 }
                 image = QImage(QString::fromStdString(bitmap_base + image_path.substr(pos + 1)));
                 if (image.isNull())
@@ -134,22 +138,62 @@ void MapConfig::loadMap(const std::string& path)
             }
             int w = image.width() / tileset.getTileSize().x;
             int h = image.height() / tileset.getTileSize().y;
-            MapConfig::index_to_name.resize(tileset.getFirstGID() + w * h, "NONE");
+            index_to_name.resize(tileset.getFirstGID() + w * h, "NONE");
+            index_to_attribute.resize(tileset.getFirstGID() + w * h, GameConfig::tile_configs.at("land"));
             for (int i = 0; i < h; i++)
             {
                 for (int j = 0; j < w; j++)
                 {
                     std::string id = tileset.getName() + std::to_string(i * w + j);
                     int count = tileset.getFirstGID() + i * w + j;
-                    MapConfig::index_to_name[count] = id;
+                    index_to_name[count] = id;
                     if (tile_images.contains(id))
                     {
                         continue;
                     }
                     MetaImage metaImage((image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
-                                                    tileset.getTileSize().x, tileset.getTileSize().y)), 1.025, false,
+                                                    tileset.getTileSize().x, tileset.getTileSize().y)), 1.01, false,
                                         true, 1);
-                    MapConfig::tile_images[id] = metaImage;
+                    tile_images[id] = metaImage;
+                }
+            }
+            for (auto& tile : tileset.getTiles())
+            {
+                for (auto property : tile.properties)
+                {
+                    std::string p_name = property.getName();
+                    if (p_name == "team")
+                    {
+                        //TODO
+                    }
+                    else if (p_name == "unit")
+                    {
+                        //TODO
+                    }
+                    else if (p_name == "type")
+                    {
+                        //TODO
+                    }
+                    else if (p_name == "showFog")
+                    {
+                        //TODO
+                    }
+                    else if (p_name == "res_pool")
+                    {
+                        //TODO
+                    }
+                    else
+                    {
+                        try
+                        {
+                            index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at(p_name);
+                        }
+                        catch (std::out_of_range& e)
+                        {
+                            qDebug() << "attribute for tileset:" << p_name << " not found";
+                            index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at("NONE");
+                        }
+                    }
                 }
             }
         }
@@ -223,6 +267,45 @@ void MapConfig::loadMap(const std::string& path)
                 if (layer->getName() == "Ground")
                 {
                     config_layer(tiles, layer, Game::LayerConfig::TILE_GROUND);
+                    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
+                    MapConfig::world_width = layer->getSize().x;
+                    MapConfig::world_height = layer->getSize().y;
+                    tile_attributes.resize(world_width + 2);
+                    for (auto& passable : tile_attributes)
+                    {
+                        passable.resize(world_height + 2, GameConfig::tile_configs.at("NONE"));
+                    }
+                    // return;
+                    for (int i = 0; i < world_height; ++i)
+                    {
+                        for (int j = 0; j < world_width; ++j)
+                        {
+                            auto tmx_tile = tmx_tiles.at(i * world_width + j);
+                            try
+                            {
+                                get_tile_attribute(j, world_height - i - 1) = index_to_attribute.at(tmx_tile.ID);
+                                // std::cout << std::setfill('-') << std::setw(3) << index_to_attribute.at(tmx_tile.ID)->
+                                //     type << ' ';
+                                // if (index_to_attribute.at(tmx_tile.ID)->type == 8)
+                                // {
+                                //     std::cout << "l ";
+                                // }
+                                // else if (index_to_attribute.at(tmx_tile.ID)->type == 4)
+                                // {
+                                //     std::cout << "c ";
+                                // }
+                                // else
+                                // {
+                                //     std::cout << "w ";
+                                // }
+                            }
+                            catch (const std::out_of_range& e)
+                            {
+                                qDebug() << "undefined passage for: " << index_to_name.at(tmx_tile.ID);
+                            }
+                        }
+                        // std::cout << std::endl;
+                    }
                 }
                 else if (layer->getName() == "Items")
                 {
@@ -235,31 +318,6 @@ void MapConfig::loadMap(const std::string& path)
                 else if (layer->getName() == "set")
                 {
                     qDebug() << "set";
-                    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
-                    MapConfig::world_width = layer->getSize().x;
-                    MapConfig::world_height = layer->getSize().y;
-                    tile_attributes.resize(world_width + 2);
-                    for (auto& passable : tile_attributes)
-                    {
-                        passable.resize(world_height + 2, GameConfig::tile_configs.at("None"));
-                    }
-                    // return;
-                    for (int i = 0; i < world_height; ++i)
-                    {
-                        for (int j = 0; j < world_width; ++j)
-                        {
-                            auto tmx_tile = tmx_tiles.at(i * world_width + j);
-                            try
-                            {
-                                get_tile_attribute(j, world_height - i - 1) = GameConfig::tile_configs.
-                                    at(index_to_name.at(tmx_tile.ID));
-                            }
-                            catch (const std::out_of_range& e)
-                            {
-                                qDebug() << "undefined passage for: " << index_to_name.at(tmx_tile.ID);
-                            }
-                        }
-                    }
                 }
             }
             const auto& properties = layer->getProperties();
