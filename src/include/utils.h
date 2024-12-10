@@ -28,7 +28,7 @@ namespace utils
         float get_value();
     };
 
-    constexpr std::string EMPTY_STR = "NONE";
+    const std::string EMPTY_STR = "NONE";
     extern float sign(float value);
     extern float dir_of(QVector3D vector);
     extern float dir_diff(QVector3D vector, float angle);
