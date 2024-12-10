@@ -13,6 +13,7 @@
 #include "battlefieldwidget.h"
 #include "GridsManager.h"
 #include "MapConfig.h"
+#include "../game/config/GameConfig.h"
 #include "structures/sound_event.h"
 
 
@@ -53,7 +54,7 @@ public:
         void timerEvent(QTimerEvent* event) override
         {
             game->step();
-            game->delta_time = start.msecsTo(QTime::currentTime()) / 1000.0;
+            game->delta_time = start.msecsTo(QTime::currentTime()) * GameConfig::game_speed / 1000.0;
             start = QTime::currentTime();
         };
     };

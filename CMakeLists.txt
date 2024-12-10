@@ -90,6 +90,8 @@ add_executable(untitled1
         src/ui/main_window.cpp
         src/ui/include/main_window.h
         src/ui/main_window.ui
+        src/game/config/GameConfig.cpp
+        src/game/config/GameConfig.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

@@ -26,6 +26,7 @@ BattlefieldWidget::~BattlefieldWidget()
     makeCurrent();
     delete engine;
     doneCurrent();
+    delete game;
 }
 
 float ths = 0;

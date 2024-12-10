@@ -16,7 +16,10 @@ game_end_widget::game_end_widget(main_window* parent) :
     QWidget(parent), ui(new Ui::game_end_widget)
 {
     ui->setupUi(this);
-    QToolBox* toolBox = new QToolBox(this);
+    connect(ui->continue_button, &QPushButton::clicked, parent, [=]
+    {
+        parent->widget_pop();
+    });
 }
 
 game_end_widget::~game_end_widget()

@@ -10,11 +10,17 @@
 #include "ui_help_slide_widget.h"
 
 
-help_slide_widget::help_slide_widget(main_window *parent) :
-    QWidget(parent), ui(new Ui::help_slide_widget) {
+help_slide_widget::help_slide_widget(main_window* parent) :
+    QWidget(parent), ui(new Ui::help_slide_widget)
+{
     ui->setupUi(this);
+    connect(ui->quit_button, &QPushButton::clicked, parent, [=]
+    {
+        parent->widget_pop();
+    });
 }
 
-help_slide_widget::~help_slide_widget() {
+help_slide_widget::~help_slide_widget()
+{
     delete ui;
 }

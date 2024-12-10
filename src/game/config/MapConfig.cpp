@@ -24,31 +24,12 @@ MapConfig::~MapConfig()
     {
         delete tile;
     }
-    for (auto& tile_attribute : tile_attributes)
-    {
-        for (auto& attribute : tile_attribute)
-        {
-            delete attribute;
-        }
-    }
 }
 
 TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
     return tile_attributes.at(x + 1).at(y + 1);
 }
-
-const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
-    {"None", new TileAttribute(0b0000, 0)},
-    // {"Grass0", new TileAttribute(0b0001, 1)},
-    // {"Water0", new TileAttribute(0b0010, 1)},
-    {"Shallow Water0", new TileAttribute(0b0100, 1)},
-    {"Long Grass0", new TileAttribute(0b1000, 1)},
-    {"Sand0", new TileAttribute(0b1000, 1)},
-    {"Mountain0", new TileAttribute(0b1000, 1.1)},
-    {"Ice0", new TileAttribute(0b1000, 1.2)},
-    {"Snow0", new TileAttribute(0b1000, 1.4)},
-};
 
 int MapConfig::x_in_which(const float x)
 {
@@ -260,7 +241,7 @@ void MapConfig::loadMap(const std::string& path)
                     tile_attributes.resize(world_width + 2);
                     for (auto& passable : tile_attributes)
                     {
-                        passable.resize(world_height + 2, tile_configs.at("None"));
+                        passable.resize(world_height + 2, GameConfig::tile_configs.at("None"));
                     }
                     // return;
                     for (int i = 0; i < world_height; ++i)
@@ -270,7 +251,7 @@ void MapConfig::loadMap(const std::string& path)
                             auto tmx_tile = tmx_tiles.at(i * world_width + j);
                             try
                             {
-                                get_tile_attribute(j, world_height - i - 1) = tile_configs.
+                                get_tile_attribute(j, world_height - i - 1) = GameConfig::tile_configs.
                                     at(index_to_name.at(tmx_tile.ID));
                             }
                             catch (const std::out_of_range& e)

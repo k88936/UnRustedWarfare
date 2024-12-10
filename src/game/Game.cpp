@@ -140,6 +140,7 @@ void Game::pause()
 void Game::run()
 {
     // if (timer.isActive())
+    timer_doer->start=QTime::currentTime();
     timer.start(0, timer_doer);
 }
 

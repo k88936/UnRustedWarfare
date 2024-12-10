@@ -456,6 +456,9 @@ QSlider::sub-page {
    </item>
    <item>
     <widget class="QPushButton" name="save_button">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>save</string>
      </property>
@@ -483,6 +486,9 @@ QSlider::sub-page {
    </item>
    <item>
     <widget class="QPushButton" name="exit_button">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
      <property name="text">
       <string>exit</string>
      </property>

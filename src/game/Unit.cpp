@@ -187,14 +187,14 @@ void Unit::on_new_selection()
 {
     const std::string id = utils::random_element(meta->sound_on_new_selection, utils::EMPTY_STR);
     game->audio_manager.sound_event_config_map[id].emplace_back(
-        this->position, 2);
+        this->position, 3);
 }
 
 void Unit::on_move_order()
 {
     const std::string id = utils::random_element(meta->sound_on_move_order, utils::EMPTY_STR);
     game->audio_manager.sound_event_config_map[id].emplace_back(
-        this->position, 2);
+        this->position, 3);
 }
 
 void Unit::after()

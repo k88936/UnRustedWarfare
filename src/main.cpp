@@ -65,7 +65,7 @@ int main(int argc, char* argv[])
     auto player = new QMediaPlayer();
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
-    audio->setVolume(0.5);
+    audio->setVolume(0.2);
     do_work(player, "../music/MW3/");
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)
     {

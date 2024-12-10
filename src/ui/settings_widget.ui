@@ -435,7 +435,7 @@ QSlider::sub-page {
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_2">
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="volume_label">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -448,8 +448,11 @@ QSlider::sub-page {
              <height>0</height>
             </size>
            </property>
+           <property name="styleSheet">
+            <string notr="true">color: rgb(48, 246, 217);</string>
+           </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#30f6d9;&quot;&gt;volume&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>volume:50%</string>
            </property>
           </widget>
          </item>
@@ -480,6 +483,12 @@ QSlider::sub-page {
              <height>0</height>
             </size>
            </property>
+           <property name="maximum">
+            <number>100</number>
+           </property>
+           <property name="singleStep">
+            <number>10</number>
+           </property>
            <property name="value">
             <number>50</number>
            </property>
@@ -505,6 +514,14 @@ QSlider::sub-page {
       </layout>
      </widget>
      <widget class="QWidget" name="page1">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>753</width>
+        <height>572</height>
+       </rect>
+      </property>
       <attribute name="label">
        <string>Game</string>
       </attribute>
@@ -512,9 +529,12 @@ QSlider::sub-page {
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_4">
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="game_speed_label">
+           <property name="styleSheet">
+            <string notr="true">color: rgb(48, 246, 217);</string>
+           </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#30f6d9;&quot;&gt;game speed&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>game_speed: 100%</string>
            </property>
           </widget>
          </item>
@@ -540,13 +560,16 @@ QSlider::sub-page {
             </size>
            </property>
            <property name="minimum">
-            <number>30</number>
+            <number>10</number>
            </property>
            <property name="maximum">
-            <number>80</number>
+            <number>300</number>
+           </property>
+           <property name="singleStep">
+            <number>10</number>
            </property>
            <property name="value">
-            <number>50</number>
+            <number>100</number>
            </property>
            <property name="orientation">
             <enum>Qt::Orientation::Horizontal</enum>
@@ -554,6 +577,9 @@ QSlider::sub-page {
           </widget>
          </item>
         </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout_5"/>
        </item>
       </layout>
      </widget>

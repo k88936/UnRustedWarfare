@@ -520,6 +520,9 @@ QSlider::sub-page {
        </property>
        <item>
         <widget class="QPushButton" name="button_pause">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
            <horstretch>0</horstretch>
@@ -549,6 +552,9 @@ QSlider::sub-page {
        </item>
        <item>
         <widget class="QPushButton" name="pushButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="focusPolicy">
           <enum>Qt::FocusPolicy::NoFocus</enum>
          </property>
@@ -569,6 +575,9 @@ QSlider::sub-page {
        </item>
        <item>
         <widget class="QPushButton" name="button_speed">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="tabletTracking">
           <bool>false</bool>
          </property>
@@ -687,6 +696,9 @@ QSlider::sub-page {
          </property>
          <item row="1" column="0">
           <widget class="QPushButton" name="button_fix">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -710,6 +722,9 @@ QSlider::sub-page {
          </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="button_upgrade">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -733,6 +748,9 @@ QSlider::sub-page {
          </item>
          <item row="0" column="1">
           <widget class="QPushButton" name="button_explore">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -756,6 +774,9 @@ QSlider::sub-page {
          </item>
          <item row="3" column="1">
           <widget class="QPushButton" name="button_patrol">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -779,6 +800,9 @@ QSlider::sub-page {
          </item>
          <item row="3" column="0">
           <widget class="QPushButton" name="button_delete">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -825,6 +849,9 @@ QSlider::sub-page {
          </item>
          <item row="3" column="2">
           <widget class="QPushButton" name="button_stay">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -848,6 +875,9 @@ QSlider::sub-page {
          </item>
          <item row="1" column="1">
           <widget class="QPushButton" name="button_march">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -1009,6 +1039,9 @@ QSlider::sub-page {
        </item>
        <item>
         <widget class="QPushButton" name="button_queue_new">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1032,6 +1065,9 @@ QSlider::sub-page {
        </item>
        <item>
         <widget class="QPushButton" name="button_queue">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -1090,6 +1126,9 @@ QSlider::sub-page {
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
           <widget class="QPushButton" name="button_type">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -1112,6 +1151,9 @@ QSlider::sub-page {
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_9">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>
@@ -1134,6 +1176,9 @@ QSlider::sub-page {
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_10">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
              <horstretch>0</horstretch>

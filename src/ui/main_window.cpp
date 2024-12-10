@@ -22,7 +22,6 @@ main_window::main_window(QWidget* parent) :
     widget_stack.push(ui->centralwidget);
     auto widget = new welcome_widget(this);
     auto game = new Game(widget->ui->widget, "../maps/1.tmx");;
-    game->run();
     widget_push(widget);
 
     // Game::start_on("../maps/1.tmx", w->ui->widget);
@@ -38,7 +37,7 @@ main_window::main_window(QWidget* parent) :
 
 void main_window::widget_push(QWidget* widget)
 {
-    qDebug() << widget_stack.size();
+    // qDebug() << widget_stack.size();
     widget_stack.top()->setVisible(false);
     widget->setVisible(true);
     widget_stack.push(widget);

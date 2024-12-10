@@ -14,7 +14,6 @@ class Game;
 class AudioManager
 {
 public:
-    float global_volume = 0.5;
     std::list<QSoundEffect*> pool;
     std::unordered_map<std::string, std::vector< SoundEvent>> sound_event_config_map;
     void play(QVector3D listener_pos);

@@ -30,7 +30,7 @@ void AudioManager::play(QVector3D listener_pos)
                 sound = new QSoundEffect();
             }
             sound->setSource(UnitConfigs::sounds.at(id));
-            sound->setVolume(global_volume * 5 / (dis + 5.0f));
+            sound->setVolume(5 * GameConfig::game_volume / (dis + 5.0f));
             sound->play();
             pool.push_back(sound);
             cnt++;
@@ -48,6 +48,7 @@ AudioManager::AudioManager()
         pool.push_back(new QSoundEffect());
     }
 }
+
 AudioManager::~AudioManager()
 {
     for (auto sound : pool)

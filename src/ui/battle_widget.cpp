@@ -10,13 +10,15 @@
 #include <qdatetime.h>
 #include <QMouseEvent>
 
+#include "ui_battle_widget.h"
 #include "BoidSensor.h"
 #include "PathFind.h"
 #include <QStyle>
 #include <ui_suspend_menu_widget.h>
 
-#include "ui_battle_widget.h"
 #include "Flock.h"
+#include "main_window.h"
+#include "settings_widget.h"
 #include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
@@ -35,6 +37,22 @@ battle_widget::battle_widget(main_window* parent) :
     {
         game->run();
         suspend_menu->setVisible(false);
+    });
+    connect(suspend_menu->ui->settings_button, &QPushButton::clicked, this, [=]()
+    {
+        auto widget = new settings_widget(parent);
+        parent->widget_push(widget);
+    });
+    connect(suspend_menu->ui->exit_button, &QPushButton::clicked, this, [=]()
+    {
+        parent->widget_pop();
+    });
+
+    connect(suspend_menu->ui->restart_button, &QPushButton::clicked, this, [=]()
+    {
+        auto widget = new battle_widget(parent);
+        auto game = new Game(widget, "../maps/2.tmx");
+        parent->widget_change(widget);
     });
 }
 
