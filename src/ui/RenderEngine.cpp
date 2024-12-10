@@ -24,8 +24,8 @@ RenderEngine::~RenderEngine()
 {
     for (auto [fst, snd] : textures_)
     {
-        delete snd.first;
-        delete snd.second;
+        // delete snd.first;
+        // delete snd.second;
     }
 }
 
