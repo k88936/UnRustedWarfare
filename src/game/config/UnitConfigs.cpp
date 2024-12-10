@@ -464,7 +464,7 @@ void UnitConfigs::scan_dir(QString path)
             }
             else if (file_name.endsWith(".png"))
             {
-                qDebug() << iter.filePath();
+                // qDebug() << iter.filePath();
                 // images[file_name.toStdString()].image = std::move(img);
                 images[(file_name.toStdString())].image = QImage(iter.filePath());
             }

@@ -450,6 +450,12 @@ void Tileset::createMissingTile(std::uint32_t ID)
     tile.imagePath = m_imagePath;
     tile.imageSize = m_tileSize;
 
+    if (m_columnCount==0)
+    {
+
+        std::cout << "tileset columnCount:0" << std::endl;
+        m_columnCount=1;
+    }
     std::uint32_t rowIndex = ID % m_columnCount;
     std::uint32_t columnIndex = ID / m_columnCount;
     tile.imagePosition.x = m_margin + rowIndex * (m_tileSize.x + m_spacing);
