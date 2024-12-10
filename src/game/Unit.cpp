@@ -27,7 +27,7 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     angular_damping = 40;
     auto* mar = new Sensor(game, meta->max_attack_range, team);
     watchers.push_back(mar);
-    boid_sensor = new BoidSensor(game,4, this);
+    boid_sensor = new BoidSensor(game, 4, this);
     watchers.push_back(boid_sensor);
     for (const auto& slot : meta->attached_turret)
     {
@@ -163,13 +163,13 @@ void Unit::step()
 void Unit::on_death()
 {
     game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
-                                     utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
-                                     scale, linear_velocity,
-                                     angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
+                                      utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
+                                      scale, linear_velocity,
+                                      angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)
     {
         game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_death), position, rotation,
-                                   linear_velocity));
+                                    linear_velocity));
     }
 }
 
@@ -198,7 +198,10 @@ void Unit::on_move_order()
 }
 
 void Unit::after()
+
 {
+    // if (std::isnan(this->position.x()))
+    //     throw std::runtime_error("nan");
     if (this->marked_for_delete)
     {
     }

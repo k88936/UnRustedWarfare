@@ -123,7 +123,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
             }
         }
     }
-
+    // else
     if (m_r_pressing)
     {
         const QVector3D move = screen_relative_to_world_relative(event->pos() - m_press_pos_screen);

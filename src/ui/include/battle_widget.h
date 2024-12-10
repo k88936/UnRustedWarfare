@@ -41,8 +41,8 @@ public:
     void resizeEvent(QResizeEvent* event) override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
-    bool m_l_pressing;
-    bool m_r_pressing;
+    bool m_l_pressing=false;
+    bool m_r_pressing=false;
 
     QVector3D m_press_pos_world;
     QVector3D m_release_pos_world;
