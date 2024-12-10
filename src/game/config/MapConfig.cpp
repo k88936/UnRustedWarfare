@@ -17,6 +17,7 @@ MapConfig::MapConfig(const std::string& path)
 {
     loadMap(path);
 }
+
 MapConfig::~MapConfig()
 {
     for (auto& tile : tiles)
@@ -30,7 +31,6 @@ MapConfig::~MapConfig()
             delete attribute;
         }
     }
-
 }
 
 TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
@@ -46,6 +46,8 @@ const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
     {"Long Grass0", new TileAttribute(0b1000, 1)},
     {"Sand0", new TileAttribute(0b1000, 1)},
     {"Mountain0", new TileAttribute(0b1000, 1.1)},
+    {"Ice0", new TileAttribute(0b1000, 1.2)},
+    {"Snow0", new TileAttribute(0b1000, 1.4)},
 };
 
 int MapConfig::x_in_which(const float x)
@@ -70,8 +72,7 @@ const std::array<std::string, 4u> LayerStrings =
 };
 
 
-
-void MapConfig::config_layer(std::vector<Tile* >& tiles, const std::unique_ptr<tmx::Layer>& layer,
+void MapConfig::config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
                              const float z)
 {
     // static float of=0;

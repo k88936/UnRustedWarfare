@@ -8,10 +8,11 @@
 
 #include <QToolBox>
 
+#include "main_window.h"
 #include "ui_game_end_widget.h"
 
 
-game_end_widget::game_end_widget(QWidget* parent) :
+game_end_widget::game_end_widget(main_window* parent) :
     QWidget(parent), ui(new Ui::game_end_widget)
 {
     ui->setupUi(this);

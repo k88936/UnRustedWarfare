@@ -29,7 +29,7 @@ class battle_widget : public BattlefieldWidget
 
 public:
     suspend_menu_widget* suspend_menu;
-    battle_widget(QWidget* parent);
+    battle_widget(main_window* parent);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
     void mouseMoveEvent(QMouseEvent* event) override;

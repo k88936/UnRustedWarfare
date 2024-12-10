@@ -17,7 +17,7 @@ class settings_widget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit settings_widget(QWidget *parent = nullptr);
+settings_widget(main_window* parent);
     ~settings_widget() override;
 
 private:

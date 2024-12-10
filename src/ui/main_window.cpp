@@ -7,6 +7,7 @@
 
 #include "main_window.h"
 
+#include <qevent.h>
 #include <ui_welcome_widget.h>
 
 #include "battle_widget.h"
@@ -18,19 +19,12 @@ main_window::main_window(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::main_window)
 {
     ui->setupUi(this);
-    // qDebug()<<widget_stack.size();
-    widget_stack.push(ui->centralwidget);
-
-
-    auto b = new battle_widget(this);;
-    Game* game = new Game(b,"../maps/1.tmx");
-    auto w = new welcome_widget(this);
-    Game* game2 = new Game(w->ui->widget,"../maps/2.tmx");;
-
+    widget_stack.push_back(ui->centralwidget);
+    auto widget = new welcome_widget(this);
+    auto game = new Game(widget->ui->widget, "../maps/2.tmx");;
     game->run();
-    game2->run();
-    setCentralWidget(b);
-    ui->centralwidget = b;
+    widget_push(widget);
+
     // Game::start_on("../maps/1.tmx", w->ui->widget);
     // Game::start_on("../maps/1.tmx", b);
     // b->show();
@@ -45,53 +39,62 @@ main_window::main_window(QWidget* parent) :
 void main_window::widget_push(QWidget* widget)
 {
     qDebug() << widget_stack.size();
-    // widget_stack.top()->setVisible(false);
-    // widget->setVisible(true);
-    widget_stack.push(widget);
-    auto in_animation = new QPropertyAnimation(widget, "windowOpacity");
+    widget_stack.back()->setVisible(false);
+    widget->setVisible(true);
+    widget_stack.push_back(widget);
+    auto in_animation = new QPropertyAnimation(widget, "Opacity");
     in_animation->setDuration(500);
     in_animation->setStartValue(0);
     in_animation->setEndValue(1);
     // in_animation->start();
     in_animation->start(QAbstractAnimation::DeleteWhenStopped);
-    setCentralWidget(widget);
     ui->centralwidget = widget;
+    ui->centralwidget->resize(this->size());
 }
 
 void main_window::widget_change(QWidget* widget)
 {
-    // widget_stack.top()->setVisible(false);
-    widget_stack.top()->deleteLater();
-    widget_stack.pop();
-    // widget->setVisible(true);
-    widget_stack.push(widget);
+    widget_stack.back()->setVisible(false);
+    widget_stack.back()->deleteLater();
+    widget_stack.pop_back();
+    widget->setVisible(true);
+    widget_stack.push_back(widget);
     auto in_animation = new QPropertyAnimation(widget, "Opacity");
     in_animation->setDuration(5000);
     in_animation->setStartValue(0);
     in_animation->setEndValue(1);
     // in_animation->start();
     in_animation->start(QAbstractAnimation::DeleteWhenStopped);
-    setCentralWidget(widget);
     ui->centralwidget = widget;
+    ui->centralwidget->resize(this->size());
 }
 
 void main_window::widget_pop()
 {
-    // widget_stack.top()->setVisible(false);
-    widget_stack.top()->deleteLater();
-    widget_stack.pop();
-    // widget_stack.top()->setVisible(true);
-    auto in_animation = new QPropertyAnimation(widget_stack.top(), "Opacity");
+    widget_stack.back()->setVisible(false);
+    widget_stack.back()->deleteLater();
+    widget_stack.pop_back();
+    widget_stack.back()->setVisible(true);
+    auto in_animation = new QPropertyAnimation(widget_stack.back(), "Opacity");
     in_animation->setDuration(500);
     in_animation->setStartValue(0);
     in_animation->setEndValue(1);
     // in_animation->start();
     in_animation->start(QAbstractAnimation::DeleteWhenStopped);
-    setCentralWidget(widget_stack.top());
-    ui->centralwidget = widget_stack.top();
+    ui->centralwidget = widget_stack.back();
+    ui->centralwidget->resize(this->size());
 }
 
 main_window::~main_window()
 {
     delete ui;
 }
+
+// void main_window::resizeEvent(QResizeEvent* event)
+// {
+//     QMainWindow::resizeEvent(event);
+//     for (auto widget : widget_stack)
+//     {
+//         widget->resize(event->size());
+//     }
+// }

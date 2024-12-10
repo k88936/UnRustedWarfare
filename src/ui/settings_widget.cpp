@@ -10,7 +10,7 @@
 #include "ui_settings_widget.h"
 
 
-settings_widget::settings_widget(QWidget *parent) :
+settings_widget::settings_widget(main_window *parent) :
     QWidget(parent), ui(new Ui::settings_widget) {
     ui->setupUi(this);
 }

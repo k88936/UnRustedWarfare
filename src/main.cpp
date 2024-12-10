@@ -13,6 +13,7 @@
 #include "UnitConfigs.h"
 #include "Game.h"
 #include "main_window.h"
+#include "splash_widget.h"
 
 QString getRandomFileName(const QString& directoryPath)
 {
@@ -51,7 +52,8 @@ int main(int argc, char* argv[])
     app.setApplicationName("test");
     app.setApplicationVersion("0.1");
 
-
+    // splash_widget splash;
+    // splash.show();
     // auto* music = new QSoundEffect();
     // music->setSource(QUrl::fromLocalFile("../sound/tank_moving0.wav"));
     // // music->setSource(QUrl("qrc:/1.wav"));
@@ -78,12 +80,15 @@ int main(int argc, char* argv[])
     });
 
 
-    UnitConfigs::init();
-
-
     // player->setSource(QUrl("qrc:/b.ogg"));
 
+
+    UnitConfigs::init();
     main_window window;
+
+    // sleep(1);
+    // splash.hide();
+
     window.showMaximized();
     // Game::init();
     return app.exec();

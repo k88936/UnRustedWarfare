@@ -20,8 +20,8 @@
 #include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
-battle_widget::battle_widget(QWidget* parent) :
-    BattlefieldWidget(parent), ui(new Ui::battle_widget)
+battle_widget::battle_widget(main_window* parent) :
+    BattlefieldWidget(reinterpret_cast<QWidget*>(parent)), ui(new Ui::battle_widget)
 {
     ui->setupUi(this);
     suspend_menu = new suspend_menu_widget(this);

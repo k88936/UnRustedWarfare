@@ -25,10 +25,10 @@ class welcome_widget : public QWidget
     Q_OBJECT
 
 public:
-    explicit welcome_widget(QWidget* parent = nullptr);
+    explicit welcome_widget(main_window* parent);
     ~welcome_widget() override;
-
     Ui::welcome_widget* ui;
+    void setVisible(bool visible) override;
 };
 
 

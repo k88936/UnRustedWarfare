@@ -18,7 +18,7 @@ class help_slide_widget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit help_slide_widget(QWidget *parent = nullptr);
+explicit help_slide_widget(main_window* parent);
     ~help_slide_widget() override;
 
 private:

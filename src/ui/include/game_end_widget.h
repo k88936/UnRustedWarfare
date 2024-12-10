@@ -7,6 +7,8 @@
 
 #include <QWidget>
 
+#include "main_window.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class game_end_widget; }
@@ -16,7 +18,7 @@ class game_end_widget : public QWidget {
 Q_OBJECT
 
 public:
-    explicit game_end_widget(QWidget *parent = nullptr);
+game_end_widget(main_window* parent);
     ~game_end_widget() override;
 
 private:

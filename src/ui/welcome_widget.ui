@@ -456,7 +456,7 @@ QSlider::sub-page {
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
      <property name="spacing">
-      <number>1</number>
+      <number>5</number>
      </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -464,22 +464,9 @@ QSlider::sub-page {
         <number>0</number>
        </property>
        <item>
-        <spacer name="horizontalSpacer_2">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
         <widget class="QPushButton" name="button_play">
          <property name="sizePolicy">
-          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
            <horstretch>0</horstretch>
            <verstretch>0</verstretch>
           </sizepolicy>
@@ -516,18 +503,34 @@ QSlider::sub-page {
          </property>
         </widget>
        </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
        <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Orientation::Horizontal</enum>
+        <widget class="QPushButton" name="load_button">
+         <property name="enabled">
+          <bool>false</bool>
          </property>
-         <property name="sizeHint" stdset="0">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
           <size>
-           <width>40</width>
-           <height>20</height>
+           <width>250</width>
+           <height>43</height>
           </size>
          </property>
-        </spacer>
+         <property name="text">
+          <string>CONTUINUE</string>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
@@ -573,6 +576,17 @@ QSlider::sub-page {
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="button_help">
+         <property name="styleSheet">
+          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/help_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/help_dark.png);} 
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="horizontalSpacer_3">
          <property name="orientation">
           <enum>Qt::Orientation::Horizontal</enum>
@@ -586,38 +600,10 @@ QSlider::sub-page {
         </spacer>
        </item>
        <item>
-        <widget class="QPushButton" name="button_help">
-         <property name="styleSheet">
-          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/help_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/help_dark.png);} 
-</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_github">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/github_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/github_dark.png);}
-</string>
-         </property>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="flat">
+        <widget class="QPushButton" name="button_info">
+         <property name="enabled">
           <bool>false</bool>
          </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="button_info">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -842,7 +828,7 @@ QSlider::sub-page {
           </palette>
          </property>
          <property name="styleSheet">
-          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/info_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/info_dark.png);}
+          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;max-width:32px;max-height:32px;image: url(:/ui/info_highlight.png);}QPushButton:hover,QPushButton:pressed,QPushButton:disabled,QPushButton:checked{image: url(:/ui/info_dark.png);} 
 </string>
          </property>
          <property name="text">
@@ -850,6 +836,26 @@ QSlider::sub-page {
          </property>
          <property name="default">
           <bool>false</bool>
+         </property>
+         <property name="flat">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="button_github">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QPushButton{min-width: 32px;min-height: 32px;image: url(:/ui/github_highlight.png);}QPushButton:hover,QPushButton:pressed{image: url(:/ui/github_dark.png);}
+</string>
+         </property>
+         <property name="text">
+          <string/>
          </property>
          <property name="flat">
           <bool>false</bool>

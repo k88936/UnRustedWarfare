@@ -31,9 +31,8 @@ public:
     void widget_change(QWidget* widget);
     void widget_pop();
     ~main_window() override;
-
     Ui::main_window* ui;
-    std::stack<QWidget*> widget_stack;
+    std::list<QWidget*> widget_stack;
 };
 
 
