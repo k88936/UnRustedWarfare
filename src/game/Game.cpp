@@ -31,23 +31,23 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): map
         tile->draw(this);
     }
     run();
-    for (int i = 25; i < 35; ++i)
+    for (int i = 20; i < 22; ++i)
     {
-        for (int j = 25; j < 35; ++j)
+        for (int j = 20; j < 21; ++j)
         {
             Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
         }
     }
-    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
+    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
     Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
-    for (int i = 57; i < 60; ++i)
-    {
-        for (int j = 40; j < 43; ++j)
-        {
-            Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
-        }
-    }
+    // for (int i = 30; i < 32; ++i)
+    // {
+    //     for (int j = 30; j < 32; ++j)
+    //     {
+    //         Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
+    //     }
+    // }
 }
 
 Game::~Game()
