@@ -12,7 +12,7 @@ def list_single_file(file):
 
 print("<RCC><qresource prefix=\"/\">",file=qrc)
 list_files("ui")
-list_files("M2A3")
+# list_files("M2A3")
 list_single_file("t_vshader.glsl")
 list_single_file("t_fshader.glsl")
 list_single_file("s_vshader.glsl")

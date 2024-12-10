@@ -30,9 +30,10 @@ public:
     void widget_push(QWidget* widget);
     void widget_change(QWidget* widget);
     void widget_pop();
+    void resizeEvent(QResizeEvent* event) override;
     ~main_window() override;
     Ui::main_window* ui;
-    std::list<QWidget*> widget_stack;
+    std::stack<QWidget*> widget_stack;
 };
 
 
