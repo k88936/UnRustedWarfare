@@ -25,13 +25,6 @@ struct PathNode
         id = hash(x, y);
     }
 
-    friend std::ostream& operator<<(std::ostream& os, const PathNode& n)
-    {
-        os << "Node(x: " << n.x << ", y: " << n.y << ", id: " << n.id
-            << ", f: " << n.f << ", g: " << n.g << ", h: " << n.h << ")";
-        return os;
-    }
-
     struct cmp
     {
         bool operator()(const PathNode* a, const PathNode* b) const
