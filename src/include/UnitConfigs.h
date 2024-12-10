@@ -5,15 +5,11 @@
 #ifndef UNIT_CONFIGS_H
 #define UNIT_CONFIGS_H
 #include <qimage.h>
-#include <QSoundEffect>
-
 #include "MetaEffect.h"
 #include "MetaProjectiles.h"
 #include "MetaUnit.h"
 #include <unordered_map>
 #include <string>
-
-#include "Effect.h"
 #include "Projectile.h"
 #include "structures/meta_image.h"
 

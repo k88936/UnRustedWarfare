@@ -5,7 +5,9 @@
 #ifndef DRAWABLE_H
 #define DRAWABLE_H
 #include <QMatrix4x4>
-#include "Object.h"
+
+
+class Game;
 
 class Drawable
 {
@@ -15,8 +17,7 @@ public:
     QVector4D color = QVector4D(1, 1, 1, 1);
     bool with_shadow = false;
     float scale = 1;
-    virtual void draw();
-
+    virtual void draw(Game* game);
 };
 
 

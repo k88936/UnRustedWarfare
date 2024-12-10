@@ -4,16 +4,15 @@
 
 #include "SimpleEffect.h"
 
-#include <utility>
-
 #include "Game.h"
 #include "utils.h"
 
-SimpleEffect::SimpleEffect(std::string image, const float life, const QVector3D& position, const float rotation,
+SimpleEffect::SimpleEffect(Game* game, std::string image, const float life, const QVector3D& position,
+                           const float rotation,
                            const float scale,
                            const QVector3D& linear_velocity, const float angular_velocity, const QVector4D& color,
-                           const bool physics): max_life(life),
-                                          image(std::move(image))
+                           const bool physics): Effect(game), max_life(life),
+                                                image(std::move(image))
 {
     this->position = position;
     this->rotation = rotation;
@@ -31,13 +30,13 @@ SimpleEffect::SimpleEffect(std::string image, const float life, const QVector3D&
     }
 }
 
-void SimpleEffect::draw()
+void SimpleEffect::draw(Game* game)
 {
     render_transform.setToIdentity();
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_transparent_image_draw_config_map[image].push_back(this);
+    game->var_transparent_image_draw_config_map[image].push_back(this);
 }
 
 void SimpleEffect::before()
@@ -52,6 +51,6 @@ void SimpleEffect::after()
     {
         marked_for_delete = true;
     }
-    has_life += Game::deltaTime;
-    draw();
+    has_life += game->deltaTime;
+    draw(game);
 }

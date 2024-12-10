@@ -4,22 +4,26 @@
 #ifndef MAINWIDGET_H
 #define MAINWIDGET_H
 
-#include <Drawable.h>
 #include <QOpenGLWidget>
+
 #include "RenderEngine.h"
 
+
+class Game;
+class Drawable;
 
 class BattlefieldWidget : public QOpenGLWidget, protected QOpenGLFunctions
 {
 public:
     using QOpenGLWidget::QOpenGLWidget;
-    explicit BattlefieldWidget(QWidget* parent = nullptr);
     QVector3D screen_to_world(const QPointF& screen_pos) const;
     QVector3D screen_relative_to_world_relative(const QPointF& screen_relative) const;
+    BattlefieldWidget(Game* game, QWidget* parent);
     ~BattlefieldWidget() override;
     QVector3D camera_pos = QVector3D(50, 50, 5);
     float camera_zoom = 0.05;
     void update_camera();
+    Game* game;
 
 protected:
     void initializeGL() override;

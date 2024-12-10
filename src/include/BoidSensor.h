@@ -4,7 +4,6 @@
 
 #ifndef BOIDSENSOR_H
 #define BOIDSENSOR_H
-#include "Flock.h"
 #include "Sensor.h"
 #include "Unit.h"
 
@@ -21,12 +20,12 @@ public:
     Flock* flock = nullptr;
     QVector3D target_offset;
 
-    BoidSensor(const float radius, Unit* boid): Sensor(radius, boid->team)
+    BoidSensor(Game* game,const float radius, Unit* boid): Sensor(game,radius, boid->team)
     {
         this->boid = boid;
     }
 
-    ~BoidSensor() override;
+    ~BoidSensor() ;
 
     bool arrived_flock_target = false;
     bool arrived_flock_target_offset = false;

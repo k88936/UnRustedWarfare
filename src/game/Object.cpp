@@ -13,7 +13,7 @@
 // }
 
 
-Object::Object(const float radius, const float mass, const float inertia): team(-1)
+Object::Object(Game* game, const float radius, const float mass, const float inertia): game(game), team(-1)
 {
     this->mass = mass;
     this->inertia = inertia;
@@ -65,38 +65,38 @@ void Object::after()
     // angularVelocity*=(1-angularDamping);
 
 
-    linear_velocity += (linear_forces) * Game::deltaTime * inv_mass;
+    linear_velocity += (linear_forces) * game->deltaTime * inv_mass;
 
     float linearVelocityDir = QVector3D::dotProduct(linear_velocity, vector_dir);
-    if (fabsf(linearVelocityDir) < linear_damping_dir * Game::deltaTime)
+    if (fabsf(linearVelocityDir) < linear_damping_dir * game->deltaTime)
     {
         linear_velocity -= vector_dir * linearVelocityDir;
         // float linearForcesDir=QVector3D::dotProduct(linearForces,Dir);
     }
     else
     {
-        linear_velocity -= vector_dir * utils::sign(linearVelocityDir) * linear_damping_dir * Game::deltaTime;
+        linear_velocity -= vector_dir * utils::sign(linearVelocityDir) * linear_damping_dir * game->deltaTime;
     }
     float linearVelocityVer = QVector3D::dotProduct(linear_velocity, vector_ver);
-    if (fabsf(linearVelocityVer) < linear_damping_ver * Game::deltaTime)
+    if (fabsf(linearVelocityVer) < linear_damping_ver * game->deltaTime)
     {
         linear_velocity -= vector_ver * linearVelocityVer;
     }
     else
     {
-        linear_velocity -= vector_ver * utils::sign(linearVelocityVer) * linear_damping_ver * Game::deltaTime;
+        linear_velocity -= vector_ver * utils::sign(linearVelocityVer) * linear_damping_ver * game->deltaTime;
     }
-    angular_velocity += (angular_forces) * Game::deltaTime * inv_inertia;
-    if (fabsf(angular_velocity) < angular_damping * Game::deltaTime)
+    angular_velocity += (angular_forces) * game->deltaTime * inv_inertia;
+    if (fabsf(angular_velocity) < angular_damping * game->deltaTime)
     {
         angular_velocity = 0;
     }
     else
     {
-        angular_velocity -= utils::sign(angular_velocity) * angular_damping * Game::deltaTime;
+        angular_velocity -= utils::sign(angular_velocity) * angular_damping * game->deltaTime;
     }
-    position += linear_velocity * Game::deltaTime;
-    rotation += angular_velocity * Game::deltaTime;
+    position += linear_velocity * game->deltaTime;
+    rotation += angular_velocity * game->deltaTime;
     utils::angle_ensure(rotation);
     // addRotation(angularVelocity * Game::deltaTime);
 
@@ -116,11 +116,12 @@ bool Object::on_overlay(Object* obj, const QVector3D position_diff)
     return true;
 }
 
-void Object::on_collision(const QVector3D &force, const float torque,Object* other)
+void Object::on_collision(const QVector3D& force, const float torque, Object* other)
 {
-    apply_force(force ,torque);
+    apply_force(force, torque);
 }
-void Object::apply_force(const QVector3D &force, const float torque)
+
+void Object::apply_force(const QVector3D& force, const float torque)
 {
     this->linear_forces += force;
     this->angular_forces += torque;
@@ -133,7 +134,7 @@ void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D positio
     const float speedProjected = QVector3D::dotProduct(normDiff, obj1->linear_velocity - obj2->linear_velocity);
     const float force = (2 - obj1->restitution - obj2->restitution) * (speedProjected + 5.0f) * obj1->mass * obj2->mass
         * (obj1->radius + obj2->radius) * (obj1->radius + obj2->radius) / (
-            (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * Game::deltaTime);;
+            (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * obj1->game->deltaTime);;
     const QVector3D force3D = normDiff * force;
     // if (force!=force) {
     //      qDebug()<<"nan";
@@ -141,8 +142,8 @@ void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D positio
     //  }
     const float torqueBefore = 256 * force * obj1->friction * obj2->friction;
     // qDebug()<<torqueBefore;
-    obj1->on_collision(-force3D, torqueBefore * obj1->radius,obj2);
-    obj2->on_collision(force3D, -torqueBefore * obj2->radius,obj1);
+    obj1->on_collision(-force3D, torqueBefore * obj1->radius, obj2);
+    obj2->on_collision(force3D, -torqueBefore * obj2->radius, obj1);
     // qDebug()<<"hit";
 }
 
@@ -171,8 +172,9 @@ void Object::ptr_change_to(Object*& obj, Object* new_obj)
     {
         obj = new_obj;
         obj->reference_count++;
-    }else
+    }
+    else
     {
-        obj=nullptr;
+        obj = nullptr;
     }
 }

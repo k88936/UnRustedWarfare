@@ -4,13 +4,15 @@
 
 #include "Projectile.h"
 
+#include "Effect.h"
 #include "UnitConfigs.h"
 #include "Game.h"
 #include "utils.h"
 
-Projectile::Projectile(MetaProjectiles* meta, const int team, const QVector3D position, const float rotation,
+Projectile::Projectile(Game* game, MetaProjectiles* meta, const int team, const QVector3D position,
+                       const float rotation,
                        const QVector3D& linear_velocity_base
-): Object(0.3f, 10, 1000), Drawable()
+): Object(game, 0.3f, 10, 1000), Drawable()
 {
     this->meta = meta;
     this->position = position;
@@ -21,18 +23,18 @@ Projectile::Projectile(MetaProjectiles* meta, const int team, const QVector3D po
     this->linear_velocity = linear_velocity_base + vector_dir * meta->speed;
 }
 
-void Projectile::draw()
+void Projectile::draw(Game* game)
 {
     render_transform.setToIdentity();
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Projectile::before()
 {
-    Game::grids_manager.update_object(this);
+    game->grids_manager.update_object(this);
     Object::before();
 }
 
@@ -42,10 +44,10 @@ void Projectile::after()
     {
         marked_for_delete = true;
     }
-    this->has_lived += Game::deltaTime;
+    this->has_lived += game->deltaTime;
     Object::after();
     // if(!marked_for_delete)
-    draw();
+    draw(game);
 }
 
 bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
@@ -67,7 +69,7 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
         {
             //aoe damage = - center_damage/r**2 +center_damage
             const float factor = -meta->areaDamage / (meta->areaRadius * meta->areaRadius);
-            for (const auto grids = Game::grids_manager.scan(position, meta->areaRadius); const auto grids_across :
+            for (const auto grids = game->grids_manager.scan(position, meta->areaRadius); const auto grids_across :
                  grids)
             {
                 for (const auto object : grids_across->objects) //has bug actually
@@ -100,7 +102,7 @@ void Projectile::hit_effect(const Unit* unit) const
     for (const auto& explode_effect : meta->explode_effect)
     {
         const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        Game::addEffect(new Effect(meta_effect, utils::set_offset_z(position, Game::LayerConfig::SHELL), rotation,
+        game->addEffect(new Effect(game, meta_effect, utils::set_offset_z(position, Game::LayerConfig::SHELL), rotation,
                                    this->linear_velocity));
     }
     // Game::addEffect()

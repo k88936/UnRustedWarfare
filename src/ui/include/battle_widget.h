@@ -23,8 +23,8 @@ Q_OBJECT
 
 public:
     suspend_menu_widget* suspend_menu;
-    explicit battle_widget(main_window *parent = nullptr);
-    battle_widget(main_window *parent, const std::string& map_path);
+battle_widget(Game* game, QWidget* parent);
+battle_widget(Game* game, QWidget* parent, const std::string& map_path);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -49,6 +49,7 @@ private:
     Ui::battle_widget *ui;
 
     Drawable* move_flag=new Drawable();
+Game* game;
 };
 
 

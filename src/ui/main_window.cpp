@@ -17,14 +17,17 @@
 main_window::main_window(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::main_window)
 {
-    Game::init();
     ui->setupUi(this);
     // qDebug()<<widget_stack.size();
     widget_stack.push(ui->centralwidget);
 
 
-    // auto w = new welcome_widget(this);
-    auto b = new battle_widget(this, "../maps/2.tmx");;
+    Game* game = new Game();
+    auto b = new battle_widget(game,this, "../maps/2.tmx");;
+    Game* game2 = new Game();
+    auto w = new welcome_widget(this);
+    game2->start_on("../maps/1.tmx", w->ui->widget);
+    w->ui->widget->game = game2;
     // setCentralWidget(w);
     // ui->centralwidget = w;
     // Game::stop();

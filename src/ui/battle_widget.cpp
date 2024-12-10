@@ -20,33 +20,34 @@
 #include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
-battle_widget::battle_widget(main_window* parent) :
-    BattlefieldWidget(reinterpret_cast<QWidget*>(parent)), ui(new Ui::battle_widget)
+battle_widget::battle_widget(Game *game,QWidget* parent) :
+    BattlefieldWidget(game,parent), ui(new Ui::battle_widget)
 {
     ui->setupUi(this);
     suspend_menu = new suspend_menu_widget(this);
     suspend_menu->setVisible(false);
     connect(ui->button_quit, &QPushButton::clicked, this, [&]()
     {
-        Game::pause();
+        game->pause();
         suspend_menu->setVisible(true);
     });
     connect(suspend_menu->ui->countinue_button, &QPushButton::clicked, this, [&]()
     {
-        Game::resume();
+        game->resume();
         suspend_menu->setVisible(false);
     });
 }
 
-battle_widget::battle_widget(main_window* parent, const std::string& map_path): battle_widget(parent)
+battle_widget::battle_widget(Game* game, QWidget* parent, const std::string& map_path): battle_widget(game,parent)
 {
-    qDebug()<<"new battle_widget";
-    Game::start_on(map_path, this);
+    this->game = game;
+    qDebug() << "new battle_widget";
+    game->start_on(map_path, this);
 }
 
 battle_widget::~battle_widget()
 {
-    qDebug()<<"delete battle_widget";
+    qDebug() << "delete battle_widget";
     delete ui;
 }
 
@@ -67,28 +68,28 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
     {
         if (elapsed > DRAG_DELAY) //drag
         {
-            const int x1 = Game::grids_manager.x_in_which(m_press_pos_world.x());
-            const int y1 = Game::grids_manager.y_in_which(m_press_pos_world.y());
+            const int x1 = game->grids_manager.x_in_which(m_press_pos_world.x());
+            const int y1 = game->grids_manager.y_in_which(m_press_pos_world.y());
             units_selected.clear();
-            Game::ui_image_draw_config_map["_select"].clear();
-            Game::ui_image_draw_config_map["_arrow_highlight"].clear();
-            const int x2 = Game::grids_manager.x_in_which(mouse_pos.x());
-            const int y2 = Game::grids_manager.y_in_which(mouse_pos.y());
-            Game::line_draw_config.clear();
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
-            Game::line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
+            game->ui_image_draw_config_map["_select"].clear();
+            game->ui_image_draw_config_map["_arrow_highlight"].clear();
+            const int x2 = game->grids_manager.x_in_which(mouse_pos.x());
+            const int y2 = game->grids_manager.y_in_which(mouse_pos.y());
+            game->line_draw_config.clear();
+            game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
+            game->line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
+            game->line_draw_config.push_back(QVector3D(mouse_pos.x(), m_press_pos_world.y(), 0));
+            game->line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
+            game->line_draw_config.push_back(QVector3D(mouse_pos.x(), mouse_pos.y(), 0));
+            game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
+            game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
+            game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
 
             for (int x = std::min(x1, x2); x <= std::max(x1, x2); ++x)
             {
                 for (int y = std::min(y1, y2); y <= std::max(y1, y2); ++y)
                 {
-                    for (const auto& object : Game::grids_manager.grids[x][y]->objects)
+                    for (const auto& object : game->grids_manager.grids[x][y]->objects)
                     {
                         if (const auto unit = dynamic_cast<Unit*>(object))
                         {
@@ -103,7 +104,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
                                 0)
                             {
                                 units_selected.insert(unit);
-                                Game::ui_image_draw_config_map["_select"].push_back(unit);
+                                game->ui_image_draw_config_map["_select"].push_back(unit);
                             }
                         }
                     }
@@ -142,15 +143,15 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::LeftButton)
     {
         m_l_pressing = false;
-        Game::line_draw_config.clear();
+        game->line_draw_config.clear();
         int elapsed = m_press_time.msecsTo(QTime::currentTime());
         if (elapsed <= DRAG_DELAY) //click
         {
             std::set<Unit*> units_to_select;
             std::set<Unit*> enermy_to_select;
-            int x = static_cast<int>(m_press_pos_world.x() / Game::grids_manager.grid_size);
-            int y = static_cast<int>(m_press_pos_world.y() / Game::grids_manager.grid_size);
-            for (const auto& object : Game::grids_manager.grids[x][y]->objects)
+            int x = static_cast<int>(m_press_pos_world.x() / game->grids_manager.grid_size);
+            int y = static_cast<int>(m_press_pos_world.y() / game->grids_manager.grid_size);
+            for (const auto& object : game->grids_manager.grids[x][y]->objects)
             {
                 // qDebug()<<object->position;
                 if (const auto unit = dynamic_cast<Unit*>(object))
@@ -176,16 +177,16 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
             {
                 (*units_to_select.begin())->on_new_selection();
                 units_selected = units_to_select;
-                Game::ui_image_draw_config_map["_select"].clear();
-                Game::ui_image_draw_config_map["_arrow_highlight"].clear();
+                game->ui_image_draw_config_map["_select"].clear();
+                game->ui_image_draw_config_map["_arrow_highlight"].clear();
                 for (auto& selected : units_selected)
                 {
-                    Game::ui_image_draw_config_map["_select"].push_back(selected);
+                    game->ui_image_draw_config_map["_select"].push_back(selected);
                 }
             }
             else // new order
             {
-                auto flock = new Flock();
+                auto flock = new Flock(game);
                 for (auto& selected : units_selected)
                 {
                     if (selected->boid_sensor->flock != nullptr)
@@ -202,8 +203,8 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     flock->move(m_press_pos_world);
                     move_flag->render_transform.setToIdentity();
                     move_flag->render_transform.translate(m_press_pos_world);
-                    Game::ui_image_draw_config_map["_arrow_orange"].clear();
-                    Game::ui_image_draw_config_map["_arrow_highlight"].clear();
+                    game->ui_image_draw_config_map["_arrow_orange"].clear();
+                    game->ui_image_draw_config_map["_arrow_highlight"].clear();
                     if (!enermy_to_select.empty())
                     {
                         auto preferred_target = *(enermy_to_select.begin());
@@ -214,13 +215,13 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                                 Object::ptr_change_to(turret->preferred_target, preferred_target);
                             }
                         }
-                        Game::ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
+                        game->ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
                     }
                     else
                     {
-                        Game::ui_image_draw_config_map["_arrow_highlight"].push_back(move_flag);
+                        game->ui_image_draw_config_map["_arrow_highlight"].push_back(move_flag);
                     }
-                    Game::flocks.insert(flock);
+                    game->flocks.insert(flock);
                 }
                 else
                 {
@@ -259,8 +260,8 @@ void battle_widget::keyReleaseEvent(QKeyEvent* event)
         // qDebug()<<"space";
         event->accept();
         units_selected.clear();
-        Game::ui_image_draw_config_map["_select"].clear();
-        Game::ui_image_draw_config_map["_arrow_highlight"].clear();
+        game->ui_image_draw_config_map["_select"].clear();
+        game->ui_image_draw_config_map["_arrow_highlight"].clear();
     }
 }
 
@@ -290,24 +291,5 @@ void battle_widget::mousePressEvent(QMouseEvent* event)
     }
     if (event->button() == Qt::MiddleButton)
     {
-        // FlowField flowField(m_press_pos_world.x(), m_press_pos_world.y(), movementType::LAND);
-        //
-        // Game::line_draw_config.clear();
-        //
-        // for (int i = 0; i < MapConfig::world_width; ++i)
-        // {
-        //     for (int j = 0; j < MapConfig::world_height; ++j)
-        //     {
-        //         Game::line_draw_config.emplace_back(i, j, 0);
-        //         Game::line_draw_config.emplace_back(flowField.field[i][j] * 0.4 + QVector3D(i, j, 0));
-        //     }
-        // }
-
-        // PathFind pathFinder(30, 43, m_press_pos_world.x(), m_press_pos_world.y(), movementType::LAND);
-        // Game::line_draw_config.clear();
-        // for (const auto& p : pathFinder.path)
-        // {
-        //     Game::line_draw_config.emplace_back(p.first, p.second, 0);
-        // }
     }
 }

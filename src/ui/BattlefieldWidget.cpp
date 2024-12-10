@@ -14,7 +14,7 @@
 #include "Unit.h"
 #include "MapConfig.h"
 
-BattlefieldWidget::BattlefieldWidget(QWidget* parent)
+BattlefieldWidget::BattlefieldWidget(Game* game, QWidget* parent): game(game), QOpenGLWidget(parent)
 {
 }
 
@@ -61,7 +61,7 @@ void BattlefieldWidget::update_textures()
         if (id.empty())continue;
         engine->resisterTexture(id, image);
     }
-    for (const auto& [id, meta_image] : MapConfig::tile_images)
+    for (const auto& [id, meta_image] : game->map_config.tile_images)
     {
         if (id.empty())continue;
         engine->resisterTexture(id, meta_image);
@@ -117,7 +117,7 @@ void BattlefieldWidget::paintGL()
     glColor3f(48.0 / 256, 246.0 / 256, 217.0 / 256);
     glLineWidth(2);
     glBegin(GL_LINES);
-    for (const auto& line : Game::line_draw_config)
+    for (const auto& line : game->line_draw_config)
     {
         glVertex3f(line.x(), line.y(), line.z());
     }
@@ -125,12 +125,12 @@ void BattlefieldWidget::paintGL()
 
     engine->bind_texture_shader();
     engine->setView(projection);
-    batch_draw(Game::const_image_draw_config_map);
-    batch_draw(Game::var_solid_image_draw_config_map);
+    batch_draw(game->const_image_draw_config_map);
+    batch_draw(game->var_solid_image_draw_config_map);
 
     glAlphaFunc(GL_GREATER, 0.1);
-    batch_draw(Game::var_transparent_image_draw_config_map);
-    batch_draw(Game::ui_image_draw_config_map);
+    batch_draw(game->var_transparent_image_draw_config_map);
+    batch_draw(game->ui_image_draw_config_map);
 }
 
 QVector3D BattlefieldWidget::screen_to_world(const QPointF& screen_pos) const

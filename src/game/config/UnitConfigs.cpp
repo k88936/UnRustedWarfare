@@ -114,7 +114,7 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
 
 void UnitConfigs::load_ini(const QString& path)
 {
-    constexpr float designed_FPS=100;
+    constexpr float designed_FPS=20;
     const float scale_rw2sw = 1.0 / 20;
     const float turnSpeed_rw2sw = designed_FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;

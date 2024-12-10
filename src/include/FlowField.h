@@ -5,6 +5,7 @@
 #ifndef FLOWFIELD_H
 #define FLOWFIELD_H
 #include <queue>
+#include <QVector3D>
 #include <set>
 #include <vector>
 
@@ -12,17 +13,19 @@
 #include "structures/path_node.h"
 
 
+class Game;
+
 class FlowField
 {
 public:
-    FlowField(float to_x, float to_y, movementType movement);
+    FlowField(Game* game, float to_x, float to_y, movementType movement);
     QVector3D& get_vector(int x, int y);
 
 private:
     std::vector<std::vector<QVector3D>> field_;
-    float get_cost(int x, int y) const;
-    void expand(int x, int y, const PathNode* parent, float cost_multiply);
-    void flow(PathNode* end);
+    float get_cost(Game*, int x, int y) const;
+    void expand(Game* game, int x, int y, const PathNode* parent, float cost_multiply);
+    void flow(Game* game, PathNode* end);
     std::priority_queue<PathNode*, std::vector<PathNode*>, PathNode::cmp> open_set_;
     std::set<int> closed_set_;
 

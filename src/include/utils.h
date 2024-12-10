@@ -9,6 +9,8 @@
 #include <random>
 
 
+class Game;
+
 namespace utils
 {
     class animater
@@ -21,7 +23,7 @@ namespace utils
         float from_;
 
     public:
-        animater(float duration, float from, float to);
+        animater(Game* game, float duration, float from, float to);
         void reset();
         float get_value();
     };
@@ -59,8 +61,9 @@ namespace utils
         std::uniform_int_distribution<std::size_t> distribution(0, vec.size() - 1);
         return vec.at(distribution(generator));;
     }
+
     extern bool random_bool(float chance);
-    extern bool freq_bool(float freq);
+    extern bool freq_bool(float freq, float delta);
     extern std::string without_extend(const std::string& file_name);
     extern std::vector<std::string> without_extend(const std::vector<std::string>& file_names);
 };

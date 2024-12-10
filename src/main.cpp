@@ -78,6 +78,7 @@ int main(int argc, char* argv[])
     });
 
 
+    UnitConfigs::init();
 
 
     // player->setSource(QUrl("qrc:/b.ogg"));

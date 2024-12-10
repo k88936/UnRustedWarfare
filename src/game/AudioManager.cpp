@@ -10,8 +10,8 @@
 
 void AudioManager::play(QVector3D listener_pos)
 {
-    Game::sound_event_config_map["NONE"].clear();
-    for (const auto& [id, sound_events] : Game::sound_event_config_map)
+    game->sound_event_config_map["NONE"].clear();
+    for (const auto& [id, sound_events] : game->sound_event_config_map)
     {
         int cnt = 0;
         for (auto sound_event : sound_events)
@@ -36,10 +36,10 @@ void AudioManager::play(QVector3D listener_pos)
             cnt++;
         }
     }
-    Game::sound_event_config_map.clear();
+    game->sound_event_config_map.clear();
 }
 
-void AudioManager::init()
+AudioManager::AudioManager(Game* game): game(game)
 {
     UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty"];
 

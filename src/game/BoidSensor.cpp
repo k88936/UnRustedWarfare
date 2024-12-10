@@ -4,10 +4,12 @@
 
 #include "BoidSensor.h"
 
-#include "Game.h"
 #include "utils.h"
 
 #include <numbers>
+
+#include "Flock.h"
+#include "FlowField.h"
 
 BoidSensor::~BoidSensor()
 {
@@ -128,7 +130,7 @@ void BoidSensor::after()
     }
     float diff = angular_target - boid->rotation;
     utils::angle_ensure(diff);
-    if (std::fabsf(diff) < angle_step * Game::deltaTime)
+    if (std::fabsf(diff) < angle_step *game-> deltaTime)
     {
         // unit0->rotation = target;
         boid->angular_velocity *= 0.8;
@@ -139,7 +141,7 @@ void BoidSensor::after()
         boid->apply_force(
             boid->vector_ver * speed_projected * boid->mass * boid->angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * Game::deltaTime, -angle_step * Game::deltaTime,
+        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * game->deltaTime, -angle_step *game-> deltaTime,
                                    0.8);
     }
 

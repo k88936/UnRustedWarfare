@@ -12,19 +12,11 @@
 #include "Game.h"
 #include "Tile.h"
 #include "structures/tile_attribute.h"
-
-std::map<std::string, MetaImage> MapConfig::tile_images;
-std::vector<std::string> MapConfig::index_to_name;
-std::vector<std::vector<TileAttribute*>> MapConfig::tile_attributes;
-
 TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
     return tile_attributes.at(x + 1).at(y + 1);
 }
 
-std::vector<std::unique_ptr<Tile>> MapConfig::tiles;
-int MapConfig::world_width = 0;
-int MapConfig::world_height = 0;
 const std::map<std::string, TileAttribute*> MapConfig::tile_configs = {
     {"None", new TileAttribute(0b0000, 0)},
     // {"Grass0", new TileAttribute(0b0001, 1)},
@@ -56,11 +48,9 @@ const std::array<std::string, 4u> LayerStrings =
     std::string("Group"),
 };
 
-void MapConfig::init()
-{
-}
 
-void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const std::unique_ptr<tmx::Layer>& layer,
+
+void MapConfig::config_layer(std::vector<Tile* >& tiles, const std::unique_ptr<tmx::Layer>& layer,
                              const float z)
 {
     // static float of=0;
@@ -86,7 +76,7 @@ void MapConfig::config_layer(std::vector<std::unique_ptr<Tile>>& tiles, const st
             for (int j = 0; j < width; ++j)
             {
                 // std::cout << " " << tmx_tiles.at(i * width + j).ID;
-                tiles.push_back(std::make_unique<Tile>(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
+                tiles.push_back(new Tile(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
                 // of-=0.00001;
             }
         }

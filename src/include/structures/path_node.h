@@ -4,7 +4,6 @@
 
 #ifndef PATH_NODE_H
 #define PATH_NODE_H
-#include "MapConfig.h"
 
 struct PathNode
 {
@@ -18,10 +17,10 @@ struct PathNode
 
     static int hash(int x, int y)
     {
-        return x * (MapConfig::world_height + 2) + y;
+        return x * 5211324 + y;
     }
 
-    PathNode(int x, int y, PathNode* parent) : x(x), y(y), parent(parent)
+    PathNode( int x, int y, PathNode* parent) : x(x), y(y), parent(parent)
     {
         id = hash(x, y);
     }

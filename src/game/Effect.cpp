@@ -8,12 +8,13 @@
 #include "utils.h"
 
 
-Effect::Effect(): Object(1, 1, 1)
+
+Effect::Effect(Game* game): ::Object(game, 1, 1, 1)
 {
 }
 
-Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
-               const QVector3D& linear_velocity_base): Object(1, 1, 1)
+Effect::Effect(Game* game, MetaEffect* meta, const QVector3D position, const float rotation,
+               const QVector3D& linear_velocity_base): ::Object(game, 1, 1, 1)
 {
     this->meta = meta;
     this->position = position;
@@ -57,17 +58,17 @@ Effect::Effect(MetaEffect* meta, const QVector3D position, const float rotation,
     this->animate_timer = 0;
 
 
-    Game::sound_event_config_map[meta->also_play_sound].emplace_back(
+    game->sound_event_config_map[meta->also_play_sound].emplace_back(
         this->position, meta->also_play_sound_volume);
 }
 
-void Effect::draw()
+void Effect::draw(Game* game)
 {
     render_transform.setToIdentity();
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Effect::before()
@@ -84,7 +85,7 @@ void Effect::after()
 {
     Object::after();
     this->scale = meta->scale_from + (meta->scale_to - meta->scale_from) * (has_life) / meta->life;
-    animate_timer += Game::deltaTime;
+    animate_timer += game->deltaTime;
     if (meta->fade_out && has_life > meta->life - meta->fade_in_time)
     {
         this->color.setZ(meta->alpha * (meta->life - has_life) / meta->fade_in_time);
@@ -94,7 +95,7 @@ void Effect::after()
         this->color.setZ(meta->alpha * has_life / meta->fade_in_time);
     }
 
-    if ((this->has_life += Game::deltaTime) >= meta->life)
+    if ((this->has_life += game->deltaTime) >= meta->life)
     {
         marked_for_delete = true;
     };
@@ -113,5 +114,5 @@ void Effect::after()
         }
     }
 
-    draw();
+    draw(game);
 }

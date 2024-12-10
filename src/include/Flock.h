@@ -5,15 +5,15 @@
 #ifndef FLOCK_H
 #define FLOCK_H
 #include <set>
-
-#include "FlowField.h"
 #include "Unit.h"
 
+
+class FlowField;
 
 class Flock
 {
 public:
-    Flock();
+    Flock(Game*);
     void move(const QVector3D& target);
 
 
@@ -24,6 +24,7 @@ public:
     FlowField* flow_field = nullptr;
     QVector3D pos_target;
     float arrived_range;
+    Game* game;
 
     void gather(const QVector3D& target);
 };

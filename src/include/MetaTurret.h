@@ -8,6 +8,7 @@
 #include "MetaAttachable.h"
 #include "MetaObject.h"
 #include "MetaDrawable.h"
+#include "utils.h"
 
 class MetaTurret :public MetaAttachable ,public  MetaObject,public MetaDrawable
 {

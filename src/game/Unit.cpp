@@ -4,7 +4,6 @@
 
 #include "Unit.h"
 #include "BoidSensor.h"
-#include "Game.h"
 #include "MapConfig.h"
 #include "Sensor.h"
 #include "SimpleEffect.h"
@@ -12,8 +11,9 @@
 #include "utils.h"
 
 
-Unit::Unit(MetaUnit* meta, int team, const QVector3D position, const float rotation): Attachable(), Drawable(),
-    Object(meta->radius, meta->mass, meta->mass)
+Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const float rotation): Attachable(),
+    Drawable(),
+    Object(game, meta->radius, meta->mass, meta->mass)
 {
     this->meta = meta;
     this->hp = meta->max_hp;
@@ -25,13 +25,13 @@ Unit::Unit(MetaUnit* meta, int team, const QVector3D position, const float rotat
     linear_damping_dir = 0.8;
     linear_damping_ver = 1.2;
     angular_damping = 40;
-    auto* mar = new Sensor(meta->max_attack_range, team);
+    auto* mar = new Sensor(game, meta->max_attack_range, team);
     watchers.push_back(mar);
-    boid_sensor = new BoidSensor(4, this);
+    boid_sensor = new BoidSensor(game,4, this);
     watchers.push_back(boid_sensor);
     for (const auto& slot : meta->attached_turret)
     {
-        auto turret = new Turret(slot, team);
+        auto turret = new Turret(game, slot, team);
         turret->slot_translation = slot->slot_translation;
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
@@ -89,7 +89,7 @@ void Unit::attack(const QVector3D& target)
     }
 }
 
-void Unit::draw()
+void Unit::draw(Game* game)
 {
     render_transform.setToIdentity();
 
@@ -105,13 +105,13 @@ void Unit::draw()
 
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
     shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 void Unit::drive(const QVector3D& force, const float torque)
@@ -125,7 +125,7 @@ void Unit::drive(const QVector3D& force, const float torque)
 void Unit::before()
 {
     is_driving = false;
-    Game::grids_manager.update_object(this);
+    game->grids_manager.update_object(this);
     Object::before();
     for (const auto& watcher : watchers)
     {
@@ -162,22 +162,23 @@ void Unit::step()
 
 void Unit::on_death()
 {
-    Game::addEffect(new SimpleEffect(meta->image_wreak, 1000,
+    game->addEffect(new SimpleEffect(game, meta->image_wreak, 1000,
                                      utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
                                      scale, linear_velocity,
                                      angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)
     {
-        Game::addEffect(new Effect(UnitConfigs::meta_effects.at(effect_on_death), position, rotation, linear_velocity));
+        game->addEffect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_death), position, rotation,
+                                   linear_velocity));
     }
 }
 
 void Unit::on_drive()
 {
-    if (utils::freq_bool(2))
+    if (utils::freq_bool(2, game->deltaTime))
     {
         const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
-        Game::sound_event_config_map[id].emplace_back(
+        game->sound_event_config_map[id].emplace_back(
             this->position, 0.2);
     }
 }
@@ -185,14 +186,14 @@ void Unit::on_drive()
 void Unit::on_new_selection()
 {
     const std::string id = utils::random_element(meta->sound_on_new_selection, utils::EMPTY_STR);
-    Game::sound_event_config_map[id].emplace_back(
+    game->sound_event_config_map[id].emplace_back(
         this->position, 2);
 }
 
 void Unit::on_move_order()
 {
     const std::string id = utils::random_element(meta->sound_on_move_order, utils::EMPTY_STR);
-    Game::sound_event_config_map[id].emplace_back(
+    game->sound_event_config_map[id].emplace_back(
         this->position, 2);
 }
 
@@ -210,9 +211,9 @@ void Unit::after()
         turret->after();
     }
     Object::after();
-    const int tile_x = MapConfig::x_in_which(position.x());
-    int tile_y = MapConfig::y_in_which(position.y());
-    if (!(MapConfig::get_tile_attribute(tile_x, tile_y)->type & this->meta->movement))
+    const int tile_x = game->map_config.x_in_which(position.x());
+    int tile_y = game->map_config.y_in_which(position.y());
+    if (!(game->map_config.get_tile_attribute(tile_x, tile_y)->type & this->meta->movement))
     {
         linear_velocity *= 0.1;
     }
@@ -220,28 +221,28 @@ void Unit::after()
     {
         constexpr float soft = 0.8;
         constexpr float space = 0.4f;
-        if (!(MapConfig::get_tile_attribute(tile_x - 1, tile_y)->type & this->meta->movement))
+        if (!(game->map_config.get_tile_attribute(tile_x - 1, tile_y)->type & this->meta->movement))
         {
             position.setX(utils::linear_limit_soft_v(position.x(), tile_x - space, std::numeric_limits<float>::max(),
                                                      soft));
             linear_velocity.setX(
                 utils::linear_limit_soft_v(linear_velocity.x(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
-        if (!(MapConfig::get_tile_attribute(tile_x + 1, tile_y)->type & this->meta->movement))
+        if (!(game->map_config.get_tile_attribute(tile_x + 1, tile_y)->type & this->meta->movement))
         {
             position.setX(
                 utils::linear_limit_soft_v(position.x(), std::numeric_limits<float>::min(), tile_x + space, soft));
             linear_velocity.setX(
                 utils::linear_limit_soft_v(linear_velocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
         }
-        if (!(MapConfig::get_tile_attribute(tile_x, tile_y - 1)->type & this->meta->movement))
+        if (!(game->map_config.get_tile_attribute(tile_x, tile_y - 1)->type & this->meta->movement))
         {
             position.setY(utils::linear_limit_soft_v(position.y(), tile_y - space, std::numeric_limits<float>::max(),
                                                      soft));
             linear_velocity.setY(
                 utils::linear_limit_soft_v(linear_velocity.y(), 0.0f, std::numeric_limits<float>::max(), soft));
         }
-        if (!(MapConfig::get_tile_attribute(tile_x, tile_y + 1)->type & this->meta->movement))
+        if (!(game->map_config.get_tile_attribute(tile_x, tile_y + 1)->type & this->meta->movement))
         {
             position.setY(
                 utils::linear_limit_soft_v(position.y(), std::numeric_limits<float>::min(), tile_y + space, soft));
@@ -261,7 +262,7 @@ void Unit::after()
         marked_for_delete = true;
     }
 
-    this->draw();
+    this->draw(game);
 }
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)

@@ -5,9 +5,11 @@
 #include "GridsManager.h"
 
 #include <iostream>
-#include "MapConfig.h"
 
+#include "Game.h"
+#include "MapConfig.h"
 #include "Object.h"
+
 
 void GridsManager::clear_grids() const
 {
@@ -24,10 +26,10 @@ void GridsManager::clear_grids() const
     }
 }
 
-void GridsManager::init()
+void GridsManager::init(Game* game)
 {
-    this->width = MapConfig::world_width - 1 / grid_size + 1;
-    this->height = MapConfig::world_height - 1 / grid_size + 1;
+    this->width =game->map_config.world_width - 1 / grid_size + 1;
+    this->height = game->map_config.world_height - 1 / grid_size + 1;
     //fill
     grids.resize(width);
     for (int i = 0; i < width; ++i)

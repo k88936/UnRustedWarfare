@@ -10,7 +10,7 @@
 class Sensor : public Object
 {
 public:
-    Sensor(float radius, int team);
+    Sensor(Game* game, float radius, int team);
     void before() override;
     void step() override;
     void after() override;

@@ -9,11 +9,11 @@
 
 #include "Game.h"
 
-utils::animater::animater(const float duration, const float from, const float to): duration_(duration * 1000), to_(to),
+utils::animater::animater(Game *game,const float duration, const float from, const float to): duration_(duration * 1000), to_(to),
     from_(from)
 {
     // qDebug()<<duration_;
-    start_ = Game::start_time;
+    start_ = game->start_time;
 }
 
 void utils::animater::reset()
@@ -226,9 +226,9 @@ bool utils::random_bool(float chance)
     return distribution(generator) < chance;
 }
 
-bool utils::freq_bool(float freq)
+bool utils::freq_bool(float freq, float delta)
 {
-    return random_bool(freq * Game::deltaTime);
+    return random_bool(freq *delta);
 }
 
 std::string utils::without_extend(const std::string& file_name)

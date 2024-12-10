@@ -4,7 +4,7 @@
 
 #ifndef TILE_H
 #define TILE_H
-#include <Drawable.h>
+#include "Drawable.h"
 
 
 class Tile : public Drawable {
@@ -12,7 +12,7 @@ public:
     int index=0;
     // int x,y;
     Tile(int index, int x, int y, float z);
-    void draw() override;
+    void draw(Game* game ) override;
 
 };
 

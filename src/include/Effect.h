@@ -17,9 +17,9 @@ public:
 
     MetaEffect* meta = nullptr;
 
-    Effect();
-    Effect(MetaEffect* meta, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
-    void draw() override;
+    Effect(Game* game);
+    Effect(Game* game, MetaEffect* meta, QVector3D position, float rotation, const QVector3D& linear_velocity_base);
+    void draw(Game* game) override;
     void before() override;
     void step() override;
     void after() override;

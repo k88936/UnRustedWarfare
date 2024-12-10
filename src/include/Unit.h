@@ -14,8 +14,8 @@ class BoidSensor;
 class Unit : public Attachable, public Drawable, public Object
 {
 public:
-    explicit Unit(MetaUnit* meta, int team, QVector3D position, float rotation);
-    ~Unit() override;
+    Unit(Game* game, MetaUnit* meta, int team, QVector3D position, float rotation);
+    ~Unit() ;
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
     Drawable* shadow = new Drawable();
@@ -24,7 +24,7 @@ public:
     BoidSensor* boid_sensor;
     bool is_driving=false;
     void attack(const QVector3D& target);
-    void draw() override;
+    void draw(Game* game) override;
     void drive(const QVector3D& force, float torque);
     std::vector<Turret*> turrets;
     std::vector<Object*> watchers;

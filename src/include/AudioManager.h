@@ -4,19 +4,20 @@
 
 #ifndef AUDIOMANAGER_H
 #define AUDIOMANAGER_H
-#include <map>
-#include <string>
-#include <vector>
+
 
 #include "structures/sound_event.h"
 
 
+class Game;
+
 class AudioManager {
 public:
+    explicit AudioManager(Game *game);
     float global_volume = 0.5;
     std::list<QSoundEffect*> pool;
+    Game* game;
     void play(QVector3D listener_pos);
-    void init();
 };
 
 

@@ -5,6 +5,6 @@
 #include "Drawable.h"
 
 
-void Drawable::draw() {
+void Drawable::draw(Game* game) {
 
 }

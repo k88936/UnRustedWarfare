@@ -5,8 +5,11 @@
 #ifndef OBJECT_H
 #define OBJECT_H
 #include <QVector3D>
+
 #include "structures/grid.h"
 
+
+class Game;
 
 enum ObjectType
 {
@@ -17,9 +20,9 @@ enum ObjectType
 class Object
 {
 public:
-    virtual ~Object() = default;
-    Object(float radius, float mass, float inertia);
+    Object(Game* game, float radius, float mass, float inertia);
 
+    Game* game;
     QVector3D position = QVector3D(0, 0, 0);
     float radius;
     float rotation = 0; //east is zero

@@ -4,10 +4,12 @@
 
 #ifndef SPACEDEVIDEENGINE_H
 #define SPACEDEVIDEENGINE_H
+#include <QVector3D>
 #include <vector>
 
-#include "Object.h"
 #include "structures/grid.h"
+
+class Game;
 
 class GridsManager {
 public:
@@ -19,7 +21,7 @@ public:
     std::vector<std::vector<Grid*>> grids;
     const int  grid_size;
     void clear_grids() const;
-    void init();
+    void init(Game* game);
     // grid* whichIn(float x,float y) const;
     // void whichAcross(float x, float y, float r, std::vector<grid*> &gridsAcross) const;
     //

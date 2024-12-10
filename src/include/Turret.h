@@ -14,8 +14,8 @@
 class Turret : public Attachable, public Drawable, public Sensor
 {
 public:
-    Turret(MetaTurret* meta, int team);
-    ~Turret() override;
+    Turret(Game* game, MetaTurret* meta, int team);
+    ~Turret();
     MetaTurret* meta;
     float rotationSpeed = 0;
     float coolDown = 0;
@@ -32,7 +32,7 @@ Drawable*     shadow=new Drawable();
     float aim(QVector3D target);
     bool shoot();
     bool attack(const QVector3D& target);
-    void draw() override;
+    void draw(Game* game) override;
 
 
     void before() override;

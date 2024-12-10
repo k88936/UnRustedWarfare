@@ -4,8 +4,8 @@
 
 #include "Tile.h"
 
-#include <Game.h>
-#include <MapConfig.h>
+#include "Game.h"
+
 
 Tile::Tile(const int index, const int x, const int y,const float z)
 {
@@ -15,7 +15,7 @@ Tile::Tile(const int index, const int x, const int y,const float z)
     this->render_transform.translate(x,y,z);
 }
 
-void Tile::draw()
+void Tile::draw(Game* game)
 {
-    Game::const_image_draw_config_map[MapConfig::index_to_name.at(index)].push_back(this);
+    game->const_image_draw_config_map[game->map_config.index_to_name.at(index)].push_back(this);
 }

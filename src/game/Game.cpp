@@ -23,26 +23,29 @@
 #include "Tile.h"
 #include "utils.h"
 
-float Game::deltaTime = 0;
+Game::Game(): audio_manager(this)
+{
+}
 
-std::vector<QVector3D> Game::line_draw_config;
-std::unordered_map<std::string, std::vector<Drawable*>> Game::var_solid_image_draw_config_map;
-std::unordered_map<std::string, std::vector<Drawable*>> Game::var_transparent_image_draw_config_map;
-std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_config_map;
-std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
-std::unordered_map<std::string, std::vector<SoundEvent>> Game::sound_event_config_map;
-GridsManager Game::grids_manager;
-AudioManager Game::audio_manager;
-std::vector<Unit*> Game::units;
-std::set<Flock*> Game::flocks;
-QBasicTimer Game::timer;
-std::vector<Projectile*> Game::projectiles;
-std::vector<Effect*> Game::effects;
-BattlefieldWidget* Game::battle_field_widget;
-QTime Game::start_time = QTime::currentTime();
-
-Game::TimerDoer* Game::timer_doer = new Game::TimerDoer();
-
+// float Game::deltaTime = 0;
+//
+// std::vector<QVector3D> Game::line_draw_config;
+// std::unordered_map<std::string, std::vector<Drawable*>> Game::var_solid_image_draw_config_map;
+// std::unordered_map<std::string, std::vector<Drawable*>> Game::var_transparent_image_draw_config_map;
+// std::unordered_map<std::string, std::vector<Drawable*>> Game::const_image_draw_config_map;
+// std::unordered_map<std::string, std::vector<Drawable*>> Game::ui_image_draw_config_map;
+// std::unordered_map<std::string, std::vector<SoundEvent>> Game::sound_event_config_map;
+// GridsManager Game::grids_manager;
+// AudioManager Game::audio_manager;
+// std::vector<Unit*> Game::units;
+// std::set<Flock*> Game::flocks;
+// QBasicTimer Game::timer;
+// std::vector<Projectile*> Game::projectiles;
+// std::vector<Effect*> Game::effects;
+// BattlefieldWidget* Game::battle_field_widget;
+// QTime Game::start_time = QTime::currentTime();
+// Game::TimerDoer* Game::timer_doer = new Game::TimerDoer();
+//
 void Game::addProjectile(Projectile* projectile)
 {
     Game::projectiles.push_back(projectile);
@@ -54,68 +57,33 @@ void Game::addEffect(Effect* effect)
 }
 
 
-void Game::init()
-{
-    UnitConfigs::init();
-}
-
-
 void Game::start_on(const std::string& map_path, BattlefieldWidget* widget)
 {
     Game::battle_field_widget = widget;
-    audio_manager.init();
-    MapConfig::init();
-    MapConfig::loadMap(map_path);
-    grids_manager.init();
-    for (const auto& tile : MapConfig::tiles)
+    map_config.loadMap(map_path);
+    grids_manager.init(this);
+    for (const auto& tile : map_config.tiles)
     {
-        tile->draw();
+        tile->draw(this);
     }
     resume();
     for (int i = 25; i < 35; ++i)
     {
         for (int j = 25; j < 35; ++j)
         {
-            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
+            Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
         }
     }
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
-    Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
+    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(30, 43, 0), -20));
+    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
-    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(30, 20, 0), 50));
-    // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(41, 41, 0), 50));
-    // // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(40, 40, 0), 50));
-    //
     for (int i = 57; i < 60; ++i)
     {
         for (int j = 40; j < 43; ++j)
         {
-            Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
+            Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
         }
     }
-    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(133, 120, 0), -5));
-
-
-    // flow_field_for_test = new FlowField(80, 50, movementType::LAND);
-    // // Game::line_draw_config.clear();
-    // //
-    // for (int i = 0; i < MapConfig::world_width; ++i)
-    // {
-    //     for (int j = 0; j < MapConfig::world_height; ++j)
-    //     {
-    //         Game::line_draw_config.emplace_back(i, j, 0);
-    //         Game::line_draw_config.emplace_back(flow_field_for_test->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
-    //     }
-    // }
-
-
-    // for (int i = 0; i < 50; ++i)
-    // {
-    //     for (int j = 0; j < 50; ++j)
-    //     {
-    // Game::units.push_back(new Unit(UnitConfigs::meta_units.at("laoda"), QVector3D(i*2+1, 2*j+1, 0), 150));
-    //     }
-    // }
 }
 
 void Game::clean()

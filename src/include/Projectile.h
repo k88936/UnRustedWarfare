@@ -15,9 +15,9 @@ public:
     float has_lived = 0;
     MetaProjectiles* meta;
 
-    Projectile(MetaProjectiles* meta, int team, QVector3D position, float rotation,
+    Projectile(Game* game, MetaProjectiles* meta, int team, QVector3D position, float rotation,
                const QVector3D& linear_velocity_base);
-    void draw() override;
+    void draw(Game* game) override;
     void before() override;
     void after() override;
     bool on_overlay(Object* obj, QVector3D positionDiff) override;

@@ -5,9 +5,10 @@
 #include "Flock.h"
 
 #include "BoidSensor.h"
+#include "FlowField.h"
 #include "utils.h"
 
-Flock::Flock()
+Flock::Flock(Game* game): game(game)
 {
 }
 
@@ -32,11 +33,13 @@ void Flock::move(const QVector3D& target)
     arrived_range = radius_count / sqrtf(boids.size());
     for (auto b : boids)
     {
-        b->boid_sensor->target_offset = utils::linear_limit_max_soft_v(utils::linear_limit_max_soft_v(b->position - center, arrived_range*4, 0.2),arrived_range*2,0.5) + target;
+        b->boid_sensor->target_offset = utils::linear_limit_max_soft_v(
+            utils::linear_limit_max_soft_v(b->position - center, arrived_range * 4, 0.2), arrived_range * 2,
+            0.5) + target;
         b->boid_sensor->arrived_flock_target = false;
         b->boid_sensor->arrived_flock_target_offset = false;
     }
-    flow_field = new FlowField(target.x(), target.y(), movementType::LAND);
+    flow_field = new FlowField(game, target.x(), target.y(), movementType::LAND);
 }
 
 void Flock::gather(const QVector3D& target)
@@ -46,7 +49,7 @@ void Flock::gather(const QVector3D& target)
     {
         delete flow_field;
     }
-    flow_field = new FlowField(target.x(), target.y(), movementType::LAND);
+    flow_field = new FlowField(game, target.x(), target.y(), movementType::LAND);
     // for (const auto& boid : boids)
     // {
     //     center += boid->position;

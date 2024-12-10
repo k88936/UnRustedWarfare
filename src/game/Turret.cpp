@@ -3,23 +3,22 @@
 //
 
 #include "Turret.h"
-
 #include <cmath>
-
 #include "UnitConfigs.h"
 #include "Effect.h"
-#include "Game.h"
 #include "SimpleEffect.h"
 #include "utils.h"
+#include "Game.h"
 
 
-Turret::Turret(MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(meta->range, team),
-                                            recoil_animater(meta->recoil_return_time, meta->recoil_offset, 0)
+Turret::Turret(Game* game, MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(game, meta->range, team),
+                                                        recoil_animater(game,meta->recoil_return_time, meta->recoil_offset,
+                                                                        0)
 {
     this->meta = meta;
     for (const auto& slot : meta->attached_turrets)
     {
-        auto turret = new Turret(slot, team);
+        auto turret = new Turret(game,slot, team);
         turret->slot_translation = slot->slot_translation;
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
@@ -62,7 +61,7 @@ float Turret::aim(const QVector3D target)
     float angle_diff = angle_target - rotation;
 
     utils::angle_ensure(angle_diff);
-    if (fabsf(angle_diff) < meta->turn_speed * Game::deltaTime)
+    if (fabsf(angle_diff) < meta->turn_speed * game->deltaTime)
     {
         relative_rotation += angle_diff;
         rotationSpeed = 0;
@@ -77,7 +76,7 @@ float Turret::aim(const QVector3D target)
     {
         rotationSpeed = +meta->turn_speed;
     }
-    relative_rotation += rotationSpeed * Game::deltaTime;
+    relative_rotation += rotationSpeed * game->deltaTime;
 
     return angle_diff;
 }
@@ -95,28 +94,30 @@ bool Turret::shoot()
         transform.rotate(rotation, 0, 0, 1);
 
         const auto meta_projectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
-        Game::addProjectile(new Projectile(meta_projectiles, this->team, transform.map(meta->barrel_position), rotation,
+        game->addProjectile(new Projectile(game, meta_projectiles, this->team, transform.map(meta->barrel_position),
+                                           rotation,
                                            QVector3D(0, 0, 0)));
         for (const auto& shoot_flame : meta->shoot_flame)
         {
-            Game::addEffect(new Effect(UnitConfigs::meta_effects.at(shoot_flame), transform.map(meta->barrel_position),
+            game->addEffect(new Effect(game, UnitConfigs::meta_effects.at(shoot_flame),
+                                       transform.map(meta->barrel_position),
                                        rotation, this->linear_velocity));
         }
         if (!meta->shoot_light.isNull())
         {
-            Game::addEffect(new SimpleEffect("light_50.png", 0.1,
+            game->addEffect(new SimpleEffect(game, "light_50.png", 0.1,
                                              transform.map(utils::add_offset_z(
                                                  meta->barrel_position, Game::LayerConfig::UPPER_EFFECT_OFFSET))
                                              , rotation, 0.8,
                                              QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
-        Game::sound_event_config_map[meta->shoot_sound].emplace_back(
+        game->sound_event_config_map[meta->shoot_sound].emplace_back(
             this->position, meta->shoot_sound_volume);
         recoil_animater.reset();
         coolDown = meta->delay;
         return true;
     }
-    coolDown -= Game::deltaTime;
+    coolDown -= game->deltaTime;
     return false;
 }
 
@@ -144,7 +145,7 @@ bool Turret::attack(const QVector3D& target)
     return shoot();
 }
 
-void Turret::draw()
+void Turret::draw(Game* game)
 {
     if (slot_inVisible)return;
 
@@ -162,12 +163,12 @@ void Turret::draw()
 
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    Game::var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    Game::var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 
@@ -216,7 +217,7 @@ void Turret::step()
 void Turret::after()
 {
     Sensor::after();
-    this->draw();
+    this->draw(game);
     for (auto attached : turrets_attached)
     {
         attached->after();
