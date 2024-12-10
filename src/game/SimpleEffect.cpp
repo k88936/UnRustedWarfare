@@ -51,6 +51,6 @@ void SimpleEffect::after()
     {
         marked_for_delete = true;
     }
-    has_life += game->deltaTime;
+    has_life += game->delta_time;
     draw(game);
 }

@@ -15,21 +15,26 @@
 
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class battle_widget; }
+
+namespace Ui
+{
+    class battle_widget;
+}
+
 QT_END_NAMESPACE
 
-class battle_widget : public BattlefieldWidget {
-Q_OBJECT
+class battle_widget : public BattlefieldWidget
+{
+    Q_OBJECT
 
 public:
     suspend_menu_widget* suspend_menu;
-battle_widget(Game* game, QWidget* parent);
-battle_widget(Game* game, QWidget* parent, const std::string& map_path);
+    battle_widget(QWidget* parent);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
     void mouseMoveEvent(QMouseEvent* event) override;
-void clean_selected();
-void mousePressEvent(QMouseEvent* event) override;
+    void clean_selected();
+    void mousePressEvent(QMouseEvent* event) override;
     void mouseReleaseEvent(QMouseEvent* event) override;
     void wheelEvent(QWheelEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
@@ -45,11 +50,10 @@ void mousePressEvent(QMouseEvent* event) override;
     QPoint m_release_pos_screen;
 
     QVector3D camera_pos_when_pressed;
-private:
-    Ui::battle_widget *ui;
 
-    Drawable* move_flag=new Drawable();
-Game* game;
+private:
+    Ui::battle_widget* ui;
+    Drawable* move_flag = new Drawable();
 };
 
 

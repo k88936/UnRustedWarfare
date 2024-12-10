@@ -18,7 +18,7 @@ public:
     using QOpenGLWidget::QOpenGLWidget;
     QVector3D screen_to_world(const QPointF& screen_pos) const;
     QVector3D screen_relative_to_world_relative(const QPointF& screen_relative) const;
-    BattlefieldWidget(Game* game, QWidget* parent);
+    BattlefieldWidget(QWidget* parent);
     ~BattlefieldWidget() override;
     QVector3D camera_pos = QVector3D(50, 50, 5);
     float camera_zoom = 0.05;

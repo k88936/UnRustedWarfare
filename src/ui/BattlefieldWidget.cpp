@@ -14,7 +14,7 @@
 #include "Unit.h"
 #include "MapConfig.h"
 
-BattlefieldWidget::BattlefieldWidget(Game* game, QWidget* parent): game(game), QOpenGLWidget(parent)
+BattlefieldWidget::BattlefieldWidget(QWidget* parent):QOpenGLWidget(parent)
 {
 }
 
@@ -52,19 +52,19 @@ void BattlefieldWidget::initializeGL()
 void BattlefieldWidget::update_textures()
 {
     //for ui
-    engine->resisterTexture("_select", MetaImage(QImage(":ui/select_highlight.png"), 1.2, false, false));
-    engine->resisterTexture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 1, false, false));
-    engine->resisterTexture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 1, false, false));
+    engine->resister_texture("_select", MetaImage(QImage(":ui/select_highlight.png"), 1.2, false, false));
+    engine->resister_texture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 1, false, false));
+    engine->resister_texture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 1, false, false));
 
     for (const auto& [id, image] : UnitConfigs::images)
     {
         if (id.empty())continue;
-        engine->resisterTexture(id, image);
+        engine->resister_texture(id, image);
     }
     for (const auto& [id, meta_image] : game->map_config.tile_images)
     {
         if (id.empty())continue;
-        engine->resisterTexture(id, meta_image);
+        engine->resister_texture(id, meta_image);
     }
 }
 
@@ -94,7 +94,7 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
     batches.erase("NONE");
     for (const auto& [texture_id, drawables] : batches)
     {
-        engine->bindTexture(texture_id);
+        engine->bind_texture(texture_id);
         // qDebug()<<texture_id;
         for (const auto& drawable : drawables)
         {
@@ -113,7 +113,7 @@ void BattlefieldWidget::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //
     engine->bind_simple_shader();
-    engine->setView(projection);
+    engine->set_view(projection);
     glColor3f(48.0 / 256, 246.0 / 256, 217.0 / 256);
     glLineWidth(2);
     glBegin(GL_LINES);
@@ -124,7 +124,7 @@ void BattlefieldWidget::paintGL()
     glEnd();
 
     engine->bind_texture_shader();
-    engine->setView(projection);
+    engine->set_view(projection);
     batch_draw(game->const_image_draw_config_map);
     batch_draw(game->var_solid_image_draw_config_map);
 

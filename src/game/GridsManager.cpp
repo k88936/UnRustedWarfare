@@ -28,7 +28,7 @@ void GridsManager::clear_grids() const
 
 void GridsManager::init(Game* game)
 {
-    this->width =game->map_config.world_width - 1 / grid_size + 1;
+    this->width = game->map_config.world_width - 1 / grid_size + 1;
     this->height = game->map_config.world_height - 1 / grid_size + 1;
     //fill
     grids.resize(width);
@@ -37,8 +37,7 @@ void GridsManager::init(Game* game)
         grids[i].resize(height);
         for (int j = 0; j < height; ++j)
         {
-            if (grids[i][j] == nullptr)
-                grids[i][j] = new Grid();
+            grids[i][j] = new Grid();
             // std::cout << grids[i][j];
         }
     }
@@ -46,6 +45,17 @@ void GridsManager::init(Game* game)
 
 GridsManager::GridsManager(): grid_size(4)
 {
+}
+
+GridsManager::~GridsManager()
+{
+    for (int i = 0; i < width; ++i)
+    {
+        for (int j = 0; j < height; ++j)
+        {
+            delete grids[i][j];
+        }
+    }
 }
 
 int GridsManager::x_in_which(const float x) const

@@ -18,14 +18,15 @@
 class MapConfig
 {
 public:
+    explicit MapConfig(const std::string& path);
+    ~MapConfig();
     std::vector<Tile*> tiles;
     int world_width;
     int world_height;
-   static  const std::map<std::string, TileAttribute*> tile_configs;
+    static const std::map<std::string, TileAttribute*> tile_configs;
     TileAttribute*& get_tile_attribute(int x, int y);
     int x_in_which(float x);
     int y_in_which(float y);
-    void init();
     void config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
                       float z);
     void loadMap(const std::string& path);

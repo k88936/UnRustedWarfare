@@ -10,13 +10,13 @@
 
 void AudioManager::play(QVector3D listener_pos)
 {
-    game->sound_event_config_map["NONE"].clear();
-    for (const auto& [id, sound_events] : game->sound_event_config_map)
+    sound_event_config_map["NONE"].clear();
+    for (const auto& [id, sound_events] : sound_event_config_map)
     {
         int cnt = 0;
-        for (auto sound_event : sound_events)
+        for (const auto sound_event : sound_events)
         {
-            float dis = (sound_event.position - listener_pos).lengthSquared();
+            const float dis = (sound_event.position - listener_pos).lengthSquared();
             if (dis > 400)continue;
             if (cnt > 8)break;
             QSoundEffect* sound = pool.front();
@@ -36,15 +36,22 @@ void AudioManager::play(QVector3D listener_pos)
             cnt++;
         }
     }
-    game->sound_event_config_map.clear();
+    sound_event_config_map.clear();
 }
 
-AudioManager::AudioManager(Game* game): game(game)
+AudioManager::AudioManager()
 {
     UnitConfigs::sounds["NONE"] = UnitConfigs::sounds["empty"];
 
     for (int i = 0; i < 32; ++i)
     {
         pool.push_back(new QSoundEffect());
+    }
+}
+AudioManager::~AudioManager()
+{
+    for (auto sound : pool)
+    {
+        delete sound;
     }
 }

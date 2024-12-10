@@ -11,15 +11,16 @@
 
 class Game;
 
-class AudioManager {
+class AudioManager
+{
 public:
-    explicit AudioManager(Game *game);
     float global_volume = 0.5;
     std::list<QSoundEffect*> pool;
-    Game* game;
+    std::unordered_map<std::string, std::vector< SoundEvent>> sound_event_config_map;
     void play(QVector3D listener_pos);
+    AudioManager();
+    ~AudioManager();
 };
-
 
 
 #endif //AUDIOMANAGER_H

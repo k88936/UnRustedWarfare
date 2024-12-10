@@ -12,6 +12,27 @@
 #include "Game.h"
 #include "Tile.h"
 #include "structures/tile_attribute.h"
+
+MapConfig::MapConfig(const std::string& path)
+{
+    loadMap(path);
+}
+MapConfig::~MapConfig()
+{
+    for (auto& tile : tiles)
+    {
+        delete tile;
+    }
+    for (auto& tile_attribute : tile_attributes)
+    {
+        for (auto& attribute : tile_attribute)
+        {
+            delete attribute;
+        }
+    }
+
+}
+
 TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
     return tile_attributes.at(x + 1).at(y + 1);

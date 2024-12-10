@@ -58,7 +58,7 @@ Effect::Effect(Game* game, MetaEffect* meta, const QVector3D position, const flo
     this->animate_timer = 0;
 
 
-    game->sound_event_config_map[meta->also_play_sound].emplace_back(
+    game->audio_manager.sound_event_config_map[meta->also_play_sound].emplace_back(
         this->position, meta->also_play_sound_volume);
 }
 
@@ -85,7 +85,7 @@ void Effect::after()
 {
     Object::after();
     this->scale = meta->scale_from + (meta->scale_to - meta->scale_from) * (has_life) / meta->life;
-    animate_timer += game->deltaTime;
+    animate_timer += game->delta_time;
     if (meta->fade_out && has_life > meta->life - meta->fade_in_time)
     {
         this->color.setZ(meta->alpha * (meta->life - has_life) / meta->fade_in_time);
@@ -95,7 +95,7 @@ void Effect::after()
         this->color.setZ(meta->alpha * has_life / meta->fade_in_time);
     }
 
-    if ((this->has_life += game->deltaTime) >= meta->life)
+    if ((this->has_life += game->delta_time) >= meta->life)
     {
         marked_for_delete = true;
     };

@@ -14,6 +14,7 @@ class Game;
 class GridsManager {
 public:
     GridsManager();
+    ~GridsManager();
     int x_in_which(float x) const;
     int y_in_which(float y) const;
     int width=0;

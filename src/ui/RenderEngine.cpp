@@ -17,15 +17,20 @@ struct VertexData
 RenderEngine::RenderEngine()
 {
     initializeOpenGLFunctions();
-    initShaders();
+    init_shaders();
 }
 
 RenderEngine::~RenderEngine()
 {
+    for (auto [fst, snd] : textures_)
+    {
+        delete snd.first;
+        delete snd.second;
+    }
 }
 
 //! [0]
-void RenderEngine::initShaders()
+void RenderEngine::init_shaders()
 {
     // Compile vertex shader
     if (!texture_shader_.addShaderFromSourceFile(QOpenGLShader::Vertex, ":/t_vshader.glsl"))
@@ -64,13 +69,13 @@ void RenderEngine::render()
     glDrawArrays(GL_QUADS, 0, 4);
 }
 
-void RenderEngine::setView(const QMatrix4x4& view)
+void RenderEngine::set_view(const QMatrix4x4& view)
 {
     texture_shader_.setUniformValue("mvp_matrix", view);
     simple_shader_.setUniformValue("mvp_matrix", view);
 }
 
-void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaImage)
+void RenderEngine::resister_texture(const std::string& id, const MetaImage& metaImage)
 {
     if (textures_.contains(id))
     {
@@ -197,7 +202,7 @@ void RenderEngine::resisterTexture(const std::string& id, const MetaImage& metaI
 }
 
 
-void RenderEngine::bindTexture(const std::string& id)
+void RenderEngine::bind_texture(const std::string& id)
 {
     textures_.at(id).first->bind();
     textures_.at(id).second->bind();

@@ -65,38 +65,38 @@ void Object::after()
     // angularVelocity*=(1-angularDamping);
 
 
-    linear_velocity += (linear_forces) * game->deltaTime * inv_mass;
+    linear_velocity += (linear_forces) * game->delta_time * inv_mass;
 
     float linearVelocityDir = QVector3D::dotProduct(linear_velocity, vector_dir);
-    if (fabsf(linearVelocityDir) < linear_damping_dir * game->deltaTime)
+    if (fabsf(linearVelocityDir) < linear_damping_dir * game->delta_time)
     {
         linear_velocity -= vector_dir * linearVelocityDir;
         // float linearForcesDir=QVector3D::dotProduct(linearForces,Dir);
     }
     else
     {
-        linear_velocity -= vector_dir * utils::sign(linearVelocityDir) * linear_damping_dir * game->deltaTime;
+        linear_velocity -= vector_dir * utils::sign(linearVelocityDir) * linear_damping_dir * game->delta_time;
     }
     float linearVelocityVer = QVector3D::dotProduct(linear_velocity, vector_ver);
-    if (fabsf(linearVelocityVer) < linear_damping_ver * game->deltaTime)
+    if (fabsf(linearVelocityVer) < linear_damping_ver * game->delta_time)
     {
         linear_velocity -= vector_ver * linearVelocityVer;
     }
     else
     {
-        linear_velocity -= vector_ver * utils::sign(linearVelocityVer) * linear_damping_ver * game->deltaTime;
+        linear_velocity -= vector_ver * utils::sign(linearVelocityVer) * linear_damping_ver * game->delta_time;
     }
-    angular_velocity += (angular_forces) * game->deltaTime * inv_inertia;
-    if (fabsf(angular_velocity) < angular_damping * game->deltaTime)
+    angular_velocity += (angular_forces) * game->delta_time * inv_inertia;
+    if (fabsf(angular_velocity) < angular_damping * game->delta_time)
     {
         angular_velocity = 0;
     }
     else
     {
-        angular_velocity -= utils::sign(angular_velocity) * angular_damping * game->deltaTime;
+        angular_velocity -= utils::sign(angular_velocity) * angular_damping * game->delta_time;
     }
-    position += linear_velocity * game->deltaTime;
-    rotation += angular_velocity * game->deltaTime;
+    position += linear_velocity * game->delta_time;
+    rotation += angular_velocity * game->delta_time;
     utils::angle_ensure(rotation);
     // addRotation(angularVelocity * Game::deltaTime);
 
@@ -134,7 +134,7 @@ void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D positio
     const float speedProjected = QVector3D::dotProduct(normDiff, obj1->linear_velocity - obj2->linear_velocity);
     const float force = (2 - obj1->restitution - obj2->restitution) * (speedProjected + 5.0f) * obj1->mass * obj2->mass
         * (obj1->radius + obj2->radius) * (obj1->radius + obj2->radius) / (
-            (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * obj1->game->deltaTime);;
+            (obj1->mass + obj2->mass) * (position_diff.lengthSquared() + 5.0f) * obj1->game->delta_time);;
     const QVector3D force3D = normDiff * force;
     // if (force!=force) {
     //      qDebug()<<"nan";

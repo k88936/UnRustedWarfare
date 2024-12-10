@@ -162,23 +162,23 @@ void Unit::step()
 
 void Unit::on_death()
 {
-    game->addEffect(new SimpleEffect(game, meta->image_wreak, 1000,
+    game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
                                      utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
                                      scale, linear_velocity,
                                      angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)
     {
-        game->addEffect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_death), position, rotation,
+        game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_death), position, rotation,
                                    linear_velocity));
     }
 }
 
 void Unit::on_drive()
 {
-    if (utils::freq_bool(2, game->deltaTime))
+    if (utils::freq_bool(2, game->delta_time))
     {
         const std::string id = utils::random_element(meta->sound_on_move, utils::EMPTY_STR);
-        game->sound_event_config_map[id].emplace_back(
+        game->audio_manager.sound_event_config_map[id].emplace_back(
             this->position, 0.2);
     }
 }
@@ -186,14 +186,14 @@ void Unit::on_drive()
 void Unit::on_new_selection()
 {
     const std::string id = utils::random_element(meta->sound_on_new_selection, utils::EMPTY_STR);
-    game->sound_event_config_map[id].emplace_back(
+    game->audio_manager.sound_event_config_map[id].emplace_back(
         this->position, 2);
 }
 
 void Unit::on_move_order()
 {
     const std::string id = utils::random_element(meta->sound_on_move_order, utils::EMPTY_STR);
-    game->sound_event_config_map[id].emplace_back(
+    game->audio_manager.sound_event_config_map[id].emplace_back(
         this->position, 2);
 }
 

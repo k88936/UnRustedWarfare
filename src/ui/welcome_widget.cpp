@@ -14,7 +14,7 @@ welcome_widget::welcome_widget(QWidget* parent) :
     QWidget(parent), ui(new Ui::welcome_widget)
 {
     ui->setupUi(this);
-    qDebug() << "new welcome_widget";
+    // qDebug() << "new welcome_widget";
     connect(this->ui->button_play, &QPushButton::clicked, this, [=]()
     {
         // qDebug()<<parent->widget_stack.top();
@@ -26,6 +26,6 @@ welcome_widget::welcome_widget(QWidget* parent) :
 welcome_widget::~welcome_widget()
 {
     // Game::stop();
-    qDebug() << "delete welcome_widget";
+    // qDebug() << "delete welcome_widget";
     delete ui;
 }

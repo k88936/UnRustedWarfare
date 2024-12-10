@@ -22,15 +22,13 @@ main_window::main_window(QWidget* parent) :
     widget_stack.push(ui->centralwidget);
 
 
-    Game* game = new Game();
-    auto b = new battle_widget(game,this, "../maps/2.tmx");;
-    Game* game2 = new Game();
+    auto b = new battle_widget(this);;
+    Game* game = new Game(b,"../maps/1.tmx");
     auto w = new welcome_widget(this);
-    game2->start_on("../maps/1.tmx", w->ui->widget);
-    w->ui->widget->game = game2;
-    // setCentralWidget(w);
-    // ui->centralwidget = w;
-    // Game::stop();
+    Game* game2 = new Game(w->ui->widget,"../maps/2.tmx");;
+
+    game->run();
+    game2->run();
     setCentralWidget(b);
     ui->centralwidget = b;
     // Game::start_on("../maps/1.tmx", w->ui->widget);

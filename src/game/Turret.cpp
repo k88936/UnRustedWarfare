@@ -61,7 +61,7 @@ float Turret::aim(const QVector3D target)
     float angle_diff = angle_target - rotation;
 
     utils::angle_ensure(angle_diff);
-    if (fabsf(angle_diff) < meta->turn_speed * game->deltaTime)
+    if (fabsf(angle_diff) < meta->turn_speed * game->delta_time)
     {
         relative_rotation += angle_diff;
         rotationSpeed = 0;
@@ -76,7 +76,7 @@ float Turret::aim(const QVector3D target)
     {
         rotationSpeed = +meta->turn_speed;
     }
-    relative_rotation += rotationSpeed * game->deltaTime;
+    relative_rotation += rotationSpeed * game->delta_time;
 
     return angle_diff;
 }
@@ -94,30 +94,30 @@ bool Turret::shoot()
         transform.rotate(rotation, 0, 0, 1);
 
         const auto meta_projectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
-        game->addProjectile(new Projectile(game, meta_projectiles, this->team, transform.map(meta->barrel_position),
+        game->add_projectile(new Projectile(game, meta_projectiles, this->team, transform.map(meta->barrel_position),
                                            rotation,
                                            QVector3D(0, 0, 0)));
         for (const auto& shoot_flame : meta->shoot_flame)
         {
-            game->addEffect(new Effect(game, UnitConfigs::meta_effects.at(shoot_flame),
+            game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(shoot_flame),
                                        transform.map(meta->barrel_position),
                                        rotation, this->linear_velocity));
         }
         if (!meta->shoot_light.isNull())
         {
-            game->addEffect(new SimpleEffect(game, "light_50.png", 0.1,
+            game->add_effect(new SimpleEffect(game, "light_50.png", 0.1,
                                              transform.map(utils::add_offset_z(
                                                  meta->barrel_position, Game::LayerConfig::UPPER_EFFECT_OFFSET))
                                              , rotation, 0.8,
                                              QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
-        game->sound_event_config_map[meta->shoot_sound].emplace_back(
+        game->audio_manager.sound_event_config_map[meta->shoot_sound].emplace_back(
             this->position, meta->shoot_sound_volume);
         recoil_animater.reset();
         coolDown = meta->delay;
         return true;
     }
-    coolDown -= game->deltaTime;
+    coolDown -= game->delta_time;
     return false;
 }
 

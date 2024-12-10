@@ -44,49 +44,46 @@ public:
         Game* game;
 
     public:
-        TimerDoer(Game* game) : game(game)
+        explicit TimerDoer(Game* game) : game(game)
         {
         }
 
         QTime start = QTime::currentTime();
 
-
         void timerEvent(QTimerEvent* event) override
         {
             game->step();
-            game->deltaTime = start.msecsTo(QTime::currentTime()) / 1000.0;
+            game->delta_time = start.msecsTo(QTime::currentTime()) / 1000.0;
             start = QTime::currentTime();
         };
     };
 
-    Game();
+    explicit Game(BattlefieldWidget* battlefield_widget, const std::string& world);
+    ~Game();
 
     std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
     std::vector<QVector3D> line_draw_config;
     std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
-    float deltaTime = 0;
+    float delta_time = 0;
     GridsManager grids_manager;
+    MapConfig map_config;
     AudioManager audio_manager;
     std::vector<Unit*> units;
     QBasicTimer timer;
     std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
     QTime start_time = QTime::currentTime();
     std::unordered_map<std::string, std::vector<Drawable*>> var_transparent_image_draw_config_map;
-    std::unordered_map<std::string, std::vector<struct SoundEvent>> sound_event_config_map;
     std::vector<Projectile*> projectiles;
     std::vector<Effect*> effects;
     std::set<Flock*> flocks;
     BattlefieldWidget* battle_field_widget;
-    MapConfig map_config;
-    void addProjectile(Projectile* projectile);
-    void addEffect(Effect* effect);
-    void init();
+    void add_projectile(Projectile* projectile);
+    void add_effect(Effect* effect);
+    void start(const std::string& world);
     TimerDoer* timer_doer = new TimerDoer(this);
-
-    void start_on(const std::string& map_path, BattlefieldWidget* widget);
     void clean();
     void pause();
-    void resume();
+    void run();
     void stop();
     void step();
 };

@@ -20,8 +20,8 @@
 #include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
-battle_widget::battle_widget(Game *game,QWidget* parent) :
-    BattlefieldWidget(game,parent), ui(new Ui::battle_widget)
+battle_widget::battle_widget(QWidget* parent) :
+    BattlefieldWidget(parent), ui(new Ui::battle_widget)
 {
     ui->setupUi(this);
     suspend_menu = new suspend_menu_widget(this);
@@ -33,21 +33,14 @@ battle_widget::battle_widget(Game *game,QWidget* parent) :
     });
     connect(suspend_menu->ui->countinue_button, &QPushButton::clicked, this, [&]()
     {
-        game->resume();
+        game->run();
         suspend_menu->setVisible(false);
     });
 }
 
-battle_widget::battle_widget(Game* game, QWidget* parent, const std::string& map_path): battle_widget(game,parent)
-{
-    this->game = game;
-    qDebug() << "new battle_widget";
-    game->start_on(map_path, this);
-}
-
 battle_widget::~battle_widget()
 {
-    qDebug() << "delete battle_widget";
+    // qDebug() << "delete battle_widget";
     delete ui;
 }
 

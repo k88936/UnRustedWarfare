@@ -19,7 +19,7 @@ public:
 
     virtual ~RenderEngine();
 
-    void initShaders();
+    void init_shaders();
 
     void transform(const QMatrix4x4& matrix);
 
@@ -27,11 +27,10 @@ public:
 
     void render();
 
-    void setView(const QMatrix4x4& matrix4_x4);
+    void set_view(const QMatrix4x4& matrix4_x4);
 
-    void resisterTexture(const std::string&, const MetaImage& metaImage);
-    void bindTexture(const std::string& id, int index);
-    void bindTexture(const std::string&);
+    void resister_texture(const std::string&, const MetaImage& metaImage);
+    void bind_texture(const std::string&);
     void bind_texture_shader();
     void bind_simple_shader();
 
