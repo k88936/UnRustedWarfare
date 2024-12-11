@@ -28,7 +28,7 @@ public:
 protected:
     void initializeGL() override;
     void resizeGL(int w, int h) override;
-    void batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches) const;
+    void batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches);
     void paintGL() override;
     void update_textures();
 

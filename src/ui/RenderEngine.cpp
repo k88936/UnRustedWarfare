@@ -101,8 +101,19 @@ void RenderEngine::resister_texture(const std::string& id, const MetaImage& meta
         arrayBuf->create();
         VertexData vertices[4];
         QVector2D texCoords[4];
-        if (metaImage.rawRot)
+        if (metaImage.tile)
         {
+            // const float offset = 1.0 / 80;
+            // const float offset = 0;
+            // texCoords[0] = QVector2D(offset, offset);
+            // texCoords[1] = QVector2D(1 - offset, offset);
+            // texCoords[2] = QVector2D(1 -offset, 1 - offset);
+            // texCoords[3] = QVector2D(offset, 1 - offset);
+
+            // texCoords[0] = QVector2D(offset, offset);
+            // texCoords[1] = QVector2D(1 + offset, offset);
+            // texCoords[2] = QVector2D(1 + offset, 1 + offset);
+            // texCoords[3] = QVector2D(offset, 1 + offset);
             texCoords[0] = QVector2D(0, 0);
             texCoords[1] = QVector2D(1, 0);
             texCoords[2] = QVector2D(1, 1);

@@ -53,7 +53,7 @@ battle_widget::battle_widget(main_window* parent) :
     connect(suspend_menu->ui->restart_button, &QPushButton::clicked, this, [=]()
     {
         auto widget = new battle_widget(parent);
-        auto game = new Game(widget, "../maps/2.tmx");
+        auto game = new Game(widget, "../maps/3.tmx");
         parent->widget_change(widget);
     });
     // auto x=new QDoubleSpinBox(this);

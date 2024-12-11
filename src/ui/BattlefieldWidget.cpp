@@ -14,7 +14,7 @@
 #include "Unit.h"
 #include "MapConfig.h"
 
-BattlefieldWidget::BattlefieldWidget(QWidget* parent):QOpenGLWidget(parent)
+BattlefieldWidget::BattlefieldWidget(QWidget* parent): QOpenGLWidget(parent)
 {
 }
 
@@ -90,7 +90,7 @@ void BattlefieldWidget::resizeGL(int w, int h)
     update_camera();
 }
 
-void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches) const
+void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<Drawable*>>& batches)
 {
     batches.erase("NONE");
     for (const auto& [texture_id, drawables] : batches)
@@ -99,6 +99,10 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
         // qDebug()<<texture_id;
         for (const auto& drawable : drawables)
         {
+            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_S,GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_WRAP_T,GL_CLAMP_TO_EDGE);
+            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+            glTexParameteri(GL_TEXTURE_2D,GL_TEXTURE_MAG_FILTER,GL_NEAREST);
             engine->transform(drawable->render_transform);
             engine->setColor(drawable->color);
             engine->render();
@@ -126,6 +130,7 @@ void BattlefieldWidget::paintGL()
 
     engine->bind_texture_shader();
     engine->set_view(projection);
+
     batch_draw(game->const_image_draw_config_map);
     batch_draw(game->var_solid_image_draw_config_map);
 

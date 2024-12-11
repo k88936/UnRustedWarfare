@@ -11,7 +11,7 @@ struct MetaImage
     QImage image;
     float scale = 1;
     bool is_raw_size = false;
-    bool rawRot = false;
+    bool tile = false;
     int frames = 1;
 };
 #endif //METAIMAGE_H
