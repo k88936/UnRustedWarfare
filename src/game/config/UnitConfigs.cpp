@@ -115,7 +115,8 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
 void UnitConfigs::load_ini(const QString& path)
 {
     constexpr float designed_FPS=50;
-    const float scale_rw2sw = 1.0 / 20;
+    const float total_scale=0.67;
+    const float scale_rw2sw =total_scale*  1.0 / 40;
     const float turnSpeed_rw2sw = designed_FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;
     const float time_rw2sw = 1.0f / designed_FPS;
@@ -367,7 +368,7 @@ void UnitConfigs::load_ini(const QString& path)
                     }
                     else if (fst == "life")projectile->life = std::stof(snd) * time_rw2sw;
                     else if (fst == "speed")projectile->speed = std::stof(snd) * speed_rw2sw;
-                    else if (fst == "drawSize")projectile->scale = std::stof(snd);
+                    else if (fst == "drawSize")projectile->scale = std::stof(snd)*total_scale;
                     else if (fst == "deflectionPower")projectile->deflectionPower = std::stof(snd);
                     else
                     {
@@ -400,8 +401,8 @@ void UnitConfigs::load_ini(const QString& path)
                         effect->animate_frame_delay = animate_delay_rw2sw * time_rw2sw / std::stof(snd);
                     }
                     else if (fst == "life")effect->life = std::stof(snd) * time_rw2sw;
-                    else if (fst == "scaleFrom")effect->scale_from = std::stof(snd);
-                    else if (fst == "scaleTo")effect->scale_to = std::stof(snd);
+                    else if (fst == "scaleFrom")effect->scale_from = std::stof(snd)*total_scale;
+                    else if (fst == "scaleTo")effect->scale_to = std::stof(snd)*total_scale;
                     else if (fst == "alpha")effect->alpha = std::stof(snd);
                     else if (fst == "spawnChance")effect->spawn_chance = std::stof(snd);
                     else if (fst == "xSpeedRelative")effect->x_speed_relative = std::stof(snd);

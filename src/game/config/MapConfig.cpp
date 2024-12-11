@@ -53,8 +53,8 @@ const std::array<std::string, 4u> LayerStrings =
 };
 
 
-void MapConfig::config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
-                             const float z)
+void MapConfig::parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
+                            const float z)
 {
     // static float of=0;
     const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
@@ -78,7 +78,7 @@ void MapConfig::config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tm
         {
             for (int j = 0; j < width; ++j)
             {
-                // std::cout <<std::setfill(' ')<<std::setw(4)<<tmx_tiles.at(i * width + j).ID<<' ';
+                // std::cout << std::setfill(' ') << std::setw(4) << tmx_tiles.at(i * width + j).ID << ' ';
                 tiles.push_back(new Tile(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
                 // of-=0.00001;
             }
@@ -152,13 +152,28 @@ void MapConfig::loadMap(const std::string& path)
                         continue;
                     }
                     MetaImage metaImage((image.copy(j * tileset.getTileSize().x, i * tileset.getTileSize().y,
-                                                    tileset.getTileSize().x, tileset.getTileSize().y)), 1.01, false,
+                                                    tileset.getTileSize().x, tileset.getTileSize().y)), 1.0, false,
                                         true, 1);
                     tile_images[id] = metaImage;
                 }
             }
             for (auto& tile : tileset.getTiles())
             {
+                if (tile.properties.size() == 1)
+
+                {
+                    std::string p_name = tile.properties.begin()->getName();
+                    try
+
+                    {
+                        index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at(p_name);
+                    }
+                    catch (std::out_of_range& e)
+                    {
+                        qDebug() << "attribute for tileset:" << p_name << " not found";
+                        index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at("NONE");
+                    }
+                }
                 for (auto property : tile.properties)
                 {
                     std::string p_name = property.getName();
@@ -178,21 +193,9 @@ void MapConfig::loadMap(const std::string& path)
                     {
                         //TODO
                     }
-                    else if (p_name == "res_pool")
-                    {
-                        //TODO
-                    }
                     else
+
                     {
-                        try
-                        {
-                            index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at(p_name);
-                        }
-                        catch (std::out_of_range& e)
-                        {
-                            qDebug() << "attribute for tileset:" << p_name << " not found";
-                            index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at("NONE");
-                        }
                     }
                 }
             }
@@ -266,7 +269,7 @@ void MapConfig::loadMap(const std::string& path)
             {
                 if (layer->getName() == "Ground")
                 {
-                    config_layer(tiles, layer, Game::LayerConfig::TILE_GROUND);
+                    parse_layer(tiles, layer, Game::LayerConfig::TILE_GROUND);
                     const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
                     MapConfig::world_width = layer->getSize().x;
                     MapConfig::world_height = layer->getSize().y;
@@ -284,7 +287,7 @@ void MapConfig::loadMap(const std::string& path)
                             try
                             {
                                 get_tile_attribute(j, world_height - i - 1) = index_to_attribute.at(tmx_tile.ID);
-                                // std::cout << std::setfill('-') << std::setw(3) << index_to_attribute.at(tmx_tile.ID)->
+                                // std::cout << std::setfill('-') << std::setw(3) << index_to_atbute.at(tmx_tile.ID)->
                                 //     type << ' ';
                                 // if (index_to_attribute.at(tmx_tile.ID)->type == 8)
                                 // {
@@ -309,7 +312,7 @@ void MapConfig::loadMap(const std::string& path)
                 }
                 else if (layer->getName() == "Items")
                 {
-                    config_layer(tiles, layer, Game::LayerConfig::TILE_ITEM);
+                    parse_layer(tiles, layer, Game::LayerConfig::TILE_ITEM);
                 }
                 else if (layer->getName() == "Units")
                 {

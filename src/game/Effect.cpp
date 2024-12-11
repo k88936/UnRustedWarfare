@@ -47,8 +47,8 @@ Effect::Effect(Game* game, MetaEffect* meta, const QVector3D position, const flo
     if (meta->physics)
     {
         restitution = 0.8;
-        linear_damping_dir = 8;
-        linear_damping_ver = 8;
+        linear_damping_dir = 2.5;
+        linear_damping_ver = 2.5;
         angular_damping = 40;
     }
     this->color = meta->color;

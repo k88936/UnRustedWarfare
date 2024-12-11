@@ -109,7 +109,7 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
 //! [5]
 void BattlefieldWidget::paintGL()
 {
-    glAlphaFunc(GL_GREATER, 0.9);
+    glAlphaFunc(GL_EQUAL, 1);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //

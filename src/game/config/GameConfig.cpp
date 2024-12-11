@@ -5,8 +5,8 @@
 #include "GameConfig.h"
 #include "structures/tile_attribute.h"
 
-float GameConfig::game_speed=1;
-float GameConfig::game_volume=0.5;
+float GameConfig::game_speed = 1;
+float GameConfig::game_volume = 0.5;
 
 /**
  * land cliff water sub
@@ -24,4 +24,3 @@ const std::map<std::string, TileAttribute*> GameConfig::tile_configs = {
     // {"res_pool", new TileAttribute(0b1000, 1.4)},
     // {"res_pool", new TileAttribute(0b1000, 1.4)},
 };
-

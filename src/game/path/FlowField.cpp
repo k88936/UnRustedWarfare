@@ -6,7 +6,7 @@
 
 #include "Game.h"
 
-FlowField::FlowField(Game *game,const float to_x, const float to_y, const movementType movement): movement_(movement)
+FlowField::FlowField(Game* game, const float to_x, const float to_y, const movementType movement): movement_(movement)
 {
     int tile_x = game->map_config.x_in_which(to_x);
     int tile_y = game->map_config.y_in_which(to_y);
@@ -33,7 +33,7 @@ FlowField::FlowField(Game *game,const float to_x, const float to_y, const moveme
 
     const auto end = nodes_[tile_x + 1][tile_y + 1];
     end->f = 0;
-    flow(game , end);
+    flow(game, end);
 
     for (int i = 0; i < game->map_config.world_width; ++i)
     {
@@ -42,27 +42,63 @@ FlowField::FlowField(Game *game,const float to_x, const float to_y, const moveme
             float x = 0;
             float y = 0;
 
-            x += nodes_[i][j]->f - nodes_[i + 1][j + 1]->f;;
-            y += nodes_[i][j]->f - nodes_[i + 1][j + 1]->f;;
+            if (nodes_[i][j]->f < 5211324)
+            {
+                x += nodes_[i][j]->f - nodes_[i + 1][j + 1]->f;;
+                y += nodes_[i][j]->f - nodes_[i + 1][j + 1]->f;;
+            }
+            if (nodes_[i + 2][j + 2]->f < 5211324)
+            {
+                x -= nodes_[i + 2][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+                y -= nodes_[i + 2][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+            }
+            if (nodes_[i][j + 2]->f < 5211324)
+            {
+                x += nodes_[i][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+                y -= nodes_[i][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+            }
 
-            x += nodes_[i][j + 1]->f - nodes_[i + 1][j + 1]->f;;
 
-            x += nodes_[i][j + 2]->f - nodes_[i + 1][j + 1]->f;;
-            y -= nodes_[i][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+            if (nodes_[i + 2][j]->f < 5211324)
+            {
+                x -= nodes_[i + 2][j]->f - nodes_[i + 1][j + 1]->f;;
+                y += nodes_[i + 2][j]->f - nodes_[i + 1][j + 1]->f;;
+            }
+
+            if (nodes_[i][j + 1]->f < 5211324)
+            {
+                x += nodes_[i][j + 1]->f - nodes_[i + 1][j + 1]->f;;
+            }
+            if (nodes_[i + 1][j]->f < 5211324)
+            {
+                y += nodes_[i + 1][j]->f - nodes_[i + 1][j + 1]->f;;
+            }
+            if (nodes_[i + 1][j + 2]->f < 5211324)
+            {
+                y -= nodes_[i + 1][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+            }
+            if (nodes_[i + 2][j + 1]->f < 5211324)
+            {
+                x -= nodes_[i + 2][j + 1]->f - nodes_[i + 1][j + 1]->f;;
+            }
 
 
-            y += nodes_[i + 1][j]->f - nodes_[i + 1][j + 1]->f;;
-
-            y -= nodes_[i + 1][j + 2]->f - nodes_[i + 1][j + 1]->f;;
-
-
-            x -= nodes_[i + 2][j]->f - nodes_[i + 1][j + 1]->f;;
-            y += nodes_[i + 2][j]->f - nodes_[i + 1][j + 1]->f;;
-
-            x -= nodes_[i + 2][j + 1]->f - nodes_[i + 1][j + 1]->f;;
-
-            x -= nodes_[i + 2][j + 2]->f - nodes_[i + 1][j + 1]->f;;
-            y -= nodes_[i + 2][j + 2]->f - nodes_[i + 1][j + 1]->f;;
+            if (nodes_[i][j + 1]->f >= 5211324)
+            {
+                x = std::max(x, 0.0f);
+            }
+            if (nodes_[i + 1][j]->f >= 5211324)
+            {
+                y = std::max(y, 0.0f);
+            }
+            if (nodes_[i + 1][j + 2]->f >= 5211324)
+            {
+                y = std::min(y, 0.0f);
+            }
+            if (nodes_[i + 2][j + 1]->f >= 5211324)
+            {
+                x = std::min(x, 0.0f);
+            }
 
             get_vector(i, j).setX(x);
             get_vector(i, j).setY(y);
@@ -85,7 +121,7 @@ QVector3D& FlowField::get_vector(int x, int y)
 }
 
 
-float FlowField::get_cost(Game* game,const int x, const int y) const
+float FlowField::get_cost(Game* game, const int x, const int y) const
 {
     if (closed_set_.contains(PathNode::hash(x, y)))
     {
@@ -99,7 +135,7 @@ float FlowField::get_cost(Game* game,const int x, const int y) const
     return 0;
 }
 
-void FlowField::expand(Game* game,int x, int y, const PathNode* parent, float cost_multiply)
+void FlowField::expand(Game* game, int x, int y, const PathNode* parent, float cost_multiply)
 {
     const float cost = get_cost(game, x, y);
     if (cost == 0)return;
@@ -109,7 +145,7 @@ void FlowField::expand(Game* game,int x, int y, const PathNode* parent, float co
     closed_set_.insert(new_node->id);
 }
 
-void FlowField::flow(Game* game,PathNode* end)
+void FlowField::flow(Game* game, PathNode* end)
 {
     constexpr float sqrt2 = 1.41421356;
     PathNode* cur = end;

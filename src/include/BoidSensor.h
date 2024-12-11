@@ -19,6 +19,7 @@ public:
     QVector3D nearby_even_center;
     Flock* flock = nullptr;
     QVector3D target_offset;
+    bool can_drive=true;
 
     BoidSensor(Game* game,const float radius, Unit* boid): Sensor(game,radius, boid->team)
     {

@@ -124,24 +124,42 @@ void BoidSensor::after()
     utils::angle_ensure(angular_target);
     float speed_projected = QVector3D::dotProduct(boid->linear_velocity, boid->vector_dir);
     float angle_step = boid->meta->max_turn_speed;
+
     if (boid->meta->is_wheel_powered)
     {
         angle_step *= (speed_projected) / boid->meta->move_speed;
     }
     float diff = angular_target - boid->rotation;
     utils::angle_ensure(diff);
-    if (std::fabsf(diff) < angle_step *game-> delta_time)
+    if (std::fabsf(diff) < angle_step * game->delta_time)
     {
         // unit0->rotation = target;
         boid->angular_velocity *= 0.8;
+        can_drive = true;
     }
     else
     {
+        if (boid->meta->is_wheel_powered)
+        {
+            can_drive = true;
+        }
+        else
+        {
+            if (std::fabsf(diff) < angle_step * game->delta_time * 4)
+            {
+                can_drive = true;
+            }
+            else
+            {
+                can_drive = false;
+            }
+        }
         const float acc = boid->meta->turn_acc * boid->inertia;
-        boid->apply_force(
+        boid->drive(
             boid->vector_ver * speed_projected * boid->mass * boid->angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * game->delta_time, -angle_step *game-> delta_time,
+        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * game->delta_time,
+                                   -angle_step * game->delta_time,
                                    0.8);
     }
 
@@ -154,7 +172,7 @@ void BoidSensor::after()
             boid->drive(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
         }
     }
-    else
+    else if (can_drive)
     {
         float speed_target_length = speed_target.length();
         if (speed_projected > 0)

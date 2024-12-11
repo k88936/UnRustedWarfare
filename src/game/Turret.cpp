@@ -153,7 +153,7 @@ void Turret::draw(Game* game)
 
     if (is_driving)
     {
-        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.008));
     }
     else
     {
@@ -164,7 +164,7 @@ void Turret::draw(Game* game)
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
+    shadow->render_transform.translate(-0.06, -0.06, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);

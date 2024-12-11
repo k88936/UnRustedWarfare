@@ -22,8 +22,8 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     this->scale = meta->scale;
     this->team = team;
     restitution = 0.8;
-    linear_damping_dir = 0.8;
-    linear_damping_ver = 1.2;
+    linear_damping_dir = 0.25;
+    linear_damping_ver = 0.4;
     angular_damping = 40;
     auto* mar = new Sensor(game, meta->max_attack_range, team);
     watchers.push_back(mar);
@@ -95,7 +95,7 @@ void Unit::draw(Game* game)
 
     if (is_driving)
     {
-        render_transform.translate(this->position + utils::generate_random_small_vector(0.025));
+        render_transform.translate(this->position + utils::generate_random_small_vector(0.008));
     }
     else
     {
@@ -107,7 +107,7 @@ void Unit::draw(Game* game)
     render_transform.scale(this->scale);
     game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
-    shadow->render_transform.translate(-0.2, -0.2, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
+    shadow->render_transform.translate(-0.06, -0.06, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
@@ -116,8 +116,8 @@ void Unit::draw(Game* game)
 
 void Unit::drive(const QVector3D& force, const float torque)
 {
-    if ((force.lengthSquared() > this->mass * this->mass * 1 || torque != 0))
-        is_driving = true;
+    if ((force.lengthSquared() > this->mass * this->mass * 0.01 || torque != 0))
+    is_driving = true;
     Object::apply_force(force, torque);
 }
 
@@ -234,9 +234,9 @@ void Unit::after()
         if (!(game->map_config.get_tile_attribute(tile_x + 1, tile_y)->type & this->meta->movement))
         {
             position.setX(
-                utils::linear_limit_soft_v(position.x(), std::numeric_limits<float>::min(), tile_x + space, soft));
+                utils::linear_limit_soft_v(position.x(), -std::numeric_limits<float>::max(), tile_x + space, soft));
             linear_velocity.setX(
-                utils::linear_limit_soft_v(linear_velocity.x(), std::numeric_limits<float>::min(), 0.0f, soft));
+                utils::linear_limit_soft_v(linear_velocity.x(), -std::numeric_limits<float>::max(), 0.0f, soft));
         }
         if (!(game->map_config.get_tile_attribute(tile_x, tile_y - 1)->type & this->meta->movement))
         {
@@ -248,9 +248,9 @@ void Unit::after()
         if (!(game->map_config.get_tile_attribute(tile_x, tile_y + 1)->type & this->meta->movement))
         {
             position.setY(
-                utils::linear_limit_soft_v(position.y(), std::numeric_limits<float>::min(), tile_y + space, soft));
+                utils::linear_limit_soft_v(position.y(), -std::numeric_limits<float>::max(), tile_y + space, soft));
             linear_velocity.setY(
-                utils::linear_limit_soft_v(linear_velocity.y(), std::numeric_limits<float>::min(), 0.0f, soft));
+                utils::linear_limit_soft_v(linear_velocity.y(), -std::numeric_limits<float>::max(), 0.0f, soft));
         }
     }
 

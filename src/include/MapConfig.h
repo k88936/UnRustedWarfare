@@ -26,7 +26,7 @@ public:
     TileAttribute*& get_tile_attribute(int x, int y);
     int x_in_which(float x);
     int y_in_which(float y);
-    void config_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
+    void parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
                       float z);
     void loadMap(const std::string& path);
     std::map<std::string, MetaImage> tile_images;

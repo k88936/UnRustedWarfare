@@ -3,6 +3,7 @@
 //
 
 // You may need to build the project (run Qt uic code generator) to get "ui_battle_widget.h" resolved
+#include <QDoubleSpinBox>
 
 #include "battle_widget.h"
 
@@ -55,6 +56,14 @@ battle_widget::battle_widget(main_window* parent) :
         auto game = new Game(widget, "../maps/2.tmx");
         parent->widget_change(widget);
     });
+    // auto x=new QDoubleSpinBox(this);
+    // x->setDecimals(16);
+    //
+    // connect(x, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, [this](double value)
+    // {
+    //     camera_zoom=value;
+    //     update_camera();
+    // });
 }
 
 battle_widget::~battle_widget()
@@ -235,15 +244,16 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     }
                     game->flocks.insert(flock);
 
-                    //
-                    // for (int i = 0; i < game->map_config.world_width; ++i)
-                    // {
-                    //     for (int j = 0; j < game->map_config.world_height; ++j)
-                    //     {
-                    //         game->line_draw_config.emplace_back(i, j, 0);
-                    //         game->line_draw_config.emplace_back(flock->flow_field->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
-                    //     }
-                    // }
+
+                    // // visualize field
+                    //  for (int i = 0; i < game->map_config.world_width; ++i)
+                    //  {
+                    //      for (int j = 0; j < game->map_config.world_height; ++j)
+                    //      {
+                    //          game->line_draw_config.emplace_back(i, j, 0);
+                    //          game->line_draw_config.emplace_back(flock->flow_field->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+                    //      }
+                    //  }
                 }
                 else
                 {
@@ -264,7 +274,7 @@ void battle_widget::wheelEvent(QWheelEvent* event)
     constexpr float delta = 0.00001;
     // if (event->angleDelta().y()>0)
     // {
-    camera_zoom = std::max(0.02f, camera_zoom + delta * event->angleDelta().y());
+    camera_zoom = std::max(0.005f, camera_zoom + delta * event->angleDelta().y());
     // }
     // else if ( event->angleDelta().y()<0)
     // {
