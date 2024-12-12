@@ -125,7 +125,7 @@ void MapConfig::loadMap(const std::string& path)
             }
             if (image.isNull())
             {
-                size_t pos = image_path.find_last_of("/\\");
+                size_t pos = image_path.find_last_of("/");
                 if (pos == std::string::npos)
                 {
                     pos = -1;
@@ -249,7 +249,7 @@ void MapConfig::loadMap(const std::string& path)
                     for (const auto& prop : properties)
                     {
                         std::cout << "Found property: " << prop.getName() << std::endl;
-                        // std::cout << "Type: " << int(prop.getType()) << std::endl;
+                        std::cout << "Type: " << int(prop.getType()) << std::endl;
                     }
 
                     if (!object.getTilesetName().empty())
