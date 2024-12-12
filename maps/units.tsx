@@ -37,6 +37,7 @@
    <property name="unit" value="hoverTank"/>
   </properties>
  </tile>
+<!-- cmd-->
  <tile id="6">
   <properties>
    <property name="team" value="0"/>

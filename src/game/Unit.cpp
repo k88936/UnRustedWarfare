@@ -117,7 +117,7 @@ void Unit::draw(Game* game)
 void Unit::drive(const QVector3D& force, const float torque)
 {
     if ((force.lengthSquared() > this->mass * this->mass * 0.01 || torque != 0))
-    is_driving = true;
+        is_driving = true;
     Object::apply_force(force, torque);
 }
 

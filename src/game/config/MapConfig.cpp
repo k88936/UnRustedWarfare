@@ -160,11 +160,9 @@ void MapConfig::loadMap(const std::string& path)
             for (auto& tile : tileset.getTiles())
             {
                 if (tile.properties.size() == 1)
-
                 {
                     std::string p_name = tile.properties.begin()->getName();
                     try
-
                     {
                         index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at(p_name);
                     }
@@ -201,67 +199,64 @@ void MapConfig::loadMap(const std::string& path)
             }
         }
         // MapConfig::index_to_name[0] = "NONE";
-        for (const auto& prop : mapProperties)
-        {
-            std::cout << "Found property: " << prop.getName() << std::endl;
-            std::cout << "Type: " << static_cast<int>(prop.getType()) << std::endl;
-        }
+        // for (const auto& prop : mapProperties)
+        // {
+        //     std::cout << "Found property: " << prop.getName() << std::endl;
+        //     std::cout << "Type: " << static_cast<int>(prop.getType()) << std::endl;
+        // }
         const auto& layers = map.getLayers();
-        std::cout << "Map has " << layers.size() << " layers" << std::endl;
+        // std::cout << "Map has " << layers.size() << " layers" << std::endl;
         for (const auto& layer : layers)
         {
-            std::cout << "Found Layer: " << layer->getName() << std::endl;
-            std::cout << "Layer Type: " << LayerStrings[static_cast<std::int32_t>(layer->getType())] << std::endl;
-            std::cout << "Layer Dimensions: " << layer->getSize() << std::endl;
-            std::cout << "Layer Tint: " << layer->getTintColour() << std::endl;
-
-            if (layer->getType() == tmx::Layer::Type::Group)
-            {
-                // std::cout << "Checking sublayers" << std::endl;
-                // const auto& sublayers = layer->getLayerAs<tmx::LayerGroup>().getLayers();
-                // std::cout << "LayerGroup has " << sublayers.size() << " layers" << std::endl;
-                // for (const auto& sublayer : sublayers)
-                // {
-                //     std::cout << "Found Layer: " << sublayer->getName() << std::endl;
-                //     std::cout << "Sub-layer Type: " << LayerStrings[static_cast<std::int32_t>(sublayer->getType())] <<
-                //         std::endl;
-                //     std::cout << "Sub-layer Class: " << sublayer->getClass() << std::endl;
-                //     std::cout << "Sub-layer Dimensions: " << sublayer->getSize() << std::endl;
-                //     std::cout << "Sub-layer Tint: " << sublayer->getTintColour() << std::endl;
-                //
-                //     if (sublayer->getType() == tmx::Layer::Type::Object)
-                //     {
-                //         std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::ObjectGroup>().
-                //             getObjects().size() << " objects" << std::endl;
-                //     }
-                //     else if (sublayer->getType() == tmx::Layer::Type::Tile)
-                //     {
-                //         std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::TileLayer>().getTiles()
-                //                                                                .size() << " tiles" << std::endl;
-                //     }
-                // }
-            }
+            // if (layer->getType() == tmx::Layer::Type::Group)
+            // {
+            //     qDebug() << "Group";
+            //     std::cout << "Checking sublayers" << std::endl;
+            //     const auto& sublayers = layer->getLayerAs<tmx::LayerGroup>().getLayers();
+            //     std::cout << "LayerGroup has " << sublayers.size() << " layers" << std::endl;
+            //     for (const auto& sublayer : sublayers)
+            //     {
+            //         std::cout << "Found Layer: " << sublayer->getName() << std::endl;
+            //         std::cout << "Sub-layer Type: " << LayerStrings[static_cast<std::int32_t>(sublayer->getType())] <<
+            //             std::endl;
+            //         std::cout << "Sub-layer Class: " << sublayer->getClass() << std::endl;
+            //         std::cout << "Sub-layer Dimensions: " << sublayer->getSize() << std::endl;
+            //         std::cout << "Sub-layer Tint: " << sublayer->getTintColour() << std::endl;
+            //
+            //         if (sublayer->getType() == tmx::Layer::Type::Object)
+            //         {
+            //             std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::ObjectGroup>().
+            //                 getObjects().size() << " objects" << std::endl;
+            //         }
+            //         else if (sublayer->getType() == tmx::Layer::Type::Tile)
+            //         {
+            //             std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::TileLayer>().getTiles()
+            //                                                                    .size() << " tiles" << std::endl;
+            //         }
+            //     }
+            // }
 
             if (layer->getType() == tmx::Layer::Type::Object)
             {
-                // const auto& objects = layer->getLayerAs<tmx::ObjectGroup>().getObjects();
-                // std::cout << "Found " << objects.size() << " objects in layer" << std::endl;
-                // for (const auto& object : objects)
-                // {
-                //     std::cout << "Object " << object.getUID() << ", " << object.getName() << std::endl;
-                //     const auto& properties = object.getProperties();
-                //     std::cout << "Object has " << properties.size() << " properties" << std::endl;
-                //     for (const auto& prop : properties)
-                //     {
-                //         std::cout << "Found property: " << prop.getName() << std::endl;
-                //         std::cout << "Type: " << int(prop.getType()) << std::endl;
-                //     }
-                //
-                //     if (!object.getTilesetName().empty())
-                //     {
-                //         std::cout << "Object uses template tile set " << object.getTilesetName() << "\n";
-                //     }
-                // }
+                qDebug() << "Object";
+                const auto& objects = layer->getLayerAs<tmx::ObjectGroup>().getObjects();
+                std::cout << "Found " << objects.size() << " objects in layer" << std::endl;
+                for (const auto& object : objects)
+                {
+                    std::cout << "Object " << object.getUID() << ", " << object.getName() << std::endl;
+                    const auto& properties = object.getProperties();
+                    std::cout << "Object has " << properties.size() << " properties" << std::endl;
+                    for (const auto& prop : properties)
+                    {
+                        std::cout << "Found property: " << prop.getName() << std::endl;
+                        // std::cout << "Type: " << int(prop.getType()) << std::endl;
+                    }
+
+                    if (!object.getTilesetName().empty())
+                    {
+                        std::cout << "Object uses template tile set " << object.getTilesetName() << "\n";
+                    }
+                }
             }
 
 
@@ -316,20 +311,23 @@ void MapConfig::loadMap(const std::string& path)
                 }
                 else if (layer->getName() == "Units")
                 {
+                    std::vector<tmx::TileLayer::Tile> tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
+
+                    for (auto tile : tiles)
+                    {
+                        if (tile.ID != 0)
+                            qDebug() << tile.ID;
+                    }
                     qDebug() << "Units";
                 }
-                else if (layer->getName() == "set")
-                {
-                    qDebug() << "set";
-                }
             }
-            const auto& properties = layer->getProperties();
-            std::cout << properties.size() << " Layer Properties:" << std::endl;
-            for (const auto& prop : properties)
-            {
-                std::cout << "Found property: " << prop.getName() << std::endl;
-                std::cout << "Type: " << int(prop.getType()) << std::endl;
-            }
+            // const auto& properties = layer->getProperties();
+            // std::cout << properties.size() << " Layer Properties:" << std::endl;
+            // for (const auto& prop : properties)
+            // {
+            //     std::cout << "Found property: " << prop.getName() << std::endl;
+            //     std::cout << "Type: " << int(prop.getType()) << std::endl;
+            // }
         }
     }
     else
