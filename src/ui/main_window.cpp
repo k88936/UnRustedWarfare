@@ -13,7 +13,9 @@
 #include "battle_widget.h"
 #include "Game.h"
 #include "ui_main_window.h"
-
+#include <QtMultimedia>
+#include <QVideoWidget>
+#include <QAudioOutput>
 
 main_window::main_window(QWidget* parent) :
     QMainWindow(parent), ui(new Ui::main_window)
@@ -21,20 +23,29 @@ main_window::main_window(QWidget* parent) :
     ui->setupUi(this);
     widget_stack.push(ui->centralwidget);
 
+    // auto p=new  QMediaPlayer(this);
+    // auto o= new QAudioOutput(this);
+    // auto x=new QVideoWidget(this);
+    // x->resize(800,800);
+    // p->setAudioOutput(o);
+    // p->setVideoOutput(x);
+    // p->setSource(QUrl::fromLocalFile("../1.mp4"));
+    // p->play();
+
     // auto widget = new welcome_widget(this);
     // auto game = new Game(widget->ui->widget, "../maps/3.tmx");;
     // widget_push(widget);
 
-    auto widget =new battle_widget(this);
+    // auto widget =new battle_widget(this);
+    // // auto game = new Game(widget, "../maps/1.tmx");
     // auto game = new Game(widget, "../maps/3.tmx");
-    auto game = new Game(widget, "../maps/1.tmx");
-    widget_push(widget);
+    // widget_push(widget);
+
     // Game::start_on("../maps/3.tmx", w->ui->widget);
     // Game::start_on("../maps/3.tmx", b);
     // b->show();
     // w->show();
     // Game::start_on("../maps/2.tmx", b);
-
 
     // widget_push(new battle_widget(this, "../maps/2.tmx"));
     // widget_push(new welcome_widget(this));

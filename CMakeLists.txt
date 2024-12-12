@@ -14,6 +14,7 @@ find_package(Qt6 COMPONENTS
         OpenGL
         OpenGLWidgets
         Multimedia
+        MultimediaWidgets
         REQUIRED)
 
 add_executable(untitled1
@@ -92,6 +93,8 @@ add_executable(untitled1
         src/ui/main_window.ui
         src/game/config/GameConfig.cpp
         src/game/config/GameConfig.h
+        src/game/Logic.cpp
+        src/game/Logic.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)
@@ -107,6 +110,7 @@ target_link_libraries(untitled1
         Qt::OpenGL
         Qt::OpenGLWidgets
         Qt::Multimedia
+        Qt::MultimediaWidgets
         zlibstatic
         libzstd_static
 )
