@@ -9,6 +9,7 @@
 #include "Turret.h"
 
 
+class Controller;
 class BoidSensor;
 
 class Unit : public Attachable, public Drawable, public Object
@@ -21,7 +22,7 @@ public:
     Drawable* shadow = new Drawable();
     float hp;
     bool isAttached = false;
-    BoidSensor* boid_sensor;
+    Controller* controller=nullptr;
     bool is_driving=false;
     void attack(const QVector3D& target);
     void draw(Game* game) override;

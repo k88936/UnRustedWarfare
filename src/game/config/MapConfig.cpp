@@ -277,7 +277,7 @@ void MapConfig::loadMap(const std::string& path)
                             }
                             else if (prop.getName() == "delay")
                             {
-                                event->delay = std::stof(prop.getStringValue());
+                                event->delay = std::stof(prop.getStringValue())/1000;
                             }
                             else if (prop.getName() == "globalMessage")
                             {
@@ -312,7 +312,7 @@ void MapConfig::loadMap(const std::string& path)
                             }
                             else if (prop.getName() == "delay")
                             {
-                                event->delay = std::stof(prop.getStringValue());
+                                event->delay = std::stof(prop.getStringValue())/1000;
                             }
                             else if (prop.getName() == "team")
                             {

@@ -33,11 +33,18 @@ void Flock::move(const QVector3D& target)
     arrived_range = radius_count / sqrtf(boids.size());
     for (auto b : boids)
     {
-        b->boid_sensor->target_offset = utils::linear_limit_max_soft_v(
+        auto boid_sensor = new BoidSensor(b);
+        if (b->controller != nullptr)
+        {
+            delete b->controller;
+        }
+        b->controller = boid_sensor;
+        boid_sensor->target_offset = utils::linear_limit_max_soft_v(
             utils::linear_limit_max_soft_v(b->position - center, arrived_range * 4, 0.2), arrived_range * 2,
             0.5) + target;
-        b->boid_sensor->arrived_flock_target = false;
-        b->boid_sensor->arrived_flock_target_offset = false;
+        boid_sensor->arrived_flock_target = false;
+        boid_sensor->arrived_flock_target_offset = false;
+        boid_sensor->flock=this;
     }
     flow_field = new FlowField(game, target.x(), target.y(), movementType::LAND);
 }

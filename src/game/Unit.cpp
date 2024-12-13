@@ -27,8 +27,6 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     angular_damping = 40;
     auto* mar = new Sensor(game, meta->max_attack_range, team);
     watchers.push_back(mar);
-    boid_sensor = new BoidSensor(game, 4, this);
-    watchers.push_back(boid_sensor);
     for (const auto& slot : meta->attached_turret)
     {
         auto turret = new Turret(game, slot, team);
@@ -48,6 +46,10 @@ Unit::~Unit()
     for (const auto watcher : watchers)
     {
         delete watcher;
+    }
+    if (controller != nullptr)
+    {
+        delete controller;
     }
     delete this->shadow;
     //remember to solve count reference
@@ -146,6 +148,7 @@ void Unit::before()
         updateSlots(transform);
     }
     this->position.setZ(0);
+ if (controller)   controller->before();
     // this->position.setZ(meta->targetHeight);
 }
 
@@ -160,6 +163,7 @@ void Unit::step()
     {
         turret->step();
     }
+   if (controller) controller->step();
 }
 
 void Unit::on_death()
@@ -211,6 +215,7 @@ void Unit::after()
     {
         watcher->after();
     }
+    if (controller)controller->after();
     for (const auto turret : turrets)
     {
         turret->after();

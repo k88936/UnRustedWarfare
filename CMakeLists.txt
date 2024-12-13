@@ -105,6 +105,10 @@ add_executable(untitled1
         src/ui/include/dialog_widget.h
         src/ui/dialog_widget.ui
         src/game/Trigger.cpp
+        src/game/Controller.cpp
+        src/game/Controller.h
+        src/game/DirectPathFollowController.cpp
+        src/game/DirectPathFollowController.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

@@ -11,16 +11,23 @@
 #include "Flock.h"
 #include "FlowField.h"
 
+BoidSensor::BoidSensor(Unit* unit): BoidSensor(unit->game, 4, unit)
+{
+}
+
 BoidSensor::~BoidSensor()
 {
     if (flock != nullptr)
     {
-        flock->boids.erase(boid);
+        flock->boids.erase(unit_under_control);
     }
 }
 
+
 void BoidSensor::before()
 {
+    position = unit_under_control->position;
+    linear_velocity = unit_under_control->linear_velocity;
     if (flock == nullptr)
     {
         return Sensor::before();
@@ -29,9 +36,9 @@ void BoidSensor::before()
     nearby_count = 1;
     angular_target = 0;
     speed_target *= 0;
-    nearby_even_rotation = boid->rotation;
-    nearby_even_speed = boid->linear_velocity;
-    nearby_even_center = boid->position;
+    nearby_even_rotation = unit_under_control->rotation;
+    nearby_even_speed = unit_under_control->linear_velocity;
+    nearby_even_center = unit_under_control->position;
 }
 
 void BoidSensor::step()
@@ -40,8 +47,8 @@ void BoidSensor::step()
     {
         return Sensor::step();
     }
-    const int x_floor = static_cast<int>(boid->position.x());
-    const int y_floor = static_cast<int>(boid->position.y());
+    const int x_floor = static_cast<int>(unit_under_control->position.x());
+    const int y_floor = static_cast<int>(unit_under_control->position.y());
     const int x_ceil = x_floor + 1;
     const int y_ceil = y_floor + 1;
     if (flock->flow_field != nullptr)
@@ -49,7 +56,7 @@ void BoidSensor::step()
         QVector3D flow_field_expected;
         if (arrived_flock_target)
         {
-            flow_field_expected = target_offset - boid->position;
+            flow_field_expected = target_offset - unit_under_control->position;
         }
         else
         {
@@ -58,21 +65,23 @@ void BoidSensor::step()
                 (flock->flow_field->get_vector(x_floor, y_floor).x() + flock->flow_field->
                                                                               get_vector(x_floor, y_ceil).x()) * (x_ceil
                     -
-                    boid
+                    unit_under_control
                     ->
                     position.x())
                 + (flock->flow_field->get_vector(x_ceil, y_floor).x() + flock->flow_field->
-                                                                               get_vector(x_ceil, y_ceil).x()) * (boid->
+                                                                               get_vector(x_ceil, y_ceil).x()) * (
+                    unit_under_control->
                     position.
                     x() - x_floor),
                 (flock->flow_field->get_vector(x_floor, y_floor).y() + flock->flow_field->
                                                                               get_vector(x_ceil, y_floor).y()) * (y_ceil
                     -
-                    boid
+                    unit_under_control
                     ->
                     position.y())
                 + (flock->flow_field->get_vector(x_floor, y_ceil).y() + flock->flow_field->
-                                                                               get_vector(x_ceil, y_ceil).y()) * (boid->
+                                                                               get_vector(x_ceil, y_ceil).y()) * (
+                    unit_under_control->
                     position.
                     y() - y_floor),
                 0
@@ -101,7 +110,7 @@ void BoidSensor::step()
         {
             if (flow_field_expected.lengthSquared() > 0.1)
             {
-                speed_target += 0.8f * boid->meta->move_speed * flow_field_expected.normalized();
+                speed_target += 0.8f * unit_under_control->meta->move_speed * flow_field_expected.normalized();
             }
         }
     }
@@ -113,7 +122,7 @@ void BoidSensor::after()
     speed_target += nearby_even_speed / nearby_count * 0.2f;
     if (this->arrived_flock_target_offset)
     {
-        angular_target += boid->rotation * 0.8f;
+        angular_target += unit_under_control->rotation * 0.8f;
     }
     else
     {
@@ -125,24 +134,24 @@ void BoidSensor::after()
     }
     angular_target += 0.2 * nearby_even_rotation / nearby_count;
     utils::angle_ensure(angular_target);
-    float speed_projected = QVector3D::dotProduct(boid->linear_velocity, boid->vector_dir);
-    float angle_step = boid->meta->max_turn_speed;
+    float speed_projected = QVector3D::dotProduct(unit_under_control->linear_velocity, unit_under_control->vector_dir);
+    float angle_step = unit_under_control->meta->max_turn_speed;
 
-    if (boid->meta->is_wheel_powered)
+    if (unit_under_control->meta->is_wheel_powered)
     {
-        angle_step *= (speed_projected) / boid->meta->move_speed;
+        angle_step *= (speed_projected) / unit_under_control->meta->move_speed;
     }
-    float diff = angular_target - boid->rotation;
+    float diff = angular_target - unit_under_control->rotation;
     utils::angle_ensure(diff);
     if (std::fabsf(diff) < angle_step * game->delta_time)
     {
         // unit0->rotation = target;
-        boid->angular_velocity *= 0.8;
+        unit_under_control->angular_velocity *= 0.8;
         can_drive = true;
     }
     else
     {
-        if (boid->meta->is_wheel_powered)
+        if (unit_under_control->meta->is_wheel_powered)
         {
             can_drive = true;
         }
@@ -157,11 +166,12 @@ void BoidSensor::after()
                 can_drive = false;
             }
         }
-        const float acc = boid->meta->turn_acc * boid->inertia;
-        boid->drive(
-            boid->vector_ver * speed_projected * boid->mass * boid->angular_velocity * std::numbers::pi / 180,
+        const float acc = unit_under_control->meta->turn_acc * unit_under_control->inertia;
+        unit_under_control->drive(
+            unit_under_control->vector_ver * speed_projected * unit_under_control->mass * unit_under_control->
+            angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(boid->angular_velocity, angle_step * game->delta_time,
+        utils::linear_limit_soft_r(unit_under_control->angular_velocity, angle_step * game->delta_time,
                                    -angle_step * game->delta_time,
                                    0.8);
     }
@@ -172,7 +182,9 @@ void BoidSensor::after()
     {
         if (!utils::within(this->position, target_offset, 0.2))
         {
-            boid->drive(-boid->mass * boid->linear_velocity * boid->meta->move_dec, 0);
+            unit_under_control->drive(
+                -unit_under_control->mass * unit_under_control->linear_velocity * unit_under_control->meta->move_dec,
+                0);
         }
     }
     else if (can_drive)
@@ -182,14 +194,14 @@ void BoidSensor::after()
         {
             if (speed_target_length > speed_projected)
             {
-                boid->drive(
-                    boid->mass * boid->vector_dir * boid->meta->move_acc,
+                unit_under_control->drive(
+                    unit_under_control->mass * unit_under_control->vector_dir * unit_under_control->meta->move_acc,
                     0);
             }
             else
             {
-                boid->drive(
-                    -boid->mass * boid->vector_dir * boid->meta->move_dec,
+                unit_under_control->drive(
+                    -unit_under_control->mass * unit_under_control->vector_dir * unit_under_control->meta->move_dec,
                     0);
             }
         }
@@ -197,21 +209,21 @@ void BoidSensor::after()
         {
             if (speed_target_length > speed_projected)
             {
-                boid->drive(
-                    boid->mass * boid->vector_dir * boid->meta->move_dec,
+                unit_under_control->drive(
+                    unit_under_control->mass * unit_under_control->vector_dir * unit_under_control->meta->move_dec,
                     0);
             }
             else
             {
-                boid->drive(
-                    -boid->mass * boid->vector_dir * boid->meta->move_acc,
+                unit_under_control->drive(
+                    -unit_under_control->mass * unit_under_control->vector_dir * unit_under_control->meta->move_acc,
                     0);
             }
         }
         else
         {
-            boid->drive(
-                boid->mass * boid->vector_dir * boid->meta->move_acc,
+            unit_under_control->drive(
+                unit_under_control->mass * unit_under_control->vector_dir * unit_under_control->meta->move_acc,
                 0);
         }
     }
@@ -234,7 +246,8 @@ bool BoidSensor::on_overlay(Object* obj, const QVector3D position_diff)
             nearby_count++;
             if (position_diff.lengthSquared() < this->radius * this->radius / 4)
             {
-                this->angular_target += 10 * QVector3D::dotProduct(boid->vector_ver, position_diff) / position_diff.
+                this->angular_target += 10 * QVector3D::dotProduct(unit_under_control->vector_ver, position_diff) /
+                    position_diff.
                     lengthSquared();
             }
         }

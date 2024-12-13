@@ -221,14 +221,8 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                 auto flock = new Flock(game);
                 for (auto& selected : units_selected)
                 {
-                    if (selected->boid_sensor->flock != nullptr)
-                    {
-                        selected->boid_sensor->flock->boids.erase(selected);
-                    }
                     flock->boids.insert(selected);
-                    selected->boid_sensor->flock = flock;
                 }
-
                 if (!flock->boids.empty())
                 {
                     (*units_selected.begin())->on_move_order();

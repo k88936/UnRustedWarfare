@@ -20,7 +20,7 @@ class FlowField
 public:
     FlowField(Game* game, float to_x, float to_y, movementType movement);
     QVector3D& get_vector(int x, int y);
-
+    QVector3D end;
 private:
     std::vector<std::vector<QVector3D>> field_;
     float get_cost(Game*, int x, int y) const;
