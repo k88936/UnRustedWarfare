@@ -9,6 +9,7 @@ enum movementType
 {
     LAND = 0b1000,
     AIR = 0b1111,
+    WATER = 0b0100,
     HOVER = 0b1100,
     SUB = 0b0101,
 };

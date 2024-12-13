@@ -9,16 +9,17 @@
 
 class DirectPathFollowController : public Controller
 {
+public:
     DirectPathFollowController(Unit* unit, FlowField* flow_field)
     ;
     void before() override;
     void step() override;
     void after() override;
     QVector3D dir_expected;
-    FlowField * flow_field;
+    FlowField * flow_field=nullptr;
     bool arrived = false;
     QVector3D speed_target;
-    float angular_target;
+    float angular_target=0;
     bool can_drive=true;
 };
 

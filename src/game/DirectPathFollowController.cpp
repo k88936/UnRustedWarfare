@@ -58,6 +58,7 @@ void DirectPathFollowController::step()
 
         speed_target = dir_expected * unit_under_control->meta->move_speed;
     }
+    angular_target = utils::dir_of(speed_target);
 }
 
 void DirectPathFollowController::after()

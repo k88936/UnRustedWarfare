@@ -5,7 +5,6 @@
 #include "MapConfig.h"
 
 #include <iostream>
-#include <qloggingcategory.h>
 #include <tmxlite/LayerGroup.hpp>
 #include <tmxlite/Map.hpp>
 #include <tmxlite/TileLayer.hpp>
@@ -238,7 +237,7 @@ void MapConfig::loadMap(const std::string& path)
             if (layer->getType() == tmx::Layer::Type::Object)
             {
                 std::map<std::string, std::string> solve_event_only_name;
-                std::map<std::string, std::string> solve_point_only_name;
+                // std::map<std::string, std::string> solve_point_only_name;
                 qDebug() << "Object";
                 const auto& objects = layer->getLayerAs<tmx::ObjectGroup>().getObjects();
                 for (const auto& object : objects)
@@ -267,17 +266,17 @@ void MapConfig::loadMap(const std::string& path)
                             {
                                 event->require_type = prop.getStringValue();
                             }
-                            else if (prop.getName() == "min")
+                            else if (prop.getName() == "minUnits")
                             {
                                 event->require_cnt_min = std::stoi(prop.getStringValue());
                             }
-                            else if (prop.getName() == "max")
+                            else if (prop.getName() == "maxUnits")
                             {
                                 event->require_cnt_max = std::stoi(prop.getStringValue());
                             }
                             else if (prop.getName() == "delay")
                             {
-                                event->delay = std::stof(prop.getStringValue())/1000;
+                                event->delay = std::stof(prop.getStringValue()) / 1000;
                             }
                             else if (prop.getName() == "globalMessage")
                             {
@@ -299,39 +298,106 @@ void MapConfig::loadMap(const std::string& path)
                     }
                     else if (type == "move")
                     {
-                        auto event = new Trigger::UnitDetect(game, posA, posB);
-                        auto action = new Trigger::Move(game, posA, posB);
-                        map_events[name] = event;
+                        Trigger::UnitDetect* event = nullptr;
+                        auto action = new Trigger::UnitMove(game, posA, posB);
                         map_actions.push_back(action);
                         action->activeBy = name;
                         for (const auto& prop : properties)
                         {
                             if (prop.getName() == "target")
                             {
-                                solve_event_only_name[prop.getStringValue()] = name;
+                                action->target = prop.getStringValue();
+                            }
+                            else if (prop.getName() == "activeBy")
+                            {
+                                action->activeBy = prop.getStringValue();
                             }
                             else if (prop.getName() == "delay")
                             {
-                                event->delay = std::stof(prop.getStringValue())/1000;
+                                if (event == nullptr)
+                                {
+                                    event = new Trigger::UnitDetect(game, posA, posB);
+                                }
+                                event->delay = std::stof(prop.getStringValue()) / 1000;
                             }
                             else if (prop.getName() == "team")
                             {
+                                if (event == nullptr)
+                                {
+                                    event = new Trigger::UnitDetect(game, posA, posB);
+                                }
                                 event->require_team = std::stoi(prop.getStringValue());
+                                action->require_team = std::stoi(prop.getStringValue());
                             }
                             else if (prop.getName() == "target")
                             {
                                 action->target = prop.getStringValue();
+                            }
+                            else if (prop.getName() == "minUnits")
+                            {
+                                if (event == nullptr)
+                                {
+                                    event = new Trigger::UnitDetect(game, posA, posB);
+                                }
+                                event->require_cnt_min = std::stoi(prop.getStringValue());
+                            }
+                            else if (prop.getName() == "maxUnits")
+                            {
+                                if (event == nullptr)
+                                {
+                                    event = new Trigger::UnitDetect(game, posA, posB);
+                                }
+                                event->require_cnt_max = std::stoi(prop.getStringValue());
+                            }
+                            else
+                            {
+                                qDebug() << "unknown property: " << prop.getName();
+                            }
+                            if (event != nullptr)
+                            {
+                                map_events[name] = event;
+                            }
+                        }
+                    }
+                    else if (type == "point")
+                    {
+                        QVector3D mid = (posA + posB) / 2;
+                        flow_fields[name][movementType::LAND] = new FlowField(
+                            game, mid.x(), mid.y(), movementType::LAND);
+                        flow_fields[name][movementType::AIR] = new FlowField(game, mid.x(), mid.y(), movementType::AIR);
+                        flow_fields[name][movementType::WATER] = new FlowField(
+                            game, mid.x(), mid.y(), movementType::WATER);
+                        flow_fields[name][movementType::HOVER] = new FlowField(
+                            game, mid.x(), mid.y(), movementType::HOVER);
+                        flow_fields[name][movementType::SUB] = new FlowField(game, mid.x(), mid.y(), movementType::SUB);
+                    }
+                    else if (type == "unitAdd")
+                    {
+                        auto action = new Trigger::UnitAdd(game, posA);
+                        map_actions.push_back(action);
+                        for (auto prop : properties)
+                        {
+                            if (prop.getName() == "activeBy")
+                            {
+                                action->activeBy = prop.getStringValue();
+                            }
+                            else if (prop.getName() == "delay")
+                            {
+                                action->delay = std::stof(prop.getStringValue()) / 1000;
+                            }
+                            else if (prop.getName() == "team")
+                            {
+                                action->team = std::stoi(prop.getStringValue());
+                            }
+                            else if (prop.getName() == "spawnUnits")
+                            {
+                                utils::parse_item_list(prop.getStringValue(), action->units);
                             }
                             else
                             {
                                 qDebug() << "unknown property: " << prop.getName();
                             }
                         }
-                    }
-                    else if (type=="point")
-                    {
-                        QVector3D mid=(posA+posB)/2;
-                        map_points[name] = new FlowField(game, mid.x(),mid.y(),movementType::LAND);
                     }
                     else
                     {
@@ -345,13 +411,13 @@ void MapConfig::loadMap(const std::string& path)
                     {
                         map_action->activeBy = solve_event_only_name[map_action->activeBy];
                     }
-                    if (auto* move = dynamic_cast<Trigger::Move*>(map_action))
-                    {
-                        if (solve_event_only_name.contains(move->target))
-                        {
-                            move->target = solve_event_only_name[move->target];
-                        }
-                    }
+                    // if (auto* move = dynamic_cast<Trigger::Move*>(map_action))
+                    // {
+                    //     if (solve_point_only_name.contains(move->target))
+                    //     {
+                    //         move->target = solve_point_only_name[move->target];
+                    //     }
+                    // }
                 }
             }
 

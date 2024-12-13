@@ -9,7 +9,41 @@
 
 #include "Game.h"
 
-utils::animater::animater(Game *game,const float duration, const float from, const float to): duration_(duration * 1000), to_(to),
+QVector4D utils::parse_color(const std::string& colorStr)
+{
+    QColor color(QString::fromStdString(colorStr));
+    return {color.redF(), color.greenF(), color.blueF(), color.alphaF()};
+}
+
+std::vector<std::string> utils::split(const std::string& str, const char delimiter)
+{
+    std::vector<std::string> tokens;
+    std::string token;
+    std::istringstream tokenStream(str);
+    while (std::getline(tokenStream, token, delimiter))
+    {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
+void utils::parse_item_list(const std::string& content, std::vector<std::string>& ans)
+{
+    for (std::vector<std::string> effects = split(content, ','); const auto& str : effects)
+    {
+        if (str == "NONE")return;
+        std::vector<std::string> word_and_num = split(str, '*');
+        int n = 1;
+        if (word_and_num.size() == 2)n = std::stoi(word_and_num[1]);
+        for (int i = 0; i < n; ++i)
+        {
+            ans.push_back(word_and_num[0]);
+        }
+    }
+}
+
+utils::animater::animater(Game* game, const float duration, const float from, const float to):
+    duration_(duration * 1000), to_(to),
     from_(from)
 {
     // qDebug()<<duration_;
@@ -228,7 +262,7 @@ bool utils::random_bool(float chance)
 
 bool utils::freq_bool(float freq, float delta)
 {
-    return random_bool(freq *delta);
+    return random_bool(freq * delta);
 }
 
 std::string utils::without_extend(const std::string& file_name)

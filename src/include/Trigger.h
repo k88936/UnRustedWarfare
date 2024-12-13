@@ -9,9 +9,12 @@
 #include <string>
 
 
-
 class Game;
 
+/**
+ *
+ *
+ */
 namespace Trigger
 {
     class Event
@@ -35,6 +38,7 @@ namespace Trigger
 
         void update();
         float delay = 0;
+        float last_active_time = 0;
         bool result = false;
         Game* game;
     };
@@ -43,17 +47,14 @@ namespace Trigger
     {
     public:
         std::string activeBy;
-        // QVector3D posLB;
-        // QVector3D posRT;
+        QVector3D posLB;
+        QVector3D posRT;
+        float delay = 0;
+        float last_active_time = 0;
 
         explicit Action(Game* game): game(game)
         {
         };
-
-        // explicit Action(Game* game, QVector3D posLB,QVector3D posRT): game(game), posLB(posLB), posRT(posRT)
-        // {
-        // }
-
 
         virtual void execute()
         {
@@ -77,14 +78,23 @@ namespace Trigger
         };
     };
 
-    class Move : public Trigger::Action
+    class UnitMove : public Trigger::Action
     {
     public:
         // FlowField* flow_field = nullptr;
         std::string target;
-        Move(Game* game, QVector3D posLB, QVector3D posRT);
+        int require_team = 5211324;
+        UnitMove(Game* game, QVector3D posLB, QVector3D posRT);
         void execute() override;
-        QVector3D posLB, posRT;
+    };
+
+    class UnitAdd : public Trigger::Action
+    {
+    public:
+        std::vector<std::string> units;
+        int team = 0;
+        UnitAdd(Game* game, QVector3D pos);
+        void execute() override;
     };
 
     class Dialog : public Trigger::Action

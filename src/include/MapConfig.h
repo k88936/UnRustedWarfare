@@ -11,6 +11,7 @@
 
 #include "Tile.h"
 #include "structures/meta_image.h"
+#include "structures/movement_type.h"
 #include "structures/tile_attribute.h"
 
 
@@ -47,9 +48,9 @@ public:
     std::map<std::string, Trigger::Event*> map_events;
     std::vector<Trigger::Action*> map_actions;
     std::vector<std::vector<TileAttribute*>> tile_attributes;
-    std::map<std::string,FlowField* > flow_fields;
+    // std::map<std::string, std::string> map_points;
 
-    std::map<std::string,FlowField*> map_points;
+    std::map<std::string, std::map<movementType, FlowField*>> flow_fields;
     // Warning all is copies of tile_configs, forbidden to delete
 };
 

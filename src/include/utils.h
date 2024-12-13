@@ -66,7 +66,8 @@ namespace utils
     extern bool freq_bool(float freq, float delta);
     extern std::string without_extend(const std::string& file_name);
     extern std::vector<std::string> without_extend(const std::vector<std::string>& file_names);
+    extern std::vector<std::string> split(const std::string& str, const char delimiter);
+    extern QVector4D parse_color(const std::string& colorStr);
+    extern void parse_item_list(const std::string& content, std::vector<std::string>& ans);
 };
-
-
 #endif //UTILS_H

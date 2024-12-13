@@ -3,23 +3,36 @@
 //
 
 #include "Trigger.h"
+
+#include "DirectPathFollowController.h"
 #include "Game.h"
 #include "Unit.h"
+#include "UnitConfigs.h"
 
 
 void Trigger::Event::update()
 {
     result = false;
-    if (game->time < delay)
+    if (game->time - last_active_time < delay)
     {
         return;
     }
+    last_active_time = game->time;
     result = detect();
 }
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
-    if (event_map.at(activeBy)->result)execute();
+    if (game->time - last_active_time < delay)
+    {
+        return;
+    }
+
+    if (event_map.at(activeBy)->result)
+    {
+        last_active_time = game->time;
+        execute();
+    }
 }
 
 bool Trigger::UnitDetect::detect()
@@ -50,20 +63,52 @@ bool Trigger::UnitDetect::detect()
     return true;
 }
 
-Trigger::Move::Move(Game* game, QVector3D posLB, QVector3D posRT): Action(game), posLB(posLB), posRT(posRT)
-
+Trigger::UnitMove::UnitMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
 {
+    this->posLB = posLB;
+    this->posRT = posRT;
 }
 
-void Trigger::Move::execute()
+void Trigger::UnitMove::execute()
 {
     auto units = game->grids_manager.scan_units(posLB, posRT);
     for (auto unit : units)
     {
+        if (unit->marked_for_delete)continue;
+        if (require_team != 5211324 && unit->team != require_team)
+        {
+            continue;
+        }
+        FlowField* flow_field = game->map_config.flow_fields.at(target).at(unit->meta->movement);
+        if (unit->controller == nullptr)
+        {
+            unit->controller = new DirectPathFollowController(unit, flow_field);
+        }
+        else if (auto ctrl = dynamic_cast<DirectPathFollowController*>(unit->controller))
+        {
+            ctrl->flow_field = flow_field;
+        }
+        else
+        {
+            unit->controller = new DirectPathFollowController(unit, flow_field);
+        }
         // auto flock = new Flock(game);
         // flock->boids.insert(unit);
         // flock->flow_field=game->map_config.flow_fields.at(target);
         // game->flocks.push_back(flock);
+    }
+}
+
+Trigger::UnitAdd::UnitAdd(Game* game, const QVector3D pos):Action(game)
+{
+    posLB=pos;
+}
+
+void Trigger::UnitAdd::execute()
+{
+    for (const auto & unit : units)
+    {
+        game->units.push_back(new Unit(game, UnitConfigs::meta_units.at(unit), team, posLB, 0));
     }
 }
 

@@ -5001,12 +5001,29 @@
   </data>
   </layer>
   <objectgroup name="Triggers">
-    <object name="unitDetect" type="unitDetect" id="20" x="150.67" y="2888.8333" width="268.667" height="180.333">
+  <object id="2" name="1" type="point" x="1958" y="1568" width="24" height="23"/>
+    <object name="w" type="unitDetect" id="20" x="150.67" y="2888.8333" width="268.667" height="180.333">
       <properties>
         <property name="info" value="Located missing units" />
         <property name="maxUnits" value="0" />
         <property name="showOnMap" value="true" />
         <property name="team" value="-1" />
+      </properties>
+    </object>
+    <object name="22" type="unitAdd" id="20" x="150.67" y="2888.8333" width="268.667" height="180.333">
+      <properties>
+        <property name="activeBy" value="w" />
+        <property name="spawnUnits" value="laoda*1" />
+        <property name="delay" value="50" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object name="2" type="move" id="20" x="150.67" y="2888.8333" width="268.667" height="180.333">
+      <properties>
+      <property name="target" value="1" />
+        <property name="minUnits" value="1" />
+        <property name="showOnMap" value="true" />
+        <property name="team" value="0" />
       </properties>
     </object>
     <object name="map_info" id="25" x="77.1667" y="55" width="217.667" height="63.3333">

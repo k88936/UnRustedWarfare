@@ -23,23 +23,6 @@ std::unordered_map<std::string, MetaEffect*> UnitConfigs::meta_effects;
 std::unordered_map<std::string, MetaImage> UnitConfigs::images;
 std::unordered_map<std::string, QUrl> UnitConfigs::sounds;
 
-std::vector<std::string> split(const std::string& str, const char delimiter)
-{
-    std::vector<std::string> tokens;
-    std::string token;
-    std::istringstream tokenStream(str);
-    while (std::getline(tokenStream, token, delimiter))
-    {
-        tokens.push_back(token);
-    }
-    return tokens;
-}
-
-QVector4D parse_color(const std::string& colorStr)
-{
-    QColor color(QString::fromStdString(colorStr));
-    return {color.redF(), color.greenF(), color.blueF(), color.alphaF()};
-}
 
 class IniParser
 {
@@ -99,21 +82,6 @@ private:
 };
 
 
-void UnitConfigs::parse_effects(const std::string& content, std::vector<std::string>& ans)
-{
-    for (std::vector<std::string> effects = split(content, ','); const auto& str : effects)
-    {
-        if (str == "NONE")return;
-        std::vector<std::string> word_and_num = split(str, '*');
-        int n = 1;
-        if (word_and_num.size() == 2)n = std::stoi(word_and_num[1]);
-        for (int i = 0; i < n; ++i)
-        {
-            ans.push_back(word_and_num[0]);
-        }
-    }
-}
-
 void UnitConfigs::load_ini(const QString& path)
 {
     constexpr float designed_FPS = 50;
@@ -167,21 +135,22 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "displayRadius")unit->display_radius = std::stof(snd) * scale_rw2sw;
                 else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
-                else if (fst == "tags")unit->tags = split(snd, ',');
+                else if (fst == "tags")unit->tags = utils::split(snd, ',');
                 else if (fst == "soundOnNewSelection")
                     unit->sound_on_new_selection = utils::without_extend(
-                        split(snd, ','));
-                else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = utils::without_extend(split(snd, ','));
-                else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(split(snd, ','));
-                else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(split(snd, ','));
-                else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(split(snd, ','));
-                else if (fst == "soundOnMove")unit->sound_on_move = utils::without_extend(split(snd, ','));
-                else if (fst == "effectOnDeath")parse_effects(snd, unit->effect_on_death);
+                        utils::split(snd, ','));
+                else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = utils::without_extend(
+                    utils::split(snd, ','));
+                else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(utils::split(snd, ','));
+                else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(utils::split(snd, ','));
+                else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(utils::split(snd, ','));
+                else if (fst == "soundOnMove")unit->sound_on_move = utils::without_extend(utils::split(snd, ','));
+                else if (fst == "effectOnDeath")utils::parse_item_list(snd, unit->effect_on_death);
                 else if (fst == "isBio")unit->is_bio = snd == "true";
 
                     //
                 else if (fst == "maxTransportingUnits")unit->max_transporting_units = std::stoi(snd);
-                else if (fst == "transportUnitsRequireTag")unit->transport_units_require_tag = split(snd, ',');
+                else if (fst == "transportUnitsRequireTag")unit->transport_units_require_tag = utils::split(snd, ',');
                 else if (fst == "exit_x")unit->exit_y = std::stof(snd) * scale_rw2sw;
                 else if (fst == "exit_y")unit->exit_x = std::stof(snd) * scale_rw2sw;
                 else
@@ -312,7 +281,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "canShoot")turret->can_shoot = snd == "true";
                     else if (fst == "shoot_light")
                     {
-                        turret->shoot_light = parse_color(snd);
+                        turret->shoot_light = utils::parse_color(snd);
                         turret->shoot_light.setW(0.6);
                     }
                     else if (fst == "shoot_sound")turret->shoot_sound = utils::without_extend(snd);
@@ -324,7 +293,7 @@ void UnitConfigs::load_ini(const QString& path)
                         turret->slave = snd == "true";
                         turret->slot_isFixed = snd == "true";
                     }
-                    else if (fst == "shoot_flame")parse_effects(snd, turret->shoot_flame);
+                    else if (fst == "shoot_flame")utils::parse_item_list(snd, turret->shoot_flame);
                     else
                     {
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -365,10 +334,10 @@ void UnitConfigs::load_ini(const QString& path)
                     }
                     else if (fst == "frame")projectile->frame = std::stoi(snd);
                     else if (fst == "lightSize")projectile->lightSize = std::stof(snd);
-                    else if (fst == "lightColor")projectile->lightColor = parse_color(snd);
+                    else if (fst == "lightColor")projectile->lightColor = utils::parse_color(snd);
                     else if (fst == "explodeEffect")
                     {
-                        parse_effects(snd, projectile->explode_effect);
+                       utils:: parse_item_list(snd, projectile->explode_effect);
                     }
                     else if (fst == "life")projectile->life = std::stof(snd) * time_rw2sw;
                     else if (fst == "speed")projectile->speed = std::stof(snd) * speed_rw2sw;
@@ -397,7 +366,7 @@ void UnitConfigs::load_ini(const QString& path)
                     {
                         effect->image = snd + ".png";
                     }
-                    else if (fst == "color") effect->color = parse_color(snd);
+                    else if (fst == "color") effect->color = utils::parse_color(snd);
                     else if (fst == "animateFrameStart")effect->animate_frame_start = std::stoi(snd);
                     else if (fst == "animateFrameEnd")effect->animate_frame_end = std::stoi(snd);
                     else if (fst == "animateFrameSpeed")
@@ -430,7 +399,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "delayedStartTimer")effect->delayed_start_timer = std::stof(snd);
                     else if (fst == "alsoPlaySound")
                     {
-                        auto name_and_volume = split(snd, ':');
+                        auto name_and_volume = utils::split(snd, ':');
                         effect->also_play_sound = utils::without_extend(name_and_volume[0]);
                         effect->also_play_sound_volume = std::stof(name_and_volume[1]);
                     }
