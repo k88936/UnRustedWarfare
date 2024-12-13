@@ -36,7 +36,7 @@ void SimpleEffect::draw(Game* game)
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_transparent_image_draw_config_map[image].push_back(this);
+    game->var_image_draw_config_map[image].push_back(this);
 }
 
 void SimpleEffect::before()

@@ -8,9 +8,15 @@
 
 class Object;
 
-struct Grid {
-   //  std::vector<Unit*> units;
-   //  std::vector<Projectile*> projectiles;
-   std::vector<Object*> objects;
+struct Grid
+{
+    Grid(int x, int y): x(x), y(y)
+    {
+    }
+
+    int x, y;
+    //  std::vector<Unit*> units;
+    //  std::vector<Projectile*> projectiles;
+    std::vector<Object*> objects;
 };
 #endif //GRID_H

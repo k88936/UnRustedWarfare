@@ -44,6 +44,10 @@ TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
     return tile_attributes.at(x + 1).at(y + 1);
 }
+QVector3D MapConfig::vector_in_which(const QVector3D& v)
+{
+    return QVector3D(x_in_which(v.x()), y_in_which(v.y()), v.z());
+}
 
 int MapConfig::x_in_which(const float x)
 {
@@ -86,17 +90,13 @@ void MapConfig::parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx
     }
     else
     {
-        int width = layer->getSize().x;
-        int height = layer->getSize().y;
-        for (int i = 0; i < height; ++i)
+        int index = 0;
+        for (auto tile : tmx_tiles)
         {
-            for (int j = 0; j < width; ++j)
-            {
-                // std::cout << std::setfill(' ') << std::setw(4) << tmx_tiles.at(i * width + j).ID << ' ';
-                tiles.push_back(new Tile(tmx_tiles.at(i * width + j).ID, j, height - i - 1, z));
-                // of-=0.00001;
-            }
-            // std::cout << std::endl;
+            int x = index % world_width;
+            int y = world_height - index / world_width - 1;
+            index++;
+            tiles.push_back(new Tile(tile.ID, x, y, z));
         }
     }
 }
@@ -426,10 +426,10 @@ void MapConfig::loadMap(const std::string& path)
             {
                 if (layer->getName() == "Ground")
                 {
-                    parse_layer(tiles, layer, GameConfig::LayerConfig::TILE_GROUND);
-                    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
                     MapConfig::world_width = layer->getSize().x;
                     MapConfig::world_height = layer->getSize().y;
+                    parse_layer(tiles, layer, GameConfig::LayerConfig::TILE_GROUND);
+                    const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
                     tile_attributes.resize(world_width + 2);
                     for (auto& passable : tile_attributes)
                     {
@@ -515,3 +515,5 @@ QVector3D MapConfig::pixel_to_world(float pix_x, float pix_y)
 {
     return QVector3D(pix_x / 20, world_height - pix_y / 20, 0);
 }
+
+// Tile*

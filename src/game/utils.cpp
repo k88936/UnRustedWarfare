@@ -115,7 +115,7 @@ void utils::angle_ensure(float& angle)
     }
 }
 
-void utils::limit(float& value, const float min, const float max)
+void utils::limit_r(float& value, const float min, const float max)
 {
     if (value < min)
     {
@@ -125,6 +125,19 @@ void utils::limit(float& value, const float min, const float max)
     {
         value = max;
     }
+}
+
+float utils::limit_v(float value, float min, float max)
+{
+    if (value < min)
+    {
+        value = min;
+    }
+    else if (value > max)
+    {
+        value = max;
+    }
+    return value;
 }
 
 float utils::limit(QVector3D& v, const float min_length, const float max_length)

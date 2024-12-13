@@ -6,7 +6,6 @@
 
 #include "Game.h"
 
-
 Tile::Tile(const int index, const int x, const int y,const float z)
 {
     this->index = index;

@@ -38,7 +38,7 @@ void GridsManager::init(Game* game)
         grids[i].resize(height);
         for (int j = 0; j < height; ++j)
         {
-            grids[i][j] = new Grid();
+            grids[i][j] = new Grid(i,j);
             // std::cout << grids[i][j];
         }
     }

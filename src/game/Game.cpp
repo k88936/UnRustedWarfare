@@ -21,16 +21,18 @@
 #include "Projectile.h"
 #include "Tile.h"
 
-Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world):
-    battle_field_widget(battlefield_widget)
+Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): warfare_fog_manager(this),
+                                                                             battle_field_widget(battlefield_widget)
 {
     map_config.init(this, world);
     battlefield_widget->game = this;
     grids_manager.init(this);
+    warfare_fog_manager.init();
     for (const auto& tile : map_config.tiles)
     {
         tile->draw(this);
     }
+
     // for (int i = 20; i < 22; ++i)
     // {
     //     for (int j = 20; j < 21; ++j)
@@ -129,8 +131,7 @@ void Game::clean()
         }
     }
     Game::grids_manager.clear_grids();
-    Game::var_solid_image_draw_config_map.clear();
-    Game::var_transparent_image_draw_config_map.clear();
+    Game::var_image_draw_config_map.clear();
 }
 
 void Game::pause()
@@ -173,6 +174,7 @@ void Game::step()
     }
     for (const auto u : Game::units)
     {
+        warfare_fog_manager.light(u->sight, u->meta->fog_of_war_sight_range);
         u->after();
     }
     for (const auto p : Game::projectiles)
@@ -185,5 +187,6 @@ void Game::step()
     }
     run_map_triggers();
     audio_manager.play(battle_field_widget->camera_pos);
+    warfare_fog_manager.draw();
     battle_field_widget->render();
 }

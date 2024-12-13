@@ -133,7 +133,7 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "mass")unit->mass = std::stof(snd);
                 else if (fst == "radius")unit->radius = std::stof(snd) * scale_rw2sw;
                 else if (fst == "displayRadius")unit->display_radius = std::stof(snd) * scale_rw2sw;
-                else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
+                else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd);//NO FACTOR HERE!!
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = utils::split(snd, ',');
                 else if (fst == "soundOnNewSelection")

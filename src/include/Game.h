@@ -14,6 +14,7 @@
 #include "GridsManager.h"
 #include "MapConfig.h"
 #include "GameConfig.h"
+#include "../game/WarfareFogManager.h"
 #include "structures/sound_event.h"
 
 
@@ -56,18 +57,18 @@ public:
     ~Game();
 
     float time = 0;
-    std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
+    std::unordered_map<std::string, std::vector<Drawable*>> var_image_draw_config_map;
     std::vector<QVector3D> line_draw_config;
     std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
     float delta_time = 0;
     GridsManager grids_manager;
     MapConfig map_config;
     AudioManager audio_manager;
+    WarfareFogManager warfare_fog_manager;
     std::vector<Unit*> units;
     QBasicTimer timer;
     std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
     QTime start_time = QTime::currentTime();
-    std::unordered_map<std::string, std::vector<Drawable*>> var_transparent_image_draw_config_map;
     std::vector<Projectile*> projectiles;
     std::vector<Effect*> effects;
     std::vector<Flock*> flocks;

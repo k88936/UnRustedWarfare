@@ -110,6 +110,7 @@
 <file>ui/help_orange.png</file>
 <file>ui/title_t.png</file>
 <file>ui/cmder.png</file>
+<file>ui/fog_dithering.png</file>
 <file>t_vshader.glsl</file>
 <file>t_fshader.glsl</file>
 <file>s_vshader.glsl</file>

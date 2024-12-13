@@ -10,6 +10,7 @@
 class Tile : public Drawable {
 public:
     int index=0;
+
     // int x,y;
     Tile(int index, int x, int y, float z);
     void draw(Game* game ) override;

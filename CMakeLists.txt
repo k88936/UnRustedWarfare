@@ -109,6 +109,8 @@ add_executable(untitled1
         src/game/Controller.h
         src/game/DirectPathFollowController.cpp
         src/game/DirectPathFollowController.h
+        src/game/WarfareFogManager.cpp
+        src/game/WarfareFogManager.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

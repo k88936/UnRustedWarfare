@@ -33,7 +33,8 @@ namespace utils
     extern float dir_of(QVector3D vector);
     extern float dir_diff(QVector3D vector, float angle);
     extern void angle_ensure(float& angle);
-    extern void limit(float& value, float min, float max);
+    extern void limit_r(float& value, float min, float max);
+    extern float limit_v(float value, float min, float max);
     extern float limit(QVector3D& v, float min_length, float max_length);
     extern void linear_limit_soft_r(float& value, float min, float max, float soft);
     extern void linear_limit_soft_r(QVector3D& v, float min_length, float max_length, float soft);

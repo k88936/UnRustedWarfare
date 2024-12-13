@@ -25,8 +25,8 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     linear_damping_dir = 0.25;
     linear_damping_ver = 0.4;
     angular_damping = 40;
-    auto* mar = new Sensor(game, meta->max_attack_range, team);
-    watchers.push_back(mar);
+    sight = new Sensor(game, meta->fog_of_war_sight_range, team);
+    watchers.push_back(sight);
     for (const auto& slot : meta->attached_turret)
     {
         auto turret = new Turret(game, slot, team);
@@ -109,13 +109,13 @@ void Unit::draw(Game* game)
 
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
     shadow->render_transform.translate(-0.06, -0.06, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 void Unit::drive(const QVector3D& force, const float torque)

@@ -56,6 +56,7 @@ void BattlefieldWidget::update_textures()
     engine->resister_texture("_select", MetaImage(QImage(":ui/select_highlight.png"), 1.2, false, false));
     engine->resister_texture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 1, false, false));
     engine->resister_texture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 1, false, false));
+    engine->resister_texture("_fog", MetaImage(QImage(":ui/fog_dithering.png"), 1, false, true,5));
 
     for (const auto& [id, image] : UnitConfigs::images)
     {
@@ -118,7 +119,8 @@ void BattlefieldWidget::batch_draw(std::unordered_map<std::string, std::vector<D
 //! [5]
 void BattlefieldWidget::paintGL()
 {
-    glAlphaFunc(GL_EQUAL, 1);
+    // glAlphaFunc(GL_EQUAL, 1);
+    glAlphaFunc(GL_GREATER, 0.1);
     glClearColor(0, 0, 0, 1);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     //
@@ -137,10 +139,8 @@ void BattlefieldWidget::paintGL()
     engine->set_view(projection);
 
     batch_draw(game->const_image_draw_config_map);
-    batch_draw(game->var_solid_image_draw_config_map);
+    batch_draw(game->var_image_draw_config_map);
 
-    glAlphaFunc(GL_GREATER, 0.1);
-    batch_draw(game->var_transparent_image_draw_config_map);
     batch_draw(game->ui_image_draw_config_map);
 }
 

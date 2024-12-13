@@ -20,6 +20,7 @@ public:
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
     Drawable* shadow = new Drawable();
+    Sensor* sight=nullptr;
     float hp;
     bool isAttached = false;
     Controller* controller=nullptr;

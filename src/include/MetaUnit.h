@@ -25,7 +25,7 @@ public:
     int tech_level;
     float radius; //contact radius
     float display_radius;
-    float fog_of_war_sight_range;
+    float fog_of_war_sight_range=10;
     int transport_slots_needed = 1;
     float build_speed;
     float energy_max;

@@ -29,12 +29,12 @@ class MapConfig
 {
 public:
     ~MapConfig();
-    std::vector<Tile*> tiles;
     int world_width;
     int world_height;
     // std::vector<Unit*> units_on_map;
     Game* game;
     TileAttribute*& get_tile_attribute(int x, int y);
+    QVector3D vector_in_which(const QVector3D& v);
     int x_in_which(float x);
     int y_in_which(float y);
     void parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
@@ -42,6 +42,7 @@ public:
     void loadMap(const std::string& path);
     void init(Game* game, const std::string& path);
     QVector3D pixel_to_world(float pix_x, float pix_y);
+    std::vector<Tile*> tiles;
     std::map<std::string, MetaImage> tile_images;
     std::vector<std::string> index_to_name;
     std::vector<TileAttribute*> index_to_attribute;
