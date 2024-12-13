@@ -23,6 +23,7 @@ public:
     QVector3D camera_pos = QVector3D(50, 50, 5);
     float camera_zoom = 0.05;
     void update_camera();
+    virtual void  render() ;
     Game* game;
 
 protected:

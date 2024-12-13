@@ -85,6 +85,11 @@ void BattlefieldWidget::update_camera()
     projection *= matrix;
 }
 
+void BattlefieldWidget::render()
+{
+    update();
+}
+
 void BattlefieldWidget::resizeGL(int w, int h)
 {
     update_camera();

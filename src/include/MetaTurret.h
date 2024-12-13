@@ -15,7 +15,7 @@ class MetaTurret :public MetaAttachable ,public  MetaObject,public MetaDrawable
     // QVector4D barrelTransform;
 public:
     MetaTurret();
-    QVector3D barrel_position=QVector3D(0,0,Game::LayerConfig::TURRET_OFFSET);
+    QVector3D barrel_position=QVector3D(0,0,GameConfig::LayerConfig::TURRET_OFFSET);
     float turn_speed=-1;
     float turn_acc;
     QVector4D  shoot_light;

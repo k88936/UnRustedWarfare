@@ -25,7 +25,7 @@ and must not be misrepresented as being the original software.
 source distribution.
 *********************************************************************/
 
-#include <tmxlite/pugixml.hpp>
+#include <utils/pugixml.hpp>
 #include <zstd.h>
 
 #include <tmxlite/FreeFuncs.hpp>

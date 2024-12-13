@@ -21,16 +21,16 @@
 #include "Projectile.h"
 #include "Tile.h"
 
-Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): map_config(world),
-                                                                             battle_field_widget(battlefield_widget)
+Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world):
+    battle_field_widget(battlefield_widget)
 {
+    map_config.init(this, world);
     battlefield_widget->game = this;
     grids_manager.init(this);
     for (const auto& tile : map_config.tiles)
     {
         tile->draw(this);
     }
-    run();
     // for (int i = 20; i < 22; ++i)
     // {
     //     for (int j = 20; j < 21; ++j)
@@ -38,8 +38,8 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): map
     //         Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
     //     }
     // }
-    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
-    Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
+    units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
+    units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
     // for (int i = 30; i < 32; ++i)
     // {
@@ -48,6 +48,7 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): map
     //         Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(i, j, 0), i + j));
     //     }
     // }
+    run();
 }
 
 Game::~Game()
@@ -140,7 +141,7 @@ void Game::pause()
 void Game::run()
 {
     // if (timer.isActive())
-    timer_doer->start=QTime::currentTime();
+    timer_doer->start = QTime::currentTime();
     timer.start(0, timer_doer);
 }
 
@@ -177,5 +178,5 @@ void Game::step()
         e->after();
     }
     audio_manager.play(battle_field_widget->camera_pos);
-    battle_field_widget->update();
+    battle_field_widget->render();
 }

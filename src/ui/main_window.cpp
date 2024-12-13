@@ -36,10 +36,10 @@ main_window::main_window(QWidget* parent) :
     // auto game = new Game(widget->ui->widget, "../maps/3.tmx");;
     // widget_push(widget);
 
-    // auto widget =new battle_widget(this);
-    // // auto game = new Game(widget, "../maps/1.tmx");
-    // auto game = new Game(widget, "../maps/3.tmx");
-    // widget_push(widget);
+    auto widget =new battle_widget(this);
+    // auto game = new Game(widget, "../maps/1.tmx");
+    auto game = new Game(widget, "../maps/3.tmx");
+    widget_push(widget);
 
     // Game::start_on("../maps/3.tmx", w->ui->widget);
     // Game::start_on("../maps/3.tmx", b);

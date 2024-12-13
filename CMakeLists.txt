@@ -49,13 +49,18 @@ add_executable(untitled1
         src/tmxlite/Tileset.cpp
         src/tmxlite/ObjectTypes.cpp
         src/tmxlite/miniz.c
-        src/tmxlite/pugixml.cpp
         src/tmxlite/FreeFuncs.cpp
+
+
+        src/utils/pugixml.cpp
 
         resources.qrc
 
         src/game/config/UnitConfigs.cpp
         src/game/config/MapConfig.cpp
+        src/game/config/GameConfig.cpp
+        src/game/config/GameConfig.h
+        src/game/Logic.cpp
 
         src/game/Tile.cpp
         src/game/path/PathFind.cpp
@@ -91,10 +96,12 @@ add_executable(untitled1
         src/ui/main_window.cpp
         src/ui/include/main_window.h
         src/ui/main_window.ui
-        src/game/config/GameConfig.cpp
-        src/game/config/GameConfig.h
-        src/game/Logic.cpp
-        src/game/Logic.h
+
+        src/ui/dialog_widget.cpp
+        src/ui/include/dialog_widget.h
+        src/ui/dialog_widget.ui
+        src/game/Trigger.cpp
+        src/game/Trigger.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

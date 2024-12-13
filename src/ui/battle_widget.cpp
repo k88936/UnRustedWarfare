@@ -10,6 +10,7 @@
 #include <Game.h>
 #include <qdatetime.h>
 #include <QMouseEvent>
+#include <qpainter.h>
 
 #include "ui_battle_widget.h"
 #include "BoidSensor.h"
@@ -305,6 +306,47 @@ void battle_widget::resizeEvent(QResizeEvent* event)
     suspend_menu->setGeometry((this->width() - suspend_menu->width()) / 2,
                               (this->height() - suspend_menu->height()) / 2, suspend_menu->width(),
                               suspend_menu->height());
+}
+
+void battle_widget::render()
+{
+    BattlefieldWidget::render();
+    QPixmap pix(2 * game->map_config.world_width, 2 * game->map_config.world_height);
+    pix.fill(QColor("#a0000000"));
+    QPainter painter(&pix);
+    QPen friend_pen(Qt::green);
+    friend_pen.setWidth(2);
+    QPen enermy_pen(Qt::red);
+    enermy_pen.setWidth(2);
+    QPen simple_white_pen(Qt::white);
+    simple_white_pen.setWidth(1);
+    for (auto unit : game->units)
+    {
+        if (unit->team == 0)
+        {
+            painter.setPen(friend_pen);
+            painter.drawPoint(2 * unit->position.x(), 2 * (game->map_config.world_height - unit->position.y()));
+        }
+        if (unit->team == 1)
+        {
+            painter.setPen(enermy_pen);
+            painter.drawPoint(2 * unit->position.x(), 2 * (game->map_config.world_height - unit->position.y()));
+        }
+    }
+    painter.setPen(simple_white_pen);
+    for (auto projectile : game->projectiles)
+    {
+        painter.drawPoint(2 * projectile->position.x(), 2 * (game->map_config.world_height - projectile->position.y()));
+    }
+
+
+    painter.setPen(simple_white_pen);
+    painter.drawRect(-this->size().width() * camera_zoom + camera_pos.x() * 2,
+                     2 * game->map_config.world_height - this->size().height() * camera_zoom - camera_pos.y() * 2,
+                     this->width() * camera_zoom * 2, this
+                     ->height() * camera_zoom * 2);
+    ui->map_view->setPixmap(pix);
+    ui->map_view->adjustSize();
 }
 
 void battle_widget::mousePressEvent(QMouseEvent* event)

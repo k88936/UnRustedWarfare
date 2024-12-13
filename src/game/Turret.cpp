@@ -107,7 +107,7 @@ bool Turret::shoot()
         {
             game->add_effect(new SimpleEffect(game, "light_50.png", 0.1,
                                              transform.map(utils::add_offset_z(
-                                                 meta->barrel_position, Game::LayerConfig::UPPER_EFFECT_OFFSET))
+                                                 meta->barrel_position, GameConfig::LayerConfig::UPPER_EFFECT_OFFSET))
                                              , rotation, 0.8,
                                              QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
@@ -164,7 +164,7 @@ void Turret::draw(Game* game)
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
     game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
-    shadow->render_transform.translate(-0.06, -0.06, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
+    shadow->render_transform.translate(-0.06, -0.06, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);

@@ -9,11 +9,13 @@
 #include <string>
 #include "UnitConfigs.h"
 
+#include <iostream>
 #include <qimage.h>
 
 #include "Game.h"
 #include "Unit.h"
 #include "RenderEngine.h"
+#include "utils/pugixml.hpp"
 
 std::unordered_map<std::string, MetaUnit*> UnitConfigs::meta_units;
 std::unordered_map<std::string, MetaProjectiles*> UnitConfigs::meta_projectiles;
@@ -114,9 +116,9 @@ void UnitConfigs::parse_effects(const std::string& content, std::vector<std::str
 
 void UnitConfigs::load_ini(const QString& path)
 {
-    constexpr float designed_FPS=50;
-    const float total_scale=0.67;
-    const float scale_rw2sw =total_scale*  1.0 / 40;
+    constexpr float designed_FPS = 50;
+    const float total_scale = 0.67;
+    const float scale_rw2sw = total_scale * 1.0 / 40;
     const float turnSpeed_rw2sw = designed_FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;
     const float time_rw2sw = 1.0f / designed_FPS;
@@ -166,7 +168,9 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd) * scale_rw2sw;
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = split(snd, ',');
-                else if (fst == "soundOnNewSelection")unit->sound_on_new_selection = utils::without_extend(split(snd, ','));
+                else if (fst == "soundOnNewSelection")
+                    unit->sound_on_new_selection = utils::without_extend(
+                        split(snd, ','));
                 else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = utils::without_extend(split(snd, ','));
                 else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(split(snd, ','));
                 else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(split(snd, ','));
@@ -368,7 +372,7 @@ void UnitConfigs::load_ini(const QString& path)
                     }
                     else if (fst == "life")projectile->life = std::stof(snd) * time_rw2sw;
                     else if (fst == "speed")projectile->speed = std::stof(snd) * speed_rw2sw;
-                    else if (fst == "drawSize")projectile->scale = std::stof(snd)*total_scale;
+                    else if (fst == "drawSize")projectile->scale = std::stof(snd) * total_scale;
                     else if (fst == "deflectionPower")projectile->deflectionPower = std::stof(snd);
                     else
                     {
@@ -401,8 +405,8 @@ void UnitConfigs::load_ini(const QString& path)
                         effect->animate_frame_delay = animate_delay_rw2sw * time_rw2sw / std::stof(snd);
                     }
                     else if (fst == "life")effect->life = std::stof(snd) * time_rw2sw;
-                    else if (fst == "scaleFrom")effect->scale_from = std::stof(snd)*total_scale;
-                    else if (fst == "scaleTo")effect->scale_to = std::stof(snd)*total_scale;
+                    else if (fst == "scaleFrom")effect->scale_from = std::stof(snd) * total_scale;
+                    else if (fst == "scaleTo")effect->scale_to = std::stof(snd) * total_scale;
                     else if (fst == "alpha")effect->alpha = std::stof(snd);
                     else if (fst == "spawnChance")effect->spawn_chance = std::stof(snd);
                     else if (fst == "xSpeedRelative")effect->x_speed_relative = std::stof(snd);
@@ -485,4 +489,45 @@ void UnitConfigs::init()
 {
     scan_dir("../M2A3/");
     scan_dir("../sound/");
+    init_units_map();
 }
+
+void UnitConfigs::init_units_map()
+{
+    pugi::xml_document doc;
+    pugi::xml_parse_result result = doc.load_file("../maps/units_map.xml");
+
+    if (!result)
+    {
+        std::cerr << "XML parsed with errors, attr value: [" << doc.child("node").attribute("attr").value() << "]\n";
+        std::cerr << "Error description: " << result.description() << "\n";
+        std::cerr << "Error offset: " << result.offset << " (error at [..." << (doc.child("node").attribute("attr").
+            value() + result.offset) << "]\n\n";
+        return;
+    }
+
+    // Access the root node
+    pugi::xml_node root = doc.child("tileset");
+
+    // Iterate over child nodes
+    for (pugi::xml_node child : root.children())
+    {
+        auto properties = child.child("properties").children();
+        for (auto xml_node : properties)
+        {
+            pugi::xml_attribute v = xml_node.attribute("value");
+            pugi::xml_attribute m = xml_node.attribute("map");
+            if (v)
+            {
+                if (m)
+                    mapped_unit_name[v.value()] = m.value();
+                else
+                {
+                    mapped_unit_name[v.value()] = v.value();
+                }
+            }
+        }
+    }
+}
+
+std::unordered_map<std::string, std::string> UnitConfigs::mapped_unit_name;

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="2">
+<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="43">
   <properties>
     <property name="sw1" value="676" />
     <property name="sw2" value="675" />
@@ -509,11 +509,18 @@
         <property name="unit" value="heavyHoverTank" />
       </properties>
     </tile>
+
     <tile id="85">
       <properties>
         <property name="team" value="2" />
         <property name="unit" value="heavyTank" />
       </properties>
+    </tile>
+       <tile id="86">
+        <properties>
+            <property name="team" value="2"/>
+            <property name="unit" value="hoverTank"/>
+        </properties>
     </tile>
     <tile id="87">
       <properties>
@@ -521,6 +528,7 @@
         <property name="unit" value="commandCenter" />
       </properties>
     </tile>
+
     <tile id="88">
       <properties>
         <property name="team" value="2" />
@@ -4998,9 +5006,226 @@
   </data>
   </layer>
   <objectgroup name="Triggers">
-    <object name="map_info" id="1" rotation="-5.26779E-15" x="1" y="1" width="29" height="41">
+    <object name="1" type="point" id="2" x="1958" y="1568" width="24" height="23" />
+    <object name="2" type="point" id="3" x="1641" y="1631" width="24" height="23" />
+    <object name="3" type="point" id="4" x="1698.67" y="1554.67" width="24" height="23" />
+    <object name="move_team_3" type="move" id="5" x="1418" y="1984" width="189" height="76">
       <properties>
-        <property name="type" value="skirmish" />
+        <property name="delay" value="0" />
+        <property name="target" value="1" />
+        <property name="team" value="3" />
+      </properties>
+    </object>
+    <object name="move_team_3" type="move" id="6" x="1292" y="2114" width="253" height="85">
+      <properties>
+        <property name="delay" value="10" />
+        <property name="target" value="2" />
+        <property name="team" value="3" />
+      </properties>
+    </object>
+    <object name="move_team_3" type="move" id="7" x="1815" y="2169" width="143" height="146">
+      <properties>
+        <property name="delay" value="13000" />
+        <property name="target" value="3" />
+        <property name="team" value="3" />
+        <property name="unload" value="" />
+      </properties>
+    </object>
+    <object name="4" type="point" id="8" x="2079" y="1631" width="24" height="23" />
+    <object name="move_team_3" type="move" id="9" x="2010" y="2175" width="141" height="110">
+      <properties>
+        <property name="delay" value="13000" />
+        <property name="target" value="4" />
+        <property name="team" value="3" />
+        <property name="unload" value="" />
+      </properties>
+    </object>
+    <object name="41" type="point" id="10" x="2010" y="2368" width="24" height="23" />
+    <object name="move_team_3" type="move" id="11" x="1603" y="1497" width="671" height="347">
+      <properties>
+        <property name="delay" value="40000" />
+        <property name="target" value="41" />
+        <property name="team" value="3" />
+      </properties>
+    </object>
+    <object name="move_team_1" type="move" id="12" x="325" y="809" width="141" height="110">
+      <properties>
+        <property name="delay" value="50000" />
+        <property name="target" value="1" />
+        <property name="team" value="1" />
+        <property name="unload" value="" />
+      </properties>
+    </object>
+    <object name="team_0_info" type="team_info" id="13" x="79.3333" y="203" width="197" height="50">
+      <properties>
+        <property name="credits" value="8000" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object name="camera_start" id="14" x="1814" y="1436" width="103" height="11" />
+    <object name="team_1_info" type="team_info" id="15" x="66.3333" y="317.333" width="222.333" height="51.3333">
+      <properties>
+        <property name="credits" value="700" />
+        <property name="team" value="1" />
+      </properties>
+    </object>
+    <object name="6" type="point" id="16" x="1608" y="1507" width="24" height="23" />
+    <object name="move_team_1" type="move" id="17" x="1489" y="583" width="150" height="149">
+      <properties>
+        <property name="delay" value="7000" />
+        <property name="target" value="2" />
+        <property name="team" value="1" />
+        <property name="unload" value="" />
+      </properties>
+    </object>
+    <object name="move_team_1" type="move" id="18" x="1816" y="553" width="150" height="149">
+      <properties>
+        <property name="delay" value="8000" />
+        <property name="target" value="1" />
+        <property name="team" value="1" />
+        <property name="unload" value="" />
+      </properties>
+    </object>
+    <object name="team_3_info" type="team_info" id="19" x="76.1667" y="417.666" width="207.667" height="54">
+      <properties>
+        <property name="credits" value="700" />
+        <property name="disabledAI" value="" />
+        <property name="team" value="3" />
+      </properties>
+    </object>
+    <object name="unitDetect" type="unitDetect" id="20" x="2374.67" y="56.8333" width="268.667" height="180.333">
+      <properties>
+        <property name="globalMessage" value="Located missing units" />
+        <property name="globalMessage_delayPerChar" value="slow" />
+        <property name="maxUnits" value="0" />
+        <property name="showOnMap" value="true" />
+        <property name="team" value="-1" />
+      </properties>
+    </object>
+    <object name="Reinforcements Message" type="unitDetect" id="21" x="1522" y="1601.17" width="767.333" height="114.667">
+      <properties>
+        <property name="globalMessage" value="Reinforcements have arrived" />
+        <property name="globalMessage_delayPerChar" value="slow" />
+        <property name="id" value="reinforcementsReady" />
+        <property name="showOnMap" value="true" />
+        <property name="team" value="3" />
+        <property name="unitType" value="hoverCraft" />
+      </properties>
+    </object>
+    <object name="rotate_units" type="rotate" id="23" x="1481.33" y="1282" width="396" height="167.333">
+      <properties>
+        <property name="dir" value="-110" />
+      </properties>
+    </object>
+    <object name="rotate_units" type="rotate" id="24" x="1726.67" y="1491.33" width="79.3333" height="56.6667">
+      <properties>
+        <property name="dir" value="80" />
+      </properties>
+    </object>
+    <object name="map_info" id="25" x="77.1667" y="55" width="217.667" height="63.3333">
+      <properties>
+        <property name="fog" value="map" />
+        <property name="introText" value="Destroy the enemy base on the left side of the river.\nBuilding extractors on the resource pools to the north might be helpful." />
+        <property name="type" value="mission" />
+        <property name="winCondition" value="requiredObjectives" />
+      </properties>
+    </object>
+    <object name="Extractor detect" type="unitDetect" id="27" x="1712.21" y="452.53" width="84.667" height="79.333">
+      <properties>
+        <property name="globalMessage" value="North extractor built - Deploying reinforcements..." />
+        <property name="globalMessage_delayPerChar" value="slow" />
+        <property name="id" value="northExtractorDetect" />
+        <property name="minUnits" value="1" />
+        <property name="onlyOnResourcePool" value="true" />
+        <property name="showOnMap" value="true" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object name="Base wiped out" type="unitDetect" id="28" x="64.3337" y="1056.33" width="688" height="528">
+      <properties>
+        <property name="globalMessage" value="Enemy base wiped out" />
+        <property name="globalMessage_delayPerChar" value="slow" />
+        <property name="id" value="baseWipedOut" />
+        <property name="maxUnits" value="0" />
+        <property name="onlyMainBuildings" value="true" />
+        <property name="showOnMap" value="true" />
+        <property name="team" value="1" />
+      </properties>
+    </object>
+    <object name="objective_base_wiped_out" type="objective" id="29" x="364.651" y="257.424" width="142.697" height="69.1515">
+      <properties>
+        <property name="activatedBy" value="baseWipedOut" />
+        <property name="team" value="0" />
+        <property name="text" value="Enemy base wiped out" />
+      </properties>
+    </object>
+    <object name="Extractor hint" type="mapText" id="30" x="1740.17" y="468.334" width="18.167" height="15.833">
+      <properties>
+        <property name="deactivatedBy" value="northExtractorDetect" />
+        <property name="style" value="arrow" />
+        <property name="text" value="Build an extractor here" />
+        <property name="textColor" value="#DDdbdbdb" />
+        <property name="textOffsetY" value="0" />
+      </properties>
+    </object>
+    <object name="detect-builderNotIdle" type="unitDetect" id="33" x="1725" y="1507.33" width="91.667" height="62.9997">
+      <properties>
+        <property name="id" value="detect-builderNotIdle" />
+        <property name="maxUnits" value="0" />
+        <property name="onlyBuilders" value="true" />
+        <property name="onlyIdle" value="true" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object name="Builder hint" type="mapText" id="34" x="1759.46" y="1524.14" width="18.167" height="15.833">
+      <properties>
+        <property name="deactivatedBy" value="detect-builderNotIdle" />
+        <property name="delay" value="15s" />
+        <property name="style" value="arrow" />
+        <property name="text" value="Use builders to place buildings" />
+        <property name="textColor" value="#DDdbdbdb" />
+        <property name="textOffsetY" value="-20" />
+      </properties>
+    </object>
+    <object name="Unit drop" type="unitAdd" id="35" x="1616.83" y="443.667" width="32.5003" height="34.6663">
+      <properties>
+        <property name="activatedBy" value="northExtractorDetect" />
+        <property name="spawnUnits" value="mechBunker*1(falling=true)" />
+        <property name="team" value="0" />
+        <property name="warmup" value="3s" />
+      </properties>
+    </object>
+    <object name="hovercraft remove" type="unitRemove" id="36" x="1798.92" y="2297.33" width="443.167" height="196.333">
+      <properties>
+        <property name="delay" value="80000" />
+        <property name="onlyIfEmpty" value="true" />
+        <property name="team" value="3" />
+      </properties>
+    </object>
+    <object name="detect-nonUpgradedExtractor" type="unitDetect" id="37" x="2020.65" y="1527.1" width="54.3943" height="50.6361">
+      <properties>
+        <property name="maxUnits" value="0" />
+        <property name="onlyEmptyQueue" value="true" />
+        <property name="onlyOnResourcePool" value="true" />
+        <property name="onlyTechLevel" value="1" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object name="Upgrade hint" type="mapText" id="38" x="2042.29" y="1532.64" width="13.8337" height="12.4997">
+      <properties>
+        <property name="deactivatedBy" value="detect-nonUpgradedExtractor" />
+        <property name="delay" value="45s" />
+        <property name="style" value="arrow" />
+        <property name="text" value="Extractors can be upgraded" />
+        <property name="textColor" value="#DDdbdbdb" />
+        <property name="textOffsetY" value="-20" />
+      </properties>
+    </object>
+    <object name="Flare Add" type="unitAdd" id="42" x="1648.25" y="425" width="21.667" height="20.833">
+      <properties>
+        <property name="activatedBy" value="northExtractorDetect" />
+        <property name="spawnUnits" value="flare_10s" />
+        <property name="team" value="0" />
       </properties>
     </object>
   </objectgroup>

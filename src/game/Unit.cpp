@@ -50,6 +50,8 @@ Unit::~Unit()
         delete watcher;
     }
     delete this->shadow;
+    //remember to solve count reference
+    //TODO
 }
 
 void Unit::updateSlots(QMatrix4x4 transform)
@@ -107,7 +109,7 @@ void Unit::draw(Game* game)
     render_transform.scale(this->scale);
     game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
-    shadow->render_transform.translate(-0.06, -0.06, Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
+    shadow->render_transform.translate(-0.06, -0.06, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
@@ -163,7 +165,7 @@ void Unit::step()
 void Unit::on_death()
 {
     game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
-                                      utils::add_offset_z(position, Game::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
+                                      utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
                                       scale, linear_velocity,
                                       angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)

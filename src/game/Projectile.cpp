@@ -102,7 +102,7 @@ void Projectile::hit_effect(const Unit* unit) const
     for (const auto& explode_effect : meta->explode_effect)
     {
         const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        game->add_effect(new Effect(game, meta_effect, utils::set_offset_z(position, Game::LayerConfig::SHELL), rotation,
+        game->add_effect(new Effect(game, meta_effect, utils::set_offset_z(position, GameConfig::LayerConfig::SHELL), rotation,
                                    this->linear_velocity));
     }
     // Game::addEffect()

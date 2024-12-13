@@ -15,20 +15,25 @@
 #include "structures/tile_attribute.h"
 
 
+class Unit;
+
 class MapConfig
 {
 public:
-    explicit MapConfig(const std::string& path);
     ~MapConfig();
     std::vector<Tile*> tiles;
     int world_width;
     int world_height;
+    std::vector<Unit *> units_on_map;
+    Game* game;
     TileAttribute*& get_tile_attribute(int x, int y);
     int x_in_which(float x);
     int y_in_which(float y);
     void parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx::Layer>& layer,
                       float z);
     void loadMap(const std::string& path);
+    void init(Game * game,const std::string& path);
+    QVector3D pixel_to_world(float pix_x, float pix_y);
     std::map<std::string, MetaImage> tile_images;
     std::vector<std::string> index_to_name;
     std::vector<TileAttribute*> index_to_attribute;

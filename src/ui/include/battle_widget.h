@@ -29,7 +29,7 @@ class battle_widget : public BattlefieldWidget
 
 public:
     suspend_menu_widget* suspend_menu;
-    battle_widget(main_window* parent);
+    explicit battle_widget(main_window* parent);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
     void mouseMoveEvent(QMouseEvent* event) override;
@@ -39,6 +39,7 @@ public:
     void wheelEvent(QWheelEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
+    void render() override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
     bool m_l_pressing=false;

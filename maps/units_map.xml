@@ -1,0 +1,305 @@
+<tileset>
+    <tile id="0">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="builderShip"/>
+        </properties>
+    </tile>
+    <tile id="1">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="builder" map="laoda"/>
+        </properties>
+    </tile>
+    <tile id="2">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="tank"/>
+        </properties>
+    </tile>
+    <tile id="3">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="artillery"/>
+        </properties>
+    </tile>
+    <tile id="4">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="heavyTank"/>
+        </properties>
+    </tile>
+    <tile id="5">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="hoverTank" map="m2a3"/>
+        </properties>
+    </tile>
+    <!-- cmd-->
+    <tile id="6">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="commandCenter" map="m2a3"/>
+        </properties>
+    </tile>
+    <tile id="7">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="turret"/>
+        </properties>
+    </tile>
+    <tile id="8">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="antiAirTurret"/>
+        </properties>
+    </tile>
+    <tile id="9">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="experimentalSpider"/>
+        </properties>
+    </tile>
+    <tile id="10">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="helicopter"/>
+        </properties>
+    </tile>
+    <tile id="11">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="airShip"/>
+        </properties>
+    </tile>
+    <tile id="12">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="amphibiousJet"/>
+        </properties>
+    </tile>
+    <tile id="13">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="mechFactory"/>
+        </properties>
+    </tile>
+    <tile id="14">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="seaFactory"/>
+        </properties>
+    </tile>
+    <tile id="15">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="landFactory"/>
+        </properties>
+    </tile>
+    <tile id="16">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="airFactory"/>
+        </properties>
+    </tile>
+    <tile id="17">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="extractor"/>
+        </properties>
+    </tile>
+    <tile id="18">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="attackSubmarine"/>
+        </properties>
+    </tile>
+    <tile id="19">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="scoutShip"/>
+        </properties>
+    </tile>
+    <tile id="20">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="hovercraft"/>
+        </properties>
+    </tile>
+    <tile id="21">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="gunBoat"/>
+        </properties>
+    </tile>
+    <tile id="22">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="battleShip"/>
+        </properties>
+    </tile>
+    <tile id="23">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="laserDefence"/>
+        </properties>
+    </tile>
+    <tile id="24">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="experimentalLandFactory"/>
+        </properties>
+    </tile>
+    <tile id="25">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="repairbay"/>
+        </properties>
+    </tile>
+    <tile id="26">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="fabricator"/>
+        </properties>
+    </tile>
+    <tile id="27">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="experimentalHoverTank"/>
+        </properties>
+    </tile>
+    <tile id="28">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="experimentalTank"/>
+        </properties>
+    </tile>
+    <tile id="29">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="mammothTank"/>
+        </properties>
+    </tile>
+    <tile id="30">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="dropship"/>
+        </properties>
+    </tile>
+    <tile id="31">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="gunShip"/>
+        </properties>
+    </tile>
+    <tile id="32">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="laserTank"/>
+        </properties>
+    </tile>
+    <tile id="33">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="heavyHoverTank"/>
+        </properties>
+    </tile>
+    <tile id="34">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="nukeLaucher"/>
+        </properties>
+    </tile>
+    <tile id="35">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="antiNukeLaucher"/>
+        </properties>
+    </tile>
+    <tile id="36">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="experimentalDropship"/>
+        </properties>
+    </tile>
+    <tile id="37">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="heavyBattleship"/>
+        </properties>
+    </tile>
+    <tile id="38">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="missileTank"/>
+        </properties>
+    </tile>
+    <tile id="39">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="combatEngineer"/>
+        </properties>
+    </tile>
+    <tile id="40">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="bomber"/>
+        </properties>
+    </tile>
+    <tile id="41">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="mechMinigun"/>
+        </properties>
+    </tile>
+    <tile id="42">
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="mechBunker"/>
+        </properties>
+    </tile>
+
+    <tile>
+        <properties>
+            <property name="team" value="0"/>
+            <property name="unit" value="tree"/>
+        </properties>
+    </tile>
+    <tile id="144">
+        <properties>
+            <property name="team" value="4"/>
+            <property name="unit" value="ladyBug"/>
+        </properties>
+    </tile>
+    <tile id="145">
+        <properties>
+            <property name="team" value="4"/>
+            <property name="unit" value="bugMelee"/>
+        </properties>
+    </tile>
+    <tile id="146">
+        <properties>
+            <property name="team" value="4"/>
+            <property name="unit" value="bugSpore"/>
+        </properties>
+    </tile>
+    <tile id="147">
+        <properties>
+            <property name="team" value="4"/>
+            <property name="unit" value="bugNest"/>
+        </properties>
+    </tile>
+    <tile id="148">
+        <properties>
+            <property name="team" value="4"/>
+            <property name="unit" value="bugRanged"/>
+        </properties>
+    </tile>
+
+    <tile id="188">
+        <properties>
+            <property name="team" value="-1"/>
+            <property name="unit" value="crystalResource"/>
+        </properties>
+    </tile>
+</tileset>

@@ -11,12 +11,9 @@
 
 #include "Game.h"
 #include "Tile.h"
+#include "UnitConfigs.h"
 #include "structures/tile_attribute.h"
 
-MapConfig::MapConfig(const std::string& path)
-{
-    loadMap(path);
-}
 
 MapConfig::~MapConfig()
 {
@@ -84,7 +81,6 @@ void MapConfig::parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx
             }
             // std::cout << std::endl;
         }
-        std::cout << "Layer has " << tmx_tiles.size() << " tiles.\n";
     }
 }
 
@@ -103,6 +99,14 @@ void MapConfig::loadMap(const std::string& path)
     tmx::Map map;
     tiles.clear();
     index_to_name.clear();
+    units_on_map.clear();
+
+    struct meta_unit_tile
+    {
+        int team;
+        std::string name;
+    };
+    std::map<int, meta_unit_tile> meta_unit_tiles;
     if (map.load(path))
     {
         if (map.isInfinite())
@@ -177,10 +181,15 @@ void MapConfig::loadMap(const std::string& path)
                     std::string p_name = property.getName();
                     if (p_name == "team")
                     {
-                        //TODO
+                        meta_unit_tiles[tileset.getFirstGID() + tile.ID].team = property.getStringValue() == "none"
+                                ? -1
+                                : std::stoi(property.getStringValue());
                     }
                     else if (p_name == "unit")
                     {
+                        meta_unit_tiles[tileset.getFirstGID() + tile.ID].name = UnitConfigs::mapped_unit_name.at(
+                            property.getStringValue());
+
                         //TODO
                     }
                     else if (p_name == "type")
@@ -208,34 +217,6 @@ void MapConfig::loadMap(const std::string& path)
         // std::cout << "Map has " << layers.size() << " layers" << std::endl;
         for (const auto& layer : layers)
         {
-            // if (layer->getType() == tmx::Layer::Type::Group)
-            // {
-            //     qDebug() << "Group";
-            //     std::cout << "Checking sublayers" << std::endl;
-            //     const auto& sublayers = layer->getLayerAs<tmx::LayerGroup>().getLayers();
-            //     std::cout << "LayerGroup has " << sublayers.size() << " layers" << std::endl;
-            //     for (const auto& sublayer : sublayers)
-            //     {
-            //         std::cout << "Found Layer: " << sublayer->getName() << std::endl;
-            //         std::cout << "Sub-layer Type: " << LayerStrings[static_cast<std::int32_t>(sublayer->getType())] <<
-            //             std::endl;
-            //         std::cout << "Sub-layer Class: " << sublayer->getClass() << std::endl;
-            //         std::cout << "Sub-layer Dimensions: " << sublayer->getSize() << std::endl;
-            //         std::cout << "Sub-layer Tint: " << sublayer->getTintColour() << std::endl;
-            //
-            //         if (sublayer->getType() == tmx::Layer::Type::Object)
-            //         {
-            //             std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::ObjectGroup>().
-            //                 getObjects().size() << " objects" << std::endl;
-            //         }
-            //         else if (sublayer->getType() == tmx::Layer::Type::Tile)
-            //         {
-            //             std::cout << sublayer->getName() << " has " << sublayer->getLayerAs<tmx::TileLayer>().getTiles()
-            //                                                                    .size() << " tiles" << std::endl;
-            //         }
-            //     }
-            // }
-
             if (layer->getType() == tmx::Layer::Type::Object)
             {
                 qDebug() << "Object";
@@ -264,7 +245,7 @@ void MapConfig::loadMap(const std::string& path)
             {
                 if (layer->getName() == "Ground")
                 {
-                    parse_layer(tiles, layer, Game::LayerConfig::TILE_GROUND);
+                    parse_layer(tiles, layer, GameConfig::LayerConfig::TILE_GROUND);
                     const auto& tmx_tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
                     MapConfig::world_width = layer->getSize().x;
                     MapConfig::world_height = layer->getSize().y;
@@ -307,18 +288,25 @@ void MapConfig::loadMap(const std::string& path)
                 }
                 else if (layer->getName() == "Items")
                 {
-                    parse_layer(tiles, layer, Game::LayerConfig::TILE_ITEM);
+                    parse_layer(tiles, layer, GameConfig::LayerConfig::TILE_ITEM);
                 }
                 else if (layer->getName() == "Units")
                 {
                     std::vector<tmx::TileLayer::Tile> tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
 
+                    int index = 0;
                     for (auto tile : tiles)
                     {
-                        if (tile.ID != 0)
-                            qDebug() << tile.ID;
+                        int x = index % world_width;
+                        int y = world_height - index / world_width - 1;
+                        index++;
+
+                        if (tile.ID == 0)continue;
+                        game->units.push_back(new Unit(
+                            game, UnitConfigs::meta_units.at(meta_unit_tiles.at(tile.ID).name),
+                            meta_unit_tiles.at(tile.ID).team, QVector3D(x, y, GameConfig::LayerConfig::OBJECT_GROUND),
+                            0));
                     }
-                    qDebug() << "Units";
                 }
             }
             // const auto& properties = layer->getProperties();
@@ -334,4 +322,14 @@ void MapConfig::loadMap(const std::string& path)
     {
         std::cout << "Failed loading map" << std::endl;
     }
+}
+
+void MapConfig::init(Game* game, const std::string& path)
+{
+    this->game = game;
+    loadMap(path);
+}
+QVector3D MapConfig::pixel_to_world(float pix_x,float pix_y)
+{
+    return QVector3D(pix_x/20,world_height-pix_y/20,0);
 }

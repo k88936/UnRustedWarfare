@@ -20,7 +20,7 @@ Effect::Effect(Game* game, MetaEffect* meta, const QVector3D position, const flo
     this->position = position;
     if (meta->draw_under_units)
     {
-        this->position.setZ(Game::LayerConfig::BOTTOM_EFFECT_OFFSET);
+        this->position.setZ(GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     }
     if (meta->attached_to_unit)
     {
