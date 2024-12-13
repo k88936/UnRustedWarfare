@@ -7,6 +7,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+    add_definitions(-DDEBUG)
+endif ()
+
 find_package(Qt6 COMPONENTS
         Core
         Gui
@@ -59,7 +63,7 @@ add_executable(untitled1
         src/game/config/UnitConfigs.cpp
         src/game/config/MapConfig.cpp
         src/game/config/GameConfig.cpp
-        src/game/config/GameConfig.h
+        src/include/GameConfig.h
         src/game/Logic.cpp
 
         src/game/Tile.cpp
@@ -101,7 +105,6 @@ add_executable(untitled1
         src/ui/include/dialog_widget.h
         src/ui/dialog_widget.ui
         src/game/Trigger.cpp
-        src/game/Trigger.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

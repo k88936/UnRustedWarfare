@@ -13,7 +13,7 @@
 #include "battlefieldwidget.h"
 #include "GridsManager.h"
 #include "MapConfig.h"
-#include "../game/config/GameConfig.h"
+#include "GameConfig.h"
 #include "structures/sound_event.h"
 
 
@@ -25,8 +25,6 @@ class Unit;
 class Game
 {
 public:
-
-
     class TimerDoer : public QObject
     {
         QOBJECT_H
@@ -43,15 +41,21 @@ public:
         void timerEvent(QTimerEvent* event) override
         {
             game->step();
-            // game->delta_time = start.msecsTo(QTime::currentTime()) * GameConfig::game_speed / 1000.0+0.00001;
-            game->delta_time=0.01;
+
+#ifdef DEBUG
+            game->delta_time = 0.01;
+#else
+            game->delta_time = start.msecsTo(QTime::currentTime()) * GameConfig::game_speed / 1000.0+0.00001;
+#endif
             start = QTime::currentTime();
+            game->time += game->delta_time;
         };
     };
 
     explicit Game(BattlefieldWidget* battlefield_widget, const std::string& world);
     ~Game();
 
+    float time = 0;
     std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
     std::vector<QVector3D> line_draw_config;
     std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
@@ -66,7 +70,7 @@ public:
     std::unordered_map<std::string, std::vector<Drawable*>> var_transparent_image_draw_config_map;
     std::vector<Projectile*> projectiles;
     std::vector<Effect*> effects;
-    std::set<Flock*> flocks;
+    std::vector<Flock*> flocks;
     BattlefieldWidget* battle_field_widget;
     void add_projectile(Projectile* projectile);
     void add_effect(Effect* effect);
@@ -76,6 +80,7 @@ public:
     void pause();
     void run();
     void stop();
+    void run_map_triggers();
     void step();
 };
 

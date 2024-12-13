@@ -8,7 +8,7 @@
 
 #include "main_window.h"
 #include "ui_settings_widget.h"
-#include "../game/config/GameConfig.h"
+#include "../include/GameConfig.h"
 
 
 settings_widget::settings_widget(main_window* parent) :

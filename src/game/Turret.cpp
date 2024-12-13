@@ -228,7 +228,7 @@ bool Turret::on_overlay(Object* obj, QVector3D position_diff)
 {
     if (!has_target)
     {
-        if (Unit* unit = dynamic_cast<Unit*>(obj))
+        if (const auto unit = dynamic_cast<Unit*>(obj))
         {
             if (unit->team != this->team)
             {

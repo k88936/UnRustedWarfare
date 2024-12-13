@@ -69,7 +69,7 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
         {
             //aoe damage = - center_damage/r**2 +center_damage
             const float factor = -meta->areaDamage / (meta->areaRadius * meta->areaRadius);
-            for (const auto grids = game->grids_manager.scan(position, meta->areaRadius); const auto grids_across :
+            for (const auto grids = game->grids_manager.scan_grids(position, meta->areaRadius); const auto grids_across :
                  grids)
             {
                 for (const auto object : grids_across->objects) //has bug actually

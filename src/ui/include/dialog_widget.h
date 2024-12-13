@@ -18,8 +18,6 @@ Q_OBJECT
 public:
     explicit dialog_widget(QWidget *parent = nullptr);
     ~dialog_widget() override;
-
-private:
     Ui::dialog_widget *ui;
 };
 

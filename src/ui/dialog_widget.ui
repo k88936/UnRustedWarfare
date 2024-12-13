@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>939</width>
+    <width>800</width>
     <height>222</height>
    </rect>
   </property>
@@ -486,6 +486,9 @@ QSlider::sub-page {
        </item>
        <item>
         <widget class="QPushButton" name="dialog_button_no">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
          <property name="minimumSize">
           <size>
            <width>200</width>

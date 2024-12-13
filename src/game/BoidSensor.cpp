@@ -52,6 +52,8 @@ void BoidSensor::step()
             flow_field_expected = target_offset - boid->position;
         }
         else
+        {
+            // flow_field_expected=flock->flow_field->get_vector(boid->position.x()+0.5, boid->position.y()+0.5);
             flow_field_expected = QVector3D(
                 (flock->flow_field->get_vector(x_floor, y_floor).x() + flock->flow_field->
                                                                               get_vector(x_floor, y_ceil).x()) * (x_ceil
@@ -75,6 +77,7 @@ void BoidSensor::step()
                     y() - y_floor),
                 0
             );
+        }
 
 
         // qDebug()<<flow_field_expected.lengthSquared();

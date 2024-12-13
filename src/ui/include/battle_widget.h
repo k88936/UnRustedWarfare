@@ -10,14 +10,14 @@
 #include <set>
 #include <Unit.h>
 
-#include "suspend_menu_widget.h"
-#include "welcome_widget.h"
-
-
+class main_window;
+class suspend_menu_widget;
+class dialog_widget;
 QT_BEGIN_NAMESPACE
 
 namespace Ui
 {
+    class dialog_widget;
     class battle_widget;
 }
 
@@ -29,6 +29,7 @@ class battle_widget : public BattlefieldWidget
 
 public:
     suspend_menu_widget* suspend_menu;
+    dialog_widget* dialog_w;
     explicit battle_widget(main_window* parent);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
@@ -39,6 +40,8 @@ public:
     void wheelEvent(QWheelEvent* event) override;
     void keyReleaseEvent(QKeyEvent* event) override;
     void resizeEvent(QResizeEvent* event) override;
+    void dialog(const std::string& string) override;
+    void info(const std::string& string) override;
     void render() override;
     std::set<Unit*> units_selected;
     QTime m_press_time;

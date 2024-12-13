@@ -18,12 +18,14 @@ public:
     using QOpenGLWidget::QOpenGLWidget;
     QVector3D screen_to_world(const QPointF& screen_pos) const;
     QVector3D screen_relative_to_world_relative(const QPointF& screen_relative) const;
+    virtual void dialog(const std::string& string);
+    virtual void info(const std::string& string);
     BattlefieldWidget(QWidget* parent);
     ~BattlefieldWidget() override;
     QVector3D camera_pos = QVector3D(50, 50, 5);
     float camera_zoom = 0.05;
     void update_camera();
-    virtual void  render() ;
+    virtual void render();
     Game* game;
 
 protected:

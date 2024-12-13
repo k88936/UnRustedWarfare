@@ -145,6 +145,12 @@ void Game::run()
     timer.start(0, timer_doer);
 }
 
+void Game::run_map_triggers()
+{
+    for (auto& map_event : map_config.map_events) map_event.second->update();
+    for (auto& map_action : map_config.map_actions) map_action->update(map_config.map_events);
+}
+
 void Game::step()
 {
     clean();
@@ -177,6 +183,7 @@ void Game::step()
     {
         e->after();
     }
+    run_map_triggers();
     audio_manager.play(battle_field_widget->camera_pos);
     battle_field_widget->render();
 }

@@ -156,3 +156,10 @@ QVector3D BattlefieldWidget::screen_relative_to_world_relative(const QPointF& sc
 {
     return QVector3D(screen_relative.x() * camera_zoom, -screen_relative.y() * camera_zoom, 0);
 }
+
+void BattlefieldWidget::dialog(const std::string& string)
+{
+}
+void BattlefieldWidget::info(const std::string& string)
+{
+}

@@ -151,14 +151,14 @@ void FlowField::flow(Game* game, PathNode* end)
     PathNode* cur = end;
     while (true)
     {
-        expand(game, cur->x - 1, cur->y - 1, cur, sqrt2);
+        // expand(game, cur->x - 1, cur->y - 1, cur, sqrt2);
         expand(game, cur->x - 1, cur->y, cur, 1);
-        expand(game, cur->x - 1, cur->y + 1, cur, sqrt2);
+        // expand(game, cur->x - 1, cur->y + 1, cur, sqrt2);
         expand(game, cur->x, cur->y + 1, cur, 1);
         expand(game, cur->x, cur->y - 1, cur, 1);
-        expand(game, cur->x + 1, cur->y - 1, cur, sqrt2);
+        // expand(game, cur->x + 1, cur->y - 1, cur, sqrt2);
         expand(game, cur->x + 1, cur->y, cur, 1);
-        expand(game, cur->x + 1, cur->y + 1, cur, sqrt2);
+        // expand(game, cur->x + 1, cur->y + 1, cur, sqrt2);
         if (open_set_.empty())
         {
             break;

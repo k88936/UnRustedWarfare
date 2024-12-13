@@ -6,7 +6,6 @@
 #include <QDoubleSpinBox>
 
 #include "battle_widget.h"
-
 #include <Game.h>
 #include <qdatetime.h>
 #include <QMouseEvent>
@@ -16,6 +15,9 @@
 #include "BoidSensor.h"
 #include "PathFind.h"
 #include <QStyle>
+#include <ui_dialog_widget.h>
+
+#include "dialog_widget.h"
 #include "ui_suspend_menu_widget.h"
 
 #include "Flock.h"
@@ -56,6 +58,14 @@ battle_widget::battle_widget(main_window* parent) :
         auto widget = new battle_widget(parent);
         auto game = new Game(widget, "../maps/3.tmx");
         parent->widget_change(widget);
+    });
+
+    dialog_w = new dialog_widget(this);
+    dialog_w->setVisible(false);
+    connect(dialog_w->ui->dialog_button_yes, &QPushButton::clicked, this, [&]()
+    {
+        dialog_w->setVisible(false);
+        game->run();
     });
     // auto x=new QDoubleSpinBox(this);
     // x->setDecimals(16);
@@ -243,7 +253,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     {
                         game->ui_image_draw_config_map["_arrow_highlight"].push_back(move_flag);
                     }
-                    game->flocks.insert(flock);
+                    game->flocks.push_back(flock);
 
 
                     // // visualize field
@@ -306,6 +316,19 @@ void battle_widget::resizeEvent(QResizeEvent* event)
     suspend_menu->setGeometry((this->width() - suspend_menu->width()) / 2,
                               (this->height() - suspend_menu->height()) / 2, suspend_menu->width(),
                               suspend_menu->height());
+    dialog_w->setGeometry((this->width()-dialog_w->width())/2,(this->height()-dialog_w->height())/2,dialog_w->width(),dialog_w->height());
+}
+
+void battle_widget::dialog(const std::string& string)
+{
+    BattlefieldWidget::dialog(string);
+    dialog_w->ui->info_label->setText(QString::fromStdString(string));
+    dialog_w->setVisible(true);
+}
+
+void battle_widget::info(const std::string& string)
+{
+    ui->info_label->setText(string.c_str());
 }
 
 void battle_widget::render()
