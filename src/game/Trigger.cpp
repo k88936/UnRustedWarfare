@@ -23,6 +23,10 @@ void Trigger::Event::update()
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
+    if (max_repeat != -1 && has_repeated >= max_repeat)
+    {
+        return;
+    }
     if (game->time - last_active_time < delay)
     {
         return;
@@ -31,6 +35,7 @@ void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event
     if (event_map.at(activeBy)->result)
     {
         last_active_time = game->time;
+        has_repeated++;
         execute();
     }
 }
@@ -61,6 +66,11 @@ bool Trigger::UnitDetect::detect()
     }
 
     return true;
+}
+
+bool Trigger::ReachTime::detect()
+{
+    return game->time >= time;
 }
 
 Trigger::UnitMove::UnitMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
@@ -99,14 +109,33 @@ void Trigger::UnitMove::execute()
     }
 }
 
-Trigger::UnitAdd::UnitAdd(Game* game, const QVector3D pos):Action(game)
+Trigger::UnitRemove::UnitRemove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
 {
-    posLB=pos;
+    this->posLB = posLB;
+    this->posRT = posRT;
+}
+
+void Trigger::UnitRemove::execute()
+{
+    auto units = game->grids_manager.scan_units(posLB, posRT);
+    for (auto unit : units)
+    {
+        if (require_team != 5211324 && unit->team != require_team)
+        {
+            continue;
+        }
+        unit->marked_for_delete = true;
+    }
+}
+
+Trigger::UnitAdd::UnitAdd(Game* game, const QVector3D pos): Action(game)
+{
+    posLB = pos;
 }
 
 void Trigger::UnitAdd::execute()
 {
-    for (const auto & unit : units)
+    for (const auto& unit : units)
     {
         game->units.push_back(new Unit(game, UnitConfigs::meta_units.at(unit), team, posLB, 0));
     }

@@ -85,11 +85,11 @@ private:
 void UnitConfigs::load_ini(const QString& path)
 {
     constexpr float designed_FPS = 50;
-    const float total_scale = 0.67;
-    const float scale_rw2sw = total_scale * 1.0 / 40;
+    const float total_scale = 0.33;
+    const float scale_rw2sw = total_scale * 1.0 / 20;
     const float turnSpeed_rw2sw = designed_FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;
-    const float time_rw2sw = 1.0f / designed_FPS;
+    const float time_rw2sw = 0.5f / designed_FPS;
     const float animate_delay_rw2sw = 1;
     const float turret_turn_speed_factor = 2.5;
     // int index = 0;
@@ -434,7 +434,7 @@ void UnitConfigs::scan_dir(QString path)
             QString file_name = iter.fileInfo().fileName();
             if (file_name.endsWith(".ini"))
             {
-                load_ini(path + file_name);
+                load_ini(iter.filePath());
             }
             else if (file_name.endsWith(".png"))
             {
@@ -448,7 +448,8 @@ void UnitConfigs::scan_dir(QString path)
             }
             else if (file_name.endsWith(".ogg"))
             {
-                throw std::runtime_error("ogg not supported");
+                // throw std::runtime_error("ogg not supported");
+                qDebug()<<"ogg not supported: "<< iter.filePath();
             }
         }
     }
@@ -456,15 +457,16 @@ void UnitConfigs::scan_dir(QString path)
 
 void UnitConfigs::init()
 {
-    scan_dir("../M2A3/");
-    scan_dir("../sound/");
+    scan_dir("../resources/units/");
+    scan_dir("../resources/assets/sound/");
+    scan_dir("../resources/assets/drawables/");
     init_units_map();
 }
 
 void UnitConfigs::init_units_map()
 {
     pugi::xml_document doc;
-    pugi::xml_parse_result result = doc.load_file("../maps/units_map.xml");
+    pugi::xml_parse_result result = doc.load_file("../resources/maps/units_map.xml");
 
     if (!result)
     {

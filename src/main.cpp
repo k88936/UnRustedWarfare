@@ -66,16 +66,17 @@ int main(int argc, char* argv[])
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
     audio->setVolume(0.1);
-    do_work(player, "../music/MW3/");
+    auto path = "../resources/assets/music/MW3/";
+    do_work(player, path);
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)
     {
         if (status == QMediaPlayer::EndOfMedia)
         {
-            do_work(player, "../music/starting/");
+            do_work(player, path);
         }
         else if (status == QMediaPlayer::InvalidMedia)
         {
-            do_work(player, "../music/starting/");
+            do_work(player, path);
         }
     });
 

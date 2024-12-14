@@ -44,6 +44,7 @@ TileAttribute*& MapConfig::get_tile_attribute(const int x, const int y)
 {
     return tile_attributes.at(x + 1).at(y + 1);
 }
+
 QVector3D MapConfig::vector_in_which(const QVector3D& v)
 {
     return QVector3D(x_in_which(v.x()), y_in_which(v.y()), v.z());
@@ -296,6 +297,26 @@ void MapConfig::loadMap(const std::string& path)
                             }
                         }
                     }
+                    else if (type == "reachTime")
+                    {
+                        auto event = new Trigger::ReachTime(game);
+                        map_events[name] = event;
+                        for (const auto& prop : properties)
+                        {
+                            if (prop.getName() == "time")
+                            {
+                                event->time = std::stof(prop.getStringValue()) / 1000;
+                            }
+                            else if (prop.getName() == "id")
+                            {
+                                solve_event_only_name[prop.getStringValue()] = name;
+                            }
+                            else
+                            {
+                                qDebug() << "unknown property: " << prop.getName();
+                            }
+                        }
+                    }
                     else if (type == "move")
                     {
                         Trigger::UnitDetect* event = nullptr;
@@ -329,10 +350,7 @@ void MapConfig::loadMap(const std::string& path)
                                 event->require_team = std::stoi(prop.getStringValue());
                                 action->require_team = std::stoi(prop.getStringValue());
                             }
-                            else if (prop.getName() == "target")
-                            {
-                                action->target = prop.getStringValue();
-                            }
+
                             else if (prop.getName() == "minUnits")
                             {
                                 if (event == nullptr)
@@ -356,6 +374,31 @@ void MapConfig::loadMap(const std::string& path)
                             if (event != nullptr)
                             {
                                 map_events[name] = event;
+                            }
+                        }
+                    }
+                    else if (type == "unitRemove")
+                    {
+                        auto action = new Trigger::UnitRemove(game, posA, posB);
+                        map_actions.push_back(action);
+                        action->activeBy = name;
+                        for (const auto& prop : properties)
+                        {
+                            if (prop.getName() == "activeBy")
+                            {
+                                action->activeBy = prop.getStringValue();
+                            }
+                            else if (prop.getName() == "delay")
+                            {
+                                action->delay = std::stof(prop.getStringValue()) / 1000;
+                            }
+                            else if (prop.getName() == "team")
+                            {
+                                action->require_team = std::stoi(prop.getStringValue());
+                            }
+                            else
+                            {
+                                qDebug() << "unknown property: " << prop.getName();
                             }
                         }
                     }

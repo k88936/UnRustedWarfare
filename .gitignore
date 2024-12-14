@@ -1,7 +1,7 @@
 venv
 cmake-build*
 .idea
-assets
+resources/assets
 download
 CMakeLists.txt.user*
 CMakeLists.txt.user

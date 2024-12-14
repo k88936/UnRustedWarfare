@@ -43,6 +43,13 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): war
     units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
     units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
+
+    float x=2;
+    for (auto meta_unit : UnitConfigs::meta_units)
+    {
+        units.push_back(new Unit(this, meta_unit.second, 0, QVector3D(x+=3, 30, 0), 0));
+    }
+
     // for (int i = 30; i < 32; ++i)
     // {
     //     for (int j = 30; j < 32; ++j)

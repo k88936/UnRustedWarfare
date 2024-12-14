@@ -52,6 +52,9 @@ namespace Trigger
         float delay = 0;
         float last_active_time = 0;
 
+        int max_repeat = -1; //-1 for infinite
+        int has_repeated = 0;
+
         explicit Action(Game* game): game(game)
         {
         };
@@ -78,6 +81,18 @@ namespace Trigger
         };
     };
 
+    class ReachTime : public Trigger::Event
+    {
+    public:
+        float time = 0;
+
+        explicit ReachTime(Game* game): Event(game)
+        {
+        }
+
+        bool detect() override;
+    };
+
     class UnitMove : public Trigger::Action
     {
     public:
@@ -85,6 +100,14 @@ namespace Trigger
         std::string target;
         int require_team = 5211324;
         UnitMove(Game* game, QVector3D posLB, QVector3D posRT);
+        void execute() override;
+    };
+
+    class UnitRemove : public Trigger::Action
+    {
+    public:
+        int require_team = 5211324;
+        UnitRemove(Game* game, QVector3D posLB, QVector3D posRT);
         void execute() override;
     };
 
