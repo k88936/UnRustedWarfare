@@ -29,7 +29,6 @@ public:
     float range=-1;
     float range_min=-1;
     float delay;
-    bool invisible=false;
     float turn_speed_acceleration;
     std::string attached_to;
     std::vector<MetaTurret*> attached_turrets=std::vector<MetaTurret*>();
@@ -39,7 +38,8 @@ public:
     std::string projectile;
     bool slave=false;
     std::vector<std::string> shoot_flame;
-   void init() override;
+    bool invisible=false;
+    void init() override;
 };
 
 

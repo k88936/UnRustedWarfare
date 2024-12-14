@@ -40,14 +40,14 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): war
     //         Game::units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 0, QVector3D(i, j, 0), i + j));
     //     }
     // }
-    units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
-    units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
+    // units.push_back(new Unit(this, UnitConfigs::meta_units.at("m2a3"), 0, QVector3D(32, 43, 0), -20));
+    // units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
 
-    float x=2;
+    float x=1;
     for (auto meta_unit : UnitConfigs::meta_units)
     {
-        units.push_back(new Unit(this, meta_unit.second, 0, QVector3D(x+=3, 30, 0), 0));
+        units.push_back(new Unit(this, meta_unit.second, 0, QVector3D(x+=1, 30, 0), 0));
     }
 
     // for (int i = 30; i < 32; ++i)

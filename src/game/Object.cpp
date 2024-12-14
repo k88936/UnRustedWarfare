@@ -15,6 +15,7 @@
 
 Object::Object(Game* game, const float radius, const float mass, const float inertia): game(game), team(-1)
 {
+
     this->mass = mass;
     this->inertia = inertia;
     this->radius = radius;
@@ -24,7 +25,6 @@ Object::Object(Game* game, const float radius, const float mass, const float ine
 
 void Object::before()
 {
-
     this->checked = false;
     this->linear_forces *= 0;
     this->angular_forces = 0;
@@ -35,7 +35,6 @@ void Object::before()
 
 void Object::step()
 {
-
     // in_sight=game->warfare_fog_manager.in_light(this);
 
     this->checked = true;
@@ -60,6 +59,16 @@ void Object::step()
             }
         }
     }
+
+#ifdef DEBUG
+    assert(!std::isnan(linear_forces.x()));
+    assert(!std::isnan(angular_forces));
+    assert(!std::isnan(angular_velocity));
+    assert(!std::isnan(rotation));
+    assert(!std::isnan(linear_forces.y()));
+    assert(!std::isnan(linear_velocity.x()));
+    assert(!std::isnan(linear_velocity.y()));
+#endif
 }
 
 
@@ -67,7 +76,6 @@ void Object::after()
 {
     // linearVelocity*=(1-linearDamping);
     // angularVelocity*=(1-angularDamping);
-
 
     linear_velocity += (linear_forces) * game->delta_time * inv_mass;
 
@@ -104,6 +112,16 @@ void Object::after()
     utils::angle_ensure(rotation);
     // addRotation(angularVelocity * Game::deltaTime);
 
+
+#ifdef DEBUG
+    assert(!std::isnan(linear_forces.x()));
+    assert(!std::isnan(angular_forces));
+    assert(!std::isnan(angular_velocity));
+    assert(!std::isnan(rotation));
+    assert(!std::isnan(linear_forces.y()));
+    assert(!std::isnan(linear_velocity.x()));
+    assert(!std::isnan(linear_velocity.y()));
+#endif
 
     // qDebug()<<"object::after";
     // qDebug()<<linearForces;
@@ -146,6 +164,10 @@ void Object::solve_collision(Object* obj1, Object* obj2, const QVector3D positio
     //  }
     const float torqueBefore = 256 * force * obj1->friction * obj2->friction;
     // qDebug()<<torqueBefore;
+#ifdef DEBUG
+    assert(!std::isnan(force));
+    assert(!std::isnan(torqueBefore));
+#endif
     obj1->on_collision(-force3D, torqueBefore * obj1->radius, obj2);
     obj2->on_collision(force3D, -torqueBefore * obj2->radius, obj1);
     // qDebug()<<"hit";

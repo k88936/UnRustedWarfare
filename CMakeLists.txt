@@ -40,6 +40,8 @@ add_executable(untitled1
         src/game/Sensor.cpp
         src/game/MetaDrawable.cpp
         src/game/Effect.cpp
+        src/game/Arm.cpp
+        src/game/MetaArm.cpp
 
 
         src/tmxlite/FreeFuncs.cpp
@@ -106,11 +108,8 @@ add_executable(untitled1
         src/ui/dialog_widget.ui
         src/game/Trigger.cpp
         src/game/Controller.cpp
-        src/game/Controller.h
         src/game/DirectPathFollowController.cpp
-        src/game/DirectPathFollowController.h
         src/game/WarfareFogManager.cpp
-        src/game/WarfareFogManager.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

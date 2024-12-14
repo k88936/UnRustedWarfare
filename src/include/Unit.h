@@ -9,6 +9,7 @@
 #include "Turret.h"
 
 
+class Arm;
 class Controller;
 class BoidSensor;
 
@@ -16,19 +17,20 @@ class Unit : public Attachable, public Drawable, public Object
 {
 public:
     Unit(Game* game, MetaUnit* meta, int team, QVector3D position, float rotation);
-    ~Unit() ;
+    ~Unit();
     void updateSlots(QMatrix4x4 transform) override;
     MetaUnit* meta = nullptr;
     Drawable* shadow = new Drawable();
-    Sensor* sight=nullptr;
+    Sensor* sight = nullptr;
     float hp;
     bool isAttached = false;
-    Controller* controller=nullptr;
-    bool is_driving=false;
+    Controller* controller = nullptr;
+    bool is_driving = false;
     void attack(const QVector3D& target);
     void draw(Game* game) override;
     void drive(const QVector3D& force, float torque);
     std::vector<Turret*> turrets;
+    std::vector<Arm*> arms;
     std::vector<Object*> watchers;
 
     void before() override;

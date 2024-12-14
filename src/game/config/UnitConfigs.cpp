@@ -10,9 +10,9 @@
 #include "UnitConfigs.h"
 
 #include <iostream>
-#include <qimage.h>
 
 #include "Game.h"
+#include "MetaArm.h"
 #include "Unit.h"
 #include "RenderEngine.h"
 #include "utils/pugixml.hpp"
@@ -95,24 +95,34 @@ void UnitConfigs::load_ini(const QString& path)
     // int index = 0;
     auto* unit = new MetaUnit();
     std::unordered_map<std::string, MetaTurret*> turret_data;
+    std::unordered_map<std::string, MetaArm*> arm_data;
     IniParser::IniData data = IniParser::parse(path);
+#ifdef DEBUG
+    assert(data.size()>0);
+#endif
+
     for (const auto&
          [section_id, snd] : data)
     {
-        if (section_id.starts_with("turret"))
+        if (section_id.starts_with("turret_"))
         {
-            auto* turret = new MetaTurret();
+            auto turret = new MetaTurret();
             turret_data[section_id.substr(7)] = turret;
         }
-        else if (section_id.starts_with("projectile"))
+        else if (section_id.starts_with("projectile_"))
         {
-            auto* projectile = new MetaProjectiles();
+            auto projectile = new MetaProjectiles();
             meta_projectiles[section_id.substr(11)] = projectile;
         }
-        else if (section_id.starts_with("effect"))
+        else if (section_id.starts_with("effect_"))
         {
-            auto* effect = new MetaEffect();
+            auto effect = new MetaEffect();
             meta_effects["CUSTOM:" + section_id.substr(7)] = effect;
+        }
+        else if (section_id.starts_with("arm_"))
+        {
+            auto arm = new MetaArm();
+            arm_data[section_id.substr(4)] = arm;
         }
     }
     for (const auto& [section_id, content] : data)
@@ -124,7 +134,7 @@ void UnitConfigs::load_ini(const QString& path)
                 if (fst == "name")unit->name = snd;
                 else if (fst == "displayText")unit->displayText = snd;
                 else if (fst == "displayDescription")unit->display_description = snd;
-                else if (fst == "price")unit->price = std::stoi(snd);
+                    // else if (fst == "price")unit->price = std::stoi(snd);
                 else if (fst == "maxHp")unit->max_hp = std::stof(snd);
                 else if (fst == "techLevel")unit->tech_level = std::stoi(snd);
                 else if (fst == "buildSpeed")unit->build_speed = std::stof(snd);
@@ -133,14 +143,15 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "mass")unit->mass = std::stof(snd);
                 else if (fst == "radius")unit->radius = std::stof(snd) * scale_rw2sw;
                 else if (fst == "displayRadius")unit->display_radius = std::stof(snd) * scale_rw2sw;
-                else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd);//NO FACTOR HERE!!
+                else if (fst == "fogOfWarSightRange")unit->fog_of_war_sight_range = std::stof(snd); //NO FACTOR HERE!!
                 else if (fst == "transportSlotsNeeded")unit->transport_slots_needed = std::stoi(snd);
                 else if (fst == "tags")unit->tags = utils::split(snd, ',');
                 else if (fst == "soundOnNewSelection")
                     unit->sound_on_new_selection = utils::without_extend(
                         utils::split(snd, ','));
-                else if (fst == "soundOnMoveOrder")unit->sound_on_move_order = utils::without_extend(
-                    utils::split(snd, ','));
+                else if (fst == "soundOnMoveOrder")
+                    unit->sound_on_move_order = utils::without_extend(
+                        utils::split(snd, ','));
                 else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(utils::split(snd, ','));
@@ -158,6 +169,11 @@ void UnitConfigs::load_ini(const QString& path)
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
                 }
             }
+#ifdef DEBUG
+            assert(unit->mass>0);
+            assert(!unit->name.empty());
+            // assert(unit->radius>0);
+#endif
         }
         else if (section_id == "graphics")
         {
@@ -172,6 +188,7 @@ void UnitConfigs::load_ini(const QString& path)
                     unit->image = snd;
                 }
                 else if (fst == "image_wreak")unit->image_wreak = snd;
+                else if (fst == "image_turret")unit->image_turret = snd;
                 else if (fst == "scale")unit->scale = std::stof(snd) * scale_rw2sw;
                 else if (fst == "scaleImagesTo")unit->scale *= std::stof(snd) * scale_rw2sw;
                     //
@@ -236,9 +253,13 @@ void UnitConfigs::load_ini(const QString& path)
         }
         else
         {
-            if (section_id.starts_with("turret"))
+            if (section_id.starts_with("turret_"))
             {
                 auto* turret = turret_data[section_id.substr(7)];
+                if (unit->image_turret != "NONE")
+                {
+                    turret->image = unit->image_turret;
+                }
                 turret->turn_speed = unit->turret_turn_speed;
                 turret->delay = unit->shoot_delay;
                 turret->scale = unit->scaleTurret;
@@ -320,7 +341,7 @@ void UnitConfigs::load_ini(const QString& path)
                 }
                 turret->init();
             }
-            else if (section_id.starts_with("projectile"))
+            else if (section_id.starts_with("projectile_"))
             {
                 auto* projectile = meta_projectiles[section_id.substr(11)];
                 for (const auto& [fst, snd] : content)
@@ -337,7 +358,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "lightColor")projectile->lightColor = utils::parse_color(snd);
                     else if (fst == "explodeEffect")
                     {
-                       utils:: parse_item_list(snd, projectile->explode_effect);
+                        utils::parse_item_list(snd, projectile->explode_effect);
                     }
                     else if (fst == "life")projectile->life = std::stof(snd) * time_rw2sw;
                     else if (fst == "speed")projectile->speed = std::stof(snd) * speed_rw2sw;
@@ -351,7 +372,7 @@ void UnitConfigs::load_ini(const QString& path)
                 images[projectile->image].is_raw_size = true;
                 projectile->init();
             }
-            else if (section_id.starts_with("effect"))
+            else if (section_id.starts_with("effect_"))
             {
                 auto* effect = meta_effects["CUSTOM:" + section_id.substr(7)];
                 for (const auto& [fst, snd] : content)
@@ -400,8 +421,13 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "alsoPlaySound")
                     {
                         auto name_and_volume = utils::split(snd, ':');
-                        effect->also_play_sound = utils::without_extend(name_and_volume[0]);
-                        effect->also_play_sound_volume = std::stof(name_and_volume[1]);
+                        effect->also_play_sound = utils::without_extend(name_and_volume.at(0));
+                        if (name_and_volume.size() == 2)
+                            effect->also_play_sound_volume = std::stof(name_and_volume.at(1));
+                        else
+                        {
+                            effect->also_play_sound_volume = 1;
+                        }
                     }
                     else
                     {
@@ -412,6 +438,26 @@ void UnitConfigs::load_ini(const QString& path)
                 images[effect->image].frames = effect->total_frames;
                 effect->init();
             }
+            else if (section_id.starts_with("arm_"))
+            {
+                auto arm = arm_data[section_id.substr(4)];
+                // arm->scale = 0.1f * scale_rw2sw;
+                for (const auto& [fst, snd] : content)
+                {
+                    if (fst == "x")arm->slot_translation.setY(std::stof(snd) * scale_rw2sw);
+                    else if (fst == "y")arm->slot_translation.setX(std::stof(snd) * scale_rw2sw);
+                    else if (fst == "spinRate")arm->spin_speed = std::stof(snd) * turnSpeed_rw2sw;
+                    else if (fst == "image_end")arm->image = snd;
+                    else
+                    {
+                        qDebug() << "missed key:" << fst << "in section:" << section_id;
+                    }
+                }
+                arm->init();
+                unit->attached_arm.push_back(arm);
+                images[arm->image].is_raw_size = true;
+                images[arm->image].scale=0.5;
+            }
             else
             {
                 qDebug() << "missed section:" << section_id;
@@ -419,6 +465,13 @@ void UnitConfigs::load_ini(const QString& path)
         }
     }
 
+#ifdef DEBUG
+    if (unit->name.empty())
+    {
+        qDebug() << path;
+        throw std::runtime_error("null name");
+    };
+#endif
     meta_units[unit->name] = unit;
     unit->init();
 }
@@ -436,7 +489,7 @@ void UnitConfigs::scan_dir(QString path)
             {
                 load_ini(iter.filePath());
             }
-            else if (file_name.endsWith(".png"))
+            else if (file_name.endsWith(".png") || file_name.endsWith(".gif"))
             {
                 // qDebug() << iter.filePath();
                 // images[file_name.toStdString()].image = std::move(img);
@@ -449,7 +502,7 @@ void UnitConfigs::scan_dir(QString path)
             else if (file_name.endsWith(".ogg"))
             {
                 // throw std::runtime_error("ogg not supported");
-                qDebug()<<"ogg not supported: "<< iter.filePath();
+                qDebug() << "ogg not supported: " << iter.filePath();
             }
         }
     }

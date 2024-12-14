@@ -85,10 +85,6 @@ void RenderEngine::resister_texture(const std::string& id, const MetaImage& meta
     {
         return;
     }
-    if (metaImage.image.isNull())
-    {
-        throw std::runtime_error("image is null");
-    }
     QOpenGLVertexArrayObject* vao;
     QOpenGLTexture* texture;
     for (int i = 0; i < metaImage.frames; ++i)

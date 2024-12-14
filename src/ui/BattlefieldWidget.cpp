@@ -66,6 +66,9 @@ void BattlefieldWidget::update_textures()
     for (const auto& [id, meta_image] : game->map_config.tile_images)
     {
         if (id.empty())continue;
+#ifdef DEBUG
+        assert(!meta_image.image.isNull());
+#endif
         engine->resister_texture(id, meta_image);
     }
 }
@@ -140,7 +143,7 @@ void BattlefieldWidget::paintGL()
     batch_draw(game->const_image_draw_config_map);
     batch_draw(game->var_solid_image_draw_config_map);
 
-    glAlphaFunc(GL_GREATER, 0.1);
+    glAlphaFunc(GL_GREATER, 0);
     batch_draw(game->var_transparent_image_draw_config_map);
     batch_draw(game->ui_image_draw_config_map);
 }

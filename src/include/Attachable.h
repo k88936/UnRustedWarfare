@@ -13,7 +13,7 @@ public:
   explicit Attachable();
   QVector3D slot_translation;
   bool slot_isFixed;
-  bool slot_inVisible;
+  bool slot_inVisible=false;
   virtual  void updateSlots(QMatrix4x4 transform);
   float relative_rotation=0;
   void setRelativeRotation(float rotation);

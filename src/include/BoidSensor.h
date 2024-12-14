@@ -4,11 +4,9 @@
 
 #ifndef BOIDSENSOR_H
 #define BOIDSENSOR_H
+#include "Controller.h"
 #include "Sensor.h"
 #include "Unit.h"
-#include "../game/Controller.h"
-
-
 class BoidSensor : public Sensor, public Controller
 {
 public:

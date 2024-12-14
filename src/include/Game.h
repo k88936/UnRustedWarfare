@@ -14,7 +14,7 @@
 #include "GridsManager.h"
 #include "MapConfig.h"
 #include "GameConfig.h"
-#include "../game/WarfareFogManager.h"
+#include "WarfareFogManager.h"
 #include "structures/sound_event.h"
 
 

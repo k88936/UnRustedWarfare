@@ -3,8 +3,12 @@
 //
 
 #include "Unit.h"
+
+#include "Arm.h"
 #include "BoidSensor.h"
+#include "Controller.h"
 #include "MapConfig.h"
+#include "MetaArm.h"
 #include "Sensor.h"
 #include "SimpleEffect.h"
 #include "UnitConfigs.h"
@@ -15,6 +19,11 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     Drawable(),
     Object(game, meta->radius, meta->mass, meta->mass)
 {
+#ifdef DEBUG
+    assert(mass>0);
+    // assert(radius>0);
+#endif
+
     this->meta = meta;
     this->hp = meta->max_hp;
     this->position = position;
@@ -34,6 +43,14 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
         turrets.push_back(turret);
+    }
+    for (auto attached_arm : meta->attached_arm)
+    {
+        auto arm = new Arm(game, attached_arm);
+        arm->slot_translation = attached_arm->slot_translation;
+        arm->slot_isFixed = attached_arm->slot_isFixed;
+        arm->slot_inVisible = attached_arm->slot_inVisible;
+        arms.push_back(arm);
     }
 }
 
@@ -60,6 +77,16 @@ void Unit::updateSlots(QMatrix4x4 transform)
 {
     transform.rotate(this->relative_rotation, 0, 0, 1);
     for (auto slot : this->turrets)
+    {
+        QMatrix4x4 push_this = transform;
+        push_this.translate(slot->slot_translation);
+        slot->position = transform.map(slot->slot_translation);
+        slot->rotation = slot->relative_rotation + rotation;
+        slot->linear_velocity = this->linear_velocity;
+        utils::angle_ensure(slot->rotation);
+        slot->updateSlots(push_this);
+    }
+    for (auto slot : this->arms)
     {
         QMatrix4x4 push_this = transform;
         push_this.translate(slot->slot_translation);
@@ -225,6 +252,10 @@ void Unit::after()
     for (const auto turret : turrets)
     {
         turret->after();
+    }
+    for (auto arm : arms)
+    {
+        arm->after();
     }
     Object::after();
     const int tile_x = game->map_config.x_in_which(position.x());

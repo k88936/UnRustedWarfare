@@ -6,31 +6,25 @@
 
 #include <QMatrix4x4>
 
-Attachable::Attachable(){
+#include "utils.h"
+
+Attachable::Attachable()
+{
 }
 
-void Attachable::updateSlots(QMatrix4x4 transform) {
+void Attachable::updateSlots(QMatrix4x4 transform)
+{
 }
 
-void Attachable::setRelativeRotation(const float rotation) {
-    this->relative_rotation=rotation;
-    while(this->relative_rotation>=180) {
-        this->relative_rotation-=360;
-    }
-    while(this->relative_rotation<-180) {
-        this->relative_rotation+=360;
-    }
+void Attachable::setRelativeRotation(const float rotation)
+{
+    this->relative_rotation = rotation;
+
+    utils::angle_ensure(this->relative_rotation);
 }
 
-void Attachable::addRelativeRotation(const float rotation) {
-    this->relative_rotation+=rotation;
-    while(this->relative_rotation>=180) {
-        this->relative_rotation-=360;
-    }
-    while(this->relative_rotation<-180) {
-        this->relative_rotation+=360;
-    }
+void Attachable::addRelativeRotation(const float rotation)
+{
+    this->relative_rotation += rotation;
+    utils::angle_ensure(this->relative_rotation);
 }
-
-
-

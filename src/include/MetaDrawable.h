@@ -12,12 +12,10 @@ class MetaDrawable
 {
 public:
     int total_frames = 1;
-    std::string image="NONE";
+    std::string image = "NONE";
     float scale = 1;
-
-   virtual void init();
+    virtual void init();
     std::vector<std::string> texture_frames;
-
 };
 
 
