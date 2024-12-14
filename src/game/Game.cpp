@@ -131,7 +131,8 @@ void Game::clean()
         }
     }
     Game::grids_manager.clear_grids();
-    Game::var_image_draw_config_map.clear();
+    Game::var_solid_image_draw_config_map.clear();
+    Game::var_transparent_image_draw_config_map.clear();
 }
 
 void Game::pause()
@@ -174,7 +175,6 @@ void Game::step()
     }
     for (const auto u : Game::units)
     {
-        warfare_fog_manager.light(u->sight, u->meta->fog_of_war_sight_range);
         u->after();
     }
     for (const auto p : Game::projectiles)

@@ -19,6 +19,7 @@ public:
                const QVector3D& linear_velocity_base);
     void draw(Game* game) override;
     void before() override;
+    void step() override;
     void after() override;
     bool on_overlay(Object* obj, QVector3D positionDiff) override;
 

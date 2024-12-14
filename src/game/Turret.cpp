@@ -163,12 +163,12 @@ void Turret::draw(Game* game)
 
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
     shadow->render_transform.translate(-0.06, -0.06, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 
@@ -190,6 +190,7 @@ void Turret::before()
 
 void Turret::step()
 {
+    in_sight=game->warfare_fog_manager.in_light(this);
     for (auto attached : turrets_attached)
     {
         attached->step();
@@ -217,7 +218,10 @@ void Turret::step()
 void Turret::after()
 {
     Sensor::after();
-    this->draw(game);
+    if (in_sight)
+    {
+        this->draw(game);
+    }
     for (auto attached : turrets_attached)
     {
         attached->after();

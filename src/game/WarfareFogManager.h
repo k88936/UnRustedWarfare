@@ -27,6 +27,7 @@ public:
 
 
     void light(const Object* obj, float range);
+    bool in_light(Object* obj);
     std::vector<Drawable> fogs;
 
     std::vector<std::string> fog_images;

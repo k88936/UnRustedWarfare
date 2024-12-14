@@ -228,7 +228,8 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     (*units_selected.begin())->on_move_order();
                     flock->move(m_press_pos_world);
                     move_flag->render_transform.setToIdentity();
-                    move_flag->render_transform.translate(m_press_pos_world);
+                    move_flag->render_transform.translate(
+                        utils::set_offset_z(m_press_pos_world, GameConfig::LayerConfig::UI));
                     game->ui_image_draw_config_map["_arrow_orange"].clear();
                     game->ui_image_draw_config_map["_arrow_highlight"].clear();
                     if (!enermy_to_select.empty())
@@ -310,7 +311,8 @@ void battle_widget::resizeEvent(QResizeEvent* event)
     suspend_menu->setGeometry((this->width() - suspend_menu->width()) / 2,
                               (this->height() - suspend_menu->height()) / 2, suspend_menu->width(),
                               suspend_menu->height());
-    dialog_w->setGeometry((this->width()-dialog_w->width())/2,(this->height()-dialog_w->height())/2,dialog_w->width(),dialog_w->height());
+    dialog_w->setGeometry((this->width() - dialog_w->width()) / 2, (this->height() - dialog_w->height()) / 2,
+                          dialog_w->width(), dialog_w->height());
 }
 
 void battle_widget::dialog(const std::string& string)
@@ -339,6 +341,7 @@ void battle_widget::render()
     simple_white_pen.setWidth(1);
     for (auto unit : game->units)
     {
+        if (!unit->in_sight)continue;
         if (unit->team == 0)
         {
             painter.setPen(friend_pen);

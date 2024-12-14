@@ -8,7 +8,6 @@
 #include "utils.h"
 
 
-
 Effect::Effect(Game* game): ::Object(game, 1, 1, 1)
 {
 }
@@ -68,7 +67,7 @@ void Effect::draw(Game* game)
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Effect::before()
@@ -79,6 +78,7 @@ void Effect::before()
 
 void Effect::step()
 {
+    in_sight = game->warfare_fog_manager.in_light(this);
 }
 
 void Effect::after()
@@ -114,5 +114,6 @@ void Effect::after()
         }
     }
 
-    draw(game);
+    if (in_sight)
+        draw(game);
 }

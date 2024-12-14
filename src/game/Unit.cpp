@@ -109,13 +109,13 @@ void Unit::draw(Game* game)
 
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 
     shadow->render_transform.translate(-0.06, -0.06, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET);
     shadow->render_transform.rotate(rotation, 0, 0, 1);
     shadow->render_transform.scale(this->scale);
     shadow->color = QVector4D(0, 0, 0, 0.6);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(shadow);
 }
 
 void Unit::drive(const QVector3D& force, const float torque)
@@ -130,6 +130,10 @@ void Unit::before()
 {
     is_driving = false;
     game->grids_manager.update_object(this);
+    if (team == 0 || team == 2)
+    {
+        game->warfare_fog_manager.light(sight, meta->fog_of_war_sight_range);
+    }
     Object::before();
     for (const auto& watcher : watchers)
     {
@@ -148,7 +152,7 @@ void Unit::before()
         updateSlots(transform);
     }
     this->position.setZ(0);
- if (controller)   controller->before();
+    if (controller) controller->before();
     // this->position.setZ(meta->targetHeight);
 }
 
@@ -163,13 +167,15 @@ void Unit::step()
     {
         turret->step();
     }
-   if (controller) controller->step();
+    if (controller) controller->step();
+    in_sight = game->warfare_fog_manager.in_light(this);
 }
 
 void Unit::on_death()
 {
     game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
-                                      utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET), rotation,
+                                      utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET),
+                                      rotation,
                                       scale, linear_velocity,
                                       angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
     for (const auto& effect_on_death : meta->effect_on_death)
@@ -271,8 +277,8 @@ void Unit::after()
     {
         marked_for_delete = true;
     }
-
-    this->draw(game);
+    if (in_sight)
+        this->draw(game);
 }
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)

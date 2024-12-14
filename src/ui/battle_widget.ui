@@ -495,7 +495,7 @@ QSlider::sub-page {
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_7">
        <item>
-        <widget class="QLabel" name="map_view">
+        <widget class="battle_widget::label_with_mouse_event" name="map_view">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
            <horstretch>0</horstretch>
@@ -1291,6 +1291,11 @@ QSlider::sub-page {
    <extends>QWidget</extends>
    <header location="global">battlefieldwidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>battle_widget::label_with_mouse_event</class>
+   <extends>QLabel</extends>
+   <header location="global">battle_widget.h</header>
   </customwidget>
  </customwidgets>
  <tabstops>

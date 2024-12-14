@@ -39,7 +39,7 @@ void WarfareFogManager::light(const Object* obj, const float range)
                 //lightness
                 float light = (
                     // magic * 5+
-                     range * range - (game->map_config.vector_in_which(obj->position) - pos).
+                    range * range - (game->map_config.vector_in_which(obj->position) - pos).
                     lengthSquared());
                 if (light > 0)
                 {
@@ -50,6 +50,13 @@ void WarfareFogManager::light(const Object* obj, const float range)
     }
 }
 
+bool WarfareFogManager::in_light(Object* obj)
+{
+    return light_dense[game->map_config.x_in_which(obj->position.x())][game->map_config.y_in_which(obj->position.y())] >
+        0;
+}
+
+
 void WarfareFogManager::draw()
 {
     for (int i = 0; i < game->map_config.world_width; ++i)
@@ -59,27 +66,27 @@ void WarfareFogManager::draw()
             float dense = light_dense[i][j];
             if (dense <= 0)
             {
-                game->var_image_draw_config_map["_fog_4"].push_back(
+                game->var_transparent_image_draw_config_map["_fog_4"].push_back(
                     &fogs[i * game->map_config.world_height + j]);
             }
             else if (dense < 1 * magic)
             {
-                game->var_image_draw_config_map["_fog_3"].push_back(
+                game->var_transparent_image_draw_config_map["_fog_3"].push_back(
                     &fogs[i * game->map_config.world_height + j]);
             }
             else if (dense < 2 * magic)
             {
-                game->var_image_draw_config_map["_fog_2"].push_back(
+                game->var_transparent_image_draw_config_map["_fog_2"].push_back(
                     &fogs[i * game->map_config.world_height + j]);
             }
             else if (dense < 3 * magic)
             {
-                game->var_image_draw_config_map["_fog_1"].push_back(
+                game->var_transparent_image_draw_config_map["_fog_1"].push_back(
                     &fogs[i * game->map_config.world_height + j]);
             }
             else if (dense < 4 * magic)
             {
-                game->var_image_draw_config_map["_fog_0"].push_back(
+                game->var_transparent_image_draw_config_map["_fog_0"].push_back(
                     &fogs[i * game->map_config.world_height + j]);
             }
         }

@@ -29,13 +29,21 @@ void Projectile::draw(Game* game)
     render_transform.translate(position);
     render_transform.rotate(rotation, 0, 0, 1);
     render_transform.scale(this->scale);
-    game->var_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
+    game->var_transparent_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 }
 
 void Projectile::before()
 {
     game->grids_manager.update_object(this);
+
+    // game->warfare_fog_manager.light(this, 1.5);
     Object::before();
+}
+
+void Projectile::step()
+{
+    in_sight=game->warfare_fog_manager.in_light(this);
+    Object::step();
 }
 
 void Projectile::after()
@@ -47,6 +55,7 @@ void Projectile::after()
     this->has_lived += game->delta_time;
     Object::after();
     // if(!marked_for_delete)
+    if (in_sight)
     draw(game);
 }
 

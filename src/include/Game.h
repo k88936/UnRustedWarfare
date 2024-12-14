@@ -44,7 +44,7 @@ public:
             game->step();
 
 #ifdef DEBUG
-            game->delta_time = 0.01;
+            game->delta_time = 0.04;
 #else
             game->delta_time = start.msecsTo(QTime::currentTime()) * GameConfig::game_speed / 1000.0+0.00001;
 #endif
@@ -57,7 +57,7 @@ public:
     ~Game();
 
     float time = 0;
-    std::unordered_map<std::string, std::vector<Drawable*>> var_image_draw_config_map;
+    std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
     std::vector<QVector3D> line_draw_config;
     std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
     float delta_time = 0;
@@ -69,6 +69,7 @@ public:
     QBasicTimer timer;
     std::unordered_map<std::string, std::vector<Drawable*>> ui_image_draw_config_map;
     QTime start_time = QTime::currentTime();
+    std::unordered_map<std::string, std::vector<Drawable*>> var_transparent_image_draw_config_map;
     std::vector<Projectile*> projectiles;
     std::vector<Effect*> effects;
     std::vector<Flock*> flocks;

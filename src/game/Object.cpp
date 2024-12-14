@@ -24,6 +24,7 @@ Object::Object(Game* game, const float radius, const float mass, const float ine
 
 void Object::before()
 {
+
     this->checked = false;
     this->linear_forces *= 0;
     this->angular_forces = 0;
@@ -34,6 +35,9 @@ void Object::before()
 
 void Object::step()
 {
+
+    // in_sight=game->warfare_fog_manager.in_light(this);
+
     this->checked = true;
     for (auto grid : this->gridsAcross)
     {

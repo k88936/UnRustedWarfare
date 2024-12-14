@@ -28,7 +28,8 @@ public:
         constexpr static float SHELL = 1;
         constexpr static float OBJECT_AIR = 2;
         constexpr static float UPPER_EFFECT_OFFSET = 0.05;
-      constexpr  static   float FOG=2.5;
+        constexpr static float FOG = 2.5;
+        constexpr static float UI = 2.8;
     };
 };
 

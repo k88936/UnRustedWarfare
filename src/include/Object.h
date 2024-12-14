@@ -27,6 +27,7 @@ public:
     float radius;
     float rotation = 0; //east is zero
     int team;
+    bool in_sight =true;
     //
     std::vector<Grid*> gridsAcross;
     bool checked = false;
