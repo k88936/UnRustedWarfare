@@ -23,7 +23,7 @@ void Trigger::Event::update()
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
-    if (max_repeat != -1 && has_repeated >= max_repeat)
+    if (repeat != -1 && has_repeated >= repeat)
     {
         return;
     }
@@ -32,7 +32,7 @@ void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event
         return;
     }
 
-    if (event_map.at(activeBy)->result)
+    if (event_map.at(by)->result)
     {
         last_active_time = game->time;
         has_repeated++;
@@ -137,7 +137,11 @@ void Trigger::UnitAdd::execute()
 {
     for (const auto& unit : units)
     {
-        game->units.push_back(new Unit(game, UnitConfigs::meta_units.at(unit), team, posLB, 0));
+        auto u = new Unit(game, UnitConfigs::meta_units.at(unit), team, posLB, 0);
+        u->rotation=rot;
+        u->linear_velocity.setX(vx);
+        u->linear_velocity.setY(vy);
+        game->units.push_back(u);
     }
 }
 

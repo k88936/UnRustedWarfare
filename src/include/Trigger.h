@@ -46,13 +46,13 @@ namespace Trigger
     class Action
     {
     public:
-        std::string activeBy;
+        std::string by;
         QVector3D posLB;
         QVector3D posRT;
         float delay = 0;
         float last_active_time = 0;
 
-        int max_repeat = -1; //-1 for infinite
+        int repeat = -1; //-1 for infinite
         int has_repeated = 0;
 
         explicit Action(Game* game): game(game)
@@ -115,7 +115,9 @@ namespace Trigger
     {
     public:
         std::vector<std::string> units;
+        float rot=0;
         int team = 0;
+        float vx=0,vy=0;
         UnitAdd(Game* game, QVector3D pos);
         void execute() override;
     };
@@ -123,7 +125,7 @@ namespace Trigger
     class Dialog : public Trigger::Action
     {
     public:
-        Dialog(Game* game, const std::string& message): Action(game), message(message)
+        explicit Dialog(Game* game): Action(game)
         {
         }
 
@@ -134,7 +136,7 @@ namespace Trigger
     class Info : public Trigger::Action
     {
     public:
-        Info(Game* game, const std::string& message): Action(game), message(message)
+        explicit Info(Game* game): Action(game)
         {
         }
 
