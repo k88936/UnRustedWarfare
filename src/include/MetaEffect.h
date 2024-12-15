@@ -24,7 +24,7 @@ public:
     int animate_frame_start=0;
     int animate_frame_end=0;
     float animate_frame_delay=1;
-    float life; //secends
+    float life=1; //secends
     float scale_from=1;
     float scale_to=1;
     float x_speed_relative_random=0;
@@ -46,6 +46,7 @@ public:
     std::string also_play_sound=utils::EMPTY_STR;
     float also_play_sound_volume=1;
     QVector4D color={1,1,1,1};
+    static void init_builtin_effects();
 };
 
 

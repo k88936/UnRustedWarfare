@@ -81,9 +81,36 @@ private:
     }
 };
 
+void parse_effects_list(int id, const std::string& content, std::vector<std::string>& ans)
+{
+    for (const auto& effect : utils::split(content, ','))
+    {
+        if (effect == "NONE")return;
+
+        std::vector<std::string> word_and_num = utils::split(effect, '*');
+        int n = 1;
+        if (word_and_num.size() == 2)n = std::stoi(word_and_num[1]);
+        if (effect.starts_with("CUSTOM:"))
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                ans.push_back(std::to_string(id) + "___" + word_and_num[0]);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < n; ++i)
+            {
+                ans.push_back(word_and_num[0]);
+            }
+        }
+    }
+}
+
 
 void UnitConfigs::load_ini(const QString& path)
 {
+    static int unit_id = 0;
     constexpr float designed_FPS = 50;
     const float total_scale = 0.33;
     const float scale_rw2sw = total_scale * 1.0 / 20;
@@ -101,6 +128,7 @@ void UnitConfigs::load_ini(const QString& path)
     assert(data.size()>0);
 #endif
 
+    unit_id++;
     for (const auto&
          [section_id, snd] : data)
     {
@@ -112,12 +140,12 @@ void UnitConfigs::load_ini(const QString& path)
         else if (section_id.starts_with("projectile_"))
         {
             auto projectile = new MetaProjectiles();
-            meta_projectiles[section_id.substr(11)] = projectile;
+            meta_projectiles[std::to_string(unit_id) + "___" + section_id.substr(11)] = projectile;
         }
         else if (section_id.starts_with("effect_"))
         {
             auto effect = new MetaEffect();
-            meta_effects["CUSTOM:" + section_id.substr(7)] = effect;
+            meta_effects[std::to_string(unit_id) + "___CUSTOM:" + section_id.substr(7)] = effect;
         }
         else if (section_id.starts_with("arm_"))
         {
@@ -156,7 +184,7 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnMove")unit->sound_on_move = utils::without_extend(utils::split(snd, ','));
-                else if (fst == "effectOnDeath")utils::parse_item_list(snd, unit->effect_on_death);
+                else if (fst == "effectOnDeath")parse_effects_list(unit_id, snd, unit->effect_on_death);
                 else if (fst == "isBio")unit->is_bio = snd == "true";
 
                     //
@@ -308,13 +336,13 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "shoot_sound")turret->shoot_sound = utils::without_extend(snd);
                     else if (fst == "shoot_sound_vol")turret->shoot_sound_volume = std::stof(snd);
                     else if (fst == "limitingMinRange")turret->limiting_min_range = std::stof(snd) * scale_rw2sw;
-                    else if (fst == "projectile")turret->projectile = snd;
+                    else if (fst == "projectile")turret->projectile = std::to_string(unit_id) + "___" + snd;
                     else if (fst == "slave")
                     {
                         turret->slave = snd == "true";
                         turret->slot_isFixed = snd == "true";
                     }
-                    else if (fst == "shoot_flame")utils::parse_item_list(snd, turret->shoot_flame);
+                    else if (fst == "shoot_flame")parse_effects_list(unit_id, snd, turret->shoot_flame);
                     else
                     {
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -343,7 +371,7 @@ void UnitConfigs::load_ini(const QString& path)
             }
             else if (section_id.starts_with("projectile_"))
             {
-                auto* projectile = meta_projectiles[section_id.substr(11)];
+                auto* projectile = meta_projectiles[std::to_string(unit_id) + "___" + section_id.substr(11)];
                 for (const auto& [fst, snd] : content)
                 {
                     if (fst == "directDamage")projectile->directDamage = std::stof(snd);
@@ -358,7 +386,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "lightColor")projectile->lightColor = utils::parse_color(snd);
                     else if (fst == "explodeEffect")
                     {
-                        utils::parse_item_list(snd, projectile->explode_effect);
+                        parse_effects_list(unit_id, snd, projectile->explode_effect);
                     }
                     else if (fst == "life")projectile->life = std::stof(snd) * time_rw2sw;
                     else if (fst == "speed")projectile->speed = std::stof(snd) * speed_rw2sw;
@@ -374,7 +402,7 @@ void UnitConfigs::load_ini(const QString& path)
             }
             else if (section_id.starts_with("effect_"))
             {
-                auto* effect = meta_effects["CUSTOM:" + section_id.substr(7)];
+                auto* effect = meta_effects[std::to_string(unit_id) + "___CUSTOM:" + section_id.substr(7)];
                 for (const auto& [fst, snd] : content)
                 {
                     if (fst == "total_frames")effect->total_frames = std::stoi(snd);
@@ -456,7 +484,7 @@ void UnitConfigs::load_ini(const QString& path)
                 arm->init();
                 unit->attached_arm.push_back(arm);
                 images[arm->image].is_raw_size = true;
-                images[arm->image].scale=0.5;
+                images[arm->image].scale = 0.5;
             }
             else
             {
@@ -476,7 +504,7 @@ void UnitConfigs::load_ini(const QString& path)
     unit->init();
 }
 
-void UnitConfigs::scan_dir(QString path)
+void UnitConfigs::scan_dir(const QString& path)
 {
     QDirIterator iter(path, QDir::NoDotAndDotDot | QDir::AllEntries, QDirIterator::Subdirectories);
     while (iter.hasNext())
@@ -513,6 +541,7 @@ void UnitConfigs::init()
     scan_dir("../resources/units/");
     scan_dir("../resources/assets/sound/");
     scan_dir("../resources/assets/drawables/");
+    MetaEffect::init_builtin_effects();
     init_units_map();
 }
 

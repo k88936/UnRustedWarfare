@@ -134,7 +134,8 @@ bool Turret::attack(const QVector3D& target)
         else
         {
             attached->attack(target);
-            qDebug() << "independent turret problem";
+            // qDebug() << "independent turret problem";
+            //TODO
         }
     }
     // qDebug()<<meta->projectile;
