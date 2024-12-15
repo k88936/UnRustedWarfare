@@ -116,7 +116,7 @@ void UnitConfigs::load_ini(const QString& path)
     const float scale_rw2sw = total_scale * 1.0 / 20;
     const float turnSpeed_rw2sw = designed_FPS;
     const float speed_rw2sw = 1.0f * scale_rw2sw * designed_FPS;
-    const float time_rw2sw = 0.5f / designed_FPS;
+    const float time_rw2sw = 1.5f / designed_FPS;
     const float animate_delay_rw2sw = 1;
     const float turret_turn_speed_factor = 2.5;
     // int index = 0;
@@ -181,7 +181,6 @@ void UnitConfigs::load_ini(const QString& path)
                     unit->sound_on_move_order = utils::without_extend(
                         utils::split(snd, ','));
                 else if (fst == "soundOnDeath")unit->sound_on_death = utils::without_extend(utils::split(snd, ','));
-
                 else if (fst == "soundOnHit")unit->sound_on_hit = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnMove")unit->sound_on_move = utils::without_extend(utils::split(snd, ','));
@@ -225,7 +224,6 @@ void UnitConfigs::load_ini(const QString& path)
                     // else if (fst=="shadowOffsetY")unit->shadowOffset.setY(std::stof(snd) * scale_rw2sw);
                     //
                 else if (fst == "scaleTurretImagesTo")unit->scaleTurret *= std::stof(snd) * scale_rw2sw;
-                else if (fst == "lock_body_rotation_with_main_turret") unit->lock_body_rotation_with_main_turret = snd== "true";
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -273,7 +271,6 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "maxTurnSpeed")unit->max_turn_speed = std::stof(snd) * turnSpeed_rw2sw;
                 else if (fst == "turnAcceleration")unit->turn_acc = std::stof(snd) * turnSpeed_rw2sw / time_rw2sw;
                 else if (fst == "targetHeight")unit->target_height = std::stof(snd);
-                else if (fst == "moveIgnoringBody")unit->moveIgnoringBody = snd == "true";
                 else if (fst == "joinGroup")unit->join_group = snd == "true";
 
                 else

@@ -32,6 +32,7 @@ void BoidSensor::before()
     {
         return Sensor::before();
     }
+
     nearby_count = 1;
     angular_target = 0;
     speed_target *= 0;
@@ -133,8 +134,6 @@ void BoidSensor::after()
     }
     angular_target += 0.2 * nearby_even_rotation / nearby_count;
     utils::angle_ensure(angular_target);
-
-
     float speed_projected = QVector3D::dotProduct(unit_under_control->linear_velocity, unit_under_control->vector_dir);
     float angle_step = unit_under_control->meta->max_turn_speed;
 
@@ -144,10 +143,7 @@ void BoidSensor::after()
     }
     float diff = angular_target - unit_under_control->rotation;
     utils::angle_ensure(diff);
-    if (unit_under_control->meta->moveIgnoringBody)
-    {
-    }
-    else if (std::fabsf(diff) < angle_step * game->delta_time)
+    if (std::fabsf(diff) < angle_step * game->delta_time)
     {
         // unit0->rotation = target;
         unit_under_control->angular_velocity *= 0.8;
@@ -190,13 +186,6 @@ void BoidSensor::after()
                 -unit_under_control->mass * unit_under_control->linear_velocity * unit_under_control->meta->move_dec,
                 0);
         }
-    }
-    else if (unit_under_control->meta->moveIgnoringBody)
-    {
-        unit_under_control->drive(
-
-            speed_target.normalized() * unit_under_control->meta->move_acc * unit_under_control->mass, 0
-        );
     }
     else if (can_drive)
     {

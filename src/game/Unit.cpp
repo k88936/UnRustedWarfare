@@ -76,7 +76,6 @@ Unit::~Unit()
 void Unit::updateSlots(QMatrix4x4 transform)
 {
     transform.rotate(this->relative_rotation, 0, 0, 1);
-
     for (auto slot : this->turrets)
     {
         QMatrix4x4 push_this = transform;
@@ -102,11 +101,6 @@ void Unit::updateSlots(QMatrix4x4 transform)
         watcher->position = this->position;
         watcher->linear_velocity = this->linear_velocity;
     }
-    // if (meta->lock_body_rotation_with_main_turret&&turrets.size()>0)
-    // {
-    //     this->rotation = turrets.at(0)->rotation;
-    //     turrets.at(0)->relative_rotation = 0;
-    // }
 }
 
 // void Unit::attack(QVector3D target) {

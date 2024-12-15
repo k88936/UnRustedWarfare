@@ -55,7 +55,7 @@ public:
     std::vector<std::string> sound_on_move; //=std::vector<std::string>();
     //
     std::vector<std::string> effect_on_death; //=std::vector<std::string>();
-bool lock_body_rotation_with_main_turret=false;
+
 
     //attack
     bool can_attack;
@@ -79,8 +79,6 @@ bool lock_body_rotation_with_main_turret=false;
     float target_height = 0;
     bool join_group;
     bool is_wheel_powered = false;
-
-    bool moveIgnoringBody =false;
 
     std::vector<MetaTurret*> attached_turret; //=std::vector<MetaTurret*>();
     std::vector<MetaArm*> attached_arm; //=std::vector<MetaArm*>();

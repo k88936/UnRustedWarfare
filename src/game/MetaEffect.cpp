@@ -33,18 +33,19 @@ void MetaEffect::init_builtin_effects()
     auto  small = new MetaEffect();
     small->image = "flame.png";
     small->total_frames=5;
-    small->life = 0.2;
+    small->life = 0.1;
     small->animate_frame_end=4;
-    small->animate_frame_delay=0.05;
-    small->scale=0.5;
+    small->animate_frame_delay=0.02;
+    small->scale=0.1;
     add_effect("small", small);
 
     auto large= new MetaEffect();
     large->image = "flame_large.png";
+    small->scale=0.2;
     large->total_frames=4;
-    large->life = 0.2;
+    large->life = 0.1;
     large->animate_frame_end=3;
-    large->animate_frame_delay=0.05;
+    large->animate_frame_delay=0.02;
     add_effect("large", large);
 
       auto medium= new MetaEffect();
