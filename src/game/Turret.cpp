@@ -108,8 +108,8 @@ bool Turret::shoot()
             game->add_effect(new SimpleEffect(game, "light_50.png", 0.1,
                                              transform.map(utils::add_offset_z(
                                                  meta->barrel_position, GameConfig::LayerConfig::UPPER_EFFECT_OFFSET))
-                                             , rotation, 0.8,
-                                             QVector3D(0, 0, 0), 0, meta->shoot_light, false));
+                                             , rotation, 0.6,
+                                             QVector3D(0, 0, 0), 0, meta->shoot_light*0.8, false));
         }
         game->audio_manager.sound_event_config_map[meta->shoot_sound].emplace_back(
             this->position, meta->shoot_sound_volume);
