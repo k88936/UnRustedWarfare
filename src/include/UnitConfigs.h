@@ -21,7 +21,7 @@ public:
     static std::unordered_map<std::string,MetaImage> images;
     static std::unordered_map<std::string, QUrl> sounds;
     static void load_ini(const QString &path);
-    static void scan_dir(QString path);
+    static void scan_dir(const QString& path);
     static void init();
     static void init_units_map();
     static std::unordered_map<std::string, std::string> mapped_unit_name;

@@ -145,6 +145,11 @@ void Object::on_collision(const QVector3D& force, const float torque, Object* ot
 
 void Object::apply_force(const QVector3D& force, const float torque)
 {
+#ifdef DEBUG
+    assert(!std::isnan(force.x()));
+    assert(!std::isnan(force.y()));
+    assert(!std::isnan(torque));
+#endif
     this->linear_forces += force;
     this->angular_forces += torque;
 }
