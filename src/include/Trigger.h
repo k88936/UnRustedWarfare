@@ -29,6 +29,7 @@ namespace Trigger
         QVector3D posLB;
         QVector3D posRT;
 
+
         explicit Event(Game* game): game(game)
         {
         };
@@ -47,6 +48,7 @@ namespace Trigger
         void update();
         float last_active_time = 0;
         float delay = 0;
+        bool each=false;
         bool result = false;
         Game* game;
     };
@@ -54,11 +56,13 @@ namespace Trigger
     class Action
     {
     public:
+        virtual ~Action() = default;
         std::vector<std::string> by;
         bool by_all = false;
         QVector3D posLB;
         QVector3D posRT;
         float delay = 0;
+        float warmup=0;
         float last_active_time = 0;
 
         int repeat = 1; //-1 for infinite
@@ -87,7 +91,7 @@ namespace Trigger
         int require_team = 5211324;
         bool detect() override;
 
-        UnitDetect(Game* game, QVector3D left, QVector3D top): Event(game, left, top)
+        UnitDetect(Game* game, QVector3D lb, QVector3D RT): Event(game, lb, RT)
         {
         };
         void parse(const tmx::Property& property) override;
@@ -112,7 +116,12 @@ namespace Trigger
         std::set<std::string> require_type;
         std::string target;
         int require_team = 5211324;
-        UnitMove(Game* game, QVector3D posLB, QVector3D posRT);
+
+        UnitMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
+        {
+            this->posLB = posLB;
+            this->posRT = posRT;
+        };
         void parse(const tmx::Property& property) override;
         void execute() override;
     };
@@ -122,7 +131,12 @@ namespace Trigger
     public:
         int require_team = 5211324;
         std::set<std::string> require_type;
-        UnitRemove(Game* game, QVector3D posLB, QVector3D posRT);
+
+        UnitRemove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
+        {
+            this->posLB = posLB;
+            this->posRT = posRT;
+        };
         void parse(const tmx::Property& property) override;
         void execute() override;
     };
@@ -134,7 +148,12 @@ namespace Trigger
         float rot = 0;
         int team = 0;
         float vx = 0, vy = 0;
-        UnitAdd(Game* game, QVector3D pos);
+
+        UnitAdd(Game* game, const QVector3D pos): Action(game)
+        {
+            posLB = pos;
+        }
+
         void parse(const tmx::Property& property) override;
         void execute() override;
     };
@@ -162,6 +181,38 @@ namespace Trigger
         void parse(const tmx::Property& property) override;
         void execute() override;
     };
+
+    class CamSet : public Trigger::Action
+    {
+    public:
+       float zoom =-1;
+        CamSet(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
+        {
+            target_ = (posLB + posRT) / 2;
+        }
+
+        void parse(const tmx::Property& property) override;
+        void execute() override;
+
+    private:
+        QVector3D target_;
+    };
+    class CamMove : public Trigger::Action
+    {
+    public:
+        float soft=0.1;
+
+        float zoom =-1;
+        CamMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
+        {
+            target_ = (posLB + posRT) / 2;
+        }
+        void parse(const tmx::Property& property) override;
+        void execute() override;
+    private:
+        QVector3D target_;
+    };
+
 };
 
 

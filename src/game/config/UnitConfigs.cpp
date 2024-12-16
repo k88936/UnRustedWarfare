@@ -271,6 +271,7 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "maxTurnSpeed")unit->max_turn_speed = std::stof(snd) * turnSpeed_rw2sw;
                 else if (fst == "turnAcceleration")unit->turn_acc = std::stof(snd) * turnSpeed_rw2sw / time_rw2sw;
                 else if (fst == "targetHeight")unit->target_height = std::stof(snd);
+                else if (fst == "wheel") unit->is_wheel_powered = snd == "true";
                 else if (fst == "joinGroup")unit->join_group = snd == "true";
 
                 else

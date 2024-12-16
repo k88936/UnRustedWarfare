@@ -43,6 +43,8 @@ namespace utils
     extern float linear_limit_soft_v(float value, float min, float max, float soft);
     extern QVector3D linear_limit_soft_v(const QVector3D& v, float min_length, float max_length, float soft);
     extern QVector3D linear_limit_max_soft_v(const QVector3D& v, float max_length, float soft);
+    extern float soft_approach(float from, float to, float soft);
+    extern QVector3D soft_approach(const QVector3D& from, const QVector3D& to, float soft);
     extern bool within(const QVector3D& v1, const QVector3D& v2, float range);
     extern QVector3D generate_random_small_vector(float max_offset);
     extern QVector3D add_offset_x(const QVector3D& v, float offset);

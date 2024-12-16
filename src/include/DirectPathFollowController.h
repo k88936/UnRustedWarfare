@@ -21,6 +21,7 @@ public:
     QVector3D speed_target;
     float angular_target=0;
     bool can_drive=true;
+    bool finish;
 };
 
 

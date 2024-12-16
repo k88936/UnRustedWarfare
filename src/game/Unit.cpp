@@ -310,8 +310,9 @@ void Unit::after()
         on_drive();
     }
 
-    if (hp <= 0)
+    if (!marked_for_delete && hp <= 0)
     {
+        on_death();
         marked_for_delete = true;
     }
     if (in_sight)

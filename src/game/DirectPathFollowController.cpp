@@ -22,10 +22,11 @@ void DirectPathFollowController::step()
     const int y_floor = static_cast<int>(unit_under_control->position.y());
     const int x_ceil = x_floor + 1;
     const int y_ceil = y_floor + 1;
-    if (utils::within(unit_under_control->position, flow_field->end, unit_under_control->radius))
+    if (utils::within(unit_under_control->position, flow_field->end, unit_under_control->radius*2))
     {
-        speed_target = (flow_field->end - unit_under_control->position) * unit_under_control->meta->move_dec /
-            unit_under_control->meta->radius;
+        finish = true;
+        // speed_target = (flow_field->end - unit_under_control->position) * unit_under_control->meta->move_dec /
+        //     unit_under_control->meta->radius;
     }
     else
     {
@@ -62,8 +63,8 @@ void DirectPathFollowController::step()
 }
 
 void DirectPathFollowController::after()
-
 {
+    if (finish)return;
     utils::angle_ensure(angular_target);
     float speed_projected = QVector3D::dotProduct(unit_under_control->linear_velocity, unit_under_control->vector_dir);
     float angle_step = unit_under_control->meta->max_turn_speed;

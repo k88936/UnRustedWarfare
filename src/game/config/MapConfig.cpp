@@ -317,6 +317,24 @@ void MapConfig::loadMap(const std::string& path)
                             action->parse(prop);
                         }
                     }
+                    else if (type == "cam_set")
+                    {
+                        auto action = new Trigger::CamSet(game, posA, posB);
+                        map_actions.push_back(action);
+                        for (const auto& prop : properties)
+                        {
+                            action->parse(prop);
+                        }
+                    }
+                    else if (type == "cam_move")
+                    {
+                        auto action = new Trigger::CamMove(game, posA, posB);
+                        map_actions.push_back(action);
+                        for (const auto& prop : properties)
+                        {
+                            action->parse(prop);
+                        }
+                    }
                     else
                     {
                         qDebug() << "unknown object type: " << type;

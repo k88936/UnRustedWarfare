@@ -16,6 +16,10 @@ void Trigger::Event::parse(const tmx::Property& property)
     {
         delay = std::stof(property.getStringValue()) / 1000;
     }
+    else if (property.getName() == "each")
+    {
+        each = property.getStringValue() == "true";
+    }
     else
     {
         qDebug() << "unknown property: " << property.getName();
@@ -24,6 +28,10 @@ void Trigger::Event::parse(const tmx::Property& property)
 
 void Trigger::Event::update()
 {
+    if (!each && result)
+    {
+        return;
+    }
     result = false;
     if (game->time - last_active_time < delay)
     {
@@ -47,6 +55,10 @@ void Trigger::Action::parse(const tmx::Property& property)
     {
         delay = std::stof(property.getStringValue()) / 1000;
     }
+    else if (property.getName() == "warmup")
+    {
+        warmup = std::stof(property.getStringValue()) / 1000;
+    }
     else if (property.getName() == "repeat")
     {
         repeat = std::stoi(property.getStringValue());
@@ -59,10 +71,25 @@ void Trigger::Action::parse(const tmx::Property& property)
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
+    if (warmup > 0)
+    {
+        if (has_repeated == 0)
+        {
+            last_active_time = game->time;
+            has_repeated++;
+            return;
+        }
+        if (game->time - last_active_time < warmup)
+        {
+            return;
+        }
+        has_repeated = 0;
+    }
     if (repeat != -1 && has_repeated >= repeat)
     {
         return;
     }
+
     if (game->time - last_active_time < delay)
     {
         return;
@@ -141,6 +168,12 @@ void Trigger::UnitDetect::parse(const tmx::Property& property)
     if (property.getName() == "type")
     {
         utils::parse_item_set(property.getStringValue(), require_type);
+#ifdef DEBUG
+        for (auto type : require_type)
+        {
+            assert(UnitConfigs::meta_units.contains(type));
+        }
+#endif
     }
     else if (property.getName() == "min")
     {
@@ -173,11 +206,6 @@ void Trigger::ReachTime::parse(const tmx::Property& property)
         Event::parse(property);
 }
 
-Trigger::UnitMove::UnitMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
-{
-    this->posLB = posLB;
-    this->posRT = posRT;
-}
 
 void Trigger::UnitMove::parse(const tmx::Property& property)
 {
@@ -192,6 +220,12 @@ void Trigger::UnitMove::parse(const tmx::Property& property)
     else if (property.getName() == "type")
     {
         utils::parse_item_set(property.getStringValue(), require_type);
+#ifdef DEBUG
+        for (auto type : require_type)
+        {
+            assert(UnitConfigs::meta_units.contains(type));
+        }
+#endif
     }
     else
         Action::parse(property);
@@ -218,6 +252,7 @@ void Trigger::UnitMove::execute()
         }
         else if (auto ctrl = dynamic_cast<DirectPathFollowController*>(unit->controller))
         {
+            ctrl->finish = false;
             ctrl->flow_field = flow_field;
         }
         else
@@ -231,11 +266,6 @@ void Trigger::UnitMove::execute()
     }
 }
 
-Trigger::UnitRemove::UnitRemove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
-{
-    this->posLB = posLB;
-    this->posRT = posRT;
-}
 
 void Trigger::UnitRemove::parse(const tmx::Property& property)
 {
@@ -246,6 +276,12 @@ void Trigger::UnitRemove::parse(const tmx::Property& property)
     else if (property.getName() == "type")
     {
         utils::parse_item_set(property.getStringValue(), require_type);
+#ifdef DEBUG
+        for (auto type : require_type)
+        {
+            assert(UnitConfigs::meta_units.contains(type));
+        }
+#endif
     }
     else
         Action::parse(property);
@@ -268,10 +304,6 @@ void Trigger::UnitRemove::execute()
     }
 }
 
-Trigger::UnitAdd::UnitAdd(Game* game, const QVector3D pos): Action(game)
-{
-    posLB = pos;
-}
 
 void Trigger::UnitAdd::parse(const tmx::Property& property)
 {
@@ -282,6 +314,12 @@ void Trigger::UnitAdd::parse(const tmx::Property& property)
     else if (property.getName() == "units")
     {
         utils::parse_item_list(property.getStringValue(), units);
+#ifdef DEBUG
+        for (auto type : units)
+        {
+            assert(UnitConfigs::meta_units.contains(type));
+        }
+#endif
     }
     else if (property.getName() == "rot")
     {
@@ -325,7 +363,7 @@ void Trigger::UnitAdd::execute()
 
 void Trigger::Dialog::parse(const tmx::Property& property)
 {
-    if (property.getName() == "message")
+    if (property.getName() == "msg")
     {
         message = property.getStringValue();
     }
@@ -342,7 +380,7 @@ void Trigger::Dialog::execute()
 
 void Trigger::Info::parse(const tmx::Property& property)
 {
-    if (property.getName() == "message")
+    if (property.getName() == "msg")
     {
         message = property.getStringValue();
     }
@@ -353,4 +391,58 @@ void Trigger::Info::parse(const tmx::Property& property)
 void Trigger::Info::execute()
 {
     game->battle_field_widget->info(message);
+}
+
+void Trigger::CamSet::parse(const tmx::Property& property)
+{
+    if (property.getName() == "zoom")
+    {
+        zoom = std::stof(property.getStringValue());
+    }
+    else
+        Action::parse(property);
+}
+
+void Trigger::CamSet::execute()
+{
+    game->battle_field_widget->camera_pos.setX(target_.x());
+    game->battle_field_widget->camera_pos.setY(target_.y());
+    if (zoom != -1)
+    {
+        game->battle_field_widget->camera_zoom = zoom;
+    }
+    game->battle_field_widget->update_camera();
+}
+
+void Trigger::CamMove::parse(const tmx::Property& property)
+{
+    if (property.getName() == "soft")
+    {
+        soft = std::stof(property.getStringValue());
+    }
+    else if (property.getName() == "zoom")
+    {
+        zoom = std::stof(property.getStringValue());
+    }
+    else
+        Action::parse(property);
+}
+
+void Trigger::CamMove::execute()
+{
+    if (has_repeated == 0)
+    {
+        has_repeated = 1;
+        return;
+    }
+    game->battle_field_widget->camera_pos.setX(
+        utils::soft_approach(game->battle_field_widget->camera_pos.x(), target_.x(), soft));
+    game->battle_field_widget->camera_pos.setY(
+        utils::soft_approach(game->battle_field_widget->camera_pos.y(), target_.y(), soft));
+    if (zoom != -1)
+    {
+        game->battle_field_widget->camera_zoom = utils::soft_approach(game->battle_field_widget->camera_zoom, zoom,
+                                                                      soft);
+    }
+    game->battle_field_widget->update_camera();
 }

@@ -262,6 +262,17 @@ QVector3D utils::linear_limit_max_soft_v(const QVector3D& v, const float max_len
     return v;
 }
 
+float utils::soft_approach(float from, float to, float soft)
+{
+    return from + (to - from) * soft;
+}
+
+QVector3D utils::soft_approach(const QVector3D& from, const QVector3D& to, float soft)
+{
+    return from + (to - from) * soft;
+}
+
+
 bool utils::within(const QVector3D& v1, const QVector3D& v2, const float range)
 {
     return (v1 - v2).lengthSquared() < range * range;

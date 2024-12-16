@@ -32,7 +32,7 @@ QMainWindow {
 	background-color:#ff000000;
 }
 QWidget{
- 	background-color: #50000000;
+ 	background-color: #90000000;
 }
 QDialog {
 	background-color:#ff000000;

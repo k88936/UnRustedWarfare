@@ -113,7 +113,6 @@ void Game::clean()
     {
         if ((*it)->marked_for_delete && (*it)->reference_count == 0)
         {
-            (*it)->on_death();
             delete *it;
             it = Game::units.erase(it);
         }
