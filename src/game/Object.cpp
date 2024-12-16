@@ -76,8 +76,17 @@ void Object::after()
 {
     // linearVelocity*=(1-linearDamping);
     // angularVelocity*=(1-angularDamping);
+#ifdef DEBUG
+    assert(!std::isnan(linear_forces.x()));
+    assert(!std::isnan(linear_forces.y()));
+    assert(!std::isnan(angular_forces));
+#endif
 
     linear_velocity += (linear_forces) * game->delta_time * inv_mass;
+#ifdef DEBUG
+    assert(!std::isnan(linear_velocity.x()));
+    assert(!std::isnan(linear_velocity.y()));
+#endif
 
     float linearVelocityDir = QVector3D::dotProduct(linear_velocity, vector_dir);
     if (fabsf(linearVelocityDir) < linear_damping_dir * game->delta_time)

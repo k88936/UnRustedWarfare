@@ -136,7 +136,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
                                 0)
                             {
                                 units_selected.insert(unit);
-                                game->ui_image_draw_config_map["_select"].push_back(unit);
+                                game->ui_image_draw_config_map["_select"].push_back(unit->selection);
                             }
                         }
                     }
@@ -213,7 +213,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                 game->ui_image_draw_config_map["_arrow_highlight"].clear();
                 for (auto& selected : units_selected)
                 {
-                    game->ui_image_draw_config_map["_select"].push_back(selected);
+                    game->ui_image_draw_config_map["_select"].push_back(selected->selection);
                 }
             }
             else // new order

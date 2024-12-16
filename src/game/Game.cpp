@@ -44,15 +44,15 @@ Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): war
     // units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(37, 32, 0), -20));
 
 
-    int x=1;
-    for (auto meta_unit : UnitConfigs::meta_units)
-    {
-        int xpos = x%100;
-        int ypos = (x/100)*4;
-        units.push_back(new Unit(this, meta_unit.second, 0, QVector3D(xpos, ypos, 0), 0));
-        units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(xpos+1, ypos+1, 0), 0));
-        x+=4;
-    }
+    // int x=1;
+    // for (auto meta_unit : UnitConfigs::meta_units)
+    // {
+    //     int xpos = x%100;
+    //     int ypos = (x/100)*4;
+    //     units.push_back(new Unit(this, meta_unit.second, 0, QVector3D(xpos, ypos, 0), 0));
+    //     units.push_back(new Unit(this, UnitConfigs::meta_units.at("laoda"), 1, QVector3D(xpos+1, ypos+1, 0), 0));
+    //     x+=4;
+    // }
 
     // for (int i = 30; i < 32; ++i)
     // {

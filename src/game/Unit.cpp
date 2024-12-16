@@ -35,6 +35,7 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     linear_damping_ver = 0.4;
     angular_damping = 40;
     sight = new Sensor(game, meta->fog_of_war_sight_range, team);
+    selection->scale = meta->radius * 1.5;
     watchers.push_back(sight);
     for (const auto& slot : meta->attached_turret)
     {
@@ -69,6 +70,7 @@ Unit::~Unit()
         delete controller;
     }
     delete this->shadow;
+    delete this->selection;
     //remember to solve count reference
     //TODO
 }
@@ -135,6 +137,10 @@ void Unit::draw(Game* game)
     shadow->render_transform = render_transform;
 
     render_transform.rotate(rotation, 0, 0, 1);
+
+    selection->render_transform = render_transform;
+    selection->render_transform.scale(selection->scale);
+
     render_transform.scale(this->scale);
     game->var_solid_image_draw_config_map[this->meta->texture_frames.at(frame_id)].push_back(this);
 

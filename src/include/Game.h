@@ -38,11 +38,9 @@ public:
         }
 
         QTime start = QTime::currentTime();
-
         void timerEvent(QTimerEvent* event) override
         {
             game->step();
-
 #ifdef DEBUG
             game->delta_time = 0.01;
 #else
@@ -60,7 +58,7 @@ public:
     std::unordered_map<std::string, std::vector<Drawable*>> var_solid_image_draw_config_map;
     std::vector<QVector3D> line_draw_config;
     std::unordered_map<std::string, std::vector<Drawable*>> const_image_draw_config_map;
-    float delta_time = 0;
+    float delta_time = 0.01;
     GridsManager grids_manager;
     MapConfig map_config;
     AudioManager audio_manager;

@@ -10,6 +10,18 @@
 #include "UnitConfigs.h"
 
 
+void Trigger::Event::parse(const tmx::Property& property)
+{
+    if (property.getName() == "delay")
+    {
+        delay = std::stof(property.getStringValue()) / 1000;
+    }
+    else
+    {
+        qDebug() << "unknown property: " << property.getName();
+    }
+}
+
 void Trigger::Event::update()
 {
     result = false;
@@ -19,6 +31,30 @@ void Trigger::Event::update()
     }
     last_active_time = game->time;
     result = detect();
+}
+
+void Trigger::Action::parse(const tmx::Property& property)
+{
+    if (property.getName() == "by")
+    {
+        utils::parse_item_list(property.getStringValue(), by);
+    }
+    else if (property.getName() == "by_all")
+    {
+        by_all = property.getStringValue() == "true";
+    }
+    else if (property.getName() == "delay")
+    {
+        delay = std::stof(property.getStringValue()) / 1000;
+    }
+    else if (property.getName() == "repeat")
+    {
+        repeat = std::stoi(property.getStringValue());
+    }
+    else
+    {
+        qDebug() << "unknown property: " << property.getName();
+    }
 }
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
@@ -32,7 +68,35 @@ void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event
         return;
     }
 
-    if (event_map.at(by)->result)
+
+    bool flag;
+
+    if (by_all)
+    {
+        flag = true;
+        for (auto id : by)
+        {
+            if (!event_map.at(id)->result)
+            {
+                flag = false;
+                break;
+            }
+        }
+    }
+    else
+    {
+        flag = false;
+        for (auto id : by)
+        {
+            if (event_map.at(id)->result)
+            {
+                flag = true;
+                break;
+            }
+        }
+    }
+
+    if (flag)
     {
         last_active_time = game->time;
         has_repeated++;
@@ -44,13 +108,17 @@ bool Trigger::UnitDetect::detect()
 {
     auto units = game->grids_manager.scan_units(posLB, posRT);
 
-    int cnt = std::ranges::count_if(units, [this](const Unit* unit)
+    const long cnt = std::ranges::count_if(units, [this](const Unit* unit)
     {
-        if (!require_type.empty() && unit->meta->name != require_type)
+        if (!require_type.empty() && !require_type.contains(unit->meta->name))
         {
             return false;
         }
         if (require_team != 5211324 && unit->team != require_team)
+        {
+            return false;
+        }
+        if (!require_type.empty() && !require_type.contains(unit->meta->name))
         {
             return false;
         }
@@ -68,15 +136,65 @@ bool Trigger::UnitDetect::detect()
     return true;
 }
 
+void Trigger::UnitDetect::parse(const tmx::Property& property)
+{
+    if (property.getName() == "type")
+    {
+        utils::parse_item_set(property.getStringValue(), require_type);
+    }
+    else if (property.getName() == "min")
+    {
+        require_cnt_min = std::stoi(property.getStringValue());
+    }
+    else if (property.getName() == "max")
+    {
+        require_cnt_max = std::stoi(property.getStringValue());
+    }
+    else if (property.getName() == "team")
+    {
+        require_team = std::stoi(property.getStringValue());
+    }
+    else
+        Event::parse(property);
+}
+
 bool Trigger::ReachTime::detect()
 {
     return game->time >= time;
+}
+
+void Trigger::ReachTime::parse(const tmx::Property& property)
+{
+    if (property.getName() == "time")
+    {
+        time = std::stof(property.getStringValue()) / 1000;
+    }
+    else
+        Event::parse(property);
 }
 
 Trigger::UnitMove::UnitMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)
 {
     this->posLB = posLB;
     this->posRT = posRT;
+}
+
+void Trigger::UnitMove::parse(const tmx::Property& property)
+{
+    if (property.getName() == "target")
+    {
+        target = property.getStringValue();
+    }
+    else if (property.getName() == "team")
+    {
+        require_team = std::stoi(property.getStringValue());
+    }
+    else if (property.getName() == "type")
+    {
+        utils::parse_item_set(property.getStringValue(), require_type);
+    }
+    else
+        Action::parse(property);
 }
 
 void Trigger::UnitMove::execute()
@@ -86,6 +204,10 @@ void Trigger::UnitMove::execute()
     {
         if (unit->marked_for_delete)continue;
         if (require_team != 5211324 && unit->team != require_team)
+        {
+            continue;
+        }
+        if (!require_type.empty() && !require_type.contains(unit->meta->name))
         {
             continue;
         }
@@ -115,12 +237,30 @@ Trigger::UnitRemove::UnitRemove(Game* game, QVector3D posLB, QVector3D posRT): A
     this->posRT = posRT;
 }
 
+void Trigger::UnitRemove::parse(const tmx::Property& property)
+{
+    if (property.getName() == "team")
+    {
+        require_team = std::stoi(property.getStringValue());
+    }
+    else if (property.getName() == "type")
+    {
+        utils::parse_item_set(property.getStringValue(), require_type);
+    }
+    else
+        Action::parse(property);
+}
+
 void Trigger::UnitRemove::execute()
 {
     auto units = game->grids_manager.scan_units(posLB, posRT);
     for (auto unit : units)
     {
         if (require_team != 5211324 && unit->team != require_team)
+        {
+            continue;
+        }
+        if (!require_type.empty() && !require_type.contains(unit->meta->name))
         {
             continue;
         }
@@ -133,22 +273,81 @@ Trigger::UnitAdd::UnitAdd(Game* game, const QVector3D pos): Action(game)
     posLB = pos;
 }
 
+void Trigger::UnitAdd::parse(const tmx::Property& property)
+{
+    if (property.getName() == "team")
+    {
+        team = std::stoi(property.getStringValue());
+    }
+    else if (property.getName() == "units")
+    {
+        utils::parse_item_list(property.getStringValue(), units);
+    }
+    else if (property.getName() == "rot")
+    {
+        rot = std::stof(property.getStringValue());
+    }
+    else if (property.getName() == "vx")
+    {
+        vx = std::stof(property.getStringValue());
+    }
+    else if (property.getName() == "vy")
+    {
+        vy = std::stof(property.getStringValue());
+    }
+    else
+        Action::parse(property);
+}
+
 void Trigger::UnitAdd::execute()
 {
-    for (const auto& unit : units)
+    if (units.size() == 1)
     {
-        auto u = new Unit(game, UnitConfigs::meta_units.at(unit), team, posLB, 0);
-        u->rotation=rot;
+        auto u = new Unit(game, UnitConfigs::meta_units.at(units.at(0)), team, posLB, 0);
+        u->rotation = rot;
         u->linear_velocity.setX(vx);
         u->linear_velocity.setY(vy);
         game->units.push_back(u);
     }
+    else
+
+        for (const auto& unit : units)
+        {
+            auto u = new Unit(game, UnitConfigs::meta_units.at(unit), team,
+                              posLB + utils::generate_random_small_vector(0.5), 0);
+            u->rotation = rot;
+            u->linear_velocity.setX(vx);
+            u->linear_velocity.setY(vy);
+            game->units.push_back(u);
+        }
+}
+
+
+void Trigger::Dialog::parse(const tmx::Property& property)
+{
+    if (property.getName() == "message")
+    {
+        message = property.getStringValue();
+    }
+    else
+        Action::parse(property);
 }
 
 void Trigger::Dialog::execute()
 {
     game->battle_field_widget->dialog(message);
     game->pause();
+}
+
+
+void Trigger::Info::parse(const tmx::Property& property)
+{
+    if (property.getName() == "message")
+    {
+        message = property.getStringValue();
+    }
+    else
+        Action::parse(property);
 }
 
 void Trigger::Info::execute()

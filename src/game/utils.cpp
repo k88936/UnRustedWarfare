@@ -27,11 +27,38 @@ std::vector<std::string> utils::split(const std::string& str, const char delimit
     return tokens;
 }
 
+// Trim from the start (left)
+std::string utils::ltrim(std::string s)
+{
+    s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch)
+    {
+        return !std::isspace(ch);
+    }));
+    return s;
+}
+
+// Trim from the end (right)
+std::string utils::rtrim(std::string s)
+{
+    s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
+    {
+        return !std::isspace(ch);
+    }).base(), s.end());
+    return s;
+}
+
+// Trim from both ends
+std::string utils::trim(std::string s)
+{
+    return ltrim(rtrim(std::move(s)));
+}
+
 void utils::parse_item_list(const std::string& content, std::vector<std::string>& ans)
 {
-    for (std::vector<std::string> effects = split(content, ','); const auto& str : effects)
+    for (std::vector<std::string> effects = split(content, ','); auto& str : effects)
     {
-        if (str == "NONE")return;
+        str = utils::trim(str);
+        if (str == "NONE")break;
         std::vector<std::string> word_and_num = split(str, '*');
         int n = 1;
         if (word_and_num.size() == 2)n = std::stoi(word_and_num[1]);
@@ -39,6 +66,17 @@ void utils::parse_item_list(const std::string& content, std::vector<std::string>
         {
             ans.push_back(word_and_num[0]);
         }
+    }
+}
+
+void utils::parse_item_set(const std::string& content, std::set<std::string>& ans)
+{
+    for (std::vector<std::string> effects = split(content, ','); auto& str : effects)
+    {
+        str = utils::trim(str);
+        if (str == "NONE")break;
+        std::vector<std::string> word_and_num = split(str, '*');
+        ans.insert(word_and_num[0]);
     }
 }
 

@@ -7,6 +7,7 @@
 #include <qdatetime.h>
 #include <qvectornd.h>
 #include <random>
+#include <set>
 
 
 class Game;
@@ -51,6 +52,10 @@ namespace utils
     extern QVector3D set_offset_y(const QVector3D& v, float offset);
     extern QVector3D set_offset_z(const QVector3D& v, float offset);
 
+    extern std::string ltrim(std::string s);
+    extern std::string rtrim(std::string s);
+    extern std::string trim(std::string s);
+
     template <typename T>
     extern T random_element(const std::vector<T>& vec, T default_on_empty)
     {
@@ -70,5 +75,6 @@ namespace utils
     extern std::vector<std::string> split(const std::string& str, const char delimiter);
     extern QVector4D parse_color(const std::string& colorStr);
     extern void parse_item_list(const std::string& content, std::vector<std::string>& ans);
+    extern void parse_item_set(const std::string& content, std::set<std::string>& ans);
 };
 #endif //UTILS_H

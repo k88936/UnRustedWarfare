@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="44">
+<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="48">
   <properties>
     <property name="sw1" value="431" />
     <property name="sw2" value="437" />
@@ -5102,6 +5102,38 @@
         <property name="team" value="0" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
+      </properties>
+    </object>
+    <object type="unit_add" id="44" x="100" y="2760" width="20" height="20">
+      <properties>
+        <property name="by" value="init" />
+        <property name="repeat" value="1" />
+        <property name="team" value="0" />
+        <property name="units" value="police_station" />
+        <property name="rot" value="90" />
+      </properties>
+    </object>
+    <object type="unit_add" id="45" x="2560" y="2880" width="20" height="20">
+      <properties>
+        <property name="by" value="init" />
+        <property name="repeat" value="1" />
+        <property name="team" value="0" />
+        <property name="units">
+police_m870,
+
+f_police_g17
+</property>
+        <property name="rot" value="-45" />
+        <property name="vx" value="1" />
+        <property name="xy" value="-1" />
+      </properties>
+    </object>
+    <object type="unit_add" id="47" x="2540" y="2880" width="20" height="20">
+      <properties>
+        <property name="by" value="init" />
+        <property name="team" value="0" />
+        <property name="units" value="police_car1" />
+        <property name="rot" value="100" />
       </properties>
     </object>
   </objectgroup>

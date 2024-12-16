@@ -254,132 +254,29 @@ void MapConfig::loadMap(const std::string& path)
                     {
                         auto event = new Trigger::UnitDetect(game, posA, posB);
                         map_events[name] = event;
-                        for (const auto& prop : properties)
-                        {
-                            if (prop.getName() == "id")
-                            {
-                                solve_event_only_name[prop.getStringValue()] = name;
-                            }
-                            else if (prop.getName() == "team")
-                            {
-                                event->require_team = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "type")
-                            {
-                                event->require_type = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "minUnits")
-                            {
-                                event->require_cnt_min = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "maxUnits")
-                            {
-                                event->require_cnt_max = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                event->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "globalMessage")
-                            {
-                                auto action = new Trigger::Dialog(game);
-                                action->by = name;
-                                map_actions.push_back(action);
-                            }
-                            else if (prop.getName() == "info")
-                            {
-                                auto action = new Trigger::Info(game);
-                                action->by = name;
-                                map_actions.push_back(action);
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
-                        }
+                        for (auto property : properties) event->parse(property);
                     }
                     else if (type == "reach_time")
                     {
                         auto event = new Trigger::ReachTime(game);
                         map_events[name] = event;
-                        for (const auto& prop : properties)
-                        {
-                            if (prop.getName() == "time")
-                            {
-                                event->time = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "id")
-                            {
-                                solve_event_only_name[prop.getStringValue()] = name;
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
-                        }
+                        for (auto property : properties) event->parse(property);
                     }
                     else if (type == "unit_move")
                     {
                         auto action = new Trigger::UnitMove(game, posA, posB);
                         map_actions.push_back(action);
-                        action->by = name;
                         for (const auto& prop : properties)
                         {
-                            if (prop.getName() == "target")
-                            {
-                                action->target = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "by")
-                            {
-                                action->by = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                action->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "repeat")
-                            {
-                                action->repeat = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "team")
-                            {
-                                action->require_team = std::stoi(prop.getStringValue());
-                            }
-
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
+                            action->parse(prop);
                         }
                     }
                     else if (type == "unit_remove")
                     {
                         auto action = new Trigger::UnitRemove(game, posA, posB);
                         map_actions.push_back(action);
-                        action->by = name;
-                        for (const auto& prop : properties)
-                        {
-                            if (prop.getName() == "by")
-                            {
-                                action->by = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                action->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "repeat")
-                            {
-                                action->repeat = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "team")
-                            {
-                                action->require_team = std::stoi(prop.getStringValue());
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
-                        }
+
+                        for (const auto& prop : properties)action->parse(prop);
                     }
                     else if (type == "point")
                     {
@@ -399,100 +296,25 @@ void MapConfig::loadMap(const std::string& path)
                         map_actions.push_back(action);
                         for (const auto& prop : properties)
                         {
-                            if (prop.getName() == "by")
-                            {
-                                action->by = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                action->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "repeat")
-                            {
-                                action->repeat = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "team")
-                            {
-                                action->team = std::stoi(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "units")
-                            {
-                                utils::parse_item_list(prop.getStringValue(), action->units);
-                            }
-                            else if (prop.getName() == "rot")
-                            {
-                                action->rot = std::stof(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "vx")
-                            {
-                                action->vx = std::stof(prop.getStringValue());
-                            }
-                            else if (prop.getName() == "vy")
-                            {
-                                action->vy = std::stof(prop.getStringValue());
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
+                            action->parse(prop);
                         }
                     }
                     else if (type == "info")
                     {
                         auto action = new Trigger::Info(game);
                         map_actions.push_back(action);
-                        action->by = name;
                         for (const auto& prop : properties)
                         {
-                            if (prop.getName() == "by")
-                            {
-                                action->by = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "message")
-                            {
-                                action->message = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                action->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "repeat")
-                            {
-                                action->repeat = std::stoi(prop.getStringValue());
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
+                            action->parse(prop);
                         }
                     }
                     else if (type == "dialog")
                     {
                         auto action = new Trigger::Dialog(game);
                         map_actions.push_back(action);
-                        action->by = name;
                         for (const auto& prop : properties)
                         {
-                            if (prop.getName() == "by")
-                            {
-                                action->by = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "message")
-                            {
-                                action->message = prop.getStringValue();
-                            }
-                            else if (prop.getName() == "delay")
-                            {
-                                action->delay = std::stof(prop.getStringValue()) / 1000;
-                            }
-                            else if (prop.getName() == "repeat")
-                            {
-                                action->repeat = std::stoi(prop.getStringValue());
-                            }
-                            else
-                            {
-                                qDebug() << "unknown property: " << prop.getName();
-                            }
+                            action->parse(prop);
                         }
                     }
                     else
@@ -501,19 +323,13 @@ void MapConfig::loadMap(const std::string& path)
                     }
                 }
 
-                for (auto& map_action : map_actions)
+                for (auto& action : map_actions)
                 {
-                    if (solve_event_only_name.contains(map_action->by))
-                    {
-                        map_action->by = solve_event_only_name[map_action->by];
-                    }
-                    // if (auto* move = dynamic_cast<Trigger::Move*>(map_action))
-                    // {
-                    //     if (solve_point_only_name.contains(move->target))
-                    //     {
-                    //         move->target = solve_point_only_name[move->target];
-                    //     }
-                    // }
+                    for (auto& by : action->by)
+                        if (solve_event_only_name.contains(by))
+                        {
+                            by = solve_event_only_name[by];
+                        }
                 }
             }
 
