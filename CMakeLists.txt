@@ -110,6 +110,8 @@ add_executable(untitled1
         src/game/Controller.cpp
         src/game/DirectPathFollowController.cpp
         src/game/WarfareFogManager.cpp
+        src/game/MeleeSensor.cpp
+        src/game/MeleeSensor.h
 )
 include_directories(src/include)
 include_directories(src/ui/include)

@@ -8,6 +8,7 @@
 #include "BoidSensor.h"
 #include "Controller.h"
 #include "MapConfig.h"
+#include "MeleeSensor.h"
 #include "MetaArm.h"
 #include "Sensor.h"
 #include "SimpleEffect.h"
@@ -17,7 +18,9 @@
 
 Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const float rotation): Attachable(),
     Drawable(),
-    Object(game, meta->radius, meta->mass, meta->mass)
+    Object(game, meta->radius, meta->mass, meta->mass),
+    animation_moving(meta->animation_moving_start, meta->animation_idle_end, meta->animation_moving_speed),
+    animation_idle(meta->animation_idle_start, meta->animation_idle_end, meta->animation_idle_speed)
 {
 #ifdef DEBUG
     assert(mass>0);
@@ -35,6 +38,8 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     linear_damping_ver = 0.4;
     angular_damping = 40;
     sight = new Sensor(game, meta->fog_of_war_sight_range, team);
+    if (meta->isMelee)
+        melee = new MeleeSensor(game, meta->meleeEngangementDistance, this);
     selection->scale = meta->radius * 1.5;
     watchers.push_back(sight);
     for (const auto& slot : meta->attached_turret)
@@ -65,10 +70,11 @@ Unit::~Unit()
     {
         delete watcher;
     }
-    if (controller != nullptr)
+    if (controller)
     {
         delete controller;
     }
+    if (melee)delete melee;
     delete this->shadow;
     delete this->selection;
     //remember to solve count reference
@@ -129,10 +135,22 @@ void Unit::draw(Game* game)
     if (is_driving)
     {
         render_transform.translate(this->position + utils::generate_random_small_vector(0.008));
+        frame_id = animation_moving.get_value(game->delta_time);
     }
     else
     {
         render_transform.translate(this->position);
+        frame_id = animation_idle.get_value(game->delta_time);
+        if (utils::freq_bool(meta->effect_on_idle_chance, game->delta_time))
+        {
+            for (const auto effect_on_idle : meta->effect_on_idle)
+            {
+                game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_idle), position, rotation,
+                                            linear_velocity));
+            }
+        }
+        {
+        }
     }
     shadow->render_transform = render_transform;
 
@@ -163,7 +181,7 @@ void Unit::before()
 {
     is_driving = false;
     game->grids_manager.update_object(this);
-    if (team == 0 || team == 2)
+    if (utils::team::is_allied(0, team))
     {
         game->warfare_fog_manager.light(sight, meta->fog_of_war_sight_range);
     }
@@ -185,6 +203,7 @@ void Unit::before()
         updateSlots(transform);
     }
     this->position.setZ(0);
+    if (melee)melee->before();
     if (controller) controller->before();
     // this->position.setZ(meta->targetHeight);
 }
@@ -200,7 +219,8 @@ void Unit::step()
     {
         turret->step();
     }
-    if (controller) controller->step();
+    if (melee)melee->step();
+    if (controller)controller->step();
     in_sight = game->warfare_fog_manager.in_light(this);
 }
 
@@ -254,7 +274,17 @@ void Unit::after()
     {
         watcher->after();
     }
-    if (controller)controller->after();
+
+    if (melee)
+    {
+        melee->after();
+        if (!melee->has_target && controller)
+            controller->after();
+    }
+    else
+    {
+        if (controller)controller->after();
+    }
     for (const auto turret : turrets)
     {
         turret->after();
@@ -321,7 +351,7 @@ void Unit::after()
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)
 {
-    if (this->meta->is_bio && other->team != this->team && force.lengthSquared() > mass * mass * 100)
+    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 100)
     {
         this->hp -= 10;
     }

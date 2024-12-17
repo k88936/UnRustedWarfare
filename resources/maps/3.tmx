@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="85">
+<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="100">
   <properties>
     <property name="sw1" value="431" />
     <property name="sw2" value="437" />
@@ -5017,8 +5017,7 @@
     <object type="unit_add" id="33" x="2740" y="2840" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5026,8 +5025,7 @@
     <object type="unit_add" id="34" x="2940" y="2840" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5035,8 +5033,7 @@
     <object type="unit_add" id="35" x="3040" y="2840" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t1" />
         <property name="rot" value="90" />
       </properties>
@@ -5044,8 +5041,7 @@
     <object type="unit_add" id="37" x="2740" y="3040" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5053,8 +5049,7 @@
     <object type="unit_add" id="38" x="2940" y="3040" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t1" />
         <property name="rot" value="90" />
       </properties>
@@ -5062,8 +5057,7 @@
     <object type="unit_add" id="39" x="3040" y="3040" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t2" />
         <property name="rot" value="90" />
       </properties>
@@ -5071,8 +5065,7 @@
     <object type="unit_add" id="40" x="2840" y="2840" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5080,8 +5073,7 @@
     <object type="unit_add" id="41" x="2840" y="3040" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5090,7 +5082,7 @@
       <properties>
         <property name="by" value="init" />
         <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5098,8 +5090,7 @@
     <object type="unit_add" id="43" x="2640" y="3040" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="-1" />
         <property name="units" value="zombie_base_t0" />
         <property name="rot" value="90" />
       </properties>
@@ -5122,7 +5113,7 @@ f_police_g17
     <object type="unit_add" id="47" x="2540" y="2880" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="team" value="0" />
+        <property name="team" value="2" />
         <property name="units" value="police_car1" />
         <property name="rot" value="100" />
       </properties>
@@ -5135,7 +5126,7 @@ f_police_g17
         <property name="soft" value="0.3" />
       </properties>
     </object>
-    <object name="approach" type="unit_detect" id="49" x="2880" y="2900" width="100" height="100">
+    <object name="approach" type="unit_detect" id="49" x="2900" y="2900" width="100" height="100">
       <properties>
         <property name="team" value="0" />
         <property name="min" value="2" />
@@ -5171,7 +5162,7 @@ z_common*8
         <property name="vy" value="-0.1" />
         <property name="team" value="1" />
         <property name="rot" value="-170" />
-        <property name="repeat" value="8" />
+        <property name="repeat" value="3" />
         <property name="delay" value="200" />
       </properties>
     </object>
@@ -5216,6 +5207,7 @@ z_common*8
         <property name="team" value="0" />
         <property name="min" value="2" />
         <property name="each" value="true" />
+        <property name="type" value="f_police_g17,police_m870" />
       </properties>
     </object>
     <object name="get_in" type="unit_remove" id="58" x="2520" y="2860" width="60" height="60">
@@ -5230,7 +5222,7 @@ z_common*8
       <properties>
         <property name="by" value="approach" />
         <property name="team" value="1" />
-        <property name="target" value="path_1" />
+        <property name="target" value="base" />
         <property name="repeat" value="-1" />
       </properties>
     </object>
@@ -5248,7 +5240,7 @@ z_security
         <property name="by" value="approach" />
       </properties>
     </object>
-    <object type="unit_move" id="62" x="2500" y="2620" width="60" height="60">
+    <object type="unit_move" id="62" x="2490" y="2620" width="80" height="140">
       <properties>
         <property name="by" value="return" />
         <property name="team" value="1" />
@@ -5271,8 +5263,7 @@ z_security
     <object type="unit_add" id="66" x="1940" y="2480" width="20" height="20">
       <properties>
         <property name="by" value="init" />
-        <property name="repeat" value="1" />
-        <property name="team" value="0" />
+        <property name="team" value="2" />
         <property name="units" value="police_station" />
         <property name="rot" value="90" />
       </properties>
@@ -5319,7 +5310,7 @@ z_security
     <object type="unit_add" id="72" x="2020" y="2620" width="20" height="20">
       <properties>
         <property name="by" value="on_back" />
-        <property name="team" value="0" />
+        <property name="team" value="2" />
         <property name="rot" value="60" />
         <property name="units" value="police_k9" />
       </properties>
@@ -5327,7 +5318,7 @@ z_security
     <object type="unit_add" id="73" x="2030" y="2540" width="20" height="20">
       <properties>
         <property name="by" value="on_back" />
-        <property name="team" value="0" />
+        <property name="team" value="2" />
         <property name="rot" value="-30" />
         <property name="units" value="police_car2" />
       </properties>
@@ -5363,14 +5354,13 @@ z_security
 z_common*3,
 z_0*2,
 z_chemical
-
 </property>
         <property name="rot" value="160" />
         <property name="vx" value="-1.5" />
         <property name="vy" value="0.2" />
         <property name="by" value="home" />
         <property name="repeat" value="15" />
-        <property name="delay" value="700" />
+        <property name="delay" value="2000" />
       </properties>
     </object>
     <object name="path_block2" type="point" id="79" x="2120" y="2570" width="20" height="20" />
@@ -5379,16 +5369,16 @@ z_chemical
         <property name="target" value="base" />
         <property name="repeat" value="-1" />
         <property name="by" value="home" />
+        <property name="team" value="1" />
       </properties>
     </object>
-    <object type="unit_remove" id="81" x="2460" y="2560" width="1000" height="1000" />
     <object name="base" type="point" id="82" x="1940" y="2580" width="20" height="20" />
     <object type="unit_add" id="83" x="2000" y="2520" width="20" height="20">
       <properties>
         <property name="by" value="on_back" />
         <property name="team" value="0" />
         <property name="rot" value="-45" />
-        <property name="units" value="swat_ar15*4" />
+        <property name="units" value="swat_ar15*10" />
         <property name="vx" value="0.8" />
         <property name="vy" value="-0.2" />
       </properties>
@@ -5396,11 +5386,115 @@ z_chemical
     <object type="unit_add" id="84" x="2020" y="2700" width="20" height="20">
       <properties>
         <property name="by" value="on_back" />
-        <property name="team" value="0" />
+        <property name="team" value="2" />
         <property name="rot" value="45" />
-        <property name="units" value="swat_m24*5" />
+        <property name="units" value="swat_m24*10" />
         <property name="vx" value="0.9" />
         <property name="vy" value="0.6" />
+      </properties>
+    </object>
+    <object name="path_block3" type="point" id="85" x="2060" y="2580" width="20" height="20" />
+    <object type="unit_change" id="87" x="2520" y="2860" width="60" height="60">
+      <properties>
+        <property name="team" value="2" />
+        <property name="by" value="return,approach" />
+        <property name="team_to" value="0" />
+        <property name="by_all" value="true" />
+      </properties>
+    </object>
+    <object type="unit_adds" id="88" x="1940" y="2880" width="20" height="20">
+      <properties>
+        <property name="team" value="0" />
+        <property name="units" value="z_common*3" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_adds" id="89" x="1960" y="2880" width="20" height="20">
+      <properties>
+        <property name="team" value="1" />
+        <property name="units" value="laoda*1" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object name="no_left" type="unit_detect" id="90" x="2000" y="2540" width="400" height="100">
+      <properties>
+        <property name="team" value="1" />
+        <property name="max" value="0" />
+        <property name="each" value="true" />
+      </properties>
+    </object>
+    <object type="win" id="91" x="1900" y="2440" width="20" height="20">
+      <properties>
+        <property name="by">
+home,
+
+no_left
+</property>
+        <property name="by_all" value="true" />
+      </properties>
+    </object>
+    <object type="unit_add" id="92" x="3000" y="3030" width="20" height="20">
+      <properties>
+        <property name="units" value="small_fire*3" />
+        <property name="team" value="-1" />
+        <property name="by" value="init" />
+        <property name="rot" value="90" />
+      </properties>
+    </object>
+    <object type="unit_add" id="93" x="3040" y="2900" width="20" height="20">
+      <properties>
+        <property name="units" value="big_fire*6" />
+        <property name="team" value="-1" />
+        <property name="by" value="init" />
+        <property name="rot" value="90" />
+      </properties>
+    </object>
+    <object type="unit_add" id="94" x="2560" y="3000" width="20" height="20">
+      <properties>
+        <property name="units" value="common_car2" />
+        <property name="rot" value="30" />
+        <property name="by" value="init" />
+        <property name="team" value="-1" />
+      </properties>
+    </object>
+    <object type="unit_add" id="95" x="3060" y="2920" width="20" height="20">
+      <properties>
+        <property name="team" value="-1" />
+        <property name="units" value="common_car3" />
+        <property name="rot" value="-18" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_add" id="96" x="2560" y="2740" width="20" height="20">
+      <properties>
+        <property name="team" value="-1" />
+        <property name="units" value="common_car4" />
+        <property name="rot" value="96" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_add" id="97" x="2220" y="2520" width="20" height="20">
+      <properties>
+        <property name="team" value="-1" />
+        <property name="units" value="common_car5" />
+        <property name="rot" value="-18" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_add" id="98" x="1940" y="2680" width="20" height="20">
+      <properties>
+        <property name="team" value="-1" />
+        <property name="units" value="common_car3" />
+        <property name="rot" value="0" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_add" id="99" x="1980" y="2680" width="20" height="20">
+      <properties>
+        <property name="team" value="-1" />
+        <property name="units" value="common_car6" />
+        <property name="rot" value="8" />
+        <property name="by" value="init" />
       </properties>
     </object>
   </objectgroup>

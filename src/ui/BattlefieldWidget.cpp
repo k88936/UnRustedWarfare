@@ -94,6 +94,10 @@ void BattlefieldWidget::render()
     update();
 }
 
+void BattlefieldWidget::game_end(bool win)
+{
+}
+
 void BattlefieldWidget::resizeGL(int w, int h)
 {
     update_camera();

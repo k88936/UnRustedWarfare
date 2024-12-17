@@ -20,6 +20,7 @@ public:
     std::vector<std::string > explode_effect;
     float life;
     float speed;
+    bool instant =false;
     float deflectionPower;
 
 

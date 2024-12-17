@@ -32,14 +32,14 @@ main_window::main_window(QWidget* parent) :
     // p->setSource(QUrl::fromLocalFile("../1.mp4"));
     // p->play();
 
-    // auto widget = new welcome_widget(this);
-    // auto game = new Game(widget->ui->widget, "../maps/3.tmx");;
-    // widget_push(widget);
-
-    auto widget =new battle_widget(this);
-    // auto game = new Game(widget, "../maps/1.tmx");
-    auto game = new Game(widget, "../resources/maps/3.tmx");
+    auto widget = new welcome_widget(this);
+    auto game = new Game(widget->ui->widget, "../resources/maps/3.tmx");;
     widget_push(widget);
+
+    // auto widget =new battle_widget(this);
+    // // auto game = new Game(widget, "../maps/1.tmx");
+    // auto game = new Game(widget, "../resources/maps/3.tmx");
+    // widget_push(widget);
 
     // Game::start_on("../maps/3.tmx", w->ui->widget);
     // Game::start_on("../maps/3.tmx", b);

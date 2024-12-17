@@ -28,6 +28,18 @@ namespace utils
         void reset();
         float get_value();
     };
+    class framer
+    {
+    public:
+        int start,end=0;
+        float cur=0;
+        const float step_l=0;
+        framer(const int start, const int end, const float step): start(start), end(end), step_l(step)
+        {
+            cur = start;
+        }
+        int get_value(float step);
+    };
 
     const std::string EMPTY_STR = "NONE";
     extern float sign(float value);
@@ -78,5 +90,45 @@ namespace utils
     extern QVector4D parse_color(const std::string& colorStr);
     extern void parse_item_list(const std::string& content, std::vector<std::string>& ans);
     extern void parse_item_set(const std::string& content, std::set<std::string>& ans);
+
+
+
+    namespace team
+    {
+        inline bool is_enemy(int src, int target)
+        {
+#ifdef DEBUG
+            assert(src!=5211324);
+            assert(target!=5211324);
+#endif
+            if (target == -1 || src == -1)
+            {
+                return false;
+            }
+            if (target == -2 || src == -2)
+            {
+                return true;
+            }
+
+            return src % 2 != target % 2;
+        }
+
+        inline bool is_allied(int src, int target)
+        {
+#ifdef DEBUG
+            assert(src!=5211324);
+            assert(target!=5211324);
+#endif
+            if (target == -1 || src == -1)
+            {
+                return false;
+            }
+            if (target == -2 || src == -2)
+            {
+                return false;
+            }
+            return src % 2 == target % 2;
+        }
+    }
 };
 #endif //UTILS_H

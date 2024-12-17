@@ -16,6 +16,7 @@
 #include "Unit.h"
 #include "Effect.h"
 #include "Flock.h"
+#include "game_end_widget.h"
 #include "MapConfig.h"
 #include "PathFind.h"
 #include "Projectile.h"
@@ -111,15 +112,25 @@ void Game::clean()
     }
     for (auto it = Game::units.begin(); it != Game::units.end();)
     {
-        if ((*it)->marked_for_delete && (*it)->reference_count == 0)
+        auto unit = *it;
+        if (unit->marked_for_delete)
         {
-            delete *it;
-            it = Game::units.erase(it);
+            unit->del_count_down--;
+            for (auto turret : unit->turrets)
+            {
+                Object::is_valid(turret->current_target);
+                Object::is_valid(turret->preferred_target);
+            }
+
+            if (unit->del_count_down == 0)
+            {
+                delete unit;
+                it = Game::units.erase(it);
+                continue;
+            }
         }
-        else
-        {
-            ++it;
-        }
+
+        ++it;
     }
     for (auto flock : flocks)
     {
@@ -149,7 +160,6 @@ void Game::pause()
 {
     timer.stop();
 }
-
 void Game::run()
 {
     // if (timer.isActive())

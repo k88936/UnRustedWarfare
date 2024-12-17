@@ -465,9 +465,6 @@ background-color: rgb(48, 246, 217);</string>
        <property name="styleSheet">
         <string notr="true">color:rgb(48, 246, 217);</string>
        </property>
-       <property name="text">
-        <string>enermy_killed:100</string>
-       </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignLeading|Qt::AlignmentFlag::AlignLeft|Qt::AlignmentFlag::AlignTop</set>
        </property>
@@ -506,9 +503,6 @@ background-color: rgb(48, 246, 217);</string>
        </property>
        <property name="styleSheet">
         <string notr="true">color:rgb(48, 246, 217);</string>
-       </property>
-       <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ore_used:568000&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTop|Qt::AlignmentFlag::AlignTrailing</set>

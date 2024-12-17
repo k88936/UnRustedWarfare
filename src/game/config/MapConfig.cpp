@@ -103,7 +103,7 @@ void MapConfig::parse_layer(std::vector<Tile*>& tiles, const std::unique_ptr<tmx
     }
 }
 
-const std::string bitmap_base = "../maps/bitmaps/";
+const std::string bitmap_base = "../resources/maps/bitmaps/";
 
 QImage base64ToImage(const QString& base64String)
 {
@@ -299,6 +299,15 @@ void MapConfig::loadMap(const std::string& path)
                             action->parse(prop);
                         }
                     }
+                    else if (type == "unit_change")
+                    {
+                        auto action = new Trigger::UnitChange(game, posA, posB);
+                        map_actions.push_back(action);
+                        for (const auto& prop : properties)
+                        {
+                            action->parse(prop);
+                        }
+                    }
                     else if (type == "info")
                     {
                         auto action = new Trigger::Info(game);
@@ -335,6 +344,25 @@ void MapConfig::loadMap(const std::string& path)
                             action->parse(prop);
                         }
                     }
+                    else if (type == "win")
+                    {
+                        auto action = new Trigger::Win(game);
+                        map_actions.push_back(action);
+                        for (const auto& prop : properties)
+                        {
+                            action->parse(prop);
+                        }
+                    }
+                    else if (type == "lose")
+                    {
+                        auto action = new Trigger::Lose(game);
+                        map_actions.push_back(action);
+                        for (const auto& prop : properties)
+                        {
+                            action->parse(prop);
+                        }
+                    }
+
                     else
                     {
                         qDebug() << "unknown object type: " << type;

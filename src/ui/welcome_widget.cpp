@@ -22,7 +22,7 @@ welcome_widget::welcome_widget(main_window* parent) :
         // qDebug()<<parent->widget_stack.top();
         // qDebug()<<parent->widget_stack.size();
         BattlefieldWidget* widget = new battle_widget(parent);
-        const auto game = new Game(widget, "../maps/2.tmx");
+        const auto game = new Game(widget, "../resources/maps/3.tmx");
         game->run();
         parent->widget_push(widget);
     });

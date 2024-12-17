@@ -53,8 +53,18 @@ public:
     std::vector<std::string> sound_on_hit; //=std::vector<std::string>();
     std::vector<std::string> sound_on_fire; //=std::vector<std::string>();
     std::vector<std::string> sound_on_move; //=std::vector<std::string>();
-    //
     std::vector<std::string> effect_on_death; //=std::vector<std::string>();
+
+    std::vector<std::string> effect_on_idle; //=std::vector<std::string>();
+    float effect_on_idle_chance = 0;
+
+    int animation_moving_start = 0;
+    int animation_moving_end = 0;
+    float animation_moving_speed = 0;
+
+    int animation_idle_start = 0;
+    int animation_idle_end = 0;
+    float animation_idle_speed = 0;
 
 
     //attack
@@ -68,6 +78,9 @@ public:
     bool turret_multi_targeting;
     float turret_size = 1;
     float turret_turn_speed;
+    bool isMelee = false;
+
+    float meleeEngangementDistance = 100;
 
     //movement
     movementType movement;

@@ -185,6 +185,8 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "soundOnFire")unit->sound_on_fire = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "soundOnMove")unit->sound_on_move = utils::without_extend(utils::split(snd, ','));
                 else if (fst == "effectOnDeath")parse_effects_list(unit_id, snd, unit->effect_on_death);
+                else if (fst == "effectOnIdle") parse_effects_list(unit_id, snd, unit->effect_on_idle);
+                else if (fst == "effectOnIdleChance") unit->effect_on_idle_chance = std::stof(snd);
                 else if (fst == "isBio")unit->is_bio = snd == "true";
 
                     //
@@ -224,6 +226,18 @@ void UnitConfigs::load_ini(const QString& path)
                     // else if (fst=="shadowOffsetY")unit->shadowOffset.setY(std::stof(snd) * scale_rw2sw);
                     //
                 else if (fst == "scaleTurretImagesTo")unit->scaleTurret *= std::stof(snd) * scale_rw2sw;
+                else if (fst == "animation_moving_start")unit->animation_moving_start = std::stoi(snd);
+                else if (fst == "animation_moving_end")unit->animation_moving_end = std::stoi(snd);
+                else if (fst == "animation_moving_speed")
+                    unit->animation_moving_speed = std::stof(snd) /
+                        animate_delay_rw2sw;
+                else if (fst == "animation_idle_start")unit->animation_idle_start = std::stoi(snd);
+                else if (fst == "animation_idle_end")unit->animation_idle_end = std::stoi(snd);
+                else if (fst == "animation_idle_speed")
+                    unit->animation_idle_speed = std::stof(snd) /
+                        animate_delay_rw2sw;
+
+
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -247,6 +261,11 @@ void UnitConfigs::load_ini(const QString& path)
                 else if (fst == "turretTurnSpeed")
                     unit->turret_turn_speed = std::stof(snd) * turnSpeed_rw2sw *
                         turret_turn_speed_factor;
+
+                else if (fst == "isMelee")unit->isMelee = snd == "true";
+                else if (fst == "meleeEngangementDistance")
+                    unit->meleeEngangementDistance = std::stof(snd) *
+                        scale_rw2sw;
                 else
                 {
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
@@ -385,6 +404,8 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "frame")projectile->frame = std::stoi(snd);
                     else if (fst == "lightSize")projectile->lightSize = std::stof(snd);
                     else if (fst == "lightColor")projectile->lightColor = utils::parse_color(snd);
+                    else if (fst == "instant")projectile->instant = snd == "true";
+
                     else if (fst == "explodeEffect")
                     {
                         parse_effects_list(unit_id, snd, projectile->explode_effect);

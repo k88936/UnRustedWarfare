@@ -26,6 +26,7 @@ public:
     float camera_zoom = 0.02;
     void update_camera();
     virtual void render();
+    virtual  void game_end(bool win);
     Game* game;
 
 protected:

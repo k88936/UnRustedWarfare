@@ -39,7 +39,7 @@ void WarfareFogManager::light(const Object* obj, const float range)
                 //lightness
                 float light = (
                     // magic * 5+
-                    range * range - (game->map_config.vector_in_which(obj->position) - pos).
+                    range * range - (obj->position - pos).
                     lengthSquared());
                 if (light > 0)
                 {

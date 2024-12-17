@@ -6,8 +6,6 @@
 
 #include "Effect.h"
 #include "UnitConfigs.h"
-#include "Game.h"
-#include "utils.h"
 
 Projectile::Projectile(Game* game, MetaProjectiles* meta, const int team, const QVector3D position,
                        const float rotation,
@@ -42,7 +40,7 @@ void Projectile::before()
 
 void Projectile::step()
 {
-    in_sight=game->warfare_fog_manager.in_light(this);
+    in_sight = game->warfare_fog_manager.in_light(this);
     Object::step();
 }
 
@@ -56,7 +54,7 @@ void Projectile::after()
     Object::after();
     // if(!marked_for_delete)
     if (in_sight)
-    draw(game);
+        draw(game);
 }
 
 bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
@@ -65,7 +63,7 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
     {
         return false;
     }
-    if (obj->team == this->team)
+    if (utils::team::is_allied(this->team, obj->team))
     {
         return false;
     }
@@ -78,14 +76,15 @@ bool Projectile::on_overlay(Object* obj, QVector3D positionDiff)
         {
             //aoe damage = - center_damage/r**2 +center_damage
             const float factor = -meta->areaDamage / (meta->areaRadius * meta->areaRadius);
-            for (const auto grids = game->grids_manager.scan_grids(position, meta->areaRadius); const auto grids_across :
+            for (const auto grids = game->grids_manager.scan_grids(position, meta->areaRadius); const auto grids_across
+                 :
                  grids)
             {
                 for (const auto object : grids_across->objects) //has bug actually
                 {
                     if (const auto u = dynamic_cast<Unit*>(object))
                     {
-                        if (u->team == this->team)
+                        if (utils::team::is_allied(this->team, u->team))
                             continue;
                         QVector3D offset = (u->position - this->position);
                         if (const auto distance = offset.lengthSquared(); distance < meta->areaRadius * meta->
@@ -111,8 +110,9 @@ void Projectile::hit_effect(const Unit* unit) const
     for (const auto& explode_effect : meta->explode_effect)
     {
         const auto meta_effect = UnitConfigs::meta_effects.at(explode_effect);
-        game->add_effect(new Effect(game, meta_effect, utils::set_offset_z(position, GameConfig::LayerConfig::SHELL), rotation,
-                                   this->linear_velocity));
+        game->add_effect(new Effect(game, meta_effect, utils::set_offset_z(position, GameConfig::LayerConfig::SHELL),
+                                    rotation,
+                                    this->linear_velocity));
     }
     // Game::addEffect()
 }

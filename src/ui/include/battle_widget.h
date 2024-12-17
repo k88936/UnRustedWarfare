@@ -12,6 +12,8 @@
 #include <set>
 #include <Unit.h>
 
+#include "game_end_widget.h"
+
 class main_window;
 class suspend_menu_widget;
 class dialog_widget;
@@ -32,6 +34,7 @@ class battle_widget : public BattlefieldWidget
 public:
     suspend_menu_widget* suspend_menu;
     dialog_widget* dialog_w;
+    game_end_widget* end_widget;
     explicit battle_widget(main_window* parent);
     ~battle_widget() override;
     BattlefieldWidget* get_battleFieldWidget();
@@ -45,6 +48,7 @@ public:
     void dialog(const std::string& string) override;
     void info(const std::string& string) override;
     void render() override;
+    void game_end(bool win) override;
     std::set<Unit*> units_selected;
     QTime m_press_time;
     bool m_l_pressing = false;
@@ -84,6 +88,7 @@ public:
 private:
     Ui::battle_widget* ui;
     Drawable* move_flag = new Drawable();
+    main_window* main_win_;
 };
 
 

@@ -75,12 +75,10 @@ public:
     BattlefieldWidget* battle_field_widget;
     void add_projectile(Projectile* projectile);
     void add_effect(Effect* effect);
-    void start(const std::string& world);
     TimerDoer* timer_doer = new TimerDoer(this);
     void clean();
     void pause();
     void run();
-    void stop();
     void run_map_triggers();
     void step();
 };

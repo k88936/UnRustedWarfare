@@ -12,13 +12,14 @@
 
 
 Turret::Turret(Game* game, MetaTurret* meta, int team): Attachable(), Drawable(), Sensor(game, meta->range, team),
-                                                        recoil_animater(game,meta->recoil_return_time, meta->recoil_offset,
+                                                        recoil_animater(game, meta->recoil_return_time,
+                                                                        meta->recoil_offset,
                                                                         0)
 {
     this->meta = meta;
     for (const auto& slot : meta->attached_turrets)
     {
-        auto turret = new Turret(game,slot, team);
+        auto turret = new Turret(game, slot, team);
         turret->slot_translation = slot->slot_translation;
         turret->slot_isFixed = slot->slot_isFixed;
         turret->slot_inVisible = slot->slot_inVisible;
@@ -94,22 +95,27 @@ bool Turret::shoot()
         transform.rotate(rotation, 0, 0, 1);
 
         const auto meta_projectiles = UnitConfigs::meta_projectiles.at(this->meta->projectile);
-        game->add_projectile(new Projectile(game, meta_projectiles, this->team, transform.map(meta->barrel_position),
-                                           rotation,
-                                           QVector3D(0, 0, 0)));
+        auto projectile = new Projectile(game, meta_projectiles, this->team, transform.map(meta->barrel_position),
+                                         rotation,
+                                         QVector3D(0, 0, 0));
+        game->add_projectile(projectile);
+        if (meta_projectiles->instant)
+        {
+            projectile->on_overlay(current_target, current_target->position - projectile->position);
+        }
         for (const auto& shoot_flame : meta->shoot_flame)
         {
             game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(shoot_flame),
-                                       transform.map(meta->barrel_position),
-                                       rotation, this->linear_velocity));
+                                        transform.map(meta->barrel_position),
+                                        rotation, this->linear_velocity));
         }
         if (!meta->shoot_light.isNull())
         {
             game->add_effect(new SimpleEffect(game, "light_50.png", 0.1,
-                                             transform.map(utils::add_offset_z(
-                                                 meta->barrel_position, GameConfig::LayerConfig::UPPER_EFFECT_OFFSET))
-                                             , rotation, 0.8,
-                                             QVector3D(0, 0, 0), 0, meta->shoot_light, false));
+                                              transform.map(utils::add_offset_z(
+                                                  meta->barrel_position, GameConfig::LayerConfig::UPPER_EFFECT_OFFSET))
+                                              , rotation, 0.8,
+                                              QVector3D(0, 0, 0), 0, meta->shoot_light, false));
         }
         game->audio_manager.sound_event_config_map[meta->shoot_sound].emplace_back(
             this->position, meta->shoot_sound_volume);
@@ -191,7 +197,7 @@ void Turret::before()
 
 void Turret::step()
 {
-    in_sight=game->warfare_fog_manager.in_light(this);
+    in_sight = game->warfare_fog_manager.in_light(this);
     for (auto attached : turrets_attached)
     {
         attached->step();
@@ -235,9 +241,9 @@ bool Turret::on_overlay(Object* obj, QVector3D position_diff)
     {
         if (const auto unit = dynamic_cast<Unit*>(obj))
         {
-            if (unit->team != this->team)
+            if (utils::team::is_enemy(this->team, unit->team))
             {
-                Object::ptr_change_to(current_target, unit);
+                current_target = unit;
                 has_target = true;
             }
         }

@@ -8,7 +8,7 @@
 #include "MetaUnit.h"
 #include "Turret.h"
 
-
+class MeleeSensor;
 class Arm;
 class Controller;
 class BoidSensor;
@@ -27,12 +27,16 @@ public:
     bool isAttached = false;
     Controller* controller = nullptr;
     bool is_driving = false;
+    MeleeSensor* melee=nullptr;
     void attack(const QVector3D& target);
     void draw(Game* game) override;
     void drive(const QVector3D& force, float torque);
     std::vector<Turret*> turrets;
     std::vector<Arm*> arms;
     std::vector<Object*> watchers;
+
+    utils::framer animation_moving;
+    utils::framer animation_idle;
 
     void before() override;
     void step() override;

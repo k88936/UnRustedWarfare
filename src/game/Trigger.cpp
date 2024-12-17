@@ -49,6 +49,9 @@ void Trigger::Action::parse(const tmx::Property& property)
     }
     else if (property.getName() == "by_all")
     {
+#ifdef DEBUG
+        assert(property.getStringValue()=="true"||property.getStringValue()=="false");
+#endif
         by_all = property.getStringValue() == "true";
     }
     else if (property.getName() == "delay")
@@ -71,20 +74,20 @@ void Trigger::Action::parse(const tmx::Property& property)
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
-    if (warmup > 0)
-    {
-        if (has_repeated == 0)
-        {
-            last_active_time = game->time;
-            has_repeated++;
-            return;
-        }
-        if (game->time - last_active_time < warmup)
-        {
-            return;
-        }
-        has_repeated = 0;
-    }
+    // if (warmup > 0)
+    // {
+    //     if (has_repeated == 0)
+    //     {
+    //         last_active_time = game->time;
+    //         has_repeated++;
+    //         return;
+    //     }
+    //     if (game->time - last_active_time < warmup)
+    //     {
+    //         return;
+    //     }
+    //     has_repeated = 0;
+    // }
     if (repeat != -1 && has_repeated >= repeat)
     {
         return;
@@ -207,13 +210,9 @@ void Trigger::ReachTime::parse(const tmx::Property& property)
 }
 
 
-void Trigger::UnitMove::parse(const tmx::Property& property)
+void Trigger::UnitFilt::parse(const tmx::Property& property)
 {
-    if (property.getName() == "target")
-    {
-        target = property.getStringValue();
-    }
-    else if (property.getName() == "team")
+    if (property.getName() == "team")
     {
         require_team = std::stoi(property.getStringValue());
     }
@@ -230,6 +229,21 @@ void Trigger::UnitMove::parse(const tmx::Property& property)
     else
         Action::parse(property);
 }
+
+void Trigger::UnitFilt::execute()
+{
+}
+
+void Trigger::UnitMove::parse(const tmx::Property& property)
+{
+    if (property.getName() == "target")
+    {
+        target = property.getStringValue();
+    }
+    else
+        UnitFilt::parse(property);
+}
+
 
 void Trigger::UnitMove::execute()
 {
@@ -269,22 +283,7 @@ void Trigger::UnitMove::execute()
 
 void Trigger::UnitRemove::parse(const tmx::Property& property)
 {
-    if (property.getName() == "team")
-    {
-        require_team = std::stoi(property.getStringValue());
-    }
-    else if (property.getName() == "type")
-    {
-        utils::parse_item_set(property.getStringValue(), require_type);
-#ifdef DEBUG
-        for (auto type : require_type)
-        {
-            assert(UnitConfigs::meta_units.contains(type));
-        }
-#endif
-    }
-    else
-        Action::parse(property);
+    UnitFilt::parse(property);
 }
 
 void Trigger::UnitRemove::execute()
@@ -445,4 +444,57 @@ void Trigger::CamMove::execute()
                                                                       soft);
     }
     game->battle_field_widget->update_camera();
+}
+
+void Trigger::UnitChange::parse(const tmx::Property& property)
+{
+    if (property.getName() == "team_to")
+    {
+        team_to = std::stoi(property.getStringValue());
+    }
+
+    else
+        UnitFilt::parse(property);
+}
+
+void Trigger::UnitChange::execute()
+{
+    auto units = game->grids_manager.scan_units(posLB, posRT);
+    for (auto unit : units)
+    {
+        if (require_team != 5211324 && unit->team != require_team)
+        {
+            continue;
+        }
+        if (!require_type.empty() && !require_type.contains(unit->meta->name))
+        {
+            continue;
+        }
+        if (team_to != 5211324)
+        {
+            unit->team = team_to;
+        }
+    }
+}
+
+void Trigger::Win::parse(const tmx::Property& property)
+{
+    Action::parse(property);
+}
+
+void Trigger::Win::execute()
+{
+    game->battle_field_widget->game_end(true);
+    Action::execute();
+}
+
+void Trigger::Lose::parse(const tmx::Property& property)
+{
+    Action::parse(property);
+}
+
+void Trigger::Lose::execute()
+{
+    game->battle_field_widget->game_end(false);
+    Action::execute();
 }

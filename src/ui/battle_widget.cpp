@@ -16,19 +16,21 @@
 #include "PathFind.h"
 #include <QStyle>
 #include <ui_dialog_widget.h>
+#include <ui_game_end_widget.h>
 
 #include "dialog_widget.h"
 #include "ui_suspend_menu_widget.h"
 
 #include "Flock.h"
 #include "FlowField.h"
+#include "game_end_widget.h"
 #include "main_window.h"
 #include "settings_widget.h"
 #include "suspend_menu_widget.h"
 #include "UnitConfigs.h"
 
 battle_widget::battle_widget(main_window* parent) :
-    BattlefieldWidget(reinterpret_cast<QWidget*>(parent)), ui(new Ui::battle_widget)
+    BattlefieldWidget(reinterpret_cast<QWidget*>(parent)), ui(new Ui::battle_widget), main_win_(parent)
 {
     ui->setupUi(this);
     suspend_menu = new suspend_menu_widget(this);
@@ -67,6 +69,9 @@ battle_widget::battle_widget(main_window* parent) :
         dialog_w->setVisible(false);
         game->run();
     });
+
+    end_widget = new game_end_widget(parent);
+    end_widget->setVisible(false);
     // auto x=new QDoubleSpinBox(this);
     // x->setDecimals(16);
     //
@@ -192,7 +197,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     {
                         if (unit->team == 0)
                             units_to_select.insert(unit);
-                        else if (unit->team == 1)
+                        else if (utils::team::is_enemy(0, unit->team))
                         {
                             enermy_to_select.insert(unit);
                         }
@@ -239,7 +244,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                         {
                             for (const auto turret : selected->turrets)
                             {
-                                Object::ptr_change_to(turret->preferred_target, preferred_target);
+                                turret->preferred_target = preferred_target;
                             }
                         }
                         game->ui_image_draw_config_map["_arrow_orange"].push_back(move_flag);
@@ -333,21 +338,28 @@ void battle_widget::render()
     QPixmap pix(2 * game->map_config.world_width, 2 * game->map_config.world_height);
     pix.fill(QColor("#a0000000"));
     QPainter painter(&pix);
-    QPen friend_pen(Qt::green);
+    static QPen me_pen(Qt::green);
+    me_pen.setWidth(2);
+    static QPen friend_pen(Qt::blue);
     friend_pen.setWidth(2);
-    QPen enermy_pen(Qt::red);
+    static QPen enermy_pen(Qt::red);
     enermy_pen.setWidth(2);
-    QPen simple_white_pen(Qt::white);
+    static QPen simple_white_pen(Qt::white);
     simple_white_pen.setWidth(1);
     for (auto unit : game->units)
     {
         if (!unit->in_sight)continue;
         if (unit->team == 0)
         {
+            painter.setPen(me_pen);
+            painter.drawPoint(2 * unit->position.x(), 2 * (game->map_config.world_height - unit->position.y()));
+        }
+        else if (utils::team::is_allied(0, unit->team))
+        {
             painter.setPen(friend_pen);
             painter.drawPoint(2 * unit->position.x(), 2 * (game->map_config.world_height - unit->position.y()));
         }
-        if (unit->team == 1)
+        else if (utils::team::is_enemy(0, unit->team))
         {
             painter.setPen(enermy_pen);
             painter.drawPoint(2 * unit->position.x(), 2 * (game->map_config.world_height - unit->position.y()));
@@ -367,6 +379,16 @@ void battle_widget::render()
                      ->height() * camera_zoom * 2);
     ui->map_view->setPixmap(pix);
     ui->map_view->adjustSize();
+}
+
+void battle_widget::game_end(bool win)
+
+{
+    if (win)end_widget->ui->label->setText("VICTORY");
+    else end_widget->ui->label->setText("DEFEAT");
+    main_win_->widget_change(end_widget);
+
+    BattlefieldWidget::game_end(win);
 }
 
 void battle_widget::mousePressEvent(QMouseEvent* event)

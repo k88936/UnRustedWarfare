@@ -5,24 +5,27 @@
 #ifndef GAME_END_WIDGET_H
 #define GAME_END_WIDGET_H
 
-#include <QWidget>
-
-#include "main_window.h"
+#include<QWidget>
 
 
+class main_window;
 QT_BEGIN_NAMESPACE
-namespace Ui { class game_end_widget; }
+
+namespace Ui
+{
+    class game_end_widget;
+}
+
 QT_END_NAMESPACE
 
-class game_end_widget : public QWidget {
-Q_OBJECT
+class game_end_widget : public QWidget
+{
+    Q_OBJECT
 
 public:
-game_end_widget(main_window* parent);
+    explicit game_end_widget(main_window* parent);
     ~game_end_widget() override;
-
-private:
-    Ui::game_end_widget *ui;
+    Ui::game_end_widget* ui;
 };
 
 

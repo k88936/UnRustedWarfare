@@ -50,7 +50,7 @@ public:
     float friction = 0.1;
     float restitution = 0.1;
 
-    int reference_count = 0;
+    int del_count_down = 2;
     bool marked_for_delete = false;
 
     virtual void before();
@@ -64,7 +64,6 @@ public:
     void apply_force(const QVector3D& force, float torque);
 
     static bool is_valid(Object*& obj);
-    static void ptr_change_to(Object*& obj, Object* new_obj);
 
 private:
     static void solve_collision(Object* obj1, Object* obj2, QVector3D position_diff);

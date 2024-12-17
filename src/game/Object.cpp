@@ -195,26 +195,9 @@ bool Object::is_valid(Object*& obj)
     }
     if (obj->marked_for_delete)
     {
-        obj->reference_count--;
         obj = nullptr;
         return false;
     }
     return true;
 }
 
-void Object::ptr_change_to(Object*& obj, Object* new_obj)
-{
-    if (is_valid(obj))
-    {
-        obj->reference_count--;
-    }
-    if (new_obj != nullptr && !new_obj->marked_for_delete)
-    {
-        obj = new_obj;
-        obj->reference_count++;
-    }
-    else
-    {
-        obj = nullptr;
-    }
-}
