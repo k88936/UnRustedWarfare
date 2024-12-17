@@ -323,7 +323,8 @@ void battle_widget::resizeEvent(QResizeEvent* event)
 void battle_widget::dialog(const std::string& string)
 {
     BattlefieldWidget::dialog(string);
-    dialog_w->ui->info_label->setText(QString::fromStdString(string));
+    // dialog_w->ui->info_label->setText(QString::fromStdString(string));
+    dialog_w->dialog(string);
     dialog_w->setVisible(true);
 }
 

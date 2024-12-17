@@ -16,8 +16,10 @@ class dialog_widget : public QFrame {
 Q_OBJECT
 
 public:
+    std::vector<QString> cmder_profiles;
     explicit dialog_widget(QWidget *parent = nullptr);
-    ~dialog_widget() override;
+void dialog(const std::string& msg);
+~dialog_widget() override;
     Ui::dialog_widget *ui;
 };
 

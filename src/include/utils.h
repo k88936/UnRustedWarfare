@@ -28,16 +28,19 @@ namespace utils
         void reset();
         float get_value();
     };
+
     class framer
     {
     public:
-        int start,end=0;
-        float cur=0;
-        const float step_l=0;
+        int start, end = 0;
+        float cur = 0;
+        const float step_l = 0;
+
         framer(const int start, const int end, const float step): start(start), end(end), step_l(step)
         {
             cur = start;
         }
+
         int get_value(float step);
     };
 
@@ -71,6 +74,17 @@ namespace utils
     extern std::string trim(std::string s);
 
     template <typename T>
+    extern T random_element(const std::vector<T>& vec)
+    {
+#ifdef DEBUG
+        assert(!vec.empty());
+#endif
+        static std::default_random_engine generator;
+        std::uniform_int_distribution<std::size_t> distribution(0, vec.size() - 1);
+        return vec.at(distribution(generator));;
+    }
+
+    template <typename T>
     extern T random_element(const std::vector<T>& vec, T default_on_empty)
     {
         if (vec.empty())
@@ -90,7 +104,6 @@ namespace utils
     extern QVector4D parse_color(const std::string& colorStr);
     extern void parse_item_list(const std::string& content, std::vector<std::string>& ans);
     extern void parse_item_set(const std::string& content, std::set<std::string>& ans);
-
 
 
     namespace team
