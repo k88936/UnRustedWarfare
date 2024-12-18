@@ -31,6 +31,7 @@ void Flock::move(const QVector3D& target)
         radius_count += unit->radius;
     }
     arrived_range = radius_count / sqrtf(boids.size());
+    int movement = 0b1111;
     for (auto b : boids)
     {
         auto boid_sensor = new BoidSensor(b);
@@ -44,13 +45,15 @@ void Flock::move(const QVector3D& target)
             0.5) + target;
         boid_sensor->arrived_flock_target = false;
         boid_sensor->arrived_flock_target_offset = false;
-        boid_sensor->flock=this;
+        boid_sensor->flock = this;
+        movement &= b->meta->movement;
     }
-    flow_field = new FlowField(game, target.x(), target.y(), movementType::LAND);
+    flow_field = new FlowField(game, target.x(), target.y(), movement);
 }
 
 void Flock::gather(const QVector3D& target)
 {
+    throw std::runtime_error("not implemented");
     pos_target = target;
     if (flow_field != nullptr)
     {

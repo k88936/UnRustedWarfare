@@ -342,6 +342,7 @@ void Unit::after()
 
     if (!marked_for_delete && hp <= 0)
     {
+        if (tags.contains("__protect__"))game->battle_field_widget->game_end(false);
         on_death();
         marked_for_delete = true;
     }

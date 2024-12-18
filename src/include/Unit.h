@@ -28,6 +28,7 @@ public:
     Controller* controller = nullptr;
     bool is_driving = false;
     MeleeSensor* melee=nullptr;
+    std::set<std::string>  tags;
     void attack(const QVector3D& target);
     void draw(Game* game) override;
     void drive(const QVector3D& force, float torque);

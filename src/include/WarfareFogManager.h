@@ -32,6 +32,7 @@ public:
 
     std::vector<std::string> fog_images;
 
+    bool enable=true;
     void draw();
     // inline int& dense_at(int x, int y)
     // {

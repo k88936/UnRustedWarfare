@@ -1,445 +1,445 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" infinite="0" nextlayerid="6" nextobjectid="2">
- <properties>
-  <property name="sw1" value="546"/>
-  <property name="sw2" value="429"/>
-  <property name="sw3" value="504"/>
-  <property name="sw4" value="334"/>
-  <property name="sw5" value="640"/>
-  <property name="sw6" value="418"/>
-  <property name="tag" value="RW"/>
- </properties>
- <tileset firstgid="1" source="units.tsx"/>
- <tileset firstgid="280" source="misc.tsx"/>
- <tileset firstgid="304" name="decoration" tilewidth="20" tileheight="20" tilecount="35" columns="7">
-  <image source="bitmaps/decoration.png" width="140" height="100"/>
-  <tile id="21">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="22">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="339" name="Deep Water" tilewidth="20" tileheight="20" tilecount="3" columns="3">
-  <image source="bitmaps/deepwater.png" trans="008a76" width="60" height="20"/>
-  <tile id="0">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="342" source="terrain/Dirt.tsx"/>
- <tileset firstgid="352" source="terrain/Dirt_Details.tsx"/>
- <tileset firstgid="412" source="terrain/Ice.tsx"/>
- <tileset firstgid="422" name="Lava" tilewidth="20" tileheight="20" tilecount="21" columns="3">
-  <image source="bitmaps/lava.png" trans="008a76" width="60" height="140"/>
-  <tile id="0">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="15"/>
-  <tile id="16"/>
-  <tile id="17"/>
-  <tile id="18"/>
-  <tile id="19"/>
-  <tile id="20"/>
- </tileset>
- <tileset firstgid="443" source="terrain/Long Grass.tsx"/>
- <tileset firstgid="493" name="Mountain" tilewidth="20" tileheight="20" tilecount="35" columns="7">
-  <image source="bitmaps/mountain.png" trans="008a76" width="140" height="100"/>
-  <tile id="21">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="22">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="528" name="Sand" tilewidth="20" tileheight="20" tilecount="42" columns="7">
-  <image source="bitmaps/sand.png" trans="008a76" width="140" height="120"/>
-  <tile id="28">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="35">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="36">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="38">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="40">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="570" name="Shallow Water" tilewidth="20" tileheight="20" tilecount="6" columns="3">
-  <image source="bitmaps/shallowwater.png" trans="008a76" width="60" height="40"/>
-  <tile id="0">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="576" source="terrain/Short Grass.tsx"/>
- <tileset firstgid="577" name="Snow" tilewidth="20" tileheight="20" tilecount="80" columns="8">
-  <image source="bitmaps/snow.png" trans="008a76" width="160" height="200"/>
-  <tile id="11">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="32">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="33">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="40">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="41">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="43">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="657" name="Stone" tilewidth="20" tileheight="20" tilecount="36" columns="6">
-  <image source="bitmaps/stone.png" trans="008a76" width="120" height="120"/>
-  <tile id="0">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="19">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="20">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="24">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="26">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="693" source="terrain/Water.tsx"/>
- <tileset firstgid="696" name="Dirt Dirt - Ridge" tilewidth="20" tileheight="20" tilecount="21" columns="3">
-  <image source="bitmaps/dirt2dirt_ridge.png" trans="008a76" width="60" height="140"/>
-  <tile id="0">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="20">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="717" source="ridges/Ice Ice - Flat.tsx"/>
- <tileset firstgid="738" source="ridges/LongGrass LongGrass - Hill.tsx"/>
- <tileset firstgid="759" source="ridges/LongGrass LongGrass - Ridge.tsx"/>
- <tileset firstgid="789" source="ridges/Mountain Mountain - Hill.tsx"/>
- <tileset firstgid="810" name="Mountain Mountain - Ridge" tilewidth="20" tileheight="20" tilecount="21" columns="3">
-  <image source="bitmaps/mountain2mountain_ridge.png" trans="008a76" width="60" height="140"/>
-  <tile id="0">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <tileset firstgid="831" source="ridges/Sand Sand - Hill.tsx"/>
- <tileset firstgid="852" source="ridges/Sand Sand - Ridge.tsx"/>
- <tileset firstgid="873" source="ridges/Snow Snow - Hill.tsx"/>
- <tileset firstgid="894" source="ridges/Snow Snow - ridge.tsx"/>
- <tileset firstgid="915" source="ridges/Stone Stone - Ridge.tsx"/>
- <tileset firstgid="930" name="rpg_test" tilewidth="20" tileheight="20" tilecount="1024" columns="32">
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="21">
   <properties>
-   <property name="embedded_png">
+    <property name="sw1" value="546" />
+    <property name="sw2" value="429" />
+    <property name="sw3" value="504" />
+    <property name="sw4" value="334" />
+    <property name="sw5" value="640" />
+    <property name="sw6" value="418" />
+    <property name="tag" value="RW" />
+  </properties>
+  <tileset source="units.tsx" firstgid="1" />
+  <tileset source="misc.tsx" firstgid="280" />
+  <tileset firstgid="304" name="decoration" columns="7" tilecount="35" tileheight="20" tilewidth="20">
+    <image source="bitmaps/decoration.png" width="140" height="100" />
+    <tile id="21">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="22">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="28">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="29">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset firstgid="339" name="Deep Water" columns="3" tilecount="3" tileheight="20" tilewidth="20">
+    <image source="bitmaps/deepwater.png" width="60" height="20" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset source="terrain/Dirt.tsx" firstgid="342" />
+  <tileset source="terrain/Dirt_Details.tsx" firstgid="352" />
+  <tileset source="terrain/Ice.tsx" firstgid="412" />
+  <tileset firstgid="422" name="Lava" columns="3" tilecount="21" tileheight="20" tilewidth="20">
+    <image source="bitmaps/lava.png" width="60" height="140" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="4">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="5">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="10">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="11">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="13">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="14">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="9">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="12">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="15" />
+    <tile id="16" />
+    <tile id="17" />
+    <tile id="18" />
+    <tile id="19" />
+    <tile id="20" />
+  </tileset>
+  <tileset source="terrain/Long Grass.tsx" firstgid="443" />
+  <tileset firstgid="493" name="Mountain" columns="7" tilecount="35" tileheight="20" tilewidth="20">
+    <image source="bitmaps/mountain.png" width="140" height="100" trans="008a76" />
+    <tile id="21">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="22">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="28">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="29">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset firstgid="528" name="Sand" columns="7" tilecount="42" tileheight="20" tilewidth="20">
+    <image source="bitmaps/sand.png" width="140" height="120" trans="008a76" />
+    <tile id="28">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="35">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="36">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="38">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="40">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset firstgid="570" name="Shallow Water" columns="3" tilecount="6" tileheight="20" tilewidth="20">
+    <image source="bitmaps/shallowwater.png" width="60" height="40" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset source="terrain/Short Grass.tsx" firstgid="576" />
+  <tileset firstgid="577" name="Snow" columns="8" tilecount="80" tileheight="20" tilewidth="20">
+    <image source="bitmaps/snow.png" width="160" height="200" trans="008a76" />
+    <tile id="11">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="12">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="32">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="33">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="40">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="41">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="43">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset firstgid="657" name="Stone" columns="6" tilecount="36" tileheight="20" tilewidth="20">
+    <image source="bitmaps/stone.png" width="120" height="120" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="12">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="13">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="14">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="18">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="19">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="20">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="24">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="25">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="26">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset source="terrain/Water.tsx" firstgid="693" />
+  <tileset firstgid="696" name="Dirt Dirt - Ridge" columns="3" tilecount="21" tileheight="20" tilewidth="20">
+    <image source="bitmaps/dirt2dirt_ridge.png" width="60" height="140" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="5">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="12">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="14">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="18">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="20">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset source="ridges/Ice Ice - Flat.tsx" firstgid="717" />
+  <tileset source="ridges/LongGrass LongGrass - Hill.tsx" firstgid="738" />
+  <tileset source="ridges/LongGrass LongGrass - Ridge.tsx" firstgid="759" />
+  <tileset source="ridges/Mountain Mountain - Hill.tsx" firstgid="789" />
+  <tileset firstgid="810" name="Mountain Mountain - Ridge" columns="3" tilecount="21" tileheight="20" tilewidth="20">
+    <image source="bitmaps/mountain2mountain_ridge.png" width="60" height="140" trans="008a76" />
+    <tile id="0">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="5">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="10">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="11">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="13">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="14">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <tileset source="ridges/Sand Sand - Hill.tsx" firstgid="831" />
+  <tileset source="ridges/Sand Sand - Ridge.tsx" firstgid="852" />
+  <tileset source="ridges/Snow Snow - Hill.tsx" firstgid="873" />
+  <tileset source="ridges/Snow Snow - ridge.tsx" firstgid="894" />
+  <tileset source="ridges/Stone Stone - Ridge.tsx" firstgid="915" />
+  <tileset firstgid="930" name="rpg_test" columns="32" tilecount="1024" tileheight="20" tilewidth="20">
+    <properties>
+      <property name="embedded_png">
 iVBORw0KGgoAAAANSUhEUgAAAoAAAAKACAYAAAAMzckjAAGfBklEQVR42uy9DbAcV3Xv28fYQpZs
 SdYXxhJYkmVLlr/kOLYK4xg/SFxgQ6UgoZL7ILlwy+8Y4lvkJZWibvKKpAhV4RVF5V6o+N7g57qQ
 BOq9VIIpCpBTEHPBUUwZByQZW0iyLdsgGXP0YR3Zkm05eN78e+bfZ82atXfv3b17Zs45s6qkmenp
@@ -2306,1632 +2306,1632 @@ xM+GEIsJIIPJGYNhiQSq2zY+tCWzraBNwtcy8dczY2iD34+OE5qocpRcpW2PSug6xJymumnbo0RP
 1x7uo0iSWQTbdSUTiI/wMRNIUqjkj77cmRDDIiJnMAFkMBgMy0DyloQI5kn4VERlPUKCA2VMsyO5
 1J6OkMX1mzTThq32bJTD46iiCti1TCC2CKEJucPyeRLB/wcSnwXn4/1woAAAAABJRU5ErkJggg==
 </property>
-  </properties>
-  <image source="../rpg_test.png" width="640" height="640"/>
-  <tile id="33">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="35">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="36">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="40">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="41">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="65">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="67">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="68">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="70">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="72">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="73">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="97">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="12"/>
-  <tile id="13"/>
-  <tile id="14"/>
-  <tile id="15"/>
-  <tile id="16"/>
-  <tile id="17"/>
-  <tile id="18"/>
-  <tile id="19"/>
-  <tile id="20"/>
-  <tile id="21"/>
-  <tile id="22"/>
-  <tile id="23"/>
-  <tile id="102">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="397">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="409">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="429">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="441">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="444">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="30"/>
-  <tile id="31"/>
-  <tile id="461">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="476">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="493">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="537">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="540">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="572">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="38"/>
-  <tile id="0">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="44"/>
-  <tile id="45"/>
-  <tile id="46"/>
-  <tile id="47"/>
-  <tile id="48"/>
-  <tile id="49"/>
-  <tile id="50"/>
-  <tile id="51"/>
-  <tile id="52"/>
-  <tile id="53"/>
-  <tile id="54"/>
-  <tile id="55"/>
-  <tile id="5">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="62"/>
-  <tile id="63"/>
-  <tile id="11">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="24">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="26">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="27">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="32">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="34">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="37">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="39">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="42">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="76"/>
-  <tile id="77"/>
-  <tile id="78"/>
-  <tile id="79"/>
-  <tile id="80"/>
-  <tile id="81"/>
-  <tile id="82"/>
-  <tile id="83"/>
-  <tile id="84"/>
-  <tile id="85"/>
-  <tile id="86"/>
-  <tile id="87"/>
-  <tile id="43">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="56">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="57">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="58">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="59">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="60">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="94"/>
-  <tile id="95"/>
-  <tile id="61">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="64">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="66">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="69">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="71">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="74">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="75">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="88">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="89">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="90">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="91">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="92">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="108"/>
-  <tile id="109"/>
-  <tile id="110"/>
-  <tile id="111"/>
-  <tile id="112"/>
-  <tile id="113"/>
-  <tile id="114"/>
-  <tile id="115"/>
-  <tile id="116"/>
-  <tile id="117"/>
-  <tile id="118"/>
-  <tile id="119"/>
-  <tile id="93">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="121"/>
-  <tile id="96">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="98">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="124"/>
-  <tile id="99">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="126"/>
-  <tile id="127"/>
-  <tile id="100">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="101">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="103">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="131"/>
-  <tile id="132"/>
-  <tile id="104">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="105">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="106">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="136"/>
-  <tile id="137"/>
-  <tile id="138"/>
-  <tile id="139"/>
-  <tile id="140"/>
-  <tile id="141"/>
-  <tile id="142"/>
-  <tile id="143"/>
-  <tile id="144"/>
-  <tile id="145"/>
-  <tile id="146"/>
-  <tile id="147"/>
-  <tile id="148"/>
-  <tile id="149"/>
-  <tile id="150"/>
-  <tile id="151"/>
-  <tile id="107">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="120">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="122">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="123">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="125">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="128">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="158"/>
-  <tile id="159"/>
-  <tile id="160"/>
-  <tile id="161"/>
-  <tile id="162"/>
-  <tile id="163"/>
-  <tile id="164"/>
-  <tile id="165"/>
-  <tile id="166"/>
-  <tile id="167"/>
-  <tile id="168"/>
-  <tile id="169"/>
-  <tile id="170"/>
-  <tile id="171"/>
-  <tile id="172"/>
-  <tile id="173"/>
-  <tile id="174"/>
-  <tile id="175"/>
-  <tile id="176"/>
-  <tile id="177"/>
-  <tile id="178"/>
-  <tile id="179"/>
-  <tile id="180"/>
-  <tile id="129">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="182"/>
-  <tile id="183"/>
-  <tile id="184"/>
-  <tile id="185"/>
-  <tile id="186"/>
-  <tile id="187"/>
-  <tile id="188"/>
-  <tile id="189"/>
-  <tile id="190"/>
-  <tile id="191"/>
-  <tile id="192"/>
-  <tile id="193"/>
-  <tile id="194"/>
-  <tile id="195"/>
-  <tile id="196"/>
-  <tile id="197"/>
-  <tile id="198"/>
-  <tile id="199"/>
-  <tile id="200"/>
-  <tile id="201"/>
-  <tile id="202"/>
-  <tile id="203"/>
-  <tile id="204"/>
-  <tile id="205"/>
-  <tile id="206"/>
-  <tile id="207"/>
-  <tile id="208"/>
-  <tile id="209"/>
-  <tile id="210"/>
-  <tile id="211"/>
-  <tile id="212"/>
-  <tile id="213"/>
-  <tile id="214"/>
-  <tile id="215"/>
-  <tile id="216"/>
-  <tile id="217"/>
-  <tile id="218"/>
-  <tile id="219"/>
-  <tile id="220"/>
-  <tile id="221"/>
-  <tile id="222"/>
-  <tile id="223"/>
-  <tile id="224"/>
-  <tile id="225"/>
-  <tile id="226"/>
-  <tile id="227"/>
-  <tile id="228"/>
-  <tile id="229"/>
-  <tile id="230"/>
-  <tile id="231"/>
-  <tile id="232"/>
-  <tile id="233"/>
-  <tile id="234"/>
-  <tile id="235"/>
-  <tile id="236"/>
-  <tile id="237"/>
-  <tile id="238"/>
-  <tile id="239"/>
-  <tile id="240"/>
-  <tile id="241"/>
-  <tile id="242"/>
-  <tile id="243"/>
-  <tile id="244"/>
-  <tile id="245"/>
-  <tile id="246"/>
-  <tile id="247"/>
-  <tile id="248"/>
-  <tile id="249"/>
-  <tile id="250"/>
-  <tile id="251"/>
-  <tile id="252"/>
-  <tile id="253"/>
-  <tile id="254"/>
-  <tile id="255"/>
-  <tile id="256"/>
-  <tile id="257"/>
-  <tile id="258"/>
-  <tile id="259"/>
-  <tile id="260"/>
-  <tile id="261"/>
-  <tile id="262"/>
-  <tile id="263"/>
-  <tile id="264"/>
-  <tile id="265"/>
-  <tile id="266"/>
-  <tile id="267"/>
-  <tile id="130">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="133">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="134">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="135">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="152">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="153">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="274"/>
-  <tile id="275"/>
-  <tile id="276"/>
-  <tile id="277"/>
-  <tile id="278"/>
-  <tile id="279"/>
-  <tile id="280"/>
-  <tile id="281"/>
-  <tile id="282"/>
-  <tile id="283"/>
-  <tile id="284"/>
-  <tile id="285"/>
-  <tile id="286"/>
-  <tile id="287"/>
-  <tile id="288"/>
-  <tile id="289"/>
-  <tile id="290"/>
-  <tile id="291"/>
-  <tile id="292"/>
-  <tile id="293"/>
-  <tile id="294"/>
-  <tile id="295"/>
-  <tile id="296"/>
-  <tile id="154">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="155">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="156">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="157">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="301"/>
-  <tile id="268">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="269">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="270">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="271">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="306"/>
-  <tile id="307"/>
-  <tile id="308"/>
-  <tile id="309"/>
-  <tile id="310"/>
-  <tile id="311"/>
-  <tile id="312"/>
-  <tile id="313"/>
-  <tile id="314"/>
-  <tile id="315"/>
-  <tile id="316"/>
-  <tile id="317"/>
-  <tile id="318"/>
-  <tile id="319"/>
-  <tile id="320"/>
-  <tile id="321"/>
-  <tile id="322"/>
-  <tile id="323"/>
-  <tile id="324"/>
-  <tile id="325"/>
-  <tile id="326"/>
-  <tile id="327"/>
-  <tile id="328"/>
-  <tile id="272">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="273">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="300">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="302">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="303">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="305">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="332">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="333">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="334">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="338"/>
-  <tile id="339"/>
-  <tile id="340"/>
-  <tile id="341"/>
-  <tile id="342"/>
-  <tile id="343"/>
-  <tile id="344"/>
-  <tile id="345"/>
-  <tile id="346"/>
-  <tile id="347"/>
-  <tile id="348"/>
-  <tile id="349"/>
-  <tile id="350"/>
-  <tile id="351"/>
-  <tile id="352"/>
-  <tile id="353"/>
-  <tile id="354"/>
-  <tile id="355"/>
-  <tile id="356"/>
-  <tile id="357"/>
-  <tile id="358"/>
-  <tile id="359"/>
-  <tile id="360"/>
-  <tile id="335">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="336">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="337">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="364"/>
-  <tile id="365"/>
-  <tile id="366"/>
-  <tile id="394">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="457">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="458">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="370"/>
-  <tile id="371"/>
-  <tile id="372"/>
-  <tile id="459">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="470">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="533">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="376"/>
-  <tile id="377"/>
-  <tile id="378"/>
-  <tile id="379"/>
-  <tile id="380"/>
-  <tile id="381"/>
-  <tile id="382"/>
-  <tile id="383"/>
-  <tile id="384"/>
-  <tile id="385"/>
-  <tile id="386"/>
-  <tile id="387"/>
-  <tile id="388"/>
-  <tile id="389"/>
-  <tile id="390"/>
-  <tile id="391"/>
-  <tile id="392"/>
-  <tile id="534">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="535">
-   <properties>
-    <property name="water" value=""/>
-   </properties>
-  </tile>
-  <tile id="297">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="396"/>
-  <tile id="298">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="398"/>
-  <tile id="399"/>
-  <tile id="400"/>
-  <tile id="401"/>
-  <tile id="402"/>
-  <tile id="403"/>
-  <tile id="404"/>
-  <tile id="299">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="329">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="330">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="408"/>
-  <tile id="331">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="410"/>
-  <tile id="411"/>
-  <tile id="412"/>
-  <tile id="413"/>
-  <tile id="414"/>
-  <tile id="415"/>
-  <tile id="416"/>
-  <tile id="417"/>
-  <tile id="418"/>
-  <tile id="419"/>
-  <tile id="420"/>
-  <tile id="421"/>
-  <tile id="422"/>
-  <tile id="423"/>
-  <tile id="424"/>
-  <tile id="361">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="362">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="363">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="428"/>
-  <tile id="393">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="430"/>
-  <tile id="431"/>
-  <tile id="432"/>
-  <tile id="433"/>
-  <tile id="434"/>
-  <tile id="435"/>
-  <tile id="436"/>
-  <tile id="395">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="425">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="426">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="440"/>
-  <tile id="427">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="442"/>
-  <tile id="443"/>
-  <tile id="373">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="445"/>
-  <tile id="446"/>
-  <tile id="447"/>
-  <tile id="448"/>
-  <tile id="449"/>
-  <tile id="450"/>
-  <tile id="451"/>
-  <tile id="452"/>
-  <tile id="453"/>
-  <tile id="454"/>
-  <tile id="455"/>
-  <tile id="456"/>
-  <tile id="374">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="375">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="405">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="460"/>
-  <tile id="406">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="462"/>
-  <tile id="463"/>
-  <tile id="464"/>
-  <tile id="465"/>
-  <tile id="466"/>
-  <tile id="467"/>
-  <tile id="468"/>
-  <tile id="407">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="437">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="438">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="472"/>
-  <tile id="473"/>
-  <tile id="474"/>
-  <tile id="475"/>
-  <tile id="439">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="477"/>
-  <tile id="478"/>
-  <tile id="479"/>
-  <tile id="480"/>
-  <tile id="481"/>
-  <tile id="482"/>
-  <tile id="483"/>
-  <tile id="484"/>
-  <tile id="485"/>
-  <tile id="486"/>
-  <tile id="487"/>
-  <tile id="488"/>
-  <tile id="489"/>
-  <tile id="490"/>
-  <tile id="491"/>
-  <tile id="492"/>
-  <tile id="469">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="494"/>
-  <tile id="495"/>
-  <tile id="496"/>
-  <tile id="497"/>
-  <tile id="498"/>
-  <tile id="499"/>
-  <tile id="500"/>
-  <tile id="471">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="501">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="502">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="504"/>
-  <tile id="505"/>
-  <tile id="506"/>
-  <tile id="507"/>
-  <tile id="508"/>
-  <tile id="509"/>
-  <tile id="510"/>
-  <tile id="511"/>
-  <tile id="512"/>
-  <tile id="513"/>
-  <tile id="514"/>
-  <tile id="515"/>
-  <tile id="516"/>
-  <tile id="517"/>
-  <tile id="518"/>
-  <tile id="519"/>
-  <tile id="520"/>
-  <tile id="521"/>
-  <tile id="522"/>
-  <tile id="523"/>
-  <tile id="524"/>
-  <tile id="525"/>
-  <tile id="526"/>
-  <tile id="527"/>
-  <tile id="528"/>
-  <tile id="529"/>
-  <tile id="530"/>
-  <tile id="531"/>
-  <tile id="532"/>
-  <tile id="503">
-   <properties>
-    <property name="cliff-soft" value=""/>
-   </properties>
-  </tile>
-  <tile id="304">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="367">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="536"/>
-  <tile id="368">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="538"/>
-  <tile id="539"/>
-  <tile id="369">
-   <properties>
-    <property name="lava" value=""/>
-   </properties>
-  </tile>
-  <tile id="541"/>
-  <tile id="542"/>
-  <tile id="543"/>
-  <tile id="544"/>
-  <tile id="545"/>
-  <tile id="546"/>
-  <tile id="547"/>
-  <tile id="548"/>
-  <tile id="549"/>
-  <tile id="550"/>
-  <tile id="551"/>
-  <tile id="552"/>
-  <tile id="553"/>
-  <tile id="554"/>
-  <tile id="555"/>
-  <tile id="556"/>
-  <tile id="557"/>
-  <tile id="558"/>
-  <tile id="559"/>
-  <tile id="560"/>
-  <tile id="561"/>
-  <tile id="562"/>
-  <tile id="563"/>
-  <tile id="564"/>
-  <tile id="565"/>
-  <tile id="566"/>
-  <tile id="567"/>
-  <tile id="568"/>
-  <tile id="569"/>
-  <tile id="570"/>
-  <tile id="571"/>
-  <tile id="181">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="573"/>
-  <tile id="574"/>
-  <tile id="575"/>
-  <tile id="576"/>
-  <tile id="577"/>
-  <tile id="578"/>
-  <tile id="579"/>
-  <tile id="580"/>
-  <tile id="581"/>
-  <tile id="582"/>
-  <tile id="583"/>
-  <tile id="584"/>
-  <tile id="585"/>
-  <tile id="586"/>
-  <tile id="587"/>
-  <tile id="588"/>
-  <tile id="589"/>
-  <tile id="590"/>
-  <tile id="591"/>
-  <tile id="592"/>
-  <tile id="593"/>
-  <tile id="594"/>
-  <tile id="595"/>
-  <tile id="596"/>
-  <tile id="597"/>
-  <tile id="598"/>
-  <tile id="599"/>
-  <tile id="600"/>
-  <tile id="601"/>
-  <tile id="602"/>
-  <tile id="603"/>
-  <tile id="604"/>
-  <tile id="605"/>
-  <tile id="606"/>
-  <tile id="607"/>
-  <tile id="608"/>
-  <tile id="609"/>
-  <tile id="610"/>
-  <tile id="611"/>
-  <tile id="612"/>
-  <tile id="613"/>
-  <tile id="614"/>
-  <tile id="615"/>
-  <tile id="616"/>
-  <tile id="617"/>
-  <tile id="618"/>
-  <tile id="619"/>
-  <tile id="620"/>
-  <tile id="621"/>
-  <tile id="622"/>
-  <tile id="623"/>
-  <tile id="624"/>
-  <tile id="625"/>
-  <tile id="626"/>
-  <tile id="627"/>
-  <tile id="628"/>
-  <tile id="629"/>
-  <tile id="630"/>
-  <tile id="631"/>
-  <tile id="632"/>
-  <tile id="633"/>
-  <tile id="634"/>
-  <tile id="635"/>
-  <tile id="636"/>
-  <tile id="637"/>
-  <tile id="638"/>
-  <tile id="639"/>
-  <tile id="640"/>
-  <tile id="641"/>
-  <tile id="642"/>
-  <tile id="643"/>
-  <tile id="644"/>
-  <tile id="645"/>
-  <tile id="646"/>
-  <tile id="647"/>
-  <tile id="648"/>
-  <tile id="649"/>
-  <tile id="650"/>
-  <tile id="651"/>
-  <tile id="652"/>
-  <tile id="653"/>
-  <tile id="654"/>
-  <tile id="655"/>
-  <tile id="656"/>
-  <tile id="657"/>
-  <tile id="658"/>
-  <tile id="659"/>
-  <tile id="660"/>
-  <tile id="661"/>
-  <tile id="662"/>
-  <tile id="663"/>
-  <tile id="664"/>
-  <tile id="665"/>
-  <tile id="666"/>
-  <tile id="667"/>
-  <tile id="668"/>
-  <tile id="669"/>
-  <tile id="670"/>
-  <tile id="671"/>
-  <tile id="672"/>
-  <tile id="673"/>
-  <tile id="674"/>
-  <tile id="675"/>
-  <tile id="676"/>
-  <tile id="677"/>
-  <tile id="678"/>
-  <tile id="679"/>
-  <tile id="680"/>
-  <tile id="681"/>
-  <tile id="682"/>
-  <tile id="683"/>
-  <tile id="684"/>
-  <tile id="685"/>
-  <tile id="686"/>
-  <tile id="687"/>
-  <tile id="688"/>
-  <tile id="689"/>
-  <tile id="690"/>
-  <tile id="691"/>
-  <tile id="692"/>
-  <tile id="693"/>
-  <tile id="694"/>
-  <tile id="695"/>
-  <tile id="696"/>
-  <tile id="697"/>
-  <tile id="698"/>
-  <tile id="699"/>
-  <tile id="700"/>
-  <tile id="701"/>
-  <tile id="702"/>
-  <tile id="703"/>
-  <tile id="704"/>
-  <tile id="705"/>
-  <tile id="706"/>
-  <tile id="707"/>
-  <tile id="708"/>
-  <tile id="709"/>
-  <tile id="710"/>
-  <tile id="711"/>
-  <tile id="712"/>
-  <tile id="713"/>
-  <tile id="714"/>
-  <tile id="715"/>
-  <tile id="716"/>
-  <tile id="717"/>
-  <tile id="718"/>
-  <tile id="719"/>
-  <tile id="720"/>
-  <tile id="721"/>
-  <tile id="722"/>
-  <tile id="723"/>
-  <tile id="724"/>
-  <tile id="725"/>
-  <tile id="726"/>
-  <tile id="727"/>
-  <tile id="728"/>
-  <tile id="729"/>
-  <tile id="730"/>
-  <tile id="731"/>
-  <tile id="732"/>
-  <tile id="733"/>
-  <tile id="734"/>
-  <tile id="735"/>
-  <tile id="736"/>
-  <tile id="737"/>
-  <tile id="738"/>
-  <tile id="739"/>
-  <tile id="740"/>
-  <tile id="741"/>
-  <tile id="742"/>
-  <tile id="743"/>
-  <tile id="744"/>
-  <tile id="745"/>
-  <tile id="746"/>
-  <tile id="747"/>
-  <tile id="748"/>
-  <tile id="749"/>
-  <tile id="750"/>
-  <tile id="751"/>
-  <tile id="752"/>
-  <tile id="753"/>
-  <tile id="754"/>
-  <tile id="755"/>
-  <tile id="756"/>
-  <tile id="757"/>
-  <tile id="758"/>
-  <tile id="759"/>
-  <tile id="760"/>
-  <tile id="761"/>
-  <tile id="762"/>
-  <tile id="763"/>
-  <tile id="764"/>
-  <tile id="765"/>
-  <tile id="766"/>
-  <tile id="767"/>
-  <tile id="768"/>
-  <tile id="769"/>
-  <tile id="770"/>
-  <tile id="771"/>
-  <tile id="772"/>
-  <tile id="773"/>
-  <tile id="774"/>
-  <tile id="775"/>
-  <tile id="776"/>
-  <tile id="777"/>
-  <tile id="778"/>
-  <tile id="779"/>
-  <tile id="780"/>
-  <tile id="781"/>
-  <tile id="782"/>
-  <tile id="783"/>
-  <tile id="784"/>
-  <tile id="785"/>
-  <tile id="786"/>
-  <tile id="787"/>
-  <tile id="788"/>
-  <tile id="789"/>
-  <tile id="790"/>
-  <tile id="791"/>
-  <tile id="792"/>
-  <tile id="793"/>
-  <tile id="794"/>
-  <tile id="795"/>
-  <tile id="796"/>
-  <tile id="797"/>
-  <tile id="798"/>
-  <tile id="799"/>
-  <tile id="800"/>
-  <tile id="801"/>
-  <tile id="802"/>
-  <tile id="803"/>
-  <tile id="804"/>
-  <tile id="805"/>
-  <tile id="806"/>
-  <tile id="807"/>
-  <tile id="808"/>
-  <tile id="809"/>
-  <tile id="810"/>
-  <tile id="811"/>
-  <tile id="812"/>
-  <tile id="813"/>
-  <tile id="814"/>
-  <tile id="815"/>
-  <tile id="816"/>
-  <tile id="817"/>
-  <tile id="818"/>
-  <tile id="819"/>
-  <tile id="820"/>
-  <tile id="821"/>
-  <tile id="822"/>
-  <tile id="823"/>
-  <tile id="824"/>
-  <tile id="825"/>
-  <tile id="826"/>
-  <tile id="827"/>
-  <tile id="828"/>
-  <tile id="829"/>
-  <tile id="830"/>
-  <tile id="831"/>
-  <tile id="832"/>
-  <tile id="833"/>
-  <tile id="834"/>
-  <tile id="835"/>
-  <tile id="836"/>
-  <tile id="837"/>
-  <tile id="838"/>
-  <tile id="839"/>
-  <tile id="840"/>
-  <tile id="841"/>
-  <tile id="842"/>
-  <tile id="843"/>
-  <tile id="844"/>
-  <tile id="845"/>
-  <tile id="846"/>
-  <tile id="847"/>
-  <tile id="848"/>
-  <tile id="849"/>
-  <tile id="850"/>
-  <tile id="851"/>
-  <tile id="852"/>
-  <tile id="853"/>
-  <tile id="854"/>
-  <tile id="855"/>
-  <tile id="856"/>
-  <tile id="857"/>
-  <tile id="858"/>
-  <tile id="859"/>
-  <tile id="860"/>
-  <tile id="861"/>
-  <tile id="862"/>
-  <tile id="863"/>
-  <tile id="864"/>
-  <tile id="865"/>
-  <tile id="866"/>
-  <tile id="867"/>
-  <tile id="868"/>
-  <tile id="869"/>
-  <tile id="870"/>
-  <tile id="871"/>
-  <tile id="872"/>
-  <tile id="873"/>
-  <tile id="874"/>
-  <tile id="875"/>
-  <tile id="876"/>
-  <tile id="877"/>
-  <tile id="878"/>
-  <tile id="879"/>
-  <tile id="880"/>
-  <tile id="881"/>
-  <tile id="882"/>
-  <tile id="883"/>
-  <tile id="884"/>
-  <tile id="885"/>
-  <tile id="886"/>
-  <tile id="887"/>
-  <tile id="888"/>
-  <tile id="889"/>
-  <tile id="890"/>
-  <tile id="891"/>
-  <tile id="892"/>
-  <tile id="893"/>
-  <tile id="894"/>
-  <tile id="895"/>
-  <tile id="896"/>
-  <tile id="897"/>
-  <tile id="898"/>
-  <tile id="899"/>
-  <tile id="900"/>
-  <tile id="901"/>
-  <tile id="902"/>
-  <tile id="903"/>
-  <tile id="904"/>
-  <tile id="905"/>
-  <tile id="906"/>
-  <tile id="907"/>
-  <tile id="908"/>
-  <tile id="909"/>
-  <tile id="910"/>
-  <tile id="911"/>
-  <tile id="912"/>
-  <tile id="913"/>
-  <tile id="914"/>
-  <tile id="915"/>
-  <tile id="916"/>
-  <tile id="917"/>
-  <tile id="918"/>
-  <tile id="919"/>
-  <tile id="920"/>
-  <tile id="921"/>
-  <tile id="922"/>
-  <tile id="923"/>
-  <tile id="924"/>
-  <tile id="925"/>
-  <tile id="926"/>
-  <tile id="927"/>
-  <tile id="928"/>
-  <tile id="929"/>
-  <tile id="930"/>
-  <tile id="931"/>
-  <tile id="932"/>
-  <tile id="933"/>
-  <tile id="934"/>
-  <tile id="935"/>
-  <tile id="936"/>
-  <tile id="937"/>
-  <tile id="938"/>
-  <tile id="939"/>
-  <tile id="940"/>
-  <tile id="941"/>
-  <tile id="942"/>
-  <tile id="943"/>
-  <tile id="944"/>
-  <tile id="945"/>
-  <tile id="946"/>
-  <tile id="947"/>
-  <tile id="948"/>
-  <tile id="949"/>
-  <tile id="950"/>
-  <tile id="951"/>
-  <tile id="952"/>
-  <tile id="953"/>
-  <tile id="954"/>
-  <tile id="955"/>
-  <tile id="956"/>
-  <tile id="957"/>
-  <tile id="958"/>
-  <tile id="959"/>
-  <tile id="960"/>
-  <tile id="961"/>
-  <tile id="962"/>
-  <tile id="963"/>
-  <tile id="964"/>
-  <tile id="965"/>
-  <tile id="966"/>
-  <tile id="967"/>
-  <tile id="968"/>
-  <tile id="969"/>
-  <tile id="970"/>
-  <tile id="971"/>
-  <tile id="972"/>
-  <tile id="973"/>
-  <tile id="974"/>
-  <tile id="975"/>
-  <tile id="976"/>
-  <tile id="977"/>
-  <tile id="978"/>
-  <tile id="979"/>
-  <tile id="980"/>
-  <tile id="981"/>
-  <tile id="982"/>
-  <tile id="983"/>
-  <tile id="984"/>
-  <tile id="985"/>
-  <tile id="986"/>
-  <tile id="987"/>
-  <tile id="988"/>
-  <tile id="989"/>
-  <tile id="990"/>
-  <tile id="991"/>
-  <tile id="992"/>
-  <tile id="993"/>
-  <tile id="994"/>
-  <tile id="995"/>
-  <tile id="996"/>
-  <tile id="997"/>
-  <tile id="998"/>
-  <tile id="999"/>
-  <tile id="1000"/>
-  <tile id="1001"/>
-  <tile id="1002"/>
-  <tile id="1003"/>
-  <tile id="1004"/>
-  <tile id="1005"/>
-  <tile id="1006"/>
-  <tile id="1007"/>
-  <tile id="1008"/>
-  <tile id="1009"/>
-  <tile id="1010"/>
-  <tile id="1011"/>
-  <tile id="1012"/>
-  <tile id="1013"/>
-  <tile id="1014"/>
-  <tile id="1015"/>
-  <tile id="1016"/>
-  <tile id="1017"/>
-  <tile id="1018"/>
-  <tile id="1019"/>
-  <tile id="1020"/>
-  <tile id="1021"/>
-  <tile id="1022"/>
-  <tile id="1023"/>
- </tileset>
- <tileset firstgid="1954" name="b" tilewidth="20" tileheight="20" tilecount="1" columns="1">
-  <properties>
-   <property name="embedded_png">
+    </properties>
+    <image source="../rpg_test.png" width="640" height="640" />
+    <tile id="33">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="35">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="36">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="40">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="41">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="65">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="67">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="68">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="70">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="72">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="73">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="97">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="12" />
+    <tile id="13" />
+    <tile id="14" />
+    <tile id="15" />
+    <tile id="16" />
+    <tile id="17" />
+    <tile id="18" />
+    <tile id="19" />
+    <tile id="20" />
+    <tile id="21" />
+    <tile id="22" />
+    <tile id="23" />
+    <tile id="102">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="397">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="409">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="429">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="441">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="444">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="30" />
+    <tile id="31" />
+    <tile id="461">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="476">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="493">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="537">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="540">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="572">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="38" />
+    <tile id="0">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="4">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="44" />
+    <tile id="45" />
+    <tile id="46" />
+    <tile id="47" />
+    <tile id="48" />
+    <tile id="49" />
+    <tile id="50" />
+    <tile id="51" />
+    <tile id="52" />
+    <tile id="53" />
+    <tile id="54" />
+    <tile id="55" />
+    <tile id="5">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="9">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="10">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="62" />
+    <tile id="63" />
+    <tile id="11">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="24">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="25">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="26">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="27">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="28">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="29">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="32">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="34">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="37">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="39">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="42">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="76" />
+    <tile id="77" />
+    <tile id="78" />
+    <tile id="79" />
+    <tile id="80" />
+    <tile id="81" />
+    <tile id="82" />
+    <tile id="83" />
+    <tile id="84" />
+    <tile id="85" />
+    <tile id="86" />
+    <tile id="87" />
+    <tile id="43">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="56">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="57">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="58">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="59">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="60">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="94" />
+    <tile id="95" />
+    <tile id="61">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="64">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="66">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="69">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="71">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="74">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="75">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="88">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="89">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="90">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="91">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="92">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="108" />
+    <tile id="109" />
+    <tile id="110" />
+    <tile id="111" />
+    <tile id="112" />
+    <tile id="113" />
+    <tile id="114" />
+    <tile id="115" />
+    <tile id="116" />
+    <tile id="117" />
+    <tile id="118" />
+    <tile id="119" />
+    <tile id="93">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="121" />
+    <tile id="96">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="98">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="124" />
+    <tile id="99">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="126" />
+    <tile id="127" />
+    <tile id="100">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="101">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="103">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="131" />
+    <tile id="132" />
+    <tile id="104">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="105">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="106">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="136" />
+    <tile id="137" />
+    <tile id="138" />
+    <tile id="139" />
+    <tile id="140" />
+    <tile id="141" />
+    <tile id="142" />
+    <tile id="143" />
+    <tile id="144" />
+    <tile id="145" />
+    <tile id="146" />
+    <tile id="147" />
+    <tile id="148" />
+    <tile id="149" />
+    <tile id="150" />
+    <tile id="151" />
+    <tile id="107">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="120">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="122">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="123">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="125">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="128">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="158" />
+    <tile id="159" />
+    <tile id="160" />
+    <tile id="161" />
+    <tile id="162" />
+    <tile id="163" />
+    <tile id="164" />
+    <tile id="165" />
+    <tile id="166" />
+    <tile id="167" />
+    <tile id="168" />
+    <tile id="169" />
+    <tile id="170" />
+    <tile id="171" />
+    <tile id="172" />
+    <tile id="173" />
+    <tile id="174" />
+    <tile id="175" />
+    <tile id="176" />
+    <tile id="177" />
+    <tile id="178" />
+    <tile id="179" />
+    <tile id="180" />
+    <tile id="129">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="182" />
+    <tile id="183" />
+    <tile id="184" />
+    <tile id="185" />
+    <tile id="186" />
+    <tile id="187" />
+    <tile id="188" />
+    <tile id="189" />
+    <tile id="190" />
+    <tile id="191" />
+    <tile id="192" />
+    <tile id="193" />
+    <tile id="194" />
+    <tile id="195" />
+    <tile id="196" />
+    <tile id="197" />
+    <tile id="198" />
+    <tile id="199" />
+    <tile id="200" />
+    <tile id="201" />
+    <tile id="202" />
+    <tile id="203" />
+    <tile id="204" />
+    <tile id="205" />
+    <tile id="206" />
+    <tile id="207" />
+    <tile id="208" />
+    <tile id="209" />
+    <tile id="210" />
+    <tile id="211" />
+    <tile id="212" />
+    <tile id="213" />
+    <tile id="214" />
+    <tile id="215" />
+    <tile id="216" />
+    <tile id="217" />
+    <tile id="218" />
+    <tile id="219" />
+    <tile id="220" />
+    <tile id="221" />
+    <tile id="222" />
+    <tile id="223" />
+    <tile id="224" />
+    <tile id="225" />
+    <tile id="226" />
+    <tile id="227" />
+    <tile id="228" />
+    <tile id="229" />
+    <tile id="230" />
+    <tile id="231" />
+    <tile id="232" />
+    <tile id="233" />
+    <tile id="234" />
+    <tile id="235" />
+    <tile id="236" />
+    <tile id="237" />
+    <tile id="238" />
+    <tile id="239" />
+    <tile id="240" />
+    <tile id="241" />
+    <tile id="242" />
+    <tile id="243" />
+    <tile id="244" />
+    <tile id="245" />
+    <tile id="246" />
+    <tile id="247" />
+    <tile id="248" />
+    <tile id="249" />
+    <tile id="250" />
+    <tile id="251" />
+    <tile id="252" />
+    <tile id="253" />
+    <tile id="254" />
+    <tile id="255" />
+    <tile id="256" />
+    <tile id="257" />
+    <tile id="258" />
+    <tile id="259" />
+    <tile id="260" />
+    <tile id="261" />
+    <tile id="262" />
+    <tile id="263" />
+    <tile id="264" />
+    <tile id="265" />
+    <tile id="266" />
+    <tile id="267" />
+    <tile id="130">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="133">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="134">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="135">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="152">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="153">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="274" />
+    <tile id="275" />
+    <tile id="276" />
+    <tile id="277" />
+    <tile id="278" />
+    <tile id="279" />
+    <tile id="280" />
+    <tile id="281" />
+    <tile id="282" />
+    <tile id="283" />
+    <tile id="284" />
+    <tile id="285" />
+    <tile id="286" />
+    <tile id="287" />
+    <tile id="288" />
+    <tile id="289" />
+    <tile id="290" />
+    <tile id="291" />
+    <tile id="292" />
+    <tile id="293" />
+    <tile id="294" />
+    <tile id="295" />
+    <tile id="296" />
+    <tile id="154">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="155">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="156">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="157">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="301" />
+    <tile id="268">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="269">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="270">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="271">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="306" />
+    <tile id="307" />
+    <tile id="308" />
+    <tile id="309" />
+    <tile id="310" />
+    <tile id="311" />
+    <tile id="312" />
+    <tile id="313" />
+    <tile id="314" />
+    <tile id="315" />
+    <tile id="316" />
+    <tile id="317" />
+    <tile id="318" />
+    <tile id="319" />
+    <tile id="320" />
+    <tile id="321" />
+    <tile id="322" />
+    <tile id="323" />
+    <tile id="324" />
+    <tile id="325" />
+    <tile id="326" />
+    <tile id="327" />
+    <tile id="328" />
+    <tile id="272">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="273">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="300">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="302">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="303">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="305">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="332">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="333">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="334">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="338" />
+    <tile id="339" />
+    <tile id="340" />
+    <tile id="341" />
+    <tile id="342" />
+    <tile id="343" />
+    <tile id="344" />
+    <tile id="345" />
+    <tile id="346" />
+    <tile id="347" />
+    <tile id="348" />
+    <tile id="349" />
+    <tile id="350" />
+    <tile id="351" />
+    <tile id="352" />
+    <tile id="353" />
+    <tile id="354" />
+    <tile id="355" />
+    <tile id="356" />
+    <tile id="357" />
+    <tile id="358" />
+    <tile id="359" />
+    <tile id="360" />
+    <tile id="335">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="336">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="337">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="364" />
+    <tile id="365" />
+    <tile id="366" />
+    <tile id="394">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="457">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="458">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="370" />
+    <tile id="371" />
+    <tile id="372" />
+    <tile id="459">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="470">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="533">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="376" />
+    <tile id="377" />
+    <tile id="378" />
+    <tile id="379" />
+    <tile id="380" />
+    <tile id="381" />
+    <tile id="382" />
+    <tile id="383" />
+    <tile id="384" />
+    <tile id="385" />
+    <tile id="386" />
+    <tile id="387" />
+    <tile id="388" />
+    <tile id="389" />
+    <tile id="390" />
+    <tile id="391" />
+    <tile id="392" />
+    <tile id="534">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="535">
+      <properties>
+        <property name="water" value="" />
+      </properties>
+    </tile>
+    <tile id="297">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="396" />
+    <tile id="298">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="398" />
+    <tile id="399" />
+    <tile id="400" />
+    <tile id="401" />
+    <tile id="402" />
+    <tile id="403" />
+    <tile id="404" />
+    <tile id="299">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="329">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="330">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="408" />
+    <tile id="331">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="410" />
+    <tile id="411" />
+    <tile id="412" />
+    <tile id="413" />
+    <tile id="414" />
+    <tile id="415" />
+    <tile id="416" />
+    <tile id="417" />
+    <tile id="418" />
+    <tile id="419" />
+    <tile id="420" />
+    <tile id="421" />
+    <tile id="422" />
+    <tile id="423" />
+    <tile id="424" />
+    <tile id="361">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="362">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="363">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="428" />
+    <tile id="393">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="430" />
+    <tile id="431" />
+    <tile id="432" />
+    <tile id="433" />
+    <tile id="434" />
+    <tile id="435" />
+    <tile id="436" />
+    <tile id="395">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="425">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="426">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="440" />
+    <tile id="427">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="442" />
+    <tile id="443" />
+    <tile id="373">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="445" />
+    <tile id="446" />
+    <tile id="447" />
+    <tile id="448" />
+    <tile id="449" />
+    <tile id="450" />
+    <tile id="451" />
+    <tile id="452" />
+    <tile id="453" />
+    <tile id="454" />
+    <tile id="455" />
+    <tile id="456" />
+    <tile id="374">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="375">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="405">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="460" />
+    <tile id="406">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="462" />
+    <tile id="463" />
+    <tile id="464" />
+    <tile id="465" />
+    <tile id="466" />
+    <tile id="467" />
+    <tile id="468" />
+    <tile id="407">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="437">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="438">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="472" />
+    <tile id="473" />
+    <tile id="474" />
+    <tile id="475" />
+    <tile id="439">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="477" />
+    <tile id="478" />
+    <tile id="479" />
+    <tile id="480" />
+    <tile id="481" />
+    <tile id="482" />
+    <tile id="483" />
+    <tile id="484" />
+    <tile id="485" />
+    <tile id="486" />
+    <tile id="487" />
+    <tile id="488" />
+    <tile id="489" />
+    <tile id="490" />
+    <tile id="491" />
+    <tile id="492" />
+    <tile id="469">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="494" />
+    <tile id="495" />
+    <tile id="496" />
+    <tile id="497" />
+    <tile id="498" />
+    <tile id="499" />
+    <tile id="500" />
+    <tile id="471">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="501">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="502">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="504" />
+    <tile id="505" />
+    <tile id="506" />
+    <tile id="507" />
+    <tile id="508" />
+    <tile id="509" />
+    <tile id="510" />
+    <tile id="511" />
+    <tile id="512" />
+    <tile id="513" />
+    <tile id="514" />
+    <tile id="515" />
+    <tile id="516" />
+    <tile id="517" />
+    <tile id="518" />
+    <tile id="519" />
+    <tile id="520" />
+    <tile id="521" />
+    <tile id="522" />
+    <tile id="523" />
+    <tile id="524" />
+    <tile id="525" />
+    <tile id="526" />
+    <tile id="527" />
+    <tile id="528" />
+    <tile id="529" />
+    <tile id="530" />
+    <tile id="531" />
+    <tile id="532" />
+    <tile id="503">
+      <properties>
+        <property name="cliff-soft" value="" />
+      </properties>
+    </tile>
+    <tile id="304">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="367">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="536" />
+    <tile id="368">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="538" />
+    <tile id="539" />
+    <tile id="369">
+      <properties>
+        <property name="lava" value="" />
+      </properties>
+    </tile>
+    <tile id="541" />
+    <tile id="542" />
+    <tile id="543" />
+    <tile id="544" />
+    <tile id="545" />
+    <tile id="546" />
+    <tile id="547" />
+    <tile id="548" />
+    <tile id="549" />
+    <tile id="550" />
+    <tile id="551" />
+    <tile id="552" />
+    <tile id="553" />
+    <tile id="554" />
+    <tile id="555" />
+    <tile id="556" />
+    <tile id="557" />
+    <tile id="558" />
+    <tile id="559" />
+    <tile id="560" />
+    <tile id="561" />
+    <tile id="562" />
+    <tile id="563" />
+    <tile id="564" />
+    <tile id="565" />
+    <tile id="566" />
+    <tile id="567" />
+    <tile id="568" />
+    <tile id="569" />
+    <tile id="570" />
+    <tile id="571" />
+    <tile id="181">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="573" />
+    <tile id="574" />
+    <tile id="575" />
+    <tile id="576" />
+    <tile id="577" />
+    <tile id="578" />
+    <tile id="579" />
+    <tile id="580" />
+    <tile id="581" />
+    <tile id="582" />
+    <tile id="583" />
+    <tile id="584" />
+    <tile id="585" />
+    <tile id="586" />
+    <tile id="587" />
+    <tile id="588" />
+    <tile id="589" />
+    <tile id="590" />
+    <tile id="591" />
+    <tile id="592" />
+    <tile id="593" />
+    <tile id="594" />
+    <tile id="595" />
+    <tile id="596" />
+    <tile id="597" />
+    <tile id="598" />
+    <tile id="599" />
+    <tile id="600" />
+    <tile id="601" />
+    <tile id="602" />
+    <tile id="603" />
+    <tile id="604" />
+    <tile id="605" />
+    <tile id="606" />
+    <tile id="607" />
+    <tile id="608" />
+    <tile id="609" />
+    <tile id="610" />
+    <tile id="611" />
+    <tile id="612" />
+    <tile id="613" />
+    <tile id="614" />
+    <tile id="615" />
+    <tile id="616" />
+    <tile id="617" />
+    <tile id="618" />
+    <tile id="619" />
+    <tile id="620" />
+    <tile id="621" />
+    <tile id="622" />
+    <tile id="623" />
+    <tile id="624" />
+    <tile id="625" />
+    <tile id="626" />
+    <tile id="627" />
+    <tile id="628" />
+    <tile id="629" />
+    <tile id="630" />
+    <tile id="631" />
+    <tile id="632" />
+    <tile id="633" />
+    <tile id="634" />
+    <tile id="635" />
+    <tile id="636" />
+    <tile id="637" />
+    <tile id="638" />
+    <tile id="639" />
+    <tile id="640" />
+    <tile id="641" />
+    <tile id="642" />
+    <tile id="643" />
+    <tile id="644" />
+    <tile id="645" />
+    <tile id="646" />
+    <tile id="647" />
+    <tile id="648" />
+    <tile id="649" />
+    <tile id="650" />
+    <tile id="651" />
+    <tile id="652" />
+    <tile id="653" />
+    <tile id="654" />
+    <tile id="655" />
+    <tile id="656" />
+    <tile id="657" />
+    <tile id="658" />
+    <tile id="659" />
+    <tile id="660" />
+    <tile id="661" />
+    <tile id="662" />
+    <tile id="663" />
+    <tile id="664" />
+    <tile id="665" />
+    <tile id="666" />
+    <tile id="667" />
+    <tile id="668" />
+    <tile id="669" />
+    <tile id="670" />
+    <tile id="671" />
+    <tile id="672" />
+    <tile id="673" />
+    <tile id="674" />
+    <tile id="675" />
+    <tile id="676" />
+    <tile id="677" />
+    <tile id="678" />
+    <tile id="679" />
+    <tile id="680" />
+    <tile id="681" />
+    <tile id="682" />
+    <tile id="683" />
+    <tile id="684" />
+    <tile id="685" />
+    <tile id="686" />
+    <tile id="687" />
+    <tile id="688" />
+    <tile id="689" />
+    <tile id="690" />
+    <tile id="691" />
+    <tile id="692" />
+    <tile id="693" />
+    <tile id="694" />
+    <tile id="695" />
+    <tile id="696" />
+    <tile id="697" />
+    <tile id="698" />
+    <tile id="699" />
+    <tile id="700" />
+    <tile id="701" />
+    <tile id="702" />
+    <tile id="703" />
+    <tile id="704" />
+    <tile id="705" />
+    <tile id="706" />
+    <tile id="707" />
+    <tile id="708" />
+    <tile id="709" />
+    <tile id="710" />
+    <tile id="711" />
+    <tile id="712" />
+    <tile id="713" />
+    <tile id="714" />
+    <tile id="715" />
+    <tile id="716" />
+    <tile id="717" />
+    <tile id="718" />
+    <tile id="719" />
+    <tile id="720" />
+    <tile id="721" />
+    <tile id="722" />
+    <tile id="723" />
+    <tile id="724" />
+    <tile id="725" />
+    <tile id="726" />
+    <tile id="727" />
+    <tile id="728" />
+    <tile id="729" />
+    <tile id="730" />
+    <tile id="731" />
+    <tile id="732" />
+    <tile id="733" />
+    <tile id="734" />
+    <tile id="735" />
+    <tile id="736" />
+    <tile id="737" />
+    <tile id="738" />
+    <tile id="739" />
+    <tile id="740" />
+    <tile id="741" />
+    <tile id="742" />
+    <tile id="743" />
+    <tile id="744" />
+    <tile id="745" />
+    <tile id="746" />
+    <tile id="747" />
+    <tile id="748" />
+    <tile id="749" />
+    <tile id="750" />
+    <tile id="751" />
+    <tile id="752" />
+    <tile id="753" />
+    <tile id="754" />
+    <tile id="755" />
+    <tile id="756" />
+    <tile id="757" />
+    <tile id="758" />
+    <tile id="759" />
+    <tile id="760" />
+    <tile id="761" />
+    <tile id="762" />
+    <tile id="763" />
+    <tile id="764" />
+    <tile id="765" />
+    <tile id="766" />
+    <tile id="767" />
+    <tile id="768" />
+    <tile id="769" />
+    <tile id="770" />
+    <tile id="771" />
+    <tile id="772" />
+    <tile id="773" />
+    <tile id="774" />
+    <tile id="775" />
+    <tile id="776" />
+    <tile id="777" />
+    <tile id="778" />
+    <tile id="779" />
+    <tile id="780" />
+    <tile id="781" />
+    <tile id="782" />
+    <tile id="783" />
+    <tile id="784" />
+    <tile id="785" />
+    <tile id="786" />
+    <tile id="787" />
+    <tile id="788" />
+    <tile id="789" />
+    <tile id="790" />
+    <tile id="791" />
+    <tile id="792" />
+    <tile id="793" />
+    <tile id="794" />
+    <tile id="795" />
+    <tile id="796" />
+    <tile id="797" />
+    <tile id="798" />
+    <tile id="799" />
+    <tile id="800" />
+    <tile id="801" />
+    <tile id="802" />
+    <tile id="803" />
+    <tile id="804" />
+    <tile id="805" />
+    <tile id="806" />
+    <tile id="807" />
+    <tile id="808" />
+    <tile id="809" />
+    <tile id="810" />
+    <tile id="811" />
+    <tile id="812" />
+    <tile id="813" />
+    <tile id="814" />
+    <tile id="815" />
+    <tile id="816" />
+    <tile id="817" />
+    <tile id="818" />
+    <tile id="819" />
+    <tile id="820" />
+    <tile id="821" />
+    <tile id="822" />
+    <tile id="823" />
+    <tile id="824" />
+    <tile id="825" />
+    <tile id="826" />
+    <tile id="827" />
+    <tile id="828" />
+    <tile id="829" />
+    <tile id="830" />
+    <tile id="831" />
+    <tile id="832" />
+    <tile id="833" />
+    <tile id="834" />
+    <tile id="835" />
+    <tile id="836" />
+    <tile id="837" />
+    <tile id="838" />
+    <tile id="839" />
+    <tile id="840" />
+    <tile id="841" />
+    <tile id="842" />
+    <tile id="843" />
+    <tile id="844" />
+    <tile id="845" />
+    <tile id="846" />
+    <tile id="847" />
+    <tile id="848" />
+    <tile id="849" />
+    <tile id="850" />
+    <tile id="851" />
+    <tile id="852" />
+    <tile id="853" />
+    <tile id="854" />
+    <tile id="855" />
+    <tile id="856" />
+    <tile id="857" />
+    <tile id="858" />
+    <tile id="859" />
+    <tile id="860" />
+    <tile id="861" />
+    <tile id="862" />
+    <tile id="863" />
+    <tile id="864" />
+    <tile id="865" />
+    <tile id="866" />
+    <tile id="867" />
+    <tile id="868" />
+    <tile id="869" />
+    <tile id="870" />
+    <tile id="871" />
+    <tile id="872" />
+    <tile id="873" />
+    <tile id="874" />
+    <tile id="875" />
+    <tile id="876" />
+    <tile id="877" />
+    <tile id="878" />
+    <tile id="879" />
+    <tile id="880" />
+    <tile id="881" />
+    <tile id="882" />
+    <tile id="883" />
+    <tile id="884" />
+    <tile id="885" />
+    <tile id="886" />
+    <tile id="887" />
+    <tile id="888" />
+    <tile id="889" />
+    <tile id="890" />
+    <tile id="891" />
+    <tile id="892" />
+    <tile id="893" />
+    <tile id="894" />
+    <tile id="895" />
+    <tile id="896" />
+    <tile id="897" />
+    <tile id="898" />
+    <tile id="899" />
+    <tile id="900" />
+    <tile id="901" />
+    <tile id="902" />
+    <tile id="903" />
+    <tile id="904" />
+    <tile id="905" />
+    <tile id="906" />
+    <tile id="907" />
+    <tile id="908" />
+    <tile id="909" />
+    <tile id="910" />
+    <tile id="911" />
+    <tile id="912" />
+    <tile id="913" />
+    <tile id="914" />
+    <tile id="915" />
+    <tile id="916" />
+    <tile id="917" />
+    <tile id="918" />
+    <tile id="919" />
+    <tile id="920" />
+    <tile id="921" />
+    <tile id="922" />
+    <tile id="923" />
+    <tile id="924" />
+    <tile id="925" />
+    <tile id="926" />
+    <tile id="927" />
+    <tile id="928" />
+    <tile id="929" />
+    <tile id="930" />
+    <tile id="931" />
+    <tile id="932" />
+    <tile id="933" />
+    <tile id="934" />
+    <tile id="935" />
+    <tile id="936" />
+    <tile id="937" />
+    <tile id="938" />
+    <tile id="939" />
+    <tile id="940" />
+    <tile id="941" />
+    <tile id="942" />
+    <tile id="943" />
+    <tile id="944" />
+    <tile id="945" />
+    <tile id="946" />
+    <tile id="947" />
+    <tile id="948" />
+    <tile id="949" />
+    <tile id="950" />
+    <tile id="951" />
+    <tile id="952" />
+    <tile id="953" />
+    <tile id="954" />
+    <tile id="955" />
+    <tile id="956" />
+    <tile id="957" />
+    <tile id="958" />
+    <tile id="959" />
+    <tile id="960" />
+    <tile id="961" />
+    <tile id="962" />
+    <tile id="963" />
+    <tile id="964" />
+    <tile id="965" />
+    <tile id="966" />
+    <tile id="967" />
+    <tile id="968" />
+    <tile id="969" />
+    <tile id="970" />
+    <tile id="971" />
+    <tile id="972" />
+    <tile id="973" />
+    <tile id="974" />
+    <tile id="975" />
+    <tile id="976" />
+    <tile id="977" />
+    <tile id="978" />
+    <tile id="979" />
+    <tile id="980" />
+    <tile id="981" />
+    <tile id="982" />
+    <tile id="983" />
+    <tile id="984" />
+    <tile id="985" />
+    <tile id="986" />
+    <tile id="987" />
+    <tile id="988" />
+    <tile id="989" />
+    <tile id="990" />
+    <tile id="991" />
+    <tile id="992" />
+    <tile id="993" />
+    <tile id="994" />
+    <tile id="995" />
+    <tile id="996" />
+    <tile id="997" />
+    <tile id="998" />
+    <tile id="999" />
+    <tile id="1000" />
+    <tile id="1001" />
+    <tile id="1002" />
+    <tile id="1003" />
+    <tile id="1004" />
+    <tile id="1005" />
+    <tile id="1006" />
+    <tile id="1007" />
+    <tile id="1008" />
+    <tile id="1009" />
+    <tile id="1010" />
+    <tile id="1011" />
+    <tile id="1012" />
+    <tile id="1013" />
+    <tile id="1014" />
+    <tile id="1015" />
+    <tile id="1016" />
+    <tile id="1017" />
+    <tile id="1018" />
+    <tile id="1019" />
+    <tile id="1020" />
+    <tile id="1021" />
+    <tile id="1022" />
+    <tile id="1023" />
+  </tileset>
+  <tileset firstgid="1954" name="b" columns="1" tilecount="1" tileheight="20" tilewidth="20">
+    <properties>
+      <property name="embedded_png">
 iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAABcElEQVR42rVUMVLDMBC8zKilosMf
 gMZ5g0t/IDRpKGlpM0ORGVpaShqa+AMu/QbUhA+YzhUPMFqhE+uzqUhuJjnrfLfW7Z7k5B92ud+M
 +jw8Nit4t5RQdE1c99UmJy7lPVzXOfa8lxG5zibHpJR4/PoUXzWj72TFYAwUwT7a5R0ieAgA5fYp
@@ -3941,12 +3941,12 @@ d6nCFPizojBX/MwKL723SjtbCMKZQ1aa1yxetNAdaiei3N6/xlOQVSZg2/oEDPUBDPN7XlHsGS1S
 nHejswlvOUWu46AX/KZWp5PDQ488K4xSkgEx5VDJKgyy41ikoQdPVnkFm92HCAwcCEVDEsxeGHxH
 CoGfXJRvlEHk674vPLwAAAAASUVORK5CYII=
 </property>
-  </properties>
-  <image source="../../b.png" width="20" height="20"/>
- </tileset>
- <tileset firstgid="1955" name="terrain" tilewidth="20" tileheight="20" tilecount="60" columns="10">
-  <properties>
-   <property name="embedded_png">
+    </properties>
+    <image source="../../b.png" width="20" height="20" />
+  </tileset>
+  <tileset firstgid="1955" name="terrain" columns="10" tilecount="60" tileheight="20" tilewidth="20">
+    <properties>
+      <property name="embedded_png">
 iVBORw0KGgoAAAANSUhEUgAAAMgAAAB4CAYAAAC3kr3rAAAftElEQVR42u1dfWxVZZp/W2qLgBRb
 CpYPaUEsKMqUDhphFpkNMwqOmtU/dtcNm9nBRUdNNOtkJ5lJZhk3u1mTWbNmhxENziRDmIm7WfBj
 LeCyikZwkY+KFLCIFGgRSvn+boXevb/3nuf0Pe9933Pe83U/6HmS5t6ee77uuc/vfb6fp2x81bjU
@@ -4092,248 +4092,248 @@ IHll5Ru89kQGCdHWXVtCzd+wZxeGsBtqDJMMPSWGkG8lpsCY3FMCkAFMcQ0gDRs1d1OtalwygmXv
 lpww6WVvJAC5hogM6EKZw55VLBXztSAJ5LytsKpYApAiIT85VLmYs+5n1Y8KHKJ61K2SIhFex+2e
 /x+Bq+nAEYVYiAAAAABJRU5ErkJggg==
 </property>
-  </properties>
-  <image source="../terrain.png" width="200" height="120"/>
-  <tile id="0">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="10">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="11">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="12">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="13">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="14">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="15">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="16">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="21">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="22">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="23">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="24">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="26">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="30">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="31">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="32">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="33">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="34">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="35">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="36">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="45">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="46">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="55">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="56">
-   <properties>
-    <property name="large-rock" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="18">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="20">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="25">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="28">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="38">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="9">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="17">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="19">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="40"/>
-  <tile id="41"/>
-  <tile id="42"/>
-  <tile id="43"/>
-  <tile id="44"/>
-  <tile id="27">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="29">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="47"/>
-  <tile id="48"/>
-  <tile id="49"/>
-  <tile id="50"/>
-  <tile id="51"/>
-  <tile id="52"/>
-  <tile id="53"/>
-  <tile id="54"/>
-  <tile id="37">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="39">
-   <properties>
-    <property name="large-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="57"/>
-  <tile id="58"/>
-  <tile id="59"/>
- </tileset>
- <tileset firstgid="2015" name="s" tilewidth="20" tileheight="20" tilecount="9" columns="3">
-  <properties>
-   <property name="embedded_png">
+    </properties>
+    <image source="../terrain.png" width="200" height="120" />
+    <tile id="0">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="4">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="5">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="10">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="11">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="12">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="13">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="14">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="15">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="16">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="21">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="22">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="23">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="24">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="26">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="30">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="31">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="32">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="33">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="34">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="35">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="36">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="45">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="46">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="55">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="56">
+      <properties>
+        <property name="large-rock" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="18">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="20">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="25">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="28">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="38">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="9">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="17">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="19">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="40" />
+    <tile id="41" />
+    <tile id="42" />
+    <tile id="43" />
+    <tile id="44" />
+    <tile id="27">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="29">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="47" />
+    <tile id="48" />
+    <tile id="49" />
+    <tile id="50" />
+    <tile id="51" />
+    <tile id="52" />
+    <tile id="53" />
+    <tile id="54" />
+    <tile id="37">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="39">
+      <properties>
+        <property name="large-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="57" />
+    <tile id="58" />
+    <tile id="59" />
+  </tileset>
+  <tileset firstgid="2015" name="s" columns="3" tilecount="9" tileheight="20" tilewidth="20">
+    <properties>
+      <property name="embedded_png">
 iVBORw0KGgoAAAANSUhEUgAAADwAAAA8CAYAAAA6/NlyAAAO50lEQVR42tVbd3cbxxGfvYJGUCTB
 TkpWjWPHlkts5/vlO+XffAJLL1FxlWRRjZQogoREolzbzczs7jUcQIiU9RTo3TuU493+5jd9R97X
 //yHgg/5qnqa+HCP96b9uLUU8Xn3yH8vIOl+Ct/vnXa/GQVwlvV5H4RNc1ZSFc5lgEKIP539iYB/
@@ -4403,81 +4403,199 @@ vjdqwFJuDjK3s5GMAx+r0mRpDtM1o8OeHi8mkKSylEb6F1ALG7Pn3lNnPByy4foZCwOzzQm5MafC
 iGKcbaxzz9vsfGjQ+UUYhskZNTyoIcDaYgPc9tkqrz/v/y0ZjQFPb4s4ULHABPQwaqD3djkE0pBq
 pLWBgSK7xCTZpTN//vLyz/2PWqe9aKK/5fLhgf9BHvk/ka1jSG29H8sAAAAASUVORK5CYII=
 </property>
-  </properties>
-  <image source="../s.png" width="60" height="60"/>
-  <tile id="0">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="1">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="2">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="3">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="4">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="5">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="6">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="7">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
-  <tile id="8">
-   <properties>
-    <property name="lava-cliff" value=""/>
-   </properties>
-  </tile>
- </tileset>
- <layer id="1" name="Ground" width="160" height="160">
-  <data encoding="base64" compression="gzip">
-   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
+    </properties>
+    <image source="../s.png" width="60" height="60" />
+    <tile id="0">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="1">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="2">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="3">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="4">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="5">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="6">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="7">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+    <tile id="8">
+      <properties>
+        <property name="lava-cliff" value="" />
+      </properties>
+    </tile>
+  </tileset>
+  <layer name="Ground" width="160" height="160">
+    <data encoding="base64" compression="gzip">
+   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
   </data>
- </layer>
- <layer id="2" name="Items" width="160" height="160">
-  <data encoding="base64" compression="gzip">
-   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
+  </layer>
+  <layer name="Items" width="160" height="160">
+    <data encoding="base64" compression="gzip">
+   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
   </data>
- </layer>
- <layer id="3" name="Units" width="160" height="160">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3OQQ3AIAAEMH4YQgwaJgYDmMUDLLmwtQpaCgAAwN1aOgDwkpkOAAAAAAAAwAc86QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwOz0dAAAAAAAAAACuVtMBgE0jHQAAAAAAgEMLiR45HQCQAQA=
+  </layer>
+  <layer name="Units" width="160" height="160">
+    <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAA/+3OQQ3AIAAEMH4YQgwaJgYDmMUDLLmwtQpaCgAAwN1aOgDwkpkOAAAAAAAAwAc86QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwOz0dAAAAAAAAAACuVtMBgE0jHQAAAAAAgEMLiR45HQCQAQA=
   </data>
- </layer>
- <layer id="4" name="Set" width="160" height="160" opacity="0.8">
-  <data encoding="base64" compression="gzip">
-   H4sIAAAAAAAACu3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfBhhhfhKAJABAA==
+  </layer>
+  <layer name="Set" opacity="0.8" width="160" height="160">
+    <data encoding="base64" compression="gzip">
+   H4sIAAAAAAAA/+3BAQEAAACCIP+vbkhAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfBhhhfhKAJABAA==
   </data>
- </layer>
- <objectgroup id="5" name="Triggers">
-  <object id="1" name="map_info" x="20" y="20" width="20" height="20">
-   <properties>
-    <property name="fog" value="none"/>
-    <property name="introText" value="修改过的宝可梦™地图，哦？那里有灌木丛，我想知道会出现什么野生的宝可梦？千万不要用你的坦克撞到它们，否则皮卡丘会攻击你，⚡⚡⚡⚡ pika pika ⚡⚡⚡⚡"/>
-    <property name="type" value="skirmish"/>
-   </properties>
-  </object>
- </objectgroup>
+  </layer>
+  <objectgroup name="Triggers">
+    <object name="map_info" id="1" x="20" y="20" width="20" height="20">
+      <properties>
+        <property name="fog" value="none" />
+        <property name="introText" value="修改过的宝可梦™地图，哦？那里有灌木丛，我想知道会出现什么野生的宝可梦？千万不要用你的坦克撞到它们，否则皮卡丘会攻击你，⚡⚡⚡⚡ pika pika ⚡⚡⚡⚡" />
+        <property name="type" value="skirmish" />
+      </properties>
+    </object>
+    <object name="init" type="reach_time" id="2" x="2700" y="600" width="20" height="20">
+      <properties>
+        <property name="time" value="0" />
+      </properties>
+    </object>
+    <object type="cam_set" id="5" x="2760" y="610" width="20" height="20">
+      <properties>
+        <property name="by" value="init" />
+        <property name="zoom" value="0.01" />
+      </properties>
+    </object>
+    <object type="unit_add" id="6" x="2840" y="460" width="20" height="20">
+      <properties>
+        <property name="team" value="2" />
+        <property name="rot" value="-145" />
+        <property name="units" value="ch47" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_move" id="7" x="2820" y="440" width="60" height="60">
+      <properties>
+        <property name="team" value="2" />
+        <property name="repeat" value="5" />
+        <property name="target" value="land-point" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object name="land-point" type="point" id="9" x="2720" y="580" width="20" height="20" />
+    <object name="arrived" type="unit_detect" id="10" x="2720" y="560" width="40" height="40">
+      <properties>
+        <property name="team" value="2" />
+        <property name="min" value="1" />
+      </properties>
+    </object>
+    <object name="move-back" type="unit_move" id="11" x="2720" y="560" width="40" height="40">
+      <properties>
+        <property name="team" value="2" />
+        <property name="target" value="return-point" />
+        <property name="repeat" value="5" />
+        <property name="by" value="arrived" />
+      </properties>
+    </object>
+    <object name="return-point" type="point" id="12" x="3140" y="180" width="20" height="20" />
+    <object name="heli-returned" type="unit_detect" id="13" x="3120" y="160" width="60" height="60">
+      <properties>
+        <property name="team" value="2" />
+        <property name="min" value="1" />
+      </properties>
+    </object>
+    <object type="unit_remove" id="14" x="3120" y="160" width="60" height="60">
+      <properties>
+        <property name="by" value="heli-returned" />
+        <property name="team" value="2" />
+        <property name="repeat" value="5" />
+      </properties>
+    </object>
+    <object type="dialog" id="15" x="2660" y="600" width="20" height="20">
+      <properties>
+        <property name="msg">
+pokemon world is alse under invasion,
+
+let us make pokemon great again with mordan magic.
+
+pika pika !
+</property>
+        <property name="by" value="arrived" />
+      </properties>
+    </object>
+    <object type="unit_add" id="16" x="2760" y="600" width="20" height="20">
+      <properties>
+        <property name="team" value="0" />
+        <property name="units" value="m2a3" />
+        <property name="rot" value="-100" />
+        <property name="vy" value="-1" />
+        <property name="by" value="arrived" />
+      </properties>
+    </object>
+    <object type="unit_add" id="17" x="2700" y="620" width="20" height="20">
+      <properties>
+        <property name="team" value="0" />
+        <property name="by" value="arrived" />
+        <property name="units" value="infantry*2" />
+        <property name="rot" value="-30" />
+      </properties>
+    </object>
+    <object type="unit_add" id="18" x="2740" y="620" width="20" height="20">
+      <properties>
+        <property name="units" value="machinegunner*2,sniper" />
+        <property name="team" value="0" />
+        <property name="rot" value="-90" />
+        <property name="vy" value="-0.5" />
+        <property name="by" value="arrived" />
+      </properties>
+    </object>
+    <object type="unit_add" id="19" x="2840" y="740" width="20" height="20">
+      <properties>
+        <property name="by" value="init" />
+        <property name="team" value="1" />
+        <property name="units" value="z_common*5" />
+        <property name="vx" value="-1.4" />
+      </properties>
+    </object>
+    <object type="unit_add" id="20" x="2740" y="720" width="20" height="20">
+      <properties>
+        <property name="team" value="2" />
+        <property name="units">
+man1,
+
+man2*2,
+
+girl
+</property>
+        <property name="by" value="init" />
+        <property name="vx" value="0.1" />
+        <property name="vy" value="0.9" />
+        <property name="rot" value="-18" />
+      </properties>
+    </object>
+  </objectgroup>
 </map>

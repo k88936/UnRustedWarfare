@@ -379,3 +379,23 @@ QSlider::add-page{
 QSlider::sub-page {
     background: $color_high_light;
 }
+QListView::item{
+	border:0px solid transparent;
+	border-radius:0px;
+	border-bottom-color: $color_high_light2;
+	border-bottom-width: 1px;
+	color: $color_gray;
+	padding:5px;
+	background-color: $color_dark2_t;	
+}
+
+QListView::item:hover{
+	color: $color_dark;
+	background-color: $color_high_light;
+	
+}
+QListView::item:selected{
+	color: $color_dark;
+	border-bottom-color: $color_high_light;
+	background-color: $color_high_light2;
+}

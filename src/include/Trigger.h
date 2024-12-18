@@ -152,6 +152,10 @@ namespace Trigger
         float rot = 0;
         int team = 0;
         float vx = 0, vy = 0;
+        std::set<std::string> tags;
+        /*
+         * "__protect__" : game over if this unit dies
+         */
 
         UnitAdd(Game* game, const QVector3D pos): Action(game)
         {
@@ -226,6 +230,8 @@ namespace Trigger
     {
     public:
         int team_to = 5211324;
+        std::set<std::string> tags_add;
+        std::set<std::string> tags_remove;
 
         UnitChange(Game* game, QVector3D posLB, QVector3D posRT): UnitFilt(game, posLB, posRT)
         {

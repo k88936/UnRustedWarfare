@@ -75,6 +75,11 @@ add_executable(untitled1
         src/game/BoidSensor.cpp
         src/game/Flock.cpp
         src/game/SimpleEffect.cpp
+        src/game/Trigger.cpp
+        src/game/Controller.cpp
+        src/game/DirectPathFollowController.cpp
+        src/game/WarfareFogManager.cpp
+        src/game/MeleeSensor.cpp
 
         src/ui/RenderEngine.cpp
         src/ui/BattlefieldWidget.cpp
@@ -106,12 +111,10 @@ add_executable(untitled1
         src/ui/dialog_widget.cpp
         src/ui/include/dialog_widget.h
         src/ui/dialog_widget.ui
-        src/game/Trigger.cpp
-        src/game/Controller.cpp
-        src/game/DirectPathFollowController.cpp
-        src/game/WarfareFogManager.cpp
-        src/game/MeleeSensor.cpp
-        src/game/MeleeSensor.h
+
+        src/ui/choose_widget.cpp
+        src/ui/include/choose_widget.h
+        src/ui/choose_widget.ui
 )
 include_directories(src/include)
 include_directories(src/ui/include)

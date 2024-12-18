@@ -6,7 +6,7 @@
 
 #include "Game.h"
 
-FlowField::FlowField(Game* game, const float to_x, const float to_y, const movementType movement): movement_(movement)
+FlowField::FlowField(Game* game, const float to_x, const float to_y, const int movement): movement_(movement)
 {
     end = QVector3D(to_x, to_y, 0);
     int tile_x = game->map_config.x_in_which(to_x);

@@ -18,7 +18,7 @@ class Game;
 class FlowField
 {
 public:
-    FlowField(Game* game, float to_x, float to_y, movementType movement);
+    FlowField(Game* game, float to_x, float to_y, int movement);
     QVector3D& get_vector(int x, int y);
     QVector3D end;
 private:
@@ -30,7 +30,7 @@ private:
     std::set<int> closed_set_;
 
     std::vector<std::vector<PathNode*>> nodes_;
-    movementType movement_;
+    int movement_;
 };
 
 

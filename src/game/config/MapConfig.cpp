@@ -195,35 +195,35 @@ void MapConfig::loadMap(const std::string& path)
                         index_to_attribute[tileset.getFirstGID() + tile.ID] = GameConfig::tile_configs.at("NONE");
                     }
                 }
-                for (auto property : tile.properties)
-                {
-                    std::string p_name = property.getName();
-                    if (p_name == "team")
-                    {
-                        meta_unit_tiles[tileset.getFirstGID() + tile.ID].team = property.getStringValue() == "none"
-                                ? -1
-                                : std::stoi(property.getStringValue());
-                    }
-                    else if (p_name == "unit")
-                    {
-                        meta_unit_tiles[tileset.getFirstGID() + tile.ID].name = UnitConfigs::mapped_unit_name.at(
-                            property.getStringValue());
-
-                        //TODO
-                    }
-                    else if (p_name == "type")
-                    {
-                        //TODO
-                    }
-                    else if (p_name == "showFog")
-                    {
-                        //TODO
-                    }
-                    else
-
-                    {
-                    }
-                }
+                // for (auto property : tile.properties)
+                // {
+                //     std::string p_name = property.getName();
+                //     if (p_name == "team")
+                //     {
+                //         meta_unit_tiles[tileset.getFirstGID() + tile.ID].team = property.getStringValue() == "none"
+                //                 ? -1
+                //                 : std::stoi(property.getStringValue());
+                //     }
+                //     else if (p_name == "unit")
+                //     {
+                //         meta_unit_tiles[tileset.getFirstGID() + tile.ID].name = UnitConfigs::mapped_unit_name.at(
+                //             property.getStringValue());
+                //
+                //         //TODO
+                //     }
+                //     else if (p_name == "type")
+                //     {
+                //         //TODO
+                //     }
+                //     else if (p_name == "showFog")
+                //     {
+                //         //TODO
+                //     }
+                //     else
+                //
+                //     {
+                //     }
+                // }
             }
         }
         // MapConfig::index_to_name[0] = "NONE";
@@ -429,24 +429,24 @@ void MapConfig::loadMap(const std::string& path)
                 {
                     parse_layer(tiles, layer, GameConfig::LayerConfig::TILE_ITEM);
                 }
-                else if (layer->getName() == "Units")
-                {
-                    std::vector<tmx::TileLayer::Tile> tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
-
-                    int index = 0;
-                    for (auto tile : tiles)
-                    {
-                        int x = index % world_width;
-                        int y = world_height - index / world_width - 1;
-                        index++;
-
-                        if (tile.ID == 0)continue;
-                        game->units.push_back(new Unit(
-                            game, UnitConfigs::meta_units.at(meta_unit_tiles.at(tile.ID).name),
-                            meta_unit_tiles.at(tile.ID).team, QVector3D(x, y, GameConfig::LayerConfig::OBJECT_GROUND),
-                            0));
-                    }
-                }
+                // else if (layer->getName() == "Units")
+                // {
+                //     std::vector<tmx::TileLayer::Tile> tiles = layer->getLayerAs<tmx::TileLayer>().getTiles();
+                //
+                //     int index = 0;
+                //     for (auto tile : tiles)
+                //     {
+                //         int x = index % world_width;
+                //         int y = world_height - index / world_width - 1;
+                //         index++;
+                //
+                //         if (tile.ID == 0)continue;
+                //         game->units.push_back(new Unit(
+                //             game, UnitConfigs::meta_units.at(meta_unit_tiles.at(tile.ID).name),
+                //             meta_unit_tiles.at(tile.ID).team, QVector3D(x, y, GameConfig::LayerConfig::OBJECT_GROUND),
+                //             0));
+                //     }
+                // }
             }
             // const auto& properties = layer->getProperties();
             // std::cout << properties.size() << " Layer Properties:" << std::endl;

@@ -33,16 +33,16 @@ main_window::main_window(QWidget* parent) :
     // p->play();
 
     auto widget = new welcome_widget(this);
-    auto game = new Game(widget->ui->widget, "../resources/maps/3.tmx");;
+    auto game = new Game(widget->ui->widget, "../resources/maps/TASK_ONE.tmx");;
     widget_push(widget);
 
     // auto widget =new battle_widget(this);
     // // auto game = new Game(widget, "../maps/1.tmx");
-    // auto game = new Game(widget, "../resources/maps/3.tmx");
+    // auto game = new Game(widget, "../resources/maps/TASK_ONE.tmx");
     // widget_push(widget);
 
-    // Game::start_on("../maps/3.tmx", w->ui->widget);
-    // Game::start_on("../maps/3.tmx", b);
+    // Game::start_on("../maps/TASK_ONE.tmx", w->ui->widget);
+    // Game::start_on("../maps/TASK_ONE.tmx", b);
     // b->show();
     // w->show();
     // Game::start_on("../maps/2.tmx", b);

@@ -28,6 +28,7 @@ void WarfareFogManager::init()
 
 void WarfareFogManager::light(const Object* obj, const float range)
 {
+    if (!enable)return;
     for (auto grid : obj->gridsAcross)
     {
         for (int i = 0; i < game->grids_manager.grid_size; ++i)
@@ -59,6 +60,7 @@ bool WarfareFogManager::in_light(Object* obj)
 
 void WarfareFogManager::draw()
 {
+    if (!enable)return;
     for (int i = 0; i < game->map_config.world_width; ++i)
     {
         for (int j = 0; j < game->map_config.world_height; ++j)

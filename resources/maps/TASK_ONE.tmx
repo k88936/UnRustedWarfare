@@ -5108,6 +5108,7 @@ f_police_g17
         <property name="rot" value="-45" />
         <property name="vx" value="0.5" />
         <property name="vy" value="-0.3" />
+        <property name="tags" value="_protect_" />
       </properties>
     </object>
     <object type="unit_add" id="47" x="2540" y="2880" width="20" height="20">
@@ -5400,6 +5401,7 @@ z_chemical
         <property name="by" value="return,approach" />
         <property name="team_to" value="0" />
         <property name="by_all" value="true" />
+        <property name="tags_add" value="__protect__" />
       </properties>
     </object>
     <object type="unit_adds" id="88" x="1940" y="2880" width="20" height="20">

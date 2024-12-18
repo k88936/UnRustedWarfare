@@ -101,6 +101,10 @@ void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event
 
     bool flag;
 
+#ifdef DEBUG
+    assert(!by.empty());
+#endif
+
     if (by_all)
     {
         flag = true;
@@ -332,6 +336,10 @@ void Trigger::UnitAdd::parse(const tmx::Property& property)
     {
         vy = std::stof(property.getStringValue());
     }
+    else if (property.getName() == "tags")
+    {
+        utils::parse_item_set(property.getStringValue(), tags);
+    }
     else
         Action::parse(property);
 }
@@ -344,6 +352,7 @@ void Trigger::UnitAdd::execute()
         u->rotation = rot;
         u->linear_velocity.setX(vx);
         u->linear_velocity.setY(vy);
+        u->tags.insert(tags.begin(), tags.end());
         game->units.push_back(u);
     }
     else
@@ -355,6 +364,7 @@ void Trigger::UnitAdd::execute()
             u->rotation = rot;
             u->linear_velocity.setX(vx);
             u->linear_velocity.setY(vy);
+            u->tags.insert(tags.begin(), tags.end());
             game->units.push_back(u);
         }
 }
@@ -452,7 +462,14 @@ void Trigger::UnitChange::parse(const tmx::Property& property)
     {
         team_to = std::stoi(property.getStringValue());
     }
-
+    else if (property.getName() == "tags_add")
+    {
+        utils::parse_item_set(property.getStringValue(), tags_add);
+    }
+    else if (property.getName() == "tags_remove")
+    {
+        utils::parse_item_set(property.getStringValue(), tags_remove);
+    }
     else
         UnitFilt::parse(property);
 }
@@ -469,6 +486,11 @@ void Trigger::UnitChange::execute()
         if (!require_type.empty() && !require_type.contains(unit->meta->name))
         {
             continue;
+        }
+        unit->tags.insert(tags_add.begin(), tags_add.end());
+        for (auto tag : tags_remove)
+        {
+            unit->tags.erase(tag);
         }
         if (team_to != 5211324)
         {

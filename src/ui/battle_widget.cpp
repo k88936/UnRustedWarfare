@@ -58,7 +58,7 @@ battle_widget::battle_widget(main_window* parent) :
     connect(suspend_menu->ui->restart_button, &QPushButton::clicked, this, [=]()
     {
         auto widget = new battle_widget(parent);
-        auto game = new Game(widget, "../resources/maps/3.tmx");
+        auto game = new Game(widget, "../resources/maps/TASK_ONE.tmx");
         parent->widget_change(widget);
     });
 

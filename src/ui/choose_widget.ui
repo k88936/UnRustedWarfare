@@ -1,4 +1,20 @@
-/*
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>choose_widget</class>
+ <widget class="QFrame" name="choose_widget">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>313</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>choose_widget</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/*
 Material Dark Style Sheet for QT Applications
 Author: Jaime A. Quiroga P.
 Inspired on https://github.com/jxfwinter/qt-material-stylesheet
@@ -17,6 +33,7 @@ QDialog {
 }
 QFrame{
 	border:1px solid #32FFE0;
+	background-color: rgba(0, 0, 0, 160);
 	border-radius:0px;
 }
 QColorDialog {
@@ -387,4 +404,51 @@ QListView::item:selected{
 	color: #ff000000;
 	border-bottom-color: #26C3A9;
 	background-color: #30F6D9;
-}
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="styleSheet">
+      <string notr="true">color: rgb(48, 246, 217);</string>
+     </property>
+     <property name="text">
+      <string>CHOOSE MAP</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QListWidget" name="listWidget"/>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QPushButton" name="button_cancel">
+       <property name="text">
+        <string>CANCEL</string>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="button_ok">
+       <property name="text">
+        <string>OK</string>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
