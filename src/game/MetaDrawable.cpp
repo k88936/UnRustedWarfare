@@ -8,7 +8,7 @@ void MetaDrawable::init()
 {
     if (image == "NONE")
     {
-        texture_frames.push_back("NONE");
+        texture_frames.emplace_back("NONE");
         return;
     }
     if (total_frames == 1)

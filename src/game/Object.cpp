@@ -118,7 +118,7 @@ void Object::after()
     }
     position += linear_velocity * game->delta_time;
     rotation += angular_velocity * game->delta_time;
-    utils::angle_ensure(rotation);
+    utils::angle_ensure_r(rotation);
     // addRotation(angularVelocity * Game::deltaTime);
 
 

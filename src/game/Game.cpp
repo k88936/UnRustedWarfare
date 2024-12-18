@@ -23,7 +23,8 @@
 #include "Tile.h"
 
 Game::Game(BattlefieldWidget* battlefield_widget, const std::string& world): warfare_fog_manager(this),
-                                                                             battle_field_widget(battlefield_widget)
+                                                                             battle_field_widget(battlefield_widget),
+                                                                             world(world)
 {
     map_config.init(this, world);
     battlefield_widget->game = this;
@@ -160,6 +161,7 @@ void Game::pause()
 {
     timer.stop();
 }
+
 void Game::run()
 {
     // if (timer.isActive())
@@ -180,6 +182,7 @@ void Game::step()
     {
         u->before();
     }
+
     for (const auto p : Game::projectiles)
     {
         p->before();
@@ -208,5 +211,18 @@ void Game::step()
     run_map_triggers();
     audio_manager.play(battle_field_widget->camera_pos);
     warfare_fog_manager.draw();
+
+    if (std::count_if(units.begin(), units.end(), [](Unit* unit)
+    {
+        return unit->team % 2 == 0;
+    }) == 0)
+    {
+        result(false);
+    }
     battle_field_widget->render();
+}
+
+void Game::result(bool win)
+{
+    battle_field_widget->game_end(win);
 }

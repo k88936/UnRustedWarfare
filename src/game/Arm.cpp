@@ -23,7 +23,7 @@ void Arm::step()
 void Arm::after()
 {
     this->relative_rotation += meta->spin_speed * game->delta_time;
-    utils::angle_ensure(this->relative_rotation);
+    utils::angle_ensure_r(this->relative_rotation);
     draw(game);
 }
 

@@ -45,6 +45,7 @@ public:
     void on_drive();
     void on_new_selection();
     void on_move_order();
+    void apply_control();
     void after() override;
 
     void on_collision(const QVector3D& force, float torque, Object* other) override;

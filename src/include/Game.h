@@ -73,6 +73,7 @@ public:
     std::vector<Effect*> effects;
     std::vector<Flock*> flocks;
     BattlefieldWidget* battle_field_widget;
+    std::string world;
     void add_projectile(Projectile* projectile);
     void add_effect(Effect* effect);
     TimerDoer* timer_doer = new TimerDoer(this);
@@ -81,6 +82,7 @@ public:
     void run();
     void run_map_triggers();
     void step();
+    void result(bool win);
 };
 
 

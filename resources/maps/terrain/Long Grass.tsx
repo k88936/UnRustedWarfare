@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<tileset name="Long Grass" tilewidth="20" tileheight="20">
- <image source="bitmaps/longgrass.png" trans="008a76" width="100" height="160"/>
- <tile id="16">
-  <properties>
-   <property name="trees" value=""/>
-  </properties>
- </tile>
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<tileset firstgid="443" name="Long Grass" columns="5" tilecount="40" tileheight="20" tilewidth="20">
+  <image source="bitmaps/longgrass.png" width="100" height="160" trans="008a76" />
+  <tile id="16">
+    <properties>
+      <property name="trees" value="" />
+    </properties>
+  </tile>
 </tileset>

@@ -32,17 +32,17 @@ main_window::main_window(QWidget* parent) :
     // p->setSource(QUrl::fromLocalFile("../1.mp4"));
     // p->play();
 
-    auto widget = new welcome_widget(this);
-    auto game = new Game(widget->ui->widget, "../resources/maps/TASK_ONE.tmx");;
-    widget_push(widget);
-
-    // auto widget =new battle_widget(this);
-    // // auto game = new Game(widget, "../maps/1.tmx");
-    // auto game = new Game(widget, "../resources/maps/TASK_ONE.tmx");
+    // auto widget = new welcome_widget(this);
+    // auto game = new Game(widget->ui->widget, "../resources/maps/menu.tmx");;
     // widget_push(widget);
 
-    // Game::start_on("../maps/TASK_ONE.tmx", w->ui->widget);
-    // Game::start_on("../maps/TASK_ONE.tmx", b);
+    auto widget =new battle_widget(this);
+    // auto game = new Game(widget, "../maps/1.tmx");
+    auto game = new Game(widget, "../resources/maps/special_1_宝可梦.tmx");
+    widget_push(widget);
+
+    // Game::start_on("../maps/mission_1_origin.tmx", w->ui->widget);
+    // Game::start_on("../maps/mission_1_origin.tmx", b);
     // b->show();
     // w->show();
     // Game::start_on("../maps/2.tmx", b);

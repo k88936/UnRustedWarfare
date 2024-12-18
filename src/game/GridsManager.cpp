@@ -85,8 +85,8 @@ std::set<Unit*> GridsManager::scan_units(QVector3D pos_lb, QVector3D pos_rt)
             for (auto obj : objects_in_grid)
             {
                 if (auto unit = dynamic_cast<Unit*>(obj); unit &&
-                    obj->position.x() > pos_lb.x() && obj->position.x() < pos_rt.x() &&
-                    obj->position.y() > pos_lb.y() && obj->position.y() < pos_rt.y()
+                    obj->position.x() >= pos_lb.x() && obj->position.x() < pos_rt.x() &&
+                    obj->position.y() >= pos_lb.y() && obj->position.y() < pos_rt.y()
                 )
                 {
                     units.insert(unit);

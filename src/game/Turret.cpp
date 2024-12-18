@@ -25,6 +25,7 @@ Turret::Turret(Game* game, MetaTurret* meta, int team): Attachable(), Drawable()
         turret->slot_inVisible = slot->slot_inVisible;
         turrets_attached.push_back(turret);
     }
+    this->relative_rotation = meta->idle_dir;
     this->slot_inVisible = meta->slot_inVisible;
     this->scale = meta->scale;
 }
@@ -48,7 +49,7 @@ void Turret::updateSlots(QMatrix4x4 transform)
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
         slot->linear_velocity = this->linear_velocity;
-        utils::angle_ensure(slot->rotation);
+        utils::angle_ensure_r(slot->rotation);
         slot->updateSlots(push_this);
     }
 }
@@ -61,7 +62,7 @@ float Turret::aim(const QVector3D target)
 
     float angle_diff = angle_target - rotation;
 
-    utils::angle_ensure(angle_diff);
+    utils::angle_ensure_r(angle_diff);
     if (fabsf(angle_diff) < meta->turn_speed * game->delta_time)
     {
         relative_rotation += angle_diff;

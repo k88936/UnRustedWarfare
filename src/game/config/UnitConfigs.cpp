@@ -243,6 +243,12 @@ void UnitConfigs::load_ini(const QString& path)
                     qDebug() << "missed key:" << fst << "in section:" << section_id;
                 }
             }
+#ifdef DEBUG
+            if (unit->image!=utils::EMPTY_STR&&images.find(unit->image) != images.end())
+            {
+                assert(images.at(unit->image).frames == unit->total_frames);
+            }
+#endif
             images[unit->image].frames = unit->total_frames;
         }
         else if (section_id == "attack")
@@ -332,6 +338,7 @@ void UnitConfigs::load_ini(const QString& path)
                     else if (fst == "recoilOutTime")turret->recoil_out_time = std::stof(snd) * time_rw2sw;
                     else if (fst == "recoilReturnTime")turret->recoil_return_time = std::stof(snd) * time_rw2sw;
                     else if (fst == "range")turret->range = std::stof(snd) * scale_rw2sw;
+                    else if (fst == "idleDir")turret->idle_dir = std::stof(snd);
                     else if (fst == "rangeMin")turret->range_min = std::stof(snd) * scale_rw2sw;
                     else if (fst == "invisible")
                     {
@@ -419,6 +426,12 @@ void UnitConfigs::load_ini(const QString& path)
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
                     }
                 }
+#ifdef DEBUG
+                if (projectile->image!=utils::EMPTY_STR&&images.find(projectile->image) != images.end())
+                {
+                    assert(images.at(projectile->image).is_raw_size);
+                }
+#endif
                 images[projectile->image].is_raw_size = true;
                 projectile->init();
             }
@@ -484,6 +497,15 @@ void UnitConfigs::load_ini(const QString& path)
                         qDebug() << "missed key:" << fst << "in section:" << section_id;
                     }
                 }
+#ifdef DEBUG
+                if (effect->image!=utils::EMPTY_STR&&images.find(effect->image) != images.end())
+                {
+                    assert(images.at(effect->image).frames == effect->total_frames);
+                    assert(images.at(effect->image).is_raw_size);
+                    //TODO
+                }
+#endif
+
                 images[effect->image].is_raw_size = true;
                 images[effect->image].frames = effect->total_frames;
                 effect->init();
@@ -505,6 +527,13 @@ void UnitConfigs::load_ini(const QString& path)
                 }
                 arm->init();
                 unit->attached_arm.push_back(arm);
+#ifdef DEBUG
+                if (arm->image!=utils::EMPTY_STR&&images.find(arm->image) != images.end())
+                {
+                    assert(images.at(arm->image).is_raw_size);
+                    assert(images.at(arm->image).scale == 0.5);
+                }
+#endif
                 images[arm->image].is_raw_size = true;
                 images[arm->image].scale = 0.5;
             }

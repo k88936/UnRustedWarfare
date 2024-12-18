@@ -292,7 +292,7 @@ void MapConfig::loadMap(const std::string& path)
                     }
                     else if (type == "unit_add")
                     {
-                        auto action = new Trigger::UnitAdd(game, posA);
+                        auto action = new Trigger::UnitAdd(game, posA, posB);
                         map_actions.push_back(action);
                         for (const auto& prop : properties)
                         {
@@ -471,7 +471,7 @@ void MapConfig::init(Game* game, const std::string& path)
 
 QVector3D MapConfig::pixel_to_world(float pix_x, float pix_y)
 {
-    return QVector3D(pix_x / 20, world_height - pix_y / 20, 0);
+    return QVector3D(pix_x / 20-0.5, world_height - pix_y / 20-0.5, 0);
 }
 
 // Tile*

@@ -32,28 +32,10 @@ void DirectPathFollowController::step()
     {
         // flow_field_expected=flock->flow_field->get_vector(boid->position.x()+0.5, boid->position.y()+0.5);
         dir_expected = QVector3D(
-            (flow_field->get_vector(x_floor, y_floor).x() + flow_field->
-                                                            get_vector(x_floor, y_ceil).x()) * (x_ceil
-                -
-                unit_under_control
-                ->
-                position.x())
-            + (flow_field->get_vector(x_ceil, y_floor).x() + flow_field->
-                                                             get_vector(x_ceil, y_ceil).x()) * (
-                unit_under_control->
-                position.
-                x() - x_floor),
-            (flow_field->get_vector(x_floor, y_floor).y() + flow_field->
-                                                            get_vector(x_ceil, y_floor).y()) * (y_ceil
-                -
-                unit_under_control
-                ->
-                position.y())
-            + (flow_field->get_vector(x_floor, y_ceil).y() + flow_field->
-                                                             get_vector(x_ceil, y_ceil).y()) * (
-                unit_under_control->
-                position.
-                y() - y_floor),
+            (flow_field->get_vector(x_floor, y_floor).x() + flow_field->get_vector(x_floor, y_ceil).x()) * (x_ceil-unit_under_control->position.x())
+            + (flow_field->get_vector(x_ceil, y_floor).x() + flow_field->get_vector(x_ceil, y_ceil).x()) * (unit_under_control->position.x() - x_floor),
+            (flow_field->get_vector(x_floor, y_floor).y() + flow_field->get_vector(x_ceil, y_floor).y()) * (y_ceil-unit_under_control->position.y())
+            + (flow_field->get_vector(x_floor, y_ceil).y() + flow_field->get_vector(x_ceil, y_ceil).y()) * (unit_under_control->position.y() - y_floor),
             0
         );
 
@@ -65,7 +47,7 @@ void DirectPathFollowController::step()
 void DirectPathFollowController::after()
 {
     if (finish)return;
-    utils::angle_ensure(angular_target);
+    utils::angle_ensure_r(angular_target);
     float speed_projected = QVector3D::dotProduct(unit_under_control->linear_velocity, unit_under_control->vector_dir);
     float angle_step = unit_under_control->meta->max_turn_speed;
 
@@ -74,7 +56,7 @@ void DirectPathFollowController::after()
         angle_step *= (speed_projected) / unit_under_control->meta->move_speed;
     }
     float diff = angular_target - unit_under_control->rotation;
-    utils::angle_ensure(diff);
+    utils::angle_ensure_r(diff);
     if (std::fabsf(diff) < angle_step * unit_under_control->game->delta_time)
     {
         // unit0->rotation = target;
@@ -103,10 +85,6 @@ void DirectPathFollowController::after()
             unit_under_control->vector_ver * speed_projected * unit_under_control->mass * unit_under_control->
             angular_velocity * std::numbers::pi / 180,
             utils::sign(diff) * acc);
-        utils::linear_limit_soft_r(unit_under_control->angular_velocity,
-                                   angle_step * unit_under_control->game->delta_time,
-                                   -angle_step * unit_under_control->game->delta_time,
-                                   0.8);
     }
 
 

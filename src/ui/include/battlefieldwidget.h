@@ -22,8 +22,8 @@ public:
     virtual void info(const std::string& string);
     BattlefieldWidget(QWidget* parent);
     ~BattlefieldWidget() override;
-    QVector3D camera_pos = QVector3D(5, 30, 5);
-    float camera_zoom = 0.02;
+    QVector3D camera_pos = QVector3D(0, 0, 5);
+    float camera_zoom = 0.01;
     void update_camera();
     virtual void render();
     virtual  void game_end(bool win);

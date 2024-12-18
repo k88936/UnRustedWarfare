@@ -48,12 +48,14 @@ namespace utils
     extern float sign(float value);
     extern float dir_of(QVector3D vector);
     extern float dir_diff(QVector3D vector, float angle);
-    extern void angle_ensure(float& angle);
+    extern void angle_ensure_r(float& angle);
+    extern float angle_ensure_v(float angle);
     extern void limit_r(float& value, float min, float max);
     extern float limit_v(float value, float min, float max);
     extern float limit(QVector3D& v, float min_length, float max_length);
     extern void linear_limit_soft_r(float& value, float min, float max, float soft);
     extern void linear_limit_soft_r(QVector3D& v, float min_length, float max_length, float soft);
+    extern void linear_limit_max_soft_r(float& v, float max_length, float soft);
     extern void linear_limit_max_soft_r(QVector3D& v, float max_length, float soft);
     extern float linear_limit_soft_v(float value, float min, float max, float soft);
     extern QVector3D linear_limit_soft_v(const QVector3D& v, float min_length, float max_length, float soft);
@@ -62,6 +64,7 @@ namespace utils
     extern QVector3D soft_approach(const QVector3D& from, const QVector3D& to, float soft);
     extern bool within(const QVector3D& v1, const QVector3D& v2, float range);
     extern QVector3D generate_random_small_vector(float max_offset);
+    extern float  generate_random_small_float(float inertia);
     extern QVector3D add_offset_x(const QVector3D& v, float offset);
     extern QVector3D add_offset_y(const QVector3D& v, float offset);
     extern QVector3D add_offset_z(const QVector3D& v, float offset);
@@ -143,5 +146,6 @@ namespace utils
             return src % 2 == target % 2;
         }
     }
+
 };
 #endif //UTILS_H

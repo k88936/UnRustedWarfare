@@ -151,7 +151,7 @@ float utils::dir_diff(const QVector3D vector, float angle)
     return diff;
 }
 
-void utils::angle_ensure(float& angle)
+void utils::angle_ensure_r(float& angle)
 {
     while (angle >= 180)
     {
@@ -161,6 +161,19 @@ void utils::angle_ensure(float& angle)
     {
         angle += 360;
     }
+}
+
+float utils::angle_ensure_v(float angle)
+{
+    while (angle >= 180)
+    {
+        angle -= 360;
+    }
+    while (angle < -180)
+    {
+        angle += 360;
+    }
+    return angle;
 }
 
 void utils::limit_r(float& value, const float min, const float max)
@@ -224,6 +237,14 @@ void utils::linear_limit_soft_r(QVector3D& v, const float min_length, const floa
     else if (length > max_length * max_length)
     {
         v = v.normalized() * max_length + (v - v.normalized() * max_length) * soft;
+    }
+}
+
+auto utils::linear_limit_max_soft_r(float& v, const float max_length, float soft) -> void
+{
+    if (v > max_length)
+    {
+        v = max_length + (v - max_length) * soft;
     }
 }
 
@@ -293,6 +314,13 @@ QVector3D utils::generate_random_small_vector(const float max_offset)
     static std::default_random_engine generator;
     std::uniform_real_distribution distribution(-max_offset, max_offset);
     return QVector3D(distribution(generator), distribution(generator), 0);
+}
+
+float utils::generate_random_small_float(float inertia)
+{
+    static std::default_random_engine generator;
+    std::uniform_real_distribution distribution(-inertia, inertia);
+    return distribution(generator);
 }
 
 QVector3D utils::add_offset_x(const QVector3D& v, const float offset)

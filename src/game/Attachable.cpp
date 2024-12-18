@@ -20,11 +20,11 @@ void Attachable::setRelativeRotation(const float rotation)
 {
     this->relative_rotation = rotation;
 
-    utils::angle_ensure(this->relative_rotation);
+    utils::angle_ensure_r(this->relative_rotation);
 }
 
 void Attachable::addRelativeRotation(const float rotation)
 {
     this->relative_rotation += rotation;
-    utils::angle_ensure(this->relative_rotation);
+    utils::angle_ensure_r(this->relative_rotation);
 }

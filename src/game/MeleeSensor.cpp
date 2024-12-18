@@ -29,10 +29,9 @@ void MeleeSensor::after()
 {
     if (has_target)
     {
-        QVector3D relative = target - position;
-        if (relative.lengthSquared() > unit_under_control->radius * unit_under_control->radius)
+        if (QVector3D relative = target - unit_under_control->position; relative.lengthSquared() > unit_under_control->radius * unit_under_control->radius)
         {
-            const float diff = utils::dir_of(relative) - rotation;
+            const float diff = utils::angle_ensure_v(utils::dir_of(relative) - unit_under_control->rotation);
             const float angle_step = unit_under_control->meta->max_turn_speed;
             float acc = 0;
             if (std::fabsf(diff) < angle_step * unit_under_control->game->delta_time)
@@ -45,12 +44,6 @@ void MeleeSensor::after()
                 relative.normalized() * unit_under_control->mass * unit_under_control->
                                                                    meta->move_acc,
                 utils::sign(diff) * acc);
-            utils::linear_limit_soft_r(unit_under_control->angular_velocity,
-                                       angle_step * unit_under_control->game->delta_time,
-                                       -angle_step * unit_under_control->game->delta_time,
-                                       0.8);
-            utils::linear_limit_max_soft_r(unit_under_control->linear_velocity, unit_under_control->meta->move_speed,
-                                           0.5);
         }
     }
     return Sensor::after();

@@ -40,7 +40,7 @@ Unit::Unit(Game* game, MetaUnit* meta, int team, const QVector3D position, const
     sight = new Sensor(game, meta->fog_of_war_sight_range, team);
     if (meta->isMelee)
         melee = new MeleeSensor(game, meta->meleeEngangementDistance, this);
-    selection->scale = meta->radius * 1.5;
+    selection->scale = 1.5 * meta->radius;
     watchers.push_back(sight);
     for (const auto& slot : meta->attached_turret)
     {
@@ -91,7 +91,7 @@ void Unit::updateSlots(QMatrix4x4 transform)
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
         slot->linear_velocity = this->linear_velocity;
-        utils::angle_ensure(slot->rotation);
+        utils::angle_ensure_r(slot->rotation);
         slot->updateSlots(push_this);
     }
     for (auto slot : this->arms)
@@ -101,7 +101,7 @@ void Unit::updateSlots(QMatrix4x4 transform)
         slot->position = transform.map(slot->slot_translation);
         slot->rotation = slot->relative_rotation + rotation;
         slot->linear_velocity = this->linear_velocity;
-        utils::angle_ensure(slot->rotation);
+        utils::angle_ensure_r(slot->rotation);
         slot->updateSlots(push_this);
     }
     for (const auto watcher : watchers)
@@ -262,6 +262,25 @@ void Unit::on_move_order()
         this->position, 3);
 }
 
+void Unit::apply_control()
+{
+    if (melee && melee->has_target)
+    {
+        melee->after();
+        return;
+    }
+    if (controller)
+    {
+        controller->after();
+        return;
+    }
+    if (meta->is_bio && utils::freq_bool(0.25, game->delta_time))
+    {
+        drive(vector_dir * (utils::generate_random_small_float(1) + 0.5) * mass * meta->move_acc * 1,
+              utils::generate_random_small_float(1) * inertia * meta->turn_acc * 1);
+    }
+}
+
 void Unit::after()
 
 {
@@ -275,16 +294,8 @@ void Unit::after()
         watcher->after();
     }
 
-    if (melee)
-    {
-        melee->after();
-        if (!melee->has_target && controller)
-            controller->after();
-    }
-    else
-    {
-        if (controller)controller->after();
-    }
+    apply_control();
+
     for (const auto turret : turrets)
     {
         turret->after();
@@ -293,6 +304,8 @@ void Unit::after()
     {
         arm->after();
     }
+    utils::linear_limit_max_soft_r(linear_velocity, meta->move_speed, 0.8);
+    utils::linear_limit_max_soft_r(angular_velocity, meta->max_turn_speed, 0.8);
     Object::after();
     const int tile_x = game->map_config.x_in_which(position.x());
     int tile_y = game->map_config.y_in_which(position.y());
@@ -352,7 +365,7 @@ void Unit::after()
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)
 {
-    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 100)
+    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 20)
     {
         this->hp -= 10;
     }

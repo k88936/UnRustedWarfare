@@ -29,6 +29,7 @@ public:
     float range=-1;
     float range_min=-1;
     float delay;
+    float idle_dir=0;
     float turn_speed_acceleration;
     std::string attached_to;
     std::vector<MetaTurret*> attached_turrets=std::vector<MetaTurret*>();

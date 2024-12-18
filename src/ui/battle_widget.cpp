@@ -55,10 +55,10 @@ battle_widget::battle_widget(main_window* parent) :
         parent->widget_pop();
     });
 
-    connect(suspend_menu->ui->restart_button, &QPushButton::clicked, this, [=]()
+    connect(suspend_menu->ui->restart_button, &QPushButton::clicked, this, [this,parent]()
     {
         auto widget = new battle_widget(parent);
-        auto game = new Game(widget, "../resources/maps/TASK_ONE.tmx");
+        auto new_game = new Game(widget, game->world);
         parent->widget_change(widget);
     });
 
@@ -226,6 +226,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                 auto flock = new Flock(game);
                 for (auto& selected : units_selected)
                 {
+                    if (selected->marked_for_delete)continue;
                     flock->boids.insert(selected);
                 }
                 if (!flock->boids.empty())
@@ -256,15 +257,16 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
                     game->flocks.push_back(flock);
 
 
-                    // // visualize field
-                    //  for (int i = 0; i < game->map_config.world_width; ++i)
-                    //  {
-                    //      for (int j = 0; j < game->map_config.world_height; ++j)
-                    //      {
-                    //          game->line_draw_config.emplace_back(i, j, 0);
-                    //          game->line_draw_config.emplace_back(flock->flow_field->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
-                    //      }
-                    //  }
+                //     // visualize field
+                //      for (int i = 0; i < game->map_config.world_width; ++i)
+                //      {
+                //          for (int j = 0; j < game->map_config.world_height; ++j)
+                //          {
+                //              game->line_draw_config.emplace_back(i, j, 0);
+                //              game->line_draw_config.emplace_back(flock->flow_field->get_vector(i, j) * 0.4 + QVector3D(i, j, 0));
+                //          }
+                //      }
+
                 }
                 else
                 {
@@ -388,7 +390,6 @@ void battle_widget::game_end(bool win)
     if (win)end_widget->ui->label->setText("VICTORY");
     else end_widget->ui->label->setText("DEFEAT");
     main_win_->widget_change(end_widget);
-
     BattlefieldWidget::game_end(win);
 }
 

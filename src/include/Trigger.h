@@ -155,11 +155,14 @@ namespace Trigger
         std::set<std::string> tags;
         /*
          * "__protect__" : game over if this unit dies
+         *
+         *
          */
 
-        UnitAdd(Game* game, const QVector3D pos): Action(game)
+        UnitAdd(Game* game, const QVector3D posLB,QVector3D posRT): Action(game)
         {
-            posLB = pos;
+            this->posLB = posLB;
+            this->posRT = posRT;
         }
 
         void parse(const tmx::Property& property) override;
@@ -211,7 +214,6 @@ namespace Trigger
     {
     public:
         float soft = 0.1;
-
         float zoom = -1;
 
         CamMove(Game* game, QVector3D posLB, QVector3D posRT): Action(game)

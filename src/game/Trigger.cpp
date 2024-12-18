@@ -74,20 +74,6 @@ void Trigger::Action::parse(const tmx::Property& property)
 
 void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event_map)
 {
-    // if (warmup > 0)
-    // {
-    //     if (has_repeated == 0)
-    //     {
-    //         last_active_time = game->time;
-    //         has_repeated++;
-    //         return;
-    //     }
-    //     if (game->time - last_active_time < warmup)
-    //     {
-    //         return;
-    //     }
-    //     has_repeated = 0;
-    // }
     if (repeat != -1 && has_repeated >= repeat)
     {
         return;
@@ -132,6 +118,11 @@ void Trigger::Action::update(const std::map<std::string, Trigger::Event*>& event
 
     if (flag)
     {
+        if (warmup > 0)
+        {
+            warmup -= game->delta_time;
+            return;
+        }
         last_active_time = game->time;
         has_repeated++;
         execute();
@@ -348,7 +339,7 @@ void Trigger::UnitAdd::execute()
 {
     if (units.size() == 1)
     {
-        auto u = new Unit(game, UnitConfigs::meta_units.at(units.at(0)), team, posLB, 0);
+        auto u = new Unit(game, UnitConfigs::meta_units.at(units.at(0)), team, (posLB + posRT) / 2, 0);
         u->rotation = rot;
         u->linear_velocity.setX(vx);
         u->linear_velocity.setY(vy);
@@ -360,7 +351,7 @@ void Trigger::UnitAdd::execute()
         for (const auto& unit : units)
         {
             auto u = new Unit(game, UnitConfigs::meta_units.at(unit), team,
-                              posLB + utils::generate_random_small_vector(0.5), 0);
+                              (posLB + posRT)/2 + utils::generate_random_small_vector(0.5), 0);
             u->rotation = rot;
             u->linear_velocity.setX(vx);
             u->linear_velocity.setY(vy);
@@ -506,7 +497,7 @@ void Trigger::Win::parse(const tmx::Property& property)
 
 void Trigger::Win::execute()
 {
-    game->battle_field_widget->game_end(true);
+    game->result(true);
     Action::execute();
 }
 
@@ -517,6 +508,6 @@ void Trigger::Lose::parse(const tmx::Property& property)
 
 void Trigger::Lose::execute()
 {
-    game->battle_field_widget->game_end(false);
+    game->result(false);
     Action::execute();
 }
