@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tileset firstgid="890" name="misc" columns="3" tilecount="18" tileheight="20" tilewidth="20">
+<tileset firstgid="280" name="misc" columns="3" tilecount="18" tileheight="20" tilewidth="20">
   <image source="bitmaps/misc.png" width="79" height="120" />
   <tile id="4">
     <properties>

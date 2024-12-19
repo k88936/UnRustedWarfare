@@ -108,7 +108,7 @@ float utils::animater::get_value()
 int utils::framer::get_value(float step)
 {
     cur += step * step_l;
-    if (cur >= end + 1)
+    while (cur >= end + 1)
     {
         cur -= end + 1;
     }

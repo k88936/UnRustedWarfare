@@ -3,6 +3,7 @@
 <file>ui/stay_dark.png</file>
 <file>ui/march_orange.png</file>
 <file>ui/research_dark.png</file>
+<file>ui/icon.png</file>
 <file>ui/all_highlight.png</file>
 <file>ui/patrol.png</file>
 <file>ui/stay_highlight.png</file>
@@ -70,6 +71,7 @@
 <file>ui/speed_orange.png</file>
 <file>ui/march_highlight.png</file>
 <file>ui/patrol_orange.png</file>
+<file>ui/slide_3.png</file>
 <file>ui/group_orange.png</file>
 <file>ui/add-group_dark.png</file>
 <file>ui/icons.txt</file>
@@ -98,9 +100,11 @@
 <file>ui/delete_dark.png</file>
 <file>ui/quit_highlight.png</file>
 <file>ui/upgrade_dark.png</file>
+<file>ui/slide_1.png</file>
 <file>ui/repair_orange.png</file>
 <file>ui/pause-button_highlight.png</file>
 <file>ui/ore_orange.png</file>
+<file>ui/slide_2.png</file>
 <file>ui/play.png</file>
 <file>ui/upgrade.png</file>
 <file>ui/select_orange.png</file>
@@ -110,6 +114,7 @@
 <file>ui/ore.png</file>
 <file>ui/ore_dark.png</file>
 <file>ui/explore_dark.png</file>
+<file>ui/slide_0.png</file>
 <file>ui/group_dark.png</file>
 <file>ui/loading_background.png</file>
 <file>ui/play_highlight.png</file>

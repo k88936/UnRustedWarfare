@@ -17,7 +17,7 @@ SimpleEffect::SimpleEffect(Game* game, std::string image, const float life, cons
     this->position = position;
     this->rotation = rotation;
     this->scale = scale;
-    this->linear_velocity = utils::add_offset_z(linear_velocity, -0.01);
+    // this->linear_velocity = utils::add_offset_z(linear_velocity, -0.01);
     this->angular_velocity = angular_velocity;
     this->color = color;
 

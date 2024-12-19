@@ -21,7 +21,7 @@ find_package(Qt6 COMPONENTS
         MultimediaWidgets
         REQUIRED)
 
-add_executable(untitled1
+add_executable(stainless_warfare
         src/main.cpp
         src/game/Drawable.cpp
         src/game/Object.cpp
@@ -123,7 +123,7 @@ add_subdirectory(zlib)
 add_subdirectory(zstd/build/cmake/)
 #find_package(ZLIB REQUIRED)
 #find_package(zstd REQUIRED)
-target_link_libraries(untitled1
+target_link_libraries(stainless_warfare
         Qt::Core
         Qt::Gui
         Qt::Widgets

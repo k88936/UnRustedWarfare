@@ -424,6 +424,9 @@ QSlider::sub-page {
        <height>0</height>
       </size>
      </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
      <property name="tabPosition">
       <enum>QTabWidget::TabPosition::North</enum>
      </property>
@@ -449,18 +452,35 @@ QSlider::sub-page {
       <bool>false</bool>
      </property>
      <widget class="QWidget" name="tab">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/ui/slide_0.png);Q</string>
+      </property>
       <attribute name="title">
-       <string>Basic</string>
+       <string>Select</string>
       </attribute>
      </widget>
      <widget class="QWidget" name="tab_2">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/ui/slide_1.png);</string>
+      </property>
       <attribute name="title">
-       <string>Advanced</string>
+       <string>View</string>
       </attribute>
      </widget>
      <widget class="QWidget" name="tab_3">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/ui/slide_2.png);</string>
+      </property>
       <attribute name="title">
-       <string>Cheet</string>
+       <string>Move&amp;&amp;Attack</string>
+      </attribute>
+     </widget>
+     <widget class="QWidget" name="tab_4">
+      <property name="styleSheet">
+       <string notr="true">border-image: url(:/ui/slide_3.png);</string>
+      </property>
+      <attribute name="title">
+       <string>UI</string>
       </attribute>
      </widget>
     </widget>
