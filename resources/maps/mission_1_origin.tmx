@@ -5014,6 +5014,16 @@
         <property name="time" value="0" />
       </properties>
     </object>
+    <object type="dialog" id="32" x="0" y="3180" width="20" height="20">
+      <properties>
+        <property name="msg">
+hi officer,
+today you and your partner's task is research an abnormal bio lab
+go along the way right after getting off
+</property>
+        <property name="by" value="init" />
+      </properties>
+    </object>
     <object type="unit_add" id="33" x="2740" y="2840" width="20" height="20">
       <properties>
         <property name="by" value="init" />
@@ -5107,7 +5117,7 @@ f_police_g17
         <property name="rot" value="-45" />
         <property name="vx" value="0.5" />
         <property name="vy" value="-0.3" />
-        <property name="tags" value="__protect__" />
+        <property name="tags" value="__protect_" />
       </properties>
     </object>
     <object type="unit_add" id="47" x="2540" y="2880" width="20" height="20">
@@ -5126,7 +5136,7 @@ f_police_g17
         <property name="soft" value="0.3" />
       </properties>
     </object>
-    <object name="approach" type="unit_detect" id="49" x="2900" y="2900" width="100" height="100">
+    <object name="approach" type="unit_detect" id="49" x="2900" y="2860" width="100" height="180">
       <properties>
         <property name="team" value="0" />
         <property name="min" value="2" />

@@ -185,6 +185,7 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
         int elapsed = m_press_time.msecsTo(QTime::currentTime());
         if (elapsed <= DRAG_DELAY) //click
         {
+            clean_selected();
             std::set<Unit*> units_to_select;
             std::set<Unit*> enermy_to_select;
             int x = static_cast<int>(m_press_pos_world.x() / game->grids_manager.grid_size);
@@ -210,7 +211,6 @@ void battle_widget::mouseReleaseEvent(QMouseEvent* event)
             //select by rect is solved at func on mouse move
 
 
-            clean_selected();
             if (!units_to_select.empty()) //new select
             {
                 (*units_to_select.begin())->on_new_selection();
