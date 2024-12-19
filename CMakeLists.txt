@@ -136,7 +136,7 @@ target_link_libraries(stainless_warfare
 )
 
 if (CMAKE_HOST_WIN32)
-    target_link_libraries(untitled1
+    target_link_libraries(stainless_warfare
             opengl32
             glu32
     )

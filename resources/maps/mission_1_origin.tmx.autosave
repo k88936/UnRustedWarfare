@@ -5013,6 +5013,13 @@
       <properties>
         <property name="time" value="0" />
       </properties>
+    </object> 
+    <object type="dialog" id="32" x="0" y="3180" width="20" height="20">
+      <properties>
+        <property name="msg" value="hi officer, 
+        today you and your partner's task is research an abno bio lab " />
+        <property name="by" value="init" />
+      </properties>
     </object>
     <object type="unit_add" id="33" x="2740" y="2840" width="20" height="20">
       <properties>

@@ -65,8 +65,8 @@ int main(int argc, char* argv[])
     auto player = new QMediaPlayer();
     auto audio = new QAudioOutput();
     player->setAudioOutput(audio);
-    audio->setVolume(0.1);
-    auto path = "../resources/assets/music";
+    audio->setVolume(0.025);
+    auto path = "../resources/assets/music/";
     do_work(player, path);
     QObject::connect(player, &QMediaPlayer::mediaStatusChanged, [=](QMediaPlayer::MediaStatus status)
     {

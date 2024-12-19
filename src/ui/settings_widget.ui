@@ -427,8 +427,8 @@ QSlider::sub-page {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>401</width>
-        <height>48</height>
+        <width>753</width>
+        <height>578</height>
        </rect>
       </property>
       <attribute name="label">
@@ -512,7 +512,17 @@ QSlider::sub-page {
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+        <spacer name="verticalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -522,7 +532,7 @@ QSlider::sub-page {
         <x>0</x>
         <y>0</y>
         <width>753</width>
-        <height>572</height>
+        <height>578</height>
        </rect>
       </property>
       <attribute name="label">
@@ -582,7 +592,17 @@ QSlider::sub-page {
         </layout>
        </item>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_5"/>
+        <spacer name="verticalSpacer_3">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </widget>
@@ -591,8 +611,8 @@ QSlider::sub-page {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>100</width>
-        <height>30</height>
+        <width>753</width>
+        <height>578</height>
        </rect>
       </property>
       <attribute name="label">
@@ -603,8 +623,6 @@ QSlider::sub-page {
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
