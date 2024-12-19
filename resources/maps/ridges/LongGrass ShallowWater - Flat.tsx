@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tileset firstgid="812" name="LongGrass ShallowWater - Flat" columns="3" tilecount="21" tileheight="20" tilewidth="20">
+<tileset firstgid="600" name="LongGrass ShallowWater - Flat" columns="3" tilecount="21" tileheight="20" tilewidth="20">
   <image source="bitmaps/longgrass2shallowwater_flat.png" width="60" height="140" trans="008a76" />
   <tile id="0">
     <properties>

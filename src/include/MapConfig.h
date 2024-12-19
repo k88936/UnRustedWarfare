@@ -33,6 +33,7 @@ public:
     int world_height;
     // std::vector<Unit*> units_on_map;
     Game* game;
+    std::string map_info_type= "mission";
     TileAttribute*& get_tile_attribute(int x, int y);
     QVector3D vector_in_which(const QVector3D& v);
     int x_in_which(float x);

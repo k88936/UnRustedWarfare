@@ -13,6 +13,9 @@
     <height>416</height>
    </rect>
   </property>
+  <property name="focusPolicy">
+   <enum>Qt::FocusPolicy::StrongFocus</enum>
+  </property>
   <property name="windowTitle">
    <string>suspend_menu_widget</string>
   </property>
@@ -429,13 +432,22 @@ QSlider::sub-page {
        <verstretch>0</verstretch>
       </sizepolicy>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::NoFocus</enum>
+     </property>
      <property name="text">
       <string>continue</string>
+     </property>
+     <property name="shortcut">
+      <string>Esc</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="restart_button">
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::NoFocus</enum>
+     </property>
      <property name="text">
       <string>restart</string>
      </property>
@@ -459,6 +471,9 @@ QSlider::sub-page {
      <property name="enabled">
       <bool>false</bool>
      </property>
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::NoFocus</enum>
+     </property>
      <property name="text">
       <string>save</string>
      </property>
@@ -479,6 +494,9 @@ QSlider::sub-page {
    </item>
    <item>
     <widget class="QPushButton" name="settings_button">
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::NoFocus</enum>
+     </property>
      <property name="text">
       <string>settings</string>
      </property>
@@ -488,6 +506,9 @@ QSlider::sub-page {
     <widget class="QPushButton" name="exit_button">
      <property name="enabled">
       <bool>true</bool>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::NoFocus</enum>
      </property>
      <property name="text">
       <string>exit</string>

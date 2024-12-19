@@ -4176,9 +4176,10 @@
   </data>
   </layer>
   <objectgroup name="Triggers">
-    <object name="map_info" id="1" x="60.9998" y="64.6667" width="152.667" height="60">
+    <object name="map_info" type="map_info" id="1" x="60.9998" y="64.6667" width="152.667" height="60">
       <properties>
-        <property name="type" value="Skirmish" />
+        <property name="type" value="landscape" />
+        <property name="fog" value="no" />
       </properties>
     </object>
   </objectgroup>

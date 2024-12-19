@@ -479,6 +479,9 @@ QSlider::sub-page {
          <property name="text">
           <string>YES</string>
          </property>
+         <property name="shortcut">
+          <string/>
+         </property>
          <property name="flat">
           <bool>true</bool>
          </property>

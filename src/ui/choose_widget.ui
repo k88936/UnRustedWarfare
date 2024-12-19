@@ -430,6 +430,9 @@ QListView::item:selected{
        <property name="text">
         <string>CANCEL</string>
        </property>
+       <property name="shortcut">
+        <string>Esc</string>
+       </property>
        <property name="flat">
         <bool>false</bool>
        </property>

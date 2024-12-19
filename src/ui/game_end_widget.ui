@@ -571,6 +571,9 @@ background-color: rgb(48, 246, 217);</string>
        <property name="text">
         <string>continue</string>
        </property>
+       <property name="shortcut">
+        <string>Space</string>
+       </property>
        <property name="flat">
         <bool>true</bool>
        </property>

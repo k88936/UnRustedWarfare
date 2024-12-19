@@ -394,6 +394,9 @@ QSlider::sub-page {
        <property name="text">
         <string/>
        </property>
+       <property name="shortcut">
+        <string>Esc</string>
+       </property>
       </widget>
      </item>
      <item>
@@ -424,8 +427,8 @@ QSlider::sub-page {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>753</width>
-        <height>572</height>
+        <width>401</width>
+        <height>48</height>
        </rect>
       </property>
       <attribute name="label">
@@ -588,8 +591,8 @@ QSlider::sub-page {
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>753</width>
-        <height>572</height>
+        <width>100</width>
+        <height>30</height>
        </rect>
       </property>
       <attribute name="label">

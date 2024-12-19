@@ -56,7 +56,7 @@ void BattlefieldWidget::update_textures()
     engine->resister_texture("_select", MetaImage(QImage(":ui/select_highlight.png"), 1.2, false, false));
     engine->resister_texture("_arrow_highlight", MetaImage(QImage(":ui/arrow_highlight.png"), 1, false, false));
     engine->resister_texture("_arrow_orange", MetaImage(QImage(":ui/arrow_orange.png"), 1, false, false));
-    engine->resister_texture("_fog", MetaImage(QImage(":ui/fog_dithering.png"), 1, false, true,5));
+    engine->resister_texture("_fog", MetaImage(QImage(":ui/fog_dithering.png"), 1, false, true, 5));
 
     for (const auto& [id, image] : UnitConfigs::images)
     {
@@ -168,6 +168,7 @@ QVector3D BattlefieldWidget::screen_relative_to_world_relative(const QPointF& sc
 void BattlefieldWidget::dialog(const std::string& string)
 {
 }
+
 void BattlefieldWidget::info(const std::string& string)
 {
 }

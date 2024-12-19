@@ -362,6 +362,23 @@ void MapConfig::loadMap(const std::string& path)
                             action->parse(prop);
                         }
                     }
+                    else if (type == "map_info")
+                    {
+                        for (const auto& prop : properties)
+                        {
+                            if (prop.getName() == "type")
+                            {
+                                map_info_type = prop.getStringValue();
+                            }
+                            else if (prop.getName() == "fog")
+                            {
+                                if (prop.getStringValue() == "no")
+                                {
+                                    game->warfare_fog_manager.enable = false;
+                                }
+                            }
+                        }
+                    }
 
                     else
                     {
@@ -471,7 +488,7 @@ void MapConfig::init(Game* game, const std::string& path)
 
 QVector3D MapConfig::pixel_to_world(float pix_x, float pix_y)
 {
-    return QVector3D(pix_x / 20-0.5, world_height - pix_y / 20-0.5, 0);
+    return QVector3D(pix_x / 20 - 0.5, world_height - pix_y / 20 - 0.5, 0);
 }
 
 // Tile*

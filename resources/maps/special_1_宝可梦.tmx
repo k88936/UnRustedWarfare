@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="30">
+<map version="1.2" orientation="orthogonal" renderorder="right-down" width="160" height="160" tilewidth="20" tileheight="20" nextobjectid="44">
   <properties>
     <property name="sw1" value="546" />
     <property name="sw2" value="429" />
@@ -4582,6 +4582,7 @@ pika pikaaaaaaa
         <property name="units" value="z_common*5" />
         <property name="vx" value="-1.4" />
         <property name="vy" value="1.1" />
+        <property name="warmup" value="1000" />
       </properties>
     </object>
     <object type="unit_add" id="20" x="2740" y="780" width="20" height="20">
@@ -4611,8 +4612,9 @@ girl
         <property name="units" value="z_chemical*3" />
         <property name="team" value="1" />
         <property name="rot" value="-170" />
-        <property name="vx" value="-1.2" />
+        <property name="vx" value="-2" />
         <property name="by" value="arrive-1" />
+        <property name="vy" value="-2" />
       </properties>
     </object>
     <object type="unit_add" id="23" x="2860" y="1120" width="20" height="20">
@@ -4647,9 +4649,9 @@ girl
         <property name="units" value="z_pig*4,z_pig2*5" />
         <property name="team" value="1" />
         <property name="rot" value="-170" />
-        <property name="vx" value="-12" />
+        <property name="vx" value="-24" />
         <property name="by" value="arrive-1" />
-        <property name="warmup" value="15000" />
+        <property name="warmup" value="25000" />
       </properties>
     </object>
     <object type="unit_add" id="28" x="2760" y="1520" width="20" height="20">
@@ -4657,7 +4659,7 @@ girl
         <property name="team" value="1" />
         <property name="units" value="z_bull*4" />
         <property name="rot" value="90" />
-        <property name="vy" value="10" />
+        <property name="vy" value="20" />
         <property name="by" value="arrive-1" />
         <property name="warmup" value="5000" />
       </properties>
@@ -4667,9 +4669,127 @@ girl
         <property name="units" value="z_chemical*12" />
         <property name="team" value="1" />
         <property name="rot" value="-170" />
-        <property name="vx" value="-1.2" />
+        <property name="vx" value="-3" />
         <property name="by" value="arrive-1" />
         <property name="warmup" value="1000" />
+      </properties>
+    </object>
+    <object name="arrived-3" type="unit_detect" id="30" x="2540" y="2300" width="200" height="200">
+      <properties>
+        <property name="team" value="0" />
+        <property name="min" value="1" />
+      </properties>
+    </object>
+    <object type="dialog" id="31" x="2740" y="2500" width="20" height="20">
+      <properties>
+        <property name="msg">
+ Two roads diverged in a wood, 
+
+and I took the one less traveled by,
+
+And that has made all the difference.
+</property>
+        <property name="by" value="arrived-3" />
+      </properties>
+    </object>
+    <object type="dialog" id="32" x="2740" y="2520" width="20" height="20">
+      <properties>
+        <property name="msg">
+search the village in the south,
+
+but before that.......
+</property>
+        <property name="warmup" value="500" />
+        <property name="by" value="arrived-3" />
+      </properties>
+    </object>
+    <object type="unit_add" id="33" x="2760" y="2840" width="20" height="20">
+      <properties>
+        <property name="units" value="girl*20" />
+        <property name="team" value="-1" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
+    <object type="unit_add" id="34" x="2440" y="2440" width="20" height="20">
+      <properties>
+        <property name="units" value="z_big*4" />
+        <property name="vx" value="5" />
+        <property name="by" value="arrived-3" />
+        <property name="warmup" value="600" />
+        <property name="team" value="1" />
+      </properties>
+    </object>
+    <object type="unit_add" id="35" x="2280" y="2380" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived-3" />
+        <property name="warmup" value="1900" />
+        <property name="vx" value="5" />
+        <property name="team" value="0" />
+        <property name="units" value="m1a2" />
+      </properties>
+    </object>
+    <object type="unit_add" id="36" x="2240" y="2340" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived-3" />
+        <property name="warmup" value="2100" />
+        <property name="vx" value="6" />
+        <property name="team" value="0" />
+        <property name="units" value="m1a2" />
+      </properties>
+    </object>
+    <object type="dialog" id="37" x="2740" y="2480" width="20" height="20">
+      <properties>
+        <property name="msg">
+our allies has arrived.
+
+eat thiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiis, meat boy!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+</property>
+        <property name="by" value="arrived-3" />
+        <property name="warmup" value="2200" />
+      </properties>
+    </object>
+    <object name="arrived-4" type="unit_detect" id="38" x="2600" y="2660" width="120" height="40">
+      <properties>
+        <property name="min" value="1" />
+        <property name="team" value="0" />
+      </properties>
+    </object>
+    <object type="dialog" id="39" x="2720" y="2660" width="20" height="20">
+      <properties>
+        <property name="msg">
+you have rescures these girls, 
+
+now time to go home
+</property>
+        <property name="by" value="arrived-4" />
+      </properties>
+    </object>
+    <object type="win" id="40" x="2720" y="2680" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived-4" />
+        <property name="warmup" value="5000" />
+      </properties>
+    </object>
+    <object type="unit_add" id="41" x="3120" y="2600" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived-4" />
+        <property name="units" value="ch47*3" />
+        <property name="team" value="2" />
+        <property name="rot" value="-135" />
+        <property name="vx" value="-8" />
+        <property name="vy" value="-8" />
+      </properties>
+    </object>
+    <object type="info" id="42" x="2660" y="620" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived" />
+        <property name="msg" value="[TASK] go to the village in the south" />
+      </properties>
+    </object>
+    <object type="info" id="43" x="2740" y="2460" width="20" height="20">
+      <properties>
+        <property name="by" value="arrived-4" />
+        <property name="msg" value="[TASK] rescure te girls" />
       </properties>
     </object>
   </objectgroup>

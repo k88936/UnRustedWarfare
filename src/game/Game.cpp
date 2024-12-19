@@ -212,7 +212,7 @@ void Game::step()
     audio_manager.play(battle_field_widget->camera_pos);
     warfare_fog_manager.draw();
 
-    if (std::count_if(units.begin(), units.end(), [](Unit* unit)
+    if (map_config.map_info_type == "mission" && std::count_if(units.begin(), units.end(), [](Unit* unit)
     {
         return unit->team % 2 == 0;
     }) == 0)
