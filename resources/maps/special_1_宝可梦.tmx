@@ -4568,7 +4568,7 @@ pika pikaaaaaaa
     </object>
     <object type="unit_add" id="18" x="2740" y="620" width="20" height="20">
       <properties>
-        <property name="units" value="machinegunner*2,sniper" />
+        <property name="units" value="machinegunner*3" />
         <property name="team" value="0" />
         <property name="rot" value="-90" />
         <property name="vy" value="-0.5" />
@@ -4683,7 +4683,7 @@ girl
     <object type="dialog" id="31" x="2740" y="2500" width="20" height="20">
       <properties>
         <property name="msg">
- Two roads diverged in a wood, 
+Two roads diverged in a wood, 
 
 and I took the one less traveled by,
 

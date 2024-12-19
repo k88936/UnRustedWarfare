@@ -122,6 +122,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
             game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), mouse_pos.y(), 0));
             game->line_draw_config.push_back(QVector3D(m_press_pos_world.x(), m_press_pos_world.y(), 0));
 
+
             for (int x = std::min(x1, x2); x <= std::max(x1, x2); ++x)
             {
                 for (int y = std::min(y1, y2); y <= std::max(y1, y2); ++y)
@@ -130,7 +131,7 @@ void battle_widget::mouseMoveEvent(QMouseEvent* event)
                     {
                         if (const auto unit = dynamic_cast<Unit*>(object))
                         {
-                            if (unit->team != 0)
+                            if (unit->team != 0||unit->marked_for_delete)
                             {
                                 continue;
                             }

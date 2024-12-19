@@ -226,11 +226,19 @@ void Unit::step()
 
 void Unit::on_death()
 {
-    game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
-                                      utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET),
-                                      rotation,
-                                      scale, linear_velocity,
-                                      angular_velocity, QVector4D(0.1, 0.1, 0.1, 1), true));
+    if (meta->image_wreak == utils::EMPTY_STR)
+        game->add_effect(new SimpleEffect(game, meta->image, 1000,
+                                          utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET),
+                                          rotation,
+                                          scale, linear_velocity,
+                                          0, QVector4D(0.1, 0.1, 0.1, 1), true));
+    else
+        game->add_effect(new SimpleEffect(game, meta->image_wreak, 1000,
+                                          utils::add_offset_z(position, GameConfig::LayerConfig::BOTTOM_EFFECT_OFFSET),
+                                          rotation,
+                                          scale, linear_velocity,
+                                          0, QVector4D(1, 1, 1, 1), true));
+
     for (const auto& effect_on_death : meta->effect_on_death)
     {
         game->add_effect(new Effect(game, UnitConfigs::meta_effects.at(effect_on_death), position, rotation,
