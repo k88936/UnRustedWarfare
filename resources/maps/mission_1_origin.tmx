@@ -5117,7 +5117,7 @@ f_police_g17
         <property name="rot" value="-45" />
         <property name="vx" value="0.5" />
         <property name="vy" value="-0.3" />
-        <property name="tags" value="__protect_" />
+        <property name="tags" value="__protect__"/>
       </properties>
     </object>
     <object type="unit_add" id="47" x="2540" y="2880" width="20" height="20">

@@ -5,7 +5,6 @@
 #include "Unit.h"
 
 #include "Arm.h"
-#include "BoidSensor.h"
 #include "Controller.h"
 #include "MapConfig.h"
 #include "MeleeSensor.h"
@@ -373,7 +372,7 @@ void Unit::after()
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)
 {
-    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 20)
+    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 4000)
     {
         this->hp -= 10;
     }
