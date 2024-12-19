@@ -1161,5 +1161,16 @@
         <property name="fog" value="no" />
       </properties>
     </object>
+    <object name ="init" type="reach_time" id="1000" x="0" y="0" width="20" height="20">
+      <properties>
+        <property name="time" value="0" />
+      </properties>
+    </object>
+    <object type="dialog" id="1001" x="0" y="0" width="20" height="20">
+      <properties>
+        <property name="msg" value="this map is under constructing  just for view,nothing to play" />
+        <property name="by" value="init" />
+      </properties>
+    </object>
   </objectgroup>
 </map>
