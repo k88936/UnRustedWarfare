@@ -5,7 +5,7 @@
 #include "GameConfig.h"
 #include "structures/tile_attribute.h"
 
-float GameConfig::game_speed = 1;
+float GameConfig::game_speed = 0.5;
 float GameConfig::game_volume = 0.5;
 
 /**

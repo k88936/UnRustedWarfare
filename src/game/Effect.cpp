@@ -30,7 +30,7 @@ Effect::Effect(Game* game, MetaEffect* meta, const QVector3D position, const flo
     else
     {
         this->linear_velocity = QVector3D(meta->x_speed_absolute, meta->y_speed_absolute, -meta->h_speed - 0.01) +
-            utils::generate_random_small_vector((meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
+            utils::generate_random_small_vector(fabsf(meta->x_speed_relative_random + meta->y_speed_relative_random) / 2);
     }
     // if (meta->x_speed_absolute != 0 || meta->y_speed_absolute != 0)
     // {

@@ -43,10 +43,11 @@ public:
         {
             game->step();
 #ifdef DEBUG
-            game->delta_time = 0.05;
+			game->delta_time = 0.05 * GameConfig::game_speed;
 #else
             game->delta_time = start.msecsTo(QTime::currentTime()) * GameConfig::game_speed / 1000.0+0.00001;
 #endif
+            //game->delta_time = GameConfig::game_speed * 0.03;
             start = QTime::currentTime();
             game->time += game->delta_time;
         };

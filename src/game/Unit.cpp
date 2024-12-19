@@ -372,7 +372,7 @@ void Unit::after()
 
 void Unit::on_collision(const QVector3D& force, float torque, Object* other)
 {
-    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 4000)
+    if (this->meta->is_bio && utils::team::is_enemy(team, other->team) && force.lengthSquared() > mass * mass * 100)
     {
         this->hp -= 10;
     }
