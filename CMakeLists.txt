@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.29)
-project(untitled1)
+project(UnRustedWarfare)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -21,7 +21,7 @@ find_package(Qt6 COMPONENTS
         MultimediaWidgets
         REQUIRED)
 
-add_executable(stainless_warfare
+add_executable(UnRustedWarfare
         src/main.cpp
         src/game/Drawable.cpp
         src/game/Object.cpp
@@ -123,7 +123,7 @@ add_subdirectory(zlib)
 add_subdirectory(zstd/build/cmake/)
 #find_package(ZLIB REQUIRED)
 #find_package(zstd REQUIRED)
-target_link_libraries(stainless_warfare
+target_link_libraries(UnRustedWarfare
         Qt::Core
         Qt::Gui
         Qt::Widgets
@@ -136,7 +136,7 @@ target_link_libraries(stainless_warfare
 )
 
 if (CMAKE_HOST_WIN32)
-    target_link_libraries(stainless_warfare
+    target_link_libraries(UnRustedWarfare
             opengl32
             glu32
     )

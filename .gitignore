@@ -1,5 +1,5 @@
 venv
-cmake-build*
+cmake-build-*
 .idea
 .vs
 download
