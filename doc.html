@@ -2,9 +2,11 @@
 <p>作者：王德宇 2024013267 2025/04/22</p>
 <h2 id="构建与运行">构建与运行</h2>
 <ul>
-<li><p>Windows 在 build.bat 中设置你的 Qt 路径</p></li>
-<li><p>Linux, macOS</p></li>
+<li>Windows 在 build.bat 中设置你的 Qt 路径</li>
 </ul>
+<pre class="shell"><code>.\build.bat
+.\run.bat</code></pre>
+<h3 id="linux-macos">linux, macos</h3>
 <pre class="shell"><code>./build.sh
 ./run.sh</code></pre>
 <h2 id="简介">简介</h2>
@@ -33,10 +35,10 @@
     G --&gt; H[地图触发器执行]
     H --&gt; I[物理更新]
     I --&gt; J[单位更新]
-    J --&gt; K{达到胜利/失败条件}
-K --&gt; D
-K --&gt; L[OpenGL 渲染]
-L --&gt; G</code></pre>
+    J --&gt; K[达到胜利/失败条件]
+    K --&gt; D
+    K --&gt; L[OpenGL 渲染]
+    L --&gt; G</code></pre>
 <h2 id="技术细节">技术细节</h2>
 <h3 id="渲染">渲染</h3>
 <p>游戏 UI 由 Qt 框架渲染，游戏世界由 OpenGL 渲染。 实际上，OpenGL
@@ -90,28 +92,36 @@ L --&gt; G</code></pre>
 </ul>
 <h2 id="途中遇到的问题及解决方案">途中遇到的问题及解决方案</h2>
 <ol type="1">
-<li>OpenGL 启动 在 Linux 上安装 Nvidia 驱动。 将 WSL 设置为使用 Windows
-GPU。 在 Windows 上添加链接 opengl32 glu32。</li>
-<li>选择空间划分方法 我放弃了四叉树，改用网格划分，阅读了网上的文章后，
+<li>OpenGL 启动<br />
+在 Linux 上安装 Nvidia 驱动。 将 WSL 设置为使用 Windows GPU。 在 Windows
+上添加链接 opengl32 glu32。</li>
+<li>选择空间划分方法<br />
+我放弃了四叉树，改用网格划分，阅读了网上的文章后，
 我的目标是减少碰撞检测次数，网格划分对于这个游戏来说已经足够。</li>
 <li>多个单位路径查找时单位之间的碰撞
 如果远，使用流场，如果近，前往预计算的目标以避免碰撞。</li>
-<li>像素坐标到世界坐标 重新制作整个游戏以统一坐标系统。</li>
-<li>调整 UI 以适应游戏 学习了 QSS。</li>
-<li>完美像素 OpenGL 选择最接近的像素绘制。</li>
-<li>半透明 PNG 添加 OpenGL Alpha 混合功能。</li>
-<li>OpenGL 性能 转向使用 VBO 和 VAO。</li>
-<li>Qt 多媒体 bug 我需要将 QMultimedia.dll
-复制到部署文件夹的插件目录中。 在 Linux 机器上，Qt
-目前无法播放声音。</li>
-<li>Windows 上的奇怪 NaN 使用断言检查每个可疑的浮点数。 学习 MSVC
-调试输出，发现我的 Win 机器上的游戏运行速度太快（每帧少于 1
-毫秒），从而导致除零错误。</li>
+<li>像素坐标到世界坐标<br />
+重新制作整个游戏以统一坐标系统。</li>
+<li>调整 UI 以适应游戏<br />
+学习了 QSS。</li>
+<li>完美像素<br />
+OpenGL 选择最接近的像素绘制。</li>
+<li>半透明 PNG<br />
+添加 OpenGL Alpha 混合功能。</li>
+<li>OpenGL 性能<br />
+转向使用 VBO 和 VAO。</li>
+<li>Qt 多媒体 bug<br />
+我需要将 QMultimedia.dll 复制到部署文件夹的插件目录中。 在我的 Linux
+机器上，Qt 目前无法播放声音。</li>
+<li>Windows 上的奇怪 NaN<br />
+使用断言检查每个可疑的浮点数。 学习 MSVC 调试输出，发现我的 Win
+机器上的游戏运行速度太快（每帧少于 1 毫秒），从而导致除零错误。</li>
 </ol>
 <h2 id="参考">参考</h2>
 <p>这款游戏受到了游戏 “Rusted Warfare”
 的启发，大多数配置文件格式与其兼容。 大部分艺术资源来自 “Rusted Warfare”
-模组社区。 tmx 解析：tmxlite 压缩：zlib zstd 框架：Qt6 OpenGL</p>
+模组社区。 tmx 解析：tmxlite base64解压缩：zlib zstd 框架：Qt6
+OpenGL</p>
 <h2 id="对-oop-和游戏的看法">对 OOP 和游戏的看法</h2>
 <p>对于复杂游戏来说，OOP
 并不是一个好的选择。因为组合比继承在可维护性和可扩展性方面更好。
