@@ -2,13 +2,15 @@
 by 王德宇 2024013267 2025/04/22
 
 ## Build && Run 
-* windows
+### windows
 set your qt path in build.bat
-```bat
-./build.bat
-./run.bat
+
+```shell
+.\build.bat
+.\run.bat
 ```
-* linux, macos
+### linux, macos
+
 ```shell
 ./build.sh
 ./run.sh
@@ -31,19 +33,19 @@ you can even visit pokemon world. 原神world, etc.
 ## proc graph
 ```mermaid
 graph TD
-A[init] --> B[load units config]
-A --> C[Qt init]
-C --> D[user choose map]
-D --> E[load map]
-E --> F[init world]
-F --> G[ai/player control]
-G --> H[map trigger execute]
-H --> I[physics update]
-I --> J[unit update]
-J --> K{reach win/lose condition?}
-K --> D
-K --> L[opengl render]
-L --> G
+    A[init] --> B[load units config]
+    A --> C[Qt init]
+    C --> D[user choose map]
+    D --> E[load map]
+    E --> F[init world]
+    F --> G[ai/player control]
+    G --> H[map trigger execute]
+    H --> I[physics update]
+    I --> J[unit update]
+    J --> K[reach win/lose condition?]
+    K --> D
+    K --> L[opengl render]
+    L --> G
 ```
 
 ## Tech details
@@ -88,7 +90,7 @@ By using tmx object layer, I implemented a trigger system, including:
     7. unit remove
 
 ## Problems and solutions along the way
-1. OpenGL startup  
+1. OpenGL startup    
 install Nvidia driver on linux.  
 set wsl to use windows gpu.  
 add link opengl32 glu32 to run on windows.  
@@ -119,7 +121,7 @@ learn msvc debug out to find the game run too fast (less than 1ms per frame) on 
 this game is inspired by the game "Rusted Warfare", most config files format are compatible with it.  
 the most art resources are from "Rusted Warfare" modding community.  
 tmx parse: tmxlite  
-compression: zlib zstd  
+base64 decompression: zlib zstd  
 framework: Qt6 opengl  
 
 

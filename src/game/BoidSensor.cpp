@@ -143,7 +143,7 @@ void BoidSensor::after()
     }
     float diff = angular_target - unit_under_control->rotation;
     utils::angle_ensure_r(diff);
-    if (std::fabsf(diff) < angle_step * game->delta_time)
+    if (fabsf(diff) < angle_step * game->delta_time)
     {
         // unit0->rotation = target;
         unit_under_control->angular_velocity *= 0.8;
@@ -157,7 +157,7 @@ void BoidSensor::after()
         }
         else
         {
-            if (std::fabsf(diff) < angle_step * game->delta_time * 4)
+            if (fabsf(diff) < angle_step * game->delta_time * 4)
             {
                 can_drive = true;
             }

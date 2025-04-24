@@ -1,2 +1,2 @@
 cd build
-./stainless_warfare.exe
+.\stainless_warfare.exe

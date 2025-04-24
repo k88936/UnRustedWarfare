@@ -7,12 +7,17 @@
 * Windows
   在 build.bat 中设置你的 Qt 路径
 
-* Linux, macOS
+```shell
+.\build.bat
+.\run.bat
+```
+### linux, macos
 
 ```shell
 ./build.sh
 ./run.sh
 ```
+
 
 ## 简介
 
@@ -44,10 +49,10 @@ graph TD
     G --> H[地图触发器执行]
     H --> I[物理更新]
     I --> J[单位更新]
-    J --> K{达到胜利/失败条件}
-K --> D
-K --> L[OpenGL 渲染]
-L --> G
+    J --> K[达到胜利/失败条件]
+    K --> D
+    K --> L[OpenGL 渲染]
+    L --> G
 ```
 
 ## 技术细节
@@ -105,29 +110,29 @@ L --> G
 
 ## 途中遇到的问题及解决方案
 
-1. OpenGL 启动
+1. OpenGL 启动  
    在 Linux 上安装 Nvidia 驱动。
    将 WSL 设置为使用 Windows GPU。
    在 Windows 上添加链接 opengl32 glu32。
-2. 选择空间划分方法
+2. 选择空间划分方法  
    我放弃了四叉树，改用网格划分，阅读了网上的文章后，
    我的目标是减少碰撞检测次数，网格划分对于这个游戏来说已经足够。
 3. 多个单位路径查找时单位之间的碰撞
    如果远，使用流场，如果近，前往预计算的目标以避免碰撞。
-4. 像素坐标到世界坐标
+4. 像素坐标到世界坐标  
    重新制作整个游戏以统一坐标系统。
-5. 调整 UI 以适应游戏
+5. 调整 UI 以适应游戏  
    学习了 QSS。
-6. 完美像素
+6. 完美像素  
    OpenGL 选择最接近的像素绘制。
-7. 半透明 PNG
+7. 半透明 PNG  
    添加 OpenGL Alpha 混合功能。
-8. OpenGL 性能
+8. OpenGL 性能  
    转向使用 VBO 和 VAO。
-9. Qt 多媒体 bug
+9. Qt 多媒体 bug  
    我需要将 QMultimedia.dll 复制到部署文件夹的插件目录中。
-   在 Linux 机器上，Qt 目前无法播放声音。
-10. Windows 上的奇怪 NaN
+   在我的 Linux 机器上，Qt 目前无法播放声音。
+10. Windows 上的奇怪 NaN  
     使用断言检查每个可疑的浮点数。
     学习 MSVC 调试输出，发现我的 Win 机器上的游戏运行速度太快（每帧少于 1 毫秒），从而导致除零错误。
 
@@ -136,7 +141,7 @@ L --> G
 这款游戏受到了游戏 "Rusted Warfare" 的启发，大多数配置文件格式与其兼容。
 大部分艺术资源来自 "Rusted Warfare" 模组社区。
 tmx 解析：tmxlite
-压缩：zlib zstd
+base64解压缩：zlib zstd
 框架：Qt6 OpenGL
 
 ## 对 OOP 和游戏的看法

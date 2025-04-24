@@ -34,7 +34,7 @@ void MeleeSensor::after()
             const float diff = utils::angle_ensure_v(utils::dir_of(relative) - unit_under_control->rotation);
             const float angle_step = unit_under_control->meta->max_turn_speed;
             float acc = 0;
-            if (std::fabsf(diff) < angle_step * unit_under_control->game->delta_time)
+            if (fabsf(diff) < angle_step * unit_under_control->game->delta_time)
             {
                 unit_under_control->angular_velocity *= 0.8;
             }
