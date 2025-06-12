@@ -41,8 +41,8 @@ main_window::main_window(QWidget* parent) :
     // auto game = new Game(widget, "../resources/maps/special_1_宝可梦.tmx");
     // widget_push(widget);
 
-    // Game::start_on("../maps/mission_1_origin.tmx", w->ui->widget);
-    // Game::start_on("../maps/mission_1_origin.tmx", b);
+    // Game::start_on("../maps/1_mission_origin.tmx", w->ui->widget);
+    // Game::start_on("../maps/1_mission_origin.tmx", b);
     // b->show();
     // w->show();
     // Game::start_on("../maps/2.tmx", b);
